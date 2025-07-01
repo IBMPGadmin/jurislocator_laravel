@@ -178,4 +178,125 @@ class UserLegalTableController extends Controller
             3 => 'Bilingual'
         ];
     }
+
+    /**
+     * Show a legal document for user-centric session (without client association)
+     */
+    public function showUserDocument(Request $request, $table_name)
+    {
+        $user = \Illuminate\Support\Facades\Auth::user();
+        $category_id = $request->get('category_id');
+        
+        // Validate table name to prevent SQL injection
+        if (!$this->isValidTableName($table_name)) {
+            abort(404, 'Invalid table name');
+        }
+        
+        // Check if table exists
+        if (!DB::getSchemaBuilder()->hasTable($table_name)) {
+            abort(404, 'Table not found');
+        }
+        
+        // Get the document
+        $document = DB::table($table_name)->where('id', $category_id)->first();
+        
+        if (!$document) {
+            abort(404, 'Document not found');
+        }
+        
+        // Get user's personal text data for this document (no client association)
+        $existingTexts = \App\Models\UserTextData::where('user_id', $user->id)
+            ->where('document_id', $category_id)
+            ->where('table_name', $table_name)
+            ->whereNull('client_id') // Personal user data
+            ->get();
+        
+        // Get user's personal popup data for this document (no client association)
+        $existingPopups = \App\Models\UserPopupData::where('user_id', $user->id)
+            ->where('document_id', $category_id)
+            ->where('table_name', $table_name)
+            ->whereNull('client_id') // Personal user data
+            ->get();
+        
+        return view('view-user-legal-table', compact(
+            'document', 
+            'table_name', 
+            'category_id', 
+            'existingTexts', 
+            'existingPopups'
+        ));
+    }
+    
+    /**
+     * Show a French legal document for user-centric session
+     */
+    public function showUserDocumentFrench(Request $request, $table_name)
+    {
+        $user = \Illuminate\Support\Facades\Auth::user();
+        $category_id = $request->get('category_id');
+        
+        // Validate table name to prevent SQL injection
+        if (!$this->isValidTableName($table_name)) {
+            abort(404, 'Invalid table name');
+        }
+        
+        // Check if table exists
+        if (!DB::getSchemaBuilder()->hasTable($table_name)) {
+            abort(404, 'Table not found');
+        }
+        
+        // Get the document
+        $document = DB::table($table_name)->where('id', $category_id)->first();
+        
+        if (!$document) {
+            abort(404, 'Document not found');
+        }
+        
+        // Get user's personal text data for this document (no client association)
+        $existingTexts = \App\Models\UserTextData::where('user_id', $user->id)
+            ->where('document_id', $category_id)
+            ->where('table_name', $table_name)
+            ->whereNull('client_id') // Personal user data
+            ->get();
+        
+        // Get user's personal popup data for this document (no client association)
+        $existingPopups = \App\Models\UserPopupData::where('user_id', $user->id)
+            ->where('document_id', $category_id)
+            ->where('table_name', $table_name)
+            ->whereNull('client_id') // Personal user data
+            ->get();
+        
+        return view('view-user-legal-table-french', compact(
+            'document', 
+            'table_name', 
+            'category_id', 
+            'existingTexts', 
+            'existingPopups'
+        ));
+    }
+    
+    /**
+     * Validate table name to prevent SQL injection
+     */
+    private function isValidTableName($tableName)
+    {
+        $allowedTables = [
+            'immigration_acts', 'immigration_appeal_review_processes', 'immigration_case_laws',
+            'immigration_codes', 'immigration_enforcements', 'immigration_forms',
+            'immigration_guidelines', 'immigration_agreements', 'immigration_ministerial_instructions',
+            'immigration_operational_bulletins', 'immigration_policies', 'immigration_procedures',
+            'immigration_regulations', 'citizenship_acts', 'citizenship_appeal_review_processes',
+            'citizenship_case_laws', 'citizenship_codes', 'citizenship_enforcements',
+            'citizenship_forms', 'citizenship_guidelines', 'citizenship_agreements',
+            'citizenship_ministerial_instructions', 'citizenship_operational_bulletins',
+            'citizenship_policies', 'citizenship_procedures', 'citizenship_regulations',
+            'criminal_acts', 'criminal_appeal_review_processes', 'criminal_case_laws',
+            'criminal_codes', 'criminal_enforcements', 'criminal_forms',
+            'criminal_guidelines', 'criminal_agreements', 'criminal_ministerial_instructions',
+            'criminal_operational_bulletins', 'criminal_policies', 'criminal_procedures',
+            'criminal_regulations'
+        ];
+        
+        return in_array($tableName, $allowedTables);
+    }
 }

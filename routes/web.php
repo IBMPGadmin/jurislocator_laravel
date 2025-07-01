@@ -82,6 +82,32 @@ Route::middleware([\App\Http\Middleware\Authenticate::class, 'verified', \App\Ht
 
 // User-only routes
 Route::middleware([\App\Http\Middleware\Authenticate::class, 'verified', \App\Http\Middleware\UserOnly::class, \App\Http\Middleware\CheckSubscription::class])->group(function () {
+    
+    // NEW DUAL WORKFLOW ROUTES
+    // Session Mode Selection - Legacy route (kept for backward compatibility, but not used)
+    // Route::get('/session-mode-selection', function () {
+    //     return view('session-mode-selection');
+    // })->name('session.mode.selection');
+    
+    // User-Centric Session Routes (Personal Session)
+    Route::get('/user-home', [App\Http\Controllers\UserCentricController::class, 'home'])->name('user.home');
+    Route::get('/user-legal-tables', [App\Http\Controllers\UserCentricController::class, 'legalTables'])->name('user.legal-tables');
+    Route::get('/user-notes', [App\Http\Controllers\UserCentricController::class, 'notes'])->name('user.notes');
+    Route::get('/user-templates', [App\Http\Controllers\UserCentricController::class, 'templates'])->name('user.templates');
+    Route::get('/user-immigration-programs', [App\Http\Controllers\UserCentricController::class, 'immigrationPrograms'])->name('user.immigration-programs');
+    Route::get('/user-support', [App\Http\Controllers\UserCentricController::class, 'support'])->name('user.support');
+    
+    // User-Centric API Routes for AJAX operations
+    Route::post('/user-notes', [App\Http\Controllers\UserCentricController::class, 'storeNote'])->name('user.notes.store');
+    Route::post('/user-templates', [App\Http\Controllers\UserCentricController::class, 'storeTemplate'])->name('user.templates.store');
+    Route::put('/user-notes/{id}', [App\Http\Controllers\UserCentricController::class, 'updateNote'])->name('user.notes.update');
+    Route::delete('/user-notes/{id}', [App\Http\Controllers\UserCentricController::class, 'deleteNote'])->name('user.notes.delete');
+    
+    // User-Centric Document Viewing Routes (without client association)
+    Route::get('/view-user-legal-table/{table_name}', [App\Http\Controllers\UserLegalTableController::class, 'showUserDocument'])->name('user.legal-table.show');
+    Route::get('/view-user-legal-table-french/{table_name}', [App\Http\Controllers\UserLegalTableController::class, 'showUserDocumentFrench'])->name('user.legal-table.show.french');
+    
+    // Client-Centric Session Routes (Original functionality)
     Route::get('/user-dashboard', function () {
         return view('user-dashboard');
     })->name('user.dashboard');

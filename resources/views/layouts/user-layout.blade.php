@@ -259,6 +259,181 @@
         border: 2px solid #fff;
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
+    
+    /* Navigation Styling */
+    .nav_workflow_switch {
+        /* Remove all special button styling to match other nav items */
+        background: transparent !important;
+        border: none !important;
+        border-radius: 0 !important;
+        /* Keep the standard nav_link behavior */
+        transition: 0.3s;
+    }
+    
+    .nav_workflow_switch:hover {
+        background: transparent !important;
+        border: none !important;
+        transform: none !important;
+        /* Use the same hover color as other nav items */
+        color: var(--color-ref);
+    }
+    
+    /* Sidebar Scrollable Styles */
+    .l-navbar {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        overflow: hidden;
+        position: fixed;
+        z-index: 1000;
+    }
+    
+    .nav {
+        display: flex;
+        flex-direction: column;
+        height: calc(100vh - var(--header-height) - 1rem);
+        overflow: hidden;
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .nav_list {
+        flex: 1;
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding-bottom: 1rem;
+        
+        /* Custom scrollbar for better appearance */
+        scrollbar-width: thin;
+        scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+    }
+    
+    /* Webkit scrollbar styling */
+    .nav_list::-webkit-scrollbar {
+        width: 6px;
+    }
+    
+    .nav_list::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    
+    .nav_list::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 3px;
+    }
+    
+    .nav_list::-webkit-scrollbar-thumb:hover {
+        background: rgba(255, 255, 255, 0.5);
+    }
+    
+    /* Bottom section for logout */
+    .nav_bottom {
+        flex-shrink: 0;
+        margin-top: 1rem;
+        padding: 0.5rem 0 0.5rem 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    /* Logout button styling - same as other nav items */
+    .nav_logout {
+        /* Remove all special button styling to match other nav items */
+        background: transparent !important;
+        border: none !important;
+        border-radius: 0 !important;
+        /* Keep the standard nav_link behavior */
+        position: relative;
+        color: var(--color-theme-3);
+        margin-bottom: 1.5rem;
+        transition: 0.3s;
+        display: grid;
+        grid-template-columns: max-content max-content;
+        align-items: center;
+        column-gap: 1rem;
+        padding: 0.5rem 0 0.5rem 1.5rem;
+    }
+    
+    .nav_logout:hover {
+        color: var(--color-ref) !important;
+        background: transparent !important;
+        border: none !important;
+        transform: none !important;
+    }
+    
+    .nav_logout .nav_icon {
+        font-size: 1.25rem;
+        color: var(--color-theme-3) !important;
+    }
+    
+    .nav_logout .nav_name {
+        color: var(--color-theme-3) !important;
+        font-weight: normal !important;
+    }
+    
+    /* Active state for logout if needed */
+    .nav_logout.active {
+        color: var(--color-theme-3);
+    }
+    
+    .nav_logout.active::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        width: 3px;
+        height: 32px;
+        background-color: var(--color-theme-2);
+    }
+    
+    /* Scroll indicator for mobile */
+    .nav_list.has-scroll {
+        position: relative;
+    }
+    
+    /* .nav_list.has-scroll::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 20px;
+        height: 3px;
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 2px;
+        animation: scrollHint 2s ease-in-out infinite;
+    }
+    
+    @keyframes scrollHint {
+        0%, 100% { opacity: 0.3; }
+        50% { opacity: 0.7; }
+    }
+    
+    /* Hide scroll indicator when scrolled to bottom */
+    .nav_list:not(.has-scroll)::after {
+        display: none;
+    } */
+    
+    /* Mobile responsive improvements */
+    @media (max-height: 600px) {
+        .nav_list {
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+        }
+    }
+    
+    /* Very small screens */
+    @media (max-height: 500px) {
+        .nav_link {
+            padding: 0.5rem 1rem;
+            min-height: auto;
+        }
+        
+        .nav_name {
+            font-size: 0.85rem;
+        }
+        
+        .nav_icon {
+            font-size: 1rem;
+        }
+    }
     </style>
     
     @php
@@ -359,23 +534,55 @@
     </header>
     
     <div class="l-navbar" id="nav-bar">
-        <nav class="nav">            <div class="nav_list"> 
-                <a href="{{ route('user.dashboard') }}" class="nav_link {{ request()->routeIs('user.dashboard') ? 'active' : '' }}"> 
+        <nav class="nav">
+            <div class="nav_list"> 
+                <a href="{{ route('user.home') }}" class="nav_link {{ request()->routeIs('user.home') ? 'active' : '' }}"> 
                     <i class='bx bx-grid-alt nav_icon'>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
                             <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z"/>
                         </svg>
                     </i> 
-                    <span class="nav_name" data-en="Dashboard" data-fr="Tableau de bord">Dashboard</span> 
-                </a> 
+                    <span class="nav_name" data-en="Home" data-fr="Accueil">Home</span> 
+                </a>
 
-                <a href="{{ route('templates.select-client') }}" class="nav_link {{ request()->routeIs('templates.select-client') || request()->routeIs('templates.index') || request()->routeIs('templates.edit') ? 'active' : '' }}"> 
-                    <i class='bx bx-message-square-detail nav_icon'>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark" viewBox="0 0 16 16">
+                <!-- User-Centric Menu Items -->
+                <a href="{{ route('user.legal-tables') }}" class="nav_link {{ request()->routeIs('user.legal-tables') ? 'active' : '' }}"> 
+                    <i class='bx bx-library nav_icon'>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-journal-text" viewBox="0 0 16 16">
+                            <path d="M5 10.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5m0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5"/>
+                            <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2"/>
+                            <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1z"/>
+                        </svg>
+                    </i> 
+                    <span class="nav_name" data-en="Legal Documents" data-fr="Documents juridiques">Legal Documents</span> 
+                </a>
+
+                <a href="{{ route('user.notes') }}" class="nav_link {{ request()->routeIs('user.notes') ? 'active' : '' }}"> 
+                    <i class='bx bx-note nav_icon'>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sticky" viewBox="0 0 16 16">
+                            <path d="M2.5 1A1.5 1.5 0 0 0 1 2.5v11A1.5 1.5 0 0 0 2.5 15h6.086a1.5 1.5 0 0 0 1.06-.44l4.915-4.914A1.5 1.5 0 0 0 15 8.586V2.5A1.5 1.5 0 0 0 13.5 1zM2 2.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 .5.5V8H9.5A1.5 1.5 0 0 0 8 9.5V14H2.5a.5.5 0 0 1-.5-.5zm7 11.293V9.5a.5.5 0 0 1 .5-.5h4.293z"/>
+                        </svg>
+                    </i> 
+                    <span class="nav_name" data-en="My Notes" data-fr="Mes notes">My Notes</span> 
+                </a>
+
+                <a href="{{ route('user.templates') }}" class="nav_link {{ request()->routeIs('user.templates') ? 'active' : '' }}"> 
+                    <i class='bx bx-file nav_icon'>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-text" viewBox="0 0 16 16">
+                            <path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1zM5.5 9a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1zM5.5 11a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1z"/>
                             <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z"/>
                         </svg>
                     </i> 
-                    <span class="nav_name" data-en="Templates" data-fr="Modèles">Templates</span> 
+                    <span class="nav_name" data-en="My Templates" data-fr="Mes modèles">My Templates</span> 
+                </a>
+
+                <a href="{{ route('user.dashboard') }}" class="nav_link nav_workflow_switch"> 
+                    <i class='bx bx-user-circle nav_icon'>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people" viewBox="0 0 16 16">
+                            <path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1zm-7.978-1L7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002-.014.002zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4m3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0M6.936 9.28a6 6 0 0 0-1.23-.247A7 7 0 0 0 5 9c-4 0-5 3-5 4q0 1 1 1h4.216A2.24 2.24 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816M4.92 10A5.5 5.5 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0m3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4"/>
+                        </svg>
+                    </i> 
+                    <span class="nav_name" data-en="Switch to Client Mode" data-fr="Passer au mode client">Switch to Client Mode</span>
                 </a> 
 
                 <a href="{{ route('user.government-links') }}" class="nav_link {{ request()->routeIs('user.government-links*') ? 'active' : '' }}"> 
@@ -431,21 +638,23 @@
 
             </div>
 
-            <a href="{{ route('logout') }}" 
-               class="nav_link" 
-               id="logout-link" 
-               onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> 
-                <i class='bx bx-log-out nav_icon'>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0z"/>
-                        <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708z"/>
-                    </svg>
-                </i> 
-                <span class="nav_name" data-en="Sign Out" data-fr="Se déconnecter">Sign Out</span>
-            </a>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                @csrf
-            </form>
+            <div class="nav_bottom">
+                <a href="{{ route('logout') }}" 
+                   class="nav_link nav_logout" 
+                   id="logout-link" 
+                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> 
+                    <i class='bx bx-log-out nav_icon'>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0z"/>
+                            <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708z"/>
+                        </svg>
+                    </i> 
+                    <span class="nav_name" data-en="Sign Out" data-fr="Se déconnecter">Sign Out</span>
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
+            </div>
         </nav>
     </div>
 
@@ -785,6 +994,44 @@
                     });
                 }
             });
+        }
+        
+        // Sidebar scrolling enhancement
+        const navList = document.querySelector('.nav_list');
+        if (navList) {
+            // Add smooth scrolling behavior
+            navList.style.scrollBehavior = 'smooth';
+            
+            // Optional: Add keyboard navigation for accessibility
+            navList.addEventListener('keydown', function(e) {
+                if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    const focusedElement = document.activeElement;
+                    if (focusedElement && focusedElement.classList.contains('nav_link')) {
+                        const navLinks = Array.from(this.querySelectorAll('.nav_link'));
+                        const currentIndex = navLinks.indexOf(focusedElement);
+                        
+                        if (e.key === 'ArrowDown' && currentIndex < navLinks.length - 1) {
+                            navLinks[currentIndex + 1].focus();
+                        } else if (e.key === 'ArrowUp' && currentIndex > 0) {
+                            navLinks[currentIndex - 1].focus();
+                        }
+                    }
+                }
+            });
+            
+            // Show a subtle scroll indicator on mobile if content overflows
+            function checkScrollIndicator() {
+                if (navList.scrollHeight > navList.clientHeight) {
+                    navList.classList.add('has-scroll');
+                } else {
+                    navList.classList.remove('has-scroll');
+                }
+            }
+            
+            // Check on load and resize
+            checkScrollIndicator();
+            window.addEventListener('resize', checkScrollIndicator);
         }
     });
     </script>
