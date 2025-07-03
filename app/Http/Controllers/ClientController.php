@@ -41,12 +41,35 @@ class ClientController extends Controller
 
     public function selectClient(Request $request)
     {
-        // Implementation for selecting client
+        $request->validate([
+            'client_id' => 'required|exists:client_table,id'
+        ]);
+
+        $client = Client::where('id', $request->client_id)
+                       ->where('user_id', Auth::id())
+                       ->first();
+
+        if (!$client) {
+            return redirect()->route('client.management')
+                ->with('error', 'Client not found or access denied.');
+        }
+
+        // Update last accessed time
+        $client->update(['last_accessed' => now()]);
+
+        // Set client session for client-centric mode
+        session(['selected_client_id' => $request->client_id]);
+
+        // Redirect to client-centric legal tables
+        return redirect()->route('user.client.legal-tables', $client->id);
     }
 
     public function home()
     {
-        // Implementation for home page
+        // Always redirect to user dashboard for home
+        return redirect()->route('user.dashboard');
+        
+        // Default to client-centric mode - show client selection
         return view('home');
     }
 
@@ -221,5 +244,11 @@ class ClientController extends Controller
         );
         
         return $text;
+    }
+
+    // Client management page
+    public function index()
+    {
+        return view('client-management');
     }
 }

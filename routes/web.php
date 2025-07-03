@@ -82,34 +82,9 @@ Route::middleware([\App\Http\Middleware\Authenticate::class, 'verified', \App\Ht
 
 // User-only routes
 Route::middleware([\App\Http\Middleware\Authenticate::class, 'verified', \App\Http\Middleware\UserOnly::class, \App\Http\Middleware\CheckSubscription::class])->group(function () {
-    
-    // NEW DUAL WORKFLOW ROUTES
-    // Session Mode Selection - Legacy route (kept for backward compatibility, but not used)
-    // Route::get('/session-mode-selection', function () {
-    //     return view('session-mode-selection');
-    // })->name('session.mode.selection');
-    
-    // User-Centric Session Routes (Personal Session)
-    Route::get('/user-home', [App\Http\Controllers\UserCentricController::class, 'home'])->name('user.home');
-    Route::get('/user-legal-tables', [App\Http\Controllers\UserCentricController::class, 'legalTables'])->name('user.legal-tables');
-    Route::get('/user-notes', [App\Http\Controllers\UserCentricController::class, 'notes'])->name('user.notes');
-    Route::get('/user-templates', [App\Http\Controllers\UserCentricController::class, 'templates'])->name('user.templates');
-    Route::get('/user-immigration-programs', [App\Http\Controllers\UserCentricController::class, 'immigrationPrograms'])->name('user.immigration-programs');
-    Route::get('/user-support', [App\Http\Controllers\UserCentricController::class, 'support'])->name('user.support');
-    
-    // User-Centric API Routes for AJAX operations
-    Route::post('/user-notes', [App\Http\Controllers\UserCentricController::class, 'storeNote'])->name('user.notes.store');
-    Route::post('/user-templates', [App\Http\Controllers\UserCentricController::class, 'storeTemplate'])->name('user.templates.store');
-    Route::put('/user-notes/{id}', [App\Http\Controllers\UserCentricController::class, 'updateNote'])->name('user.notes.update');
-    Route::delete('/user-notes/{id}', [App\Http\Controllers\UserCentricController::class, 'deleteNote'])->name('user.notes.delete');
-    
-    // User-Centric Document Viewing Routes (without client association)
-    Route::get('/view-user-legal-table/{table_name}', [App\Http\Controllers\UserLegalTableController::class, 'showUserDocument'])->name('user.legal-table.show');
-    Route::get('/view-user-legal-table-french/{table_name}', [App\Http\Controllers\UserLegalTableController::class, 'showUserDocumentFrench'])->name('user.legal-table.show.french');
-    
-    // Client-Centric Session Routes (Original functionality)
     Route::get('/user-dashboard', function () {
-        return view('user-dashboard');
+        // Always show the home dashboard with tiles
+        return view('home-dashboard');
     })->name('user.dashboard');
 
     // RCIC Deadlines for users
@@ -206,19 +181,57 @@ Route::middleware([\App\Http\Middleware\Authenticate::class, 'verified', \App\Ht
     Route::get('/sidebar/popups/fetch', [ClientSidebarController::class, 'fetchPinnedPopups'])->name('sidebar.popups.fetch');
     Route::delete('/sidebar/popups/clear', [ClientSidebarController::class, 'clearPinnedPopups'])->name('sidebar.popups.clear');
     
-    // Legal tables route
+    // Legal tables route (Client-centric)
     Route::get('/user/client/{client}/legal-tables', [App\Http\Controllers\UserLegalTableController::class, 'show'])
         ->name('user.client.legal-tables');
-        
+    
+    // Client management routes (moved to sidebar submenu)
+    Route::get('/client-management', [ClientController::class, 'index'])->name('client.management');
+    Route::post('/clients', [ClientController::class, 'store'])->name('clients.store');
+    Route::post('/select-client', [ClientController::class, 'selectClient'])->name('clients.select');
+    
+    // User-centric legal tables routes
+    Route::get('/user/legal-tables', [App\Http\Controllers\UserLegalTableController::class, 'index'])
+        ->name('user.legal-tables');
+    
+    // User-centric document viewing routes with user_id (like client-centric structure)
+    Route::get('/user/{user}/view-legal-table/{tableName}', [App\Http\Controllers\UserPersonalDocumentController::class, 'show'])
+        ->name('user.personal.document.view');
+    Route::get('/user/{user}/view-legal-table-french/{tableName}', [App\Http\Controllers\UserPersonalDocumentController::class, 'showFrench'])
+        ->name('user.personal.document.view.french');
+    
+    // User-specific text and popup data routes
+    Route::post('/user/annotations', [App\Http\Controllers\UserAnnotationController::class, 'store'])
+        ->name('user.annotations.store');
+    Route::get('/user/annotations/section', [App\Http\Controllers\UserAnnotationController::class, 'getForSection'])
+        ->name('user.annotations.section');
+    Route::patch('/user/annotations/{id}', [App\Http\Controllers\UserAnnotationController::class, 'update'])
+        ->name('user.annotations.update');
+    Route::delete('/user/annotations/{id}', [App\Http\Controllers\UserAnnotationController::class, 'destroy'])
+        ->name('user.annotations.destroy');
+    
+    // User-specific popup routes
+    Route::post('/user/popups/save', [App\Http\Controllers\UserPopupController::class, 'save'])
+        ->name('user.popups.save');
+    Route::get('/user/popups/fetch', [App\Http\Controllers\UserPopupController::class, 'fetch'])
+        ->name('user.popups.fetch');
+    Route::delete('/user/popups/clear', [App\Http\Controllers\UserPopupController::class, 'clear'])
+        ->name('user.popups.clear');
+    
+    // User template routes
+    Route::get('/user/templates', [App\Http\Controllers\UserTemplateController::class, 'index'])
+        ->name('user.templates.index');
+    Route::post('/user/templates', [App\Http\Controllers\UserTemplateController::class, 'store'])
+        ->name('user.templates.store');
+    Route::patch('/user/templates/{id}', [App\Http\Controllers\UserTemplateController::class, 'update'])
+        ->name('user.templates.update');
+    Route::delete('/user/templates/{id}', [App\Http\Controllers\UserTemplateController::class, 'destroy'])
+        ->name('user.templates.destroy');
+    
     // Payment Details routes
     Route::get('/payment/details', [App\Http\Controllers\PaymentDetailsController::class, 'index'])->name('payment.details');
     Route::post('/payment/subscription/{id}/cancel', [App\Http\Controllers\PaymentDetailsController::class, 'cancelSubscription'])->name('payment.subscription.cancel');
     Route::get('/payment/subscription/activate/{packageId}', [App\Http\Controllers\PaymentDetailsController::class, 'activateNewPackage'])->name('payment.subscription.activate');
-
-    // Client Sidebar routes
-    Route::post('/client/sidebar/pin-popup', [ClientSidebarController::class, 'pinPopup'])->name('client.sidebar.pin-popup');
-    Route::post('/client/sidebar/fetch-popups', [ClientSidebarController::class, 'fetchPopups'])->name('client.sidebar.fetch-popups');
-    Route::post('/client/sidebar/clear-popups', [ClientSidebarController::class, 'clearPopups'])->name('client.sidebar.clear-popups');
 });
 
 Route::middleware(\App\Http\Middleware\Authenticate::class)->group(function () {

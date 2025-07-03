@@ -19,6 +19,13 @@ class Client extends Model
         'last_accessed'
     ];
     
+    // Cast dates to Carbon instances
+    protected $casts = [
+        'last_accessed' => 'datetime',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+    ];
+    
     // Relation to User
     public function user()
     {
