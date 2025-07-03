@@ -8,11 +8,11 @@
             <div class="welcome-header text-center">
                 <h1 class="display-4 mb-3" data-en="Welcome to JurisLocator" data-fr="Bienvenue sur JurisLocator">Welcome to JurisLocator</h1>
                 <p class="lead text-muted" data-en="Your personal legal research workspace. Access legal documents, create notes, and manage your research efficiently" data-fr="Votre espace de recherche juridique personnel. Accédez aux documents juridiques, créez des notes et gérez efficacement vos recherches">
-                    Your personal legal research workspace. Access legal documents, create notes, and manage your research efficiently
+                    2 our personal legal research workspace. Access legal documents, create notes, and manage your research efficiently
                 </p>
                 <div class="session-info bg-light p-3 rounded d-inline-block">
                     <i class="fas fa-home text-primary me-2"></i>
-                    <strong data-en="Personal Workspace" data-fr="Espace de travail personnel">Personal Workspace</strong>
+                    <strong data-en="Personal Workspace" data-fr="Espace de travail personnel">Personal Workspace 02</strong>
                     <span class="ms-3 text-muted">
                         <small>
                             <span data-en="Need client-specific work?" data-fr="Besoin de travail spécifique au client ?">Need client-specific work?</span>
