@@ -81,7 +81,7 @@
                         <p class="tile-desc">
                             Access practical tools designed for immigration consultants and legal professionals — including age calculators, time zone planners, currency converters, and more.
                         </p>
-                        <a href="#" class="btn btn-neutral">Browse Tools</a>
+                        <a href="/tools" class="btn btn-neutral">Browse Tools</a>
                     </div>
                 </div>
             </div>
@@ -100,7 +100,7 @@
             </div>
 
             <!-- Tools Card -->
-            <div class="dashboard-card" onclick="window.location.href='{{ route('user.tools') }}'">
+            <!-- <div class="dashboard-card" onclick="window.location.href='{{ route('user.tools') }}'">
                 <div class="card-icon tools-icon">
                     <i class="fas fa-tools"></i>
                 </div>
@@ -109,7 +109,7 @@
                     <p data-en="Access useful calculators and time zone tools" data-fr="Accédez aux calculatrices utiles et aux outils de fuseau horaire">Access useful calculators and time zone tools</p>
                     <button class="card-button" data-en="View Tools" data-fr="Voir les outils">View Tools</button>
                 </div>
-            </div>
+            </div> -->
         </div>
         <div class="row sec-title title-default px-4">
             <div class="col-12">
@@ -163,7 +163,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="activity-item">
+                <!-- <div class="activity-item">
                     <div class="activity-icon">
                         <i class="fas fa-search"></i>
                     </div>
@@ -171,7 +171,7 @@
                         <h4 data-en="Searched for family class immigration regulations" data-fr="Recherché les règlements d'immigration de la classe familiale">Searched for family class immigration regulations</h4>
                         <p data-en="1 day ago" data-fr="Il y a 1 jour">1 day ago</p>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
