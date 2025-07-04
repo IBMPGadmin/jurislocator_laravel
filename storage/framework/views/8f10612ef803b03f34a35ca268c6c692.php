@@ -1,10 +1,10 @@
 
 
 <?php $__env->startSection('meta'); ?>
-    <!-- Current document context meta tags -->
+    <!-- Current document context meta tags for personal research -->
     <meta name="current-document-table" content="<?php echo e($tableName); ?>">
     <meta name="current-document-category-id" content="<?php echo e($categoryId); ?>">
-    <meta name="current-client-id" content="<?php echo e($client->id); ?>">
+    <meta name="current-user-id" content="<?php echo e($user->id); ?>">
     <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
 <?php $__env->stopSection(); ?>
 
@@ -225,7 +225,7 @@
         color: #533f03;
     }
     
-    /* Enhanced Floating popup styles */
+    /* Enhanced Floating popup styles - exact match from client-centric */
     .floating-popup {
         position: absolute;
         z-index: 1050;
@@ -273,6 +273,57 @@
     .popup-header .section-number {
         background: rgba(255,255,255,0.2);
         padding: 0.25rem 0.5rem;
+        border-radius: 0.25rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        margin-right: 0.5rem;
+    }
+    
+    .popup-actions {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+    }
+    
+    .popup-actions .btn {
+        border: 1px solid rgba(255,255,255,0.3);
+        background: rgba(255,255,255,0.1);
+        color: white;
+        font-size: 0.75rem;
+        padding: 0.25rem 0.5rem;
+        border-radius: 0.25rem;
+        transition: all 0.2s ease;
+    }
+    
+    .popup-actions .btn:hover {
+        background: rgba(255,255,255,0.2);
+        border-color: rgba(255,255,255,0.5);
+        transform: translateY(-1px);
+    }
+    
+    .popup-content {
+        padding: 1.25rem;
+        max-height: 65vh;
+        overflow-y: auto;
+        background: #fff;
+        border-radius: 0 0 0.5rem 0.5rem;
+    }
+    
+    .popup-content::-webkit-scrollbar {
+        width: 6px;
+    }
+    
+    .popup-content::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 3px;
+    }
+    
+    .popup-content::-webkit-scrollbar-thumb {
+        background: #c1c1c1;
+        border-radius: 3px;
+    }
+    
+    .section-path {
         border-radius: 0.25rem;
         font-size: 0.875rem;
         font-weight: 500;
@@ -472,36 +523,34 @@
 <?php $__env->stopPush(); ?>
 
 <?php $__env->startSection('main-content'); ?>
-            <?php if(isset($client) && $client): ?>
-                <div class="gap_top col-12 mb-4 p-0">
-                    <div class="bg_custom p-4 rounded shadow-sm">
-                        <div class="d-flex align-items-center">
-                            <div class="client-avatar me-4 d-flex justify-content-center align-items-center rounded-circle text-white" style="width: 60px; height: 60px; font-size: 24px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); background-color: var(--color-theme-3);">
-                                <i class="fas fa-user-circle"></i>
-                            </div>
-                            <div class="client-info flex-grow-1">
-                                <h4 class="mb-2" data-en="Client Details" data-fr="Détails du client">Client Details</h4>
-                                <div class="d-flex flex-wrap">
-                                    <div class="me-4 mb-2">
-                                        <span class="d-flex align-items-center">
-                                            <strong data-en="Name:" data-fr="Nom :">Name:</strong>&nbsp;<?php echo e($client->client_name ?? '-'); ?>
+            <!-- Personal Research Mode - No client details needed -->
+            <div class="gap_top col-12 mb-4 p-0">
+                <div class="bg_custom p-4 rounded shadow-sm">
+                    <div class="d-flex align-items-center">
+                        <div class="personal-avatar me-4 d-flex justify-content-center align-items-center rounded-circle text-white" style="width: 60px; height: 60px; font-size: 24px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); background-color: var(--color-theme-3);">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="research-info flex-grow-1">
+                            <h4 class="mb-2" data-en="Personal Research" data-fr="Recherche personnelle">Personal Research</h4>
+                            <div class="d-flex flex-wrap">
+                                <div class="me-4 mb-2">
+                                    <span class="d-flex align-items-center">
+                                        <strong data-en="User:" data-fr="Utilisateur :">User:</strong>&nbsp;<?php echo e($user->name ?? 'Current User'); ?>
 
-                                        </span>
-                                    </div>
-                                    <div class="mb-2">
-                                        <span class="d-flex align-items-center">
-                                            <i class="fas fa-envelope me-2" style="color: var(--color-theme-3);"></i>
-                                            <strong data-en="Email:" data-fr="Courriel :">Email:</strong>&nbsp;<?php echo e($client->client_email ?? '-'); ?>
-
-                                        </span>
-                                    </div>
+                                    </span>
+                                </div>
+                                <div class="mb-2">
+                                    <span class="d-flex align-items-center">
+                                        <i class="fas fa-book me-2" style="color: var(--color-theme-3);"></i>
+                                        <strong data-en="Research Mode:" data-fr="Mode de recherche :">Research Mode:</strong>&nbsp;<span data-en="Personal" data-fr="Personnel">Personal</span>
+                                    </span>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            <?php endif; ?>
-            <?php if(empty($columns)): ?>
+            </div>
+            <?php if(empty($tableData) || $tableData->isEmpty()): ?>
                 <div class="alert alert-warning mt-4" data-en="No data found in this table." data-fr="Aucune donnée trouvée dans cette table.">No data found in this table.</div>
             <?php else: ?>
             <div class="card mb-3 shadow-sm">
@@ -509,10 +558,8 @@
                     <h5 class="mb-0" data-en="Keyword Search" data-fr="Recherche par mots-clés">Keyword Search</h5>
                 </div>
                 <div class="card-body">
-                    <form action="<?php echo e(route('client.legalTables.view', $legalTable->id)); ?>" method="GET" class="mb-3">
-                        <?php if(isset($client) && $client): ?>
-                            <input type="hidden" name="client_id" value="<?php echo e($client->id); ?>">
-                        <?php endif; ?>
+                    <form action="<?php echo e(route('user.personal.document.view', ['user' => $user->id, 'tableName' => $tableName])); ?>" method="GET" class="mb-3">
+                        <input type="hidden" name="category_id" value="<?php echo e($categoryId); ?>">
                         <div class="input-group">
                             <input type="text" name="search" class="form-control" 
                                    placeholder="Search..." 
@@ -530,10 +577,12 @@
                     <h5 class="mb-0" data-en="Legal Content" data-fr="Contenu juridique">Legal Content</h5>
                 </div>
                 <div class="card-body" id="legal-content-area">
-
                     <?php
                         $data = [];
                         $standaloneData = [];
+                        
+                        // Get a safe table ID for makeLinksClickableSimple function
+                        $safeTableId = $legalTable->id ?? $categoryId ?? 1;
                         
                         foreach ($tableData as $row) {
                             if (empty($row->part)) {
@@ -800,7 +849,7 @@
                                             <?php if(!isset($section['is_intro'])): ?>
                                                 <strong><?php echo e($sectionNumber); ?></strong>
                                             <?php endif; ?>
-                                            <?php echo makeLinksClickableSimple($section['text_content'], $legalTable->id, isset($section['is_intro']) ? null : $sectionNumber); ?>
+                                            <?php echo makeLinksClickableSimple($section['text_content'], $safeTableId, isset($section['is_intro']) ? null : $sectionNumber); ?>
 
                                         </div>
                                     <?php endif; ?>
@@ -808,20 +857,20 @@
                                         <div style="margin-left: 2em;">
                                             <?php if(!empty($subsection['text_content'])): ?>
                                                 <div style="margin-bottom: 0.5em;">
-                                                    <strong><?php echo e($subsectionNumber); ?></strong> <?php echo makeLinksClickableSimple($subsection['text_content'], $legalTable->id, $sectionNumber . '(' . $subsectionNumber . ')'); ?>
+                                                    <strong><?php echo e($subsectionNumber); ?></strong> <?php echo makeLinksClickableSimple($subsection['text_content'], $safeTableId, $sectionNumber . '(' . $subsectionNumber . ')'); ?>
 
                                                 </div>
                                             <?php endif; ?>
                                             <?php $__currentLoopData = $subsection['paragraphs']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $paragraphNumber => $paragraph): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <div style="margin-left: 2em;">
                                                     <div style="margin-bottom: 0.5em;">
-                                                        <strong><?php echo e($paragraphNumber); ?></strong> <?php echo makeLinksClickableSimple($paragraph['text_content'], $legalTable->id, $sectionNumber . '(' . $subsectionNumber . ')(' . $paragraphNumber . ')'); ?>
+                                                        <strong><?php echo e($paragraphNumber); ?></strong> <?php echo makeLinksClickableSimple($paragraph['text_content'], $safeTableId, $sectionNumber . '(' . $subsectionNumber . ')(' . $paragraphNumber . ')'); ?>
 
                                                     </div>
                                                     <?php $__currentLoopData = $paragraph['sub_paragraphs']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subParagraph): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                         <div style="margin-left: 2em;">
                                                             <div style="margin-bottom: 0.5em;">
-                                                                <strong><?php echo e($subParagraph['sub_paragraph']); ?></strong> <?php echo makeLinksClickableSimple($subParagraph['text_content'], $legalTable->id, $sectionNumber . '(' . $subsectionNumber . ')(' . $paragraphNumber . ')(' . $subParagraph['sub_paragraph'] . ')'); ?>
+                                                                <strong><?php echo e($subParagraph['sub_paragraph']); ?></strong> <?php echo makeLinksClickableSimple($subParagraph['text_content'], $safeTableId, $sectionNumber . '(' . $subsectionNumber . ')(' . $paragraphNumber . ')(' . $subParagraph['sub_paragraph'] . ')'); ?>
 
                                                             </div>
                                                         </div>
@@ -833,13 +882,13 @@
                                     <?php $__currentLoopData = $section['paragraphs']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $paragraphNumber => $paragraph): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         <div style="margin-left: 2em;">
                                             <div style="margin-bottom: 0.5em;">
-                                                <strong><?php echo e($paragraphNumber); ?></strong> <?php echo makeLinksClickableSimple($paragraph['text_content'], $legalTable->id, $sectionNumber . '(' . $paragraphNumber . ')'); ?>
+                                                <strong><?php echo e($paragraphNumber); ?></strong> <?php echo makeLinksClickableSimple($paragraph['text_content'], $safeTableId, $sectionNumber . '(' . $paragraphNumber . ')'); ?>
 
                                             </div>
                                             <?php $__currentLoopData = $paragraph['sub_paragraphs']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subParagraph): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <div style="margin-left: 2em;">
                                                     <div style="margin-bottom: 0.5em;">
-                                                        <strong><?php echo e($subParagraph['sub_paragraph']); ?></strong> <?php echo makeLinksClickableSimple($subParagraph['text_content'], $legalTable->id, $sectionNumber . '(' . $paragraphNumber . ')(' . $subParagraph['sub_paragraph'] . ')'); ?>
+                                                        <strong><?php echo e($subParagraph['sub_paragraph']); ?></strong> <?php echo makeLinksClickableSimple($subParagraph['text_content'], $safeTableId, $sectionNumber . '(' . $paragraphNumber . ')(' . $subParagraph['sub_paragraph'] . ')'); ?>
 
                                                     </div>
                                                 </div>
@@ -864,7 +913,7 @@
                                         <?php endif; ?>
                                         <?php if(!empty($section['text_content'])): ?>
                                             <div style="margin-left: 0.5em; margin-bottom: 1em;">
-                                                <strong><?php echo e($sectionNumber); ?></strong> <?php echo makeLinksClickableSimple($section['text_content'], $legalTable->id, $sectionNumber); ?>
+                                                <strong><?php echo e($sectionNumber); ?></strong> <?php echo makeLinksClickableSimple($section['text_content'], $safeTableId, $sectionNumber); ?>
 
                                             </div>
                                         <?php endif; ?>
@@ -875,20 +924,20 @@
                                                 <?php endif; ?>
                                                 <?php if(!empty($subsection['text_content'])): ?>
                                                     <div style="margin-bottom: 0.5em;">
-                                                        <strong><?php echo e($subsectionNumber); ?></strong> <?php echo makeLinksClickableSimple($subsection['text_content'], $legalTable->id, $sectionNumber . '(' . $subsectionNumber . ')'); ?>
+                                                        <strong><?php echo e($subsectionNumber); ?></strong> <?php echo makeLinksClickableSimple($subsection['text_content'], $safeTableId, $sectionNumber . '(' . $subsectionNumber . ')'); ?>
 
                                                     </div>
                                                 <?php endif; ?>
                                                 <?php $__currentLoopData = $subsection['paragraphs']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $paragraphNumber => $paragraph): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                     <div style="margin-left: 2em;">
                                                         <div style="margin-bottom: 0.5em;">
-                                                            <strong><?php echo e($paragraphNumber); ?></strong> <?php echo makeLinksClickableSimple($paragraph['text_content'], $legalTable->id, $sectionNumber . '(' . $subsectionNumber . ')(' . $paragraphNumber . ')'); ?>
+                                                            <strong><?php echo e($paragraphNumber); ?></strong> <?php echo makeLinksClickableSimple($paragraph['text_content'], $safeTableId, $sectionNumber . '(' . $subsectionNumber . ')(' . $paragraphNumber . ')'); ?>
 
                                                         </div>
                                                         <?php $__currentLoopData = $paragraph['sub_paragraphs']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subParagraph): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                             <div style="margin-left: 2em;">
                                                                 <div style="margin-bottom: 0.5em;">
-                                                                    <strong><?php echo e($subParagraph['sub_paragraph']); ?></strong> <?php echo makeLinksClickableSimple($subParagraph['text_content'], $legalTable->id, $sectionNumber . '(' . $subsectionNumber . ')(' . $paragraphNumber . ')(' . $subParagraph['sub_paragraph'] . ')'); ?>
+                                                                    <strong><?php echo e($subParagraph['sub_paragraph']); ?></strong> <?php echo makeLinksClickableSimple($subParagraph['text_content'], $safeTableId, $sectionNumber . '(' . $subsectionNumber . ')(' . $paragraphNumber . ')(' . $subParagraph['sub_paragraph'] . ')'); ?>
 
                                                                 </div>
                                                             </div>
@@ -903,13 +952,13 @@
                                         <?php $__currentLoopData = $section['paragraphs']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $paragraph): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <div style="margin-left: 2em;">
                                                 <div style="margin-bottom: 0.5em;">
-                                                    <strong><?php echo e($paragraph['paragraph']); ?></strong> <?php echo makeLinksClickableSimple($paragraph['text_content'], $legalTable->id, $sectionNumber . '(' . $paragraph['paragraph'] . ')'); ?>
+                                                    <strong><?php echo e($paragraph['paragraph']); ?></strong> <?php echo makeLinksClickableSimple($paragraph['text_content'], $safeTableId, $sectionNumber . '(' . $paragraph['paragraph'] . ')'); ?>
 
                                                 </div>
                                                 <?php $__currentLoopData = $paragraph['sub_paragraphs']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subParagraph): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                     <div style="margin-left: 2em;">
                                                         <div style="margin-bottom: 0.5em;">
-                                                            <strong><?php echo e($subParagraph['sub_paragraph']); ?></strong> <?php echo makeLinksClickableSimple($subParagraph['text_content'], $legalTable->id, $sectionNumber . '(' . $paragraph['paragraph'] . ')(' . $subParagraph['sub_paragraph'] . ')'); ?>
+                                                            <strong><?php echo e($subParagraph['sub_paragraph']); ?></strong> <?php echo makeLinksClickableSimple($subParagraph['text_content'], $safeTableId, $sectionNumber . '(' . $paragraph['paragraph'] . ')(' . $subParagraph['sub_paragraph'] . ')'); ?>
 
                                                         </div>
                                                     </div>
@@ -937,7 +986,7 @@
                                                             <?php endif; ?>
                                                             <?php if(!empty($section['text_content'])): ?>
                                                                 <div style="margin-left: 1em; margin-bottom: 0.5em;">
-                                                                    <strong><?php echo e($sectionNumber); ?></strong> <?php echo makeLinksClickableSimple($section['text_content'], $legalTable->id, $sectionNumber); ?>
+                                                                    <strong><?php echo e($sectionNumber); ?></strong> <?php echo makeLinksClickableSimple($section['text_content'], $safeTableId, $sectionNumber); ?>
 
                                                                 </div>
                                                             <?php endif; ?>
@@ -948,20 +997,20 @@
                                                                     <?php endif; ?>
                                                                     <?php if(!empty($subsection['text_content'])): ?>
                                                                         <div style="margin-bottom: 0.5em;">
-                                                                            <strong><?php echo e($subsectionNumber); ?></strong> <?php echo makeLinksClickableSimple($subsection['text_content'], $legalTable->id, $sectionNumber . '(' . $subsectionNumber . ')'); ?>
+                                                                            <strong><?php echo e($subsectionNumber); ?></strong> <?php echo makeLinksClickableSimple($subsection['text_content'], $safeTableId, $sectionNumber . '(' . $subsectionNumber . ')'); ?>
 
                                                                         </div>
                                                                     <?php endif; ?>
                                                                     <?php $__currentLoopData = $subsection['paragraphs']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $paragraph): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                                         <div style="margin-left: 2em;">
                                                                             <div style="margin-bottom: 0.5em;">
-                                                                                <strong><?php echo e($paragraph['paragraph']); ?></strong> <?php echo makeLinksClickableSimple($paragraph['text_content'], $legalTable->id, $sectionNumber . '(' . $subsectionNumber . ')(' . $paragraph['paragraph'] . ')'); ?>
+                                                                                <strong><?php echo e($paragraph['paragraph']); ?></strong> <?php echo makeLinksClickableSimple($paragraph['text_content'], $safeTableId, $sectionNumber . '(' . $subsectionNumber . ')(' . $paragraph['paragraph'] . ')'); ?>
 
                                                                             </div>
                                                                             <?php $__currentLoopData = $paragraph['sub_paragraphs']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subParagraph): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                                                 <div style="margin-left: 2em;">
                                                                                     <div style="margin-bottom: 0.5em;">
-                                                                                        <strong><?php echo e($subParagraph['sub_paragraph']); ?></strong> <?php echo makeLinksClickableSimple($subParagraph['text_content'], $legalTable->id, $sectionNumber . '(' . $subsectionNumber . ')(' . $paragraph['paragraph'] . ')(' . $subParagraph['sub_paragraph'] . ')'); ?>
+                                                                                        <strong><?php echo e($subParagraph['sub_paragraph']); ?></strong> <?php echo makeLinksClickableSimple($subParagraph['text_content'], $safeTableId, $sectionNumber . '(' . $subsectionNumber . ')(' . $paragraph['paragraph'] . ')(' . $subParagraph['sub_paragraph'] . ')'); ?>
 
                                                                                     </div>
                                                                                 </div>
@@ -976,13 +1025,13 @@
                                                             <?php $__currentLoopData = $section['paragraphs']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $paragraph): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                                 <div style="margin-left: 2em;">
                                                                     <div style="margin-bottom: 0.5em;">
-                                                                        <strong><?php echo e($paragraph['paragraph']); ?></strong> <?php echo makeLinksClickableSimple($paragraph['text_content'], $legalTable->id, $sectionNumber . '(' . $paragraph['paragraph'] . ')'); ?>
+                                                                        <strong><?php echo e($paragraph['paragraph']); ?></strong> <?php echo makeLinksClickableSimple($paragraph['text_content'], $safeTableId, $sectionNumber . '(' . $paragraph['paragraph'] . ')'); ?>
 
                                                                     </div>
                                                                     <?php $__currentLoopData = $paragraph['sub_paragraphs']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subParagraph): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                                         <div style="margin-left: 2em;">
                                                                             <div style="margin-bottom: 0.5em;">
-                                                                                <strong><?php echo e($subParagraph['sub_paragraph']); ?></strong> <?php echo makeLinksClickableSimple($subParagraph['text_content'], $legalTable->id, $sectionNumber . '(' . $paragraph['paragraph'] . ')(' . $subParagraph['sub_paragraph'] . ')'); ?>
+                                                                                <strong><?php echo e($subParagraph['sub_paragraph']); ?></strong> <?php echo makeLinksClickableSimple($subParagraph['text_content'], $safeTableId, $sectionNumber . '(' . $paragraph['paragraph'] . ')(' . $subParagraph['sub_paragraph'] . ')'); ?>
 
                                                                             </div>
                                                                         </div>
@@ -1006,11 +1055,11 @@
             </div>
             
             <div class="pagination-controls d-flex justify-content-center align-items-center mt-3 gap-3">
-                <button id="prev-page-btn" class="btn pagination-btn" style="color: var(--color-theme-3); border-color: var(--color-theme-3); background-color: transparent; padding: 8px 15px; border: 2px solid var(--color-theme-3); border-radius: 4px; cursor: pointer; transition: all 0.3s ease;" onclick="changePage(currentPage - 1, currentCategoryId)" <?php echo e(request('page', 1) <= 1 ? 'disabled' : ''); ?>>
+                <button id="prev-page-btn" class="btn pagination-btn" style="color: var(--color-theme-3); border-color: var(--color-theme-3); background-color: transparent; padding: 8px 15px; border: 2px solid var(--color-theme-3); border-radius: 4px; cursor: pointer; transition: all 0.3s ease;" <?php echo e(request('page', 1) <= 1 ? 'disabled' : ''); ?>>
                     Previous
                 </button>
                 
-                <select id="page-select" class="form-select" style="width: auto; border-color: var(--color-theme-3);" onchange="changePage(this.value, currentCategoryId)">
+                <select id="page-select" class="form-select" style="width: auto; border-color: var(--color-theme-3);">
                     <?php for($i = 1; $i <= $tableData->lastPage(); $i++): ?>
                         <option value="<?php echo e($i); ?>" <?php echo e(request('page', 1) == $i ? 'selected' : ''); ?>>
                             Page <?php echo e($i); ?> of <?php echo e($tableData->lastPage()); ?>
@@ -1019,7 +1068,7 @@
                     <?php endfor; ?>
                 </select>
                 
-                <button id="next-page-btn" class="btn pagination-btn" style="color: var(--color-theme-3); border-color: var(--color-theme-3); background-color: transparent; padding: 8px 15px; border: 2px solid var(--color-theme-3); border-radius: 4px; cursor: pointer; transition: all 0.3s ease;" onclick="changePage(currentPage + 1, currentCategoryId)" <?php echo e(request('page', 1) >= $tableData->lastPage() ? 'disabled' : ''); ?>>
+                <button id="next-page-btn" class="btn pagination-btn" style="color: var(--color-theme-3); border-color: var(--color-theme-3); background-color: transparent; padding: 8px 15px; border: 2px solid var(--color-theme-3); border-radius: 4px; cursor: pointer; transition: all 0.3s ease;" <?php echo e(request('page', 1) >= $tableData->lastPage() ? 'disabled' : ''); ?>>
                     Next
                 </button>
             </div>
@@ -1028,54 +1077,6 @@
 <?php $__env->startSection('page-scripts'); ?>
 <script>
     var fullHierarchicalData = <?php echo json_encode($tableData->items(), 15, 512) ?>;
-    var currentPage = <?php echo e(request('page', 1)); ?>;
-    var totalPages = <?php echo e($tableData->lastPage()); ?>;
-    var currentCategoryId = <?php echo e($legalTable->id); ?>;
-    
-    // Function to change page with AJAX loading
-    function changePage(page, category_id) {
-        if (page < 1 || page > totalPages) return;
-        
-        const url = new URL(window.location.href);
-        url.searchParams.set('page', page);
-        url.searchParams.set('category_id', category_id);
-
-        // Show loading state
-        const contentArea = document.getElementById('legal-content-area');
-        if (contentArea) {
-            contentArea.innerHTML = '<div class="text-center p-5"><div class="spinner-border text-primary" role="status"></div><p class="mt-2">Loading content...</p></div>';
-        }
-
-        fetch(url.toString(), { 
-            method: 'GET',
-            headers: {
-                'X-Requested-With': 'XMLHttpRequest'
-            }
-        })
-        .then(response => response.text())
-        .then(html => {
-            // Handle response
-            window.history.pushState({}, '', url.toString());
-            currentPage = page;
-            location.reload(); // Simple reload approach
-        })
-        .catch(error => {
-            console.error('Error loading page:', error);
-            if (contentArea) {
-                contentArea.innerHTML = '<div class="alert alert-danger">Error loading content. Please try again.</div>';
-            }
-        });
-    }
-
-    // Initialize reference handlers
-    document.addEventListener('DOMContentLoaded', function() {
-        // Make all clickable headings act like references
-        document.querySelectorAll('.clickable-heading').forEach(function(elem) {
-            elem.addEventListener('click', function(e) {
-                // Your click handler logic
-            });
-        });
-    });
 </script>
 <?php $__env->stopSection(); ?>
 <!-- Content Viewer Modal -->
@@ -1112,6 +1113,9 @@
 <!-- Custom scripts specific to this page -->
 <script src="<?php echo e(asset('user_assets/js/api-endpoint-tests.js')); ?>"></script>
 <script src="<?php echo e(asset('user_assets/js/reference-by-id.js')); ?>"></script>
+<script src="<?php echo e(asset('user_assets/js/legal-reference-popups.js')); ?>"></script>
+<script src="<?php echo e(asset('user_assets/js/sidebar-persistence.js')); ?>"></script>
+<script src="<?php echo e(asset('user_assets/js/user-centric-popups.js')); ?>"></script>
 
 <!-- Initialize TinyMCE and droppable area -->
 <script>
@@ -1213,6 +1217,141 @@ $(document).ready(function() {
 });
 </script>
 
+<!-- Pagination Script for AJAX Navigation -->
+<script>
+$(document).ready(function() {
+    console.log('Pagination script initializing...');
+    
+    // Global pagination variables
+    var currentPage = <?php echo e(request('page', 1)); ?>;
+    var totalPages = <?php echo e($tableData->lastPage()); ?>;
+    var currentCategoryId = <?php echo e($safeTableId); ?>;
+    
+    console.log('Pagination variables:', { currentPage, totalPages, currentCategoryId });
+    
+    // Check if pagination elements exist
+    const prevBtn = $('#prev-page-btn');
+    const nextBtn = $('#next-page-btn');
+    const pageSelect = $('#page-select');
+    
+    console.log('Pagination elements found:', {
+        prevBtn: prevBtn.length > 0,
+        nextBtn: nextBtn.length > 0,
+        pageSelect: pageSelect.length > 0
+    });
+    
+    // Function to change page with AJAX loading
+    function changePage(page, category_id) {
+        console.log('changePage called with:', { page, category_id, currentPage, totalPages, currentCategoryId });
+        
+        // Validate page bounds
+        if (page < 1 || page > totalPages) {
+            console.log('Page out of bounds, ignoring request');
+            return;
+        }
+        
+        const url = new URL(window.location.href);
+        url.searchParams.set('page', page);
+        url.searchParams.set('category_id', category_id);
+
+        console.log('Making AJAX request to:', url.toString());
+
+        // Show loading state
+        const contentArea = $('#legal-content-area');
+        if (contentArea.length) {
+            contentArea.html('<div class="text-center p-5"><div class="spinner-border text-primary" role="status"></div><p class="mt-2">Loading content...</p></div>');
+        }
+
+        // Get CSRF token
+        const token = $('meta[name="csrf-token"]').attr('content');
+
+        $.ajax({
+            url: url.toString(),
+            method: 'GET',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+                'X-CSRF-TOKEN': token || ''
+            },
+            success: function(html) {
+                console.log('AJAX response received, HTML length:', html.length);
+                
+                const $doc = $(html);
+                const newContent = $doc.find('#legal-content-area');
+                
+                if (newContent.length && contentArea.length) {
+                    console.log('Updating content area...');
+                    contentArea.html(newContent.html());
+                }
+                
+                // Update pagination controls
+                const newPaginationControls = $doc.find('.pagination-controls');
+                const currentPaginationControls = $('.pagination-controls');
+                
+                if (newPaginationControls.length && currentPaginationControls.length) {
+                    console.log('Updating pagination controls...');
+                    
+                    // Update button states
+                    const newPrevBtn = newPaginationControls.find('#prev-page-btn');
+                    const newNextBtn = newPaginationControls.find('#next-page-btn');
+                    const newPageSelect = newPaginationControls.find('#page-select');
+                    
+                    if (newPrevBtn.length) {
+                        prevBtn.prop('disabled', newPrevBtn.prop('disabled'));
+                    }
+                    if (newNextBtn.length) {
+                        nextBtn.prop('disabled', newNextBtn.prop('disabled'));
+                    }
+                    if (newPageSelect.length) {
+                        pageSelect.html(newPageSelect.html());
+                        pageSelect.val(newPageSelect.val());
+                    }
+                }
+                
+                // Update URL without refresh
+                window.history.pushState({}, '', url.toString());
+                
+                // Update current page variable
+                currentPage = page;
+                
+                console.log('Page updated successfully');
+            },
+            error: function(xhr, status, error) {
+                console.error('Error loading page:', error);
+                if (contentArea.length) {
+                    contentArea.html('<div class="alert alert-danger">Error loading content. Please try again.</div>');
+                }
+            }
+        });
+    }
+    
+    // Attach event handlers using jQuery
+    prevBtn.on('click', function(e) {
+        e.preventDefault();
+        console.log('Previous button clicked, current page:', currentPage);
+        if (currentPage > 1) {
+            changePage(currentPage - 1, currentCategoryId);
+        }
+    });
+    
+    nextBtn.on('click', function(e) {
+        e.preventDefault();
+        console.log('Next button clicked, current page:', currentPage);
+        if (currentPage < totalPages) {
+            changePage(currentPage + 1, currentCategoryId);
+        }
+    });
+    
+    pageSelect.on('change', function() {
+        const selectedPage = parseInt($(this).val());
+        console.log('Page select changed to:', selectedPage);
+        changePage(selectedPage, currentCategoryId);
+    });
+    
+    console.log('Pagination event handlers attached successfully');
+});
+</script>
+
 <!-- Reference pattern processing and popup handling -->
 <script>
 $(document).ready(function() {
@@ -1222,7 +1361,7 @@ $(document).ready(function() {
         // Pattern 1: section X references
         processedText = processedText.replace(
             /\b(section|sections)\s+(\d+(?:\.\d+)?)\b/gi,
-            '<span class="ref" data-section-id="$2" data-table-id="<?php echo e($legalTable->id); ?>">$1 $2</span>'
+            '<span class="ref" data-section-id="$2" data-table-id="<?php echo e($safeTableId); ?>">$1 $2</span>'
         );
         // Pattern 2: paragraph references
         processedText = processedText.replace(
@@ -1231,10 +1370,10 @@ $(document).ready(function() {
                 // Try to get context from parent .legal-text div
                 const section = $(this).closest('.legal-text').data('section-id') || '';
                 let sectionId = section ? section + '(' + firstRef + ')' : '(' + firstRef + ')';
-                let result = '<span class="ref" data-section-id="' + sectionId + '" data-table-id="<?php echo e($legalTable->id); ?>">' + type + ' (' + firstRef + ')</span>';
+                let result = '<span class="ref" data-section-id="' + sectionId + '" data-table-id="<?php echo e($safeTableId); ?>">' + type + ' (' + firstRef + ')</span>';
                 if (secondRef) {
                     let secondSectionId = section ? section + '(' + secondRef + ')' : '(' + secondRef + ')';
-                    result += ' or <span class="ref" data-section-id="' + secondSectionId + '" data-table-id="<?php echo e($legalTable->id); ?>">(' + secondRef + ')</span>';
+                    result += ' or <span class="ref" data-section-id="' + secondSectionId + '" data-table-id="<?php echo e($safeTableId); ?>">(' + secondRef + ')</span>';
                 }
                 return result;
             }
@@ -1245,10 +1384,10 @@ $(document).ready(function() {
             function(match, type, firstRef, secondRef) {
                 const section = $(this).closest('.legal-text').data('section-id') || '';
                 let sectionId = section ? section + '(' + firstRef + ')' : '(' + firstRef + ')';
-                let result = '<span class="ref" data-section-id="' + sectionId + '" data-table-id="<?php echo e($legalTable->id); ?>">' + type + ' (' + firstRef + ')</span>';
+                let result = '<span class="ref" data-section-id="' + sectionId + '" data-table-id="<?php echo e($safeTableId); ?>">' + type + ' (' + firstRef + ')</span>';
                 if (secondRef) {
                     let secondSectionId = section ? section + '(' + secondRef + ')' : '(' + secondRef + ')';
-                    result += ' or <span class="ref" data-section-id="' + secondSectionId + '" data-table-id="<?php echo e($legalTable->id); ?>">(' + secondRef + ')</span>';
+                    result += ' or <span class="ref" data-section-id="' + secondSectionId + '" data-table-id="<?php echo e($safeTableId); ?>">(' + secondRef + ')</span>';
                 }
                 return result;
             }
@@ -1256,7 +1395,7 @@ $(document).ready(function() {
         // Pattern 4: complex section references like 279.1(2)
         processedText = processedText.replace(
             /\b(\d+(?:\.\d+)?(?:\([^)]+\)){1,4})\b(?!\s*\([a-z](?:\.\d+)?\))(?![^<>]*<\/span>)/g,
-            '<span class="ref" data-section-id="$1" data-table-id="<?php echo e($legalTable->id); ?>">$1</span>'
+            '<span class="ref" data-section-id="$1" data-table-id="<?php echo e($safeTableId); ?>">$1</span>'
         );
         // Pattern 5: explicit section references
         processedText = processedText.replace(
@@ -1264,7 +1403,7 @@ $(document).ready(function() {
             function(match, type, section, subsection, paragraph) {
                 let sectionId = section + '(' + subsection + ')';
                 if (paragraph) sectionId += '(' + paragraph + ')';
-                return '<span class="ref" data-section-id="' + sectionId + '" data-table-id="<?php echo e($legalTable->id); ?>">' + match + '</span>';
+                return '<span class="ref" data-section-id="' + sectionId + '" data-table-id="<?php echo e($safeTableId); ?>">' + match + '</span>';
             }
         );
         $(this).html(processedText);
@@ -1284,6 +1423,61 @@ $(document).ready(function() {
             console.warn('No popup-related functions found on window. Check that legal-reference-popups.js is loaded and defines a global function.');
         }
     }
+});
+</script>
+
+<!-- Database persistence initialization for user popups -->
+<script>
+$(document).ready(function() {
+    // Initialize database persistence (now user-wide, not document-specific)
+    if (typeof setDocumentContext === 'function') {
+        const tableName = '<?php echo e($tableName); ?>';
+        const categoryId = '<?php echo e($categoryId); ?>';
+        setDocumentContext(tableName, categoryId);
+        console.log('Document context initialized (popups are now user-wide)');
+    } else {
+        // Directly load popups if context function not available
+        if (typeof loadSavedPopups === 'function') {
+            setTimeout(() => {
+                loadSavedPopups(false); // Silent load
+            }, 500);
+        }
+    }
+    
+    // Set up auto-save functionality
+    if (typeof setupAutoSave === 'function') {
+        setupAutoSave();
+    }
+    
+    // Add enhanced save/load/clear functionality to existing buttons
+    $(document).on('click', '#save-sidebar-state', function() {
+        // Original sidebar state saving
+        saveSidebarState();
+        
+        // Also save popup data to database with notifications
+        if (typeof savePopupDataToDatabase === 'function') {
+            savePopupDataToDatabase(true); // Show notifications for manual saves
+        }
+    });
+    
+    // Manual popup management buttons (if they exist)
+    $(document).on('click', '#save-pinned-popups', function() {
+        if (typeof savePopupDataToDatabase === 'function') {
+            savePopupDataToDatabase(true);
+        }
+    });
+    
+    $(document).on('click', '#fetch-pinned-popups', function() {
+        if (typeof loadSavedPopups === 'function') {
+            loadSavedPopups();
+        }
+    });
+    
+    $(document).on('click', '#clear-pinned-popups', function() {
+        if (typeof clearSavedPopups === 'function') {
+            clearSavedPopups();
+        }
+    });
 });
 </script>
 
@@ -1355,21 +1549,27 @@ $(function() {
 });
 </script>
 
-<!-- New pagination and reference handling scripts -->
 <script>
-    // Global variables for pagination and content management
-    var fullHierarchicalData = <?php echo json_encode($tableData->items(), 15, 512) ?>;
+    // Global pagination variables
     var currentPage = <?php echo e(request('page', 1)); ?>;
     var totalPages = <?php echo e($tableData->lastPage()); ?>;
-    var currentCategoryId = <?php echo e($legalTable->id); ?>;
-    
+    var currentCategoryId = <?php echo e($safeTableId); ?>;
+
     // Function to change page with AJAX loading
     function changePage(page, category_id) {
-        if (page < 1 || page > totalPages) return;
+        console.log('changePage called with:', { page, category_id, currentPage, totalPages, currentCategoryId });
+        
+        // Validate page bounds
+        if (page < 1 || page > totalPages) {
+            console.log('Page out of bounds, ignoring request');
+            return;
+        }
         
         const url = new URL(window.location.href);
         url.searchParams.set('page', page);
         url.searchParams.set('category_id', category_id);
+
+        console.log('Making AJAX request to:', url.toString());
 
         // Show loading state
         const contentArea = document.getElementById('legal-content-area');
@@ -1377,28 +1577,123 @@ $(function() {
             contentArea.innerHTML = '<div class="text-center p-5"><div class="spinner-border text-primary" role="status"></div><p class="mt-2">Loading content...</p></div>';
         }
 
+        // Get CSRF token
+        const token = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+
         fetch(url.toString(), { 
             method: 'GET',
             headers: {
-                'X-Requested-With': 'XMLHttpRequest'
-            }
+                'X-Requested-With': 'XMLHttpRequest',
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+                'X-CSRF-TOKEN': token || ''
+            },
+            credentials: 'same-origin'
         })
-        .then(response => response.text())
+        .then(response => {
+            console.log('Response received:', {
+                status: response.status,
+                statusText: response.statusText,
+                headers: Object.fromEntries(response.headers.entries())
+            });
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            return response.text();
+        })
         .then(html => {
+            console.log('AJAX response received, HTML length:', html.length);
+            console.log('HTML preview (first 500 chars):', html.substring(0, 500));
+            
             const parser = new DOMParser();
             const doc = parser.parseFromString(html, 'text/html');
 
             // Replace only the content area
             const newContent = doc.getElementById('legal-content-area');
             if (newContent && contentArea) {
+                console.log('Updating content area...');
                 contentArea.innerHTML = newContent.innerHTML;
+            } else {
+                console.error('Could not find legal-content-area in response');
+                console.log('Available elements with IDs:', Array.from(doc.querySelectorAll('[id]')).map(el => el.id));
             }
             
-            // Update pagination controls
+            // Update pagination controls properly while preserving theme and functionality
+            console.log('Updating pagination controls...');
             const newPaginationControls = doc.querySelector('.pagination-controls');
             const currentPaginationControls = document.querySelector('.pagination-controls');
             if (newPaginationControls && currentPaginationControls) {
-                currentPaginationControls.innerHTML = newPaginationControls.innerHTML;
+                // Get the new pagination data
+                const newPrevBtn = newPaginationControls.querySelector('#prev-page-btn');
+                const newNextBtn = newPaginationControls.querySelector('#next-page-btn');
+                const newPageSelect = newPaginationControls.querySelector('#page-select');
+                
+                // Update current pagination elements while preserving everything
+                const currentPrevBtn = currentPaginationControls.querySelector('#prev-page-btn');
+                const currentNextBtn = currentPaginationControls.querySelector('#next-page-btn');
+                const currentPageSelect = currentPaginationControls.querySelector('#page-select');
+                
+                if (currentPrevBtn && newPrevBtn) {
+                    console.log('Before update - currentPrevBtn style:', currentPrevBtn.getAttribute('style'));
+                    console.log('Before update - currentPrevBtn class:', currentPrevBtn.className);
+                    console.log('New button style:', newPrevBtn.getAttribute('style'));
+                    console.log('New button class:', newPrevBtn.className);
+                    
+                    // Copy all attributes from new button to current button
+                    currentPrevBtn.disabled = newPrevBtn.disabled;
+                    // Ensure we use pagination-btn class, not theme-btn
+                    currentPrevBtn.className = newPrevBtn.className.replace(/theme-btn/g, 'pagination-btn');
+                    currentPrevBtn.setAttribute('style', newPrevBtn.getAttribute('style') || '');
+                    // Copy any other attributes that might be different
+                    ['onclick'].forEach(attr => {
+                        if (newPrevBtn.hasAttribute(attr)) {
+                            currentPrevBtn.setAttribute(attr, newPrevBtn.getAttribute(attr));
+                        }
+                    });
+                    
+                    console.log('After update - currentPrevBtn style:', currentPrevBtn.getAttribute('style'));
+                    console.log('After update - currentPrevBtn class:', currentPrevBtn.className);
+                }
+                
+                if (currentNextBtn && newNextBtn) {
+                    console.log('Before update - currentNextBtn style:', currentNextBtn.getAttribute('style'));
+                    console.log('Before update - currentNextBtn class:', currentNextBtn.className);
+                    console.log('New next button style:', newNextBtn.getAttribute('style'));
+                    console.log('New next button class:', newNextBtn.className);
+                    
+                    // Copy all attributes from new button to current button
+                    currentNextBtn.disabled = newNextBtn.disabled;
+                    // Ensure we use pagination-btn class, not theme-btn
+                    currentNextBtn.className = newNextBtn.className.replace(/theme-btn/g, 'pagination-btn');
+                    currentNextBtn.setAttribute('style', newNextBtn.getAttribute('style') || '');
+                    // Copy any other attributes that might be different
+                    ['onclick'].forEach(attr => {
+                        if (newNextBtn.hasAttribute(attr)) {
+                            currentNextBtn.setAttribute(attr, newNextBtn.getAttribute(attr));
+                        }
+                    });
+                    
+                    console.log('After update - currentNextBtn style:', currentNextBtn.getAttribute('style'));
+                    console.log('After update - currentNextBtn class:', currentNextBtn.className);
+                }
+                
+                if (currentPageSelect && newPageSelect) {
+                    currentPageSelect.innerHTML = newPageSelect.innerHTML;
+                    currentPageSelect.value = newPageSelect.value;
+                    // Preserve theme styling
+                    currentPageSelect.style.borderColor = 'var(--color-theme-3)';
+                }
+                
+                // Update total pages from the new content
+                const newOptions = newPageSelect ? newPageSelect.querySelectorAll('option') : [];
+                if (newOptions.length > 0) {
+                    const lastOption = newOptions[newOptions.length - 1];
+                    const match = lastOption.textContent.match(/Page \d+ of (\d+)/);
+                    if (match) {
+                        totalPages = parseInt(match[1]);
+                    }
+                }
             }
             
             // Update URL without refresh
@@ -1407,10 +1702,11 @@ $(function() {
             // Update current page variable
             currentPage = page;
             
-            // Re-initialize reference handlers
+            // Re-initialize reference handlers and pagination
             setTimeout(() => {
                 attachReferenceHandlers();
                 initializeReferences();
+                reattachPaginationHandlers();
             }, 100);
         })
         .catch(error => {
@@ -1421,7 +1717,123 @@ $(function() {
         });
     }
 
+    // Global test function for manual debugging
+    window.testPaginationSetup = function() {
+        console.log('=== PAGINATION DEBUG TEST ===');
+        console.log('Global variables:', { currentPage, totalPages, currentCategoryId });
+        
+        const prevBtn = document.getElementById('prev-page-btn');
+        const nextBtn = document.getElementById('next-page-btn');
+        const pageSelect = document.getElementById('page-select');
+        
+        console.log('Elements found:', {
+            prevBtn: !!prevBtn,
+            nextBtn: !!nextBtn,
+            pageSelect: !!pageSelect
+        });
+        
+        if (prevBtn) {
+            console.log('Previous button:', prevBtn);
+            console.log('Previous button disabled:', prevBtn.disabled);
+        }
+        
+        if (nextBtn) {
+            console.log('Next button:', nextBtn);
+            console.log('Next button disabled:', nextBtn.disabled);
+        }
+        
+        if (pageSelect) {
+            console.log('Page select:', pageSelect);
+            console.log('Page select value:', pageSelect.value);
+        }
+        
+        // Test attaching a simple handler
+        if (prevBtn && !prevBtn.disabled) {
+            prevBtn.addEventListener('click', function() {
+                console.log('TEST: Prev button clicked manually!');
+            });
+            console.log('Test handler attached to prev button');
+        }
+        
+        console.log('=== END PAGINATION DEBUG TEST ===');
+    };
+
+    // Function to re-attach pagination event handlers after AJAX updates
+    function reattachPaginationHandlers() {
+        console.log('Re-attaching pagination handlers...');
+        console.log('Current scope variables - currentPage:', currentPage, 'totalPages:', totalPages, 'currentCategoryId:', currentCategoryId);
+        
+        const prevBtn = document.getElementById('prev-page-btn');
+        const nextBtn = document.getElementById('next-page-btn');
+        const pageSelect = document.getElementById('page-select');
+        
+        if (prevBtn) {
+            console.log('Attaching prev button handler');
+            // Remove any existing event listeners and add new one
+            prevBtn.onclick = null;
+            prevBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log('Prev button clicked, current page:', currentPage);
+                if (currentPage > 1) {
+                    changePage(currentPage - 1, currentCategoryId);
+                }
+                return false;
+            });
+        }
+        
+        if (nextBtn) {
+            console.log('Attaching next button handler');
+            // Remove any existing event listeners and add new one
+            nextBtn.onclick = null;
+            nextBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log('Next button clicked, current page:', currentPage);
+                if (currentPage < totalPages) {
+                    changePage(currentPage + 1, currentCategoryId);
+                }
+                return false;
+            });
+        }
+        
+        if (pageSelect) {
+            console.log('Attaching page select handler');
+            // Remove any existing event listeners and add new one
+            pageSelect.onchange = null;
+            pageSelect.addEventListener('change', function(e) {
+                console.log('Page select changed to:', this.value);
+                changePage(parseInt(this.value), currentCategoryId);
+            });
+        }
+        
+        console.log('Pagination handlers attached. Current page:', currentPage, 'Total pages:', totalPages, 'Category ID:', currentCategoryId);
+    }
+
+    console.log('Script block starting execution - before DOMContentLoaded');
+    console.log('Initial global variables:', { currentPage, totalPages, currentCategoryId });
+    console.log('jQuery available:', typeof $ !== 'undefined');
+    console.log('Document ready state:', document.readyState);
+    
+    // Test immediate execution
+    try {
+        console.log('Testing immediate pagination element access:');
+        const testPrevBtn = document.getElementById('prev-page-btn');
+        const testNextBtn = document.getElementById('next-page-btn');
+        const testPageSelect = document.getElementById('page-select');
+        console.log('Immediate element check:', {
+            prevBtn: !!testPrevBtn,
+            nextBtn: !!testNextBtn,
+            pageSelect: !!testPageSelect
+        });
+    } catch (error) {
+        console.error('Error in immediate element check:', error);
+    }
+    
     document.addEventListener('DOMContentLoaded', function() {
+        console.log('DOMContentLoaded fired - initializing pagination');
+        console.log('Global variables in DOMContentLoaded:', { currentPage, totalPages, currentCategoryId });
+        
         // Make all clickable headings act like references
         document.querySelectorAll('.clickable-heading').forEach(function(elem) {
             elem.addEventListener('click', function(e) {
@@ -1610,14 +2022,29 @@ $(function() {
             });
         });
 
-        // Initialize reference system on page load
+        // Initialize reference system and pagination on page load
         setTimeout(() => {
+            console.log('Initializing pagination handlers after timeout');
+            
+            // Check if elements exist
+            const prevBtn = document.getElementById('prev-page-btn');
+            const nextBtn = document.getElementById('next-page-btn');
+            const pageSelect = document.getElementById('page-select');
+            
+            console.log('Pagination elements found:', {
+                prevBtn: !!prevBtn,
+                nextBtn: !!nextBtn,
+                pageSelect: !!pageSelect
+            });
+            
             if (typeof attachReferenceHandlers === 'function') {
                 attachReferenceHandlers();
             }
             if (typeof initializeReferences === 'function') {
                 initializeReferences();
             }
+            // Initialize pagination handlers
+            reattachPaginationHandlers();
         }, 100);
 
         // Example of adding direct reference IDs to elements
@@ -1627,7 +2054,7 @@ $(function() {
                 // Add a small reference button after each legal text
                 const refButton = document.createElement('button');
                 refButton.className = 'btn btn-sm btn-outline-primary ms-2';
-                refButton.setAttribute('data-ref-id', '<?php echo e($legalTable->id); ?>:' + rowId);
+                refButton.setAttribute('data-ref-id', '<?php echo e($safeTableId); ?>:' + rowId);
                 refButton.innerHTML = '<i class="fas fa-link"></i>';
                 refButton.title = 'Direct reference to this text';
                 textElem.appendChild(refButton);
@@ -2319,7 +2746,36 @@ $(function() {
         debugContent.innerHTML = '<div class="text-center">Running debug checks...</div>';
         
         setTimeout(() => {
-            let output = '<h5>Reference Elements</h5>';
+            let output = '<h5>Pagination Debug</h5>';
+            
+            // Test pagination elements
+            const prevBtn = document.getElementById('prev-page-btn');
+            const nextBtn = document.getElementById('next-page-btn');
+            const pageSelect = document.getElementById('page-select');
+            
+            output += `<p>Pagination Elements Check:</p><ul>`;
+            output += `<li><strong>Previous Button:</strong> ${prevBtn ? 'Found' : 'Missing'} ${prevBtn && prevBtn.disabled ? '(disabled)' : ''}</li>`;
+            output += `<li><strong>Next Button:</strong> ${nextBtn ? 'Found' : 'Missing'} ${nextBtn && nextBtn.disabled ? '(disabled)' : ''}</li>`;
+            output += `<li><strong>Page Select:</strong> ${pageSelect ? 'Found' : 'Missing'} ${pageSelect ? `(value: ${pageSelect.value})` : ''}</li>`;
+            output += `</ul>`;
+            
+            output += `<p>Global Variables:</p><ul>`;
+            output += `<li><strong>currentPage:</strong> ${typeof currentPage !== 'undefined' ? currentPage : 'undefined'}</li>`;
+            output += `<li><strong>totalPages:</strong> ${typeof totalPages !== 'undefined' ? totalPages : 'undefined'}</li>`;
+            output += `<li><strong>currentCategoryId:</strong> ${typeof currentCategoryId !== 'undefined' ? currentCategoryId : 'undefined'}</li>`;
+            output += `</ul>`;
+            
+            output += `<p>Manual Test Buttons:</p>`;
+            if (nextBtn && !nextBtn.disabled && typeof changePage === 'function') {
+                output += `<button class="btn btn-sm btn-primary me-2" onclick="changePage(${currentPage + 1}, ${currentCategoryId})">Test Next Page</button>`;
+            }
+            if (prevBtn && !prevBtn.disabled && typeof changePage === 'function') {
+                output += `<button class="btn btn-sm btn-primary me-2" onclick="changePage(${currentPage - 1}, ${currentCategoryId})">Test Prev Page</button>`;
+            }
+            output += `<button class="btn btn-sm btn-secondary me-2" onclick="window.testPaginationSetup()">Run Pagination Setup Test</button>`;
+            output += `<button class="btn btn-sm btn-warning" onclick="reattachPaginationHandlers()">Re-attach Handlers</button>`;
+            
+            output += '<h5>Reference Elements</h5>';
             
             // Count and display reference elements
             const refElements = document.querySelectorAll('.ref');
@@ -2461,7 +2917,7 @@ $(function() {
                     const dummyRef = document.createElement('span');
                     dummyRef.className = 'ref';
                     dummyRef.setAttribute('data-section-id', '(a)');
-                    dummyRef.setAttribute('data-table-id', '<?php echo e($legalTable->id); ?>');
+                    dummyRef.setAttribute('data-table-id', '<?php echo e($safeTableId); ?>');
                     dummyRef.textContent = 'paragraph (a)';
                     
                     // Temporarily append it to the section
@@ -2564,4 +3020,10 @@ $(function() {
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <?php $__env->stopPush(); ?>
 
-<?php echo $__env->make('layouts.with-sidebar-layout', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\Users\Ardent\Desktop\jurislocator_laravel\resources\views/view-legal-table-data.blade.php ENDPATH**/ ?>
+<script>
+console.log('DEBUG: Simple script at end of file executing');
+console.log('DEBUG: Document ready state:', document.readyState);
+</script>
+
+
+<?php echo $__env->make('layouts.with-sidebar-layout', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\Users\Ardent\Desktop\jurislocator_laravel\resources\views/view-legal-table-data-personal.blade.php ENDPATH**/ ?>

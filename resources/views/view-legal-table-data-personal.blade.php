@@ -1197,6 +1197,141 @@ $(document).ready(function() {
 });
 </script>
 
+<!-- Pagination Script for AJAX Navigation -->
+<script>
+$(document).ready(function() {
+    console.log('Pagination script initializing...');
+    
+    // Global pagination variables
+    var currentPage = {{ request('page', 1) }};
+    var totalPages = {{ $tableData->lastPage() }};
+    var currentCategoryId = {{ $safeTableId }};
+    
+    console.log('Pagination variables:', { currentPage, totalPages, currentCategoryId });
+    
+    // Check if pagination elements exist
+    const prevBtn = $('#prev-page-btn');
+    const nextBtn = $('#next-page-btn');
+    const pageSelect = $('#page-select');
+    
+    console.log('Pagination elements found:', {
+        prevBtn: prevBtn.length > 0,
+        nextBtn: nextBtn.length > 0,
+        pageSelect: pageSelect.length > 0
+    });
+    
+    // Function to change page with AJAX loading
+    function changePage(page, category_id) {
+        console.log('changePage called with:', { page, category_id, currentPage, totalPages, currentCategoryId });
+        
+        // Validate page bounds
+        if (page < 1 || page > totalPages) {
+            console.log('Page out of bounds, ignoring request');
+            return;
+        }
+        
+        const url = new URL(window.location.href);
+        url.searchParams.set('page', page);
+        url.searchParams.set('category_id', category_id);
+
+        console.log('Making AJAX request to:', url.toString());
+
+        // Show loading state
+        const contentArea = $('#legal-content-area');
+        if (contentArea.length) {
+            contentArea.html('<div class="text-center p-5"><div class="spinner-border text-primary" role="status"></div><p class="mt-2">Loading content...</p></div>');
+        }
+
+        // Get CSRF token
+        const token = $('meta[name="csrf-token"]').attr('content');
+
+        $.ajax({
+            url: url.toString(),
+            method: 'GET',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+                'X-CSRF-TOKEN': token || ''
+            },
+            success: function(html) {
+                console.log('AJAX response received, HTML length:', html.length);
+                
+                const $doc = $(html);
+                const newContent = $doc.find('#legal-content-area');
+                
+                if (newContent.length && contentArea.length) {
+                    console.log('Updating content area...');
+                    contentArea.html(newContent.html());
+                }
+                
+                // Update pagination controls
+                const newPaginationControls = $doc.find('.pagination-controls');
+                const currentPaginationControls = $('.pagination-controls');
+                
+                if (newPaginationControls.length && currentPaginationControls.length) {
+                    console.log('Updating pagination controls...');
+                    
+                    // Update button states
+                    const newPrevBtn = newPaginationControls.find('#prev-page-btn');
+                    const newNextBtn = newPaginationControls.find('#next-page-btn');
+                    const newPageSelect = newPaginationControls.find('#page-select');
+                    
+                    if (newPrevBtn.length) {
+                        prevBtn.prop('disabled', newPrevBtn.prop('disabled'));
+                    }
+                    if (newNextBtn.length) {
+                        nextBtn.prop('disabled', newNextBtn.prop('disabled'));
+                    }
+                    if (newPageSelect.length) {
+                        pageSelect.html(newPageSelect.html());
+                        pageSelect.val(newPageSelect.val());
+                    }
+                }
+                
+                // Update URL without refresh
+                window.history.pushState({}, '', url.toString());
+                
+                // Update current page variable
+                currentPage = page;
+                
+                console.log('Page updated successfully');
+            },
+            error: function(xhr, status, error) {
+                console.error('Error loading page:', error);
+                if (contentArea.length) {
+                    contentArea.html('<div class="alert alert-danger">Error loading content. Please try again.</div>');
+                }
+            }
+        });
+    }
+    
+    // Attach event handlers using jQuery
+    prevBtn.on('click', function(e) {
+        e.preventDefault();
+        console.log('Previous button clicked, current page:', currentPage);
+        if (currentPage > 1) {
+            changePage(currentPage - 1, currentCategoryId);
+        }
+    });
+    
+    nextBtn.on('click', function(e) {
+        e.preventDefault();
+        console.log('Next button clicked, current page:', currentPage);
+        if (currentPage < totalPages) {
+            changePage(currentPage + 1, currentCategoryId);
+        }
+    });
+    
+    pageSelect.on('change', function() {
+        const selectedPage = parseInt($(this).val());
+        console.log('Page select changed to:', selectedPage);
+        changePage(selectedPage, currentCategoryId);
+    });
+    
+    console.log('Pagination event handlers attached successfully');
+});
+</script>
+
 <!-- Reference pattern processing and popup handling -->
 <script>
 $(document).ready(function() {
