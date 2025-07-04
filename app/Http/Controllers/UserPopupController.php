@@ -4,24 +4,23 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\UserPopupData;
+use Illuminate\Support\Facades\Auth;
 
 class UserPopupController extends Controller
 {
     /**
-     * Save user popup data
+     * Save user popup data (user-wide, not document-specific)
      */
     public function save(Request $request)
     {
         $request->validate([
-            'table_name' => 'required|string',
-            'category_id' => 'required|string',
             'popups' => 'required|array'
         ]);
 
         $userPopupData = UserPopupData::getOrCreateForUser(
-            auth()->id(),
-            $request->table_name,
-            $request->category_id
+            Auth::id(),
+            'user_global', // Use a global key instead of specific table
+            'all' // Use 'all' as category to indicate global scope
         );
 
         $userPopupData->update(['popup_data' => $request->popups]);
@@ -33,18 +32,13 @@ class UserPopupController extends Controller
     }
 
     /**
-     * Fetch user popup data
+     * Fetch user popup data (user-wide, not document-specific)
      */
     public function fetch(Request $request)
     {
-        $request->validate([
-            'table_name' => 'required|string',
-            'category_id' => 'required|string'
-        ]);
-
-        $userPopupData = UserPopupData::where('user_id', auth()->id())
-            ->where('table_name', $request->table_name)
-            ->where('category_id', $request->category_id)
+        $userPopupData = UserPopupData::where('user_id', Auth::id())
+            ->where('table_name', 'user_global')
+            ->where('category_id', 'all')
             ->first();
 
         $popups = $userPopupData ? $userPopupData->popup_data : [];
@@ -56,18 +50,13 @@ class UserPopupController extends Controller
     }
 
     /**
-     * Clear user popup data
+     * Clear user popup data (user-wide, not document-specific)
      */
     public function clear(Request $request)
     {
-        $request->validate([
-            'table_name' => 'required|string',
-            'category_id' => 'required|string'
-        ]);
-
-        $userPopupData = UserPopupData::where('user_id', auth()->id())
-            ->where('table_name', $request->table_name)
-            ->where('category_id', $request->category_id)
+        $userPopupData = UserPopupData::where('user_id', Auth::id())
+            ->where('table_name', 'user_global')
+            ->where('category_id', 'all')
             ->first();
 
         if ($userPopupData) {

@@ -382,10 +382,6 @@ $(function () {
           alert("Failed to save pinned popups.");
         }
       },
-      error: function (xhr, status, error) {
-        console.error("Save failed:", xhr.responseText);
-        alert("Network error while saving pinned popups.");
-      },
     });
   }
 

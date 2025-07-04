@@ -1,14 +1,14 @@
-@extends('layouts.with-sidebar-layout')
 
-@section('meta')
+
+<?php $__env->startSection('meta'); ?>
     <!-- Current document context meta tags for personal research -->
-    <meta name="current-document-table" content="{{ $tableName }}">
-    <meta name="current-document-category-id" content="{{ $categoryId }}">
-    <meta name="current-user-id" content="{{ $user->id }}">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-@endsection
+    <meta name="current-document-table" content="<?php echo e($tableName); ?>">
+    <meta name="current-document-category-id" content="<?php echo e($categoryId); ?>">
+    <meta name="current-user-id" content="<?php echo e($user->id); ?>">
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
+<?php $__env->stopSection(); ?>
 
-@push('styles')
+<?php $__env->startPush('styles'); ?>
 <style>
     .clickable-heading {
         cursor: pointer;
@@ -495,9 +495,9 @@
         outline: 2px dashed red !important;
     }
 </style>
-@endpush
+<?php $__env->stopPush(); ?>
 
-@section('main-content')
+<?php $__env->startSection('main-content'); ?>
             <!-- Personal Research Mode - No client details needed -->
             <div class="gap_top col-12 mb-4 p-0">
                 <div class="bg_custom p-4 rounded shadow-sm">
@@ -510,7 +510,8 @@
                             <div class="d-flex flex-wrap">
                                 <div class="me-4 mb-2">
                                     <span class="d-flex align-items-center">
-                                        <strong data-en="User:" data-fr="Utilisateur :">User:</strong>&nbsp;{{ $user->name ?? 'Current User' }}
+                                        <strong data-en="User:" data-fr="Utilisateur :">User:</strong>&nbsp;<?php echo e($user->name ?? 'Current User'); ?>
+
                                     </span>
                                 </div>
                                 <div class="mb-2">
@@ -524,22 +525,22 @@
                     </div>
                 </div>
             </div>
-            @if(empty($tableData) || $tableData->isEmpty())
+            <?php if(empty($tableData) || $tableData->isEmpty()): ?>
                 <div class="alert alert-warning mt-4" data-en="No data found in this table." data-fr="Aucune donnée trouvée dans cette table.">No data found in this table.</div>
-            @else
+            <?php else: ?>
             <div class="card mb-3 shadow-sm">
                 <div class="card-header bg-light">
                     <h5 class="mb-0" data-en="Keyword Search" data-fr="Recherche par mots-clés">Keyword Search</h5>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('user.personal.document.view', ['user' => $user->id, 'tableName' => $tableName]) }}" method="GET" class="mb-3">
-                        <input type="hidden" name="category_id" value="{{ $categoryId }}">
+                    <form action="<?php echo e(route('user.personal.document.view', ['user' => $user->id, 'tableName' => $tableName])); ?>" method="GET" class="mb-3">
+                        <input type="hidden" name="category_id" value="<?php echo e($categoryId); ?>">
                         <div class="input-group">
                             <input type="text" name="search" class="form-control" 
                                    placeholder="Search..." 
                                    data-placeholder-en="Search..." 
                                    data-placeholder-fr="Rechercher..." 
-                                   value="{{ request('search') }}">
+                                   value="<?php echo e(request('search')); ?>">
                             <button class="btn search-btn" type="submit" data-en="Search" data-fr="Rechercher" style="background-color: var(--color-theme-3); border-color: var(--color-theme-3); color: white;">Search</button>
                         </div>
                     </form>
@@ -551,7 +552,7 @@
                     <h5 class="mb-0" data-en="Legal Content" data-fr="Contenu juridique">Legal Content</h5>
                 </div>
                 <div class="card-body" id="legal-content-area">
-                    @php
+                    <?php
                         $data = [];
                         $standaloneData = [];
                         
@@ -808,233 +809,252 @@
                             
                             return $text;
                         }
-                    @endphp
+                    ?>
 
                     <div class="legal-document-content">
-                        {{-- Render Standalone Sections First --}}
-                        @foreach($standaloneData as $titleGroup => $group)
+                        
+                        <?php $__currentLoopData = $standaloneData; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $titleGroup => $group): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <div style="margin-bottom: 1.5em;">
-                                <div style="font-size:1.15em; font-weight:bold; margin-bottom:0.5em;">{{ $titleGroup }}</div>
-                                @foreach($group['sections'] as $sectionNumber => $section)                                        @if(!empty($section['title']) && trim($section['title']) !== '' && !isset($section['is_intro']) && $section['title'] !== $titleGroup)
-                                        <div style="margin-top: 1em; color: #333; font-weight: bold;">{{ $section['title'] }}</div>
-                                    @endif
-                                    @if(!empty($section['text_content']))
+                                <div style="font-size:1.15em; font-weight:bold; margin-bottom:0.5em;"><?php echo e($titleGroup); ?></div>
+                                <?php $__currentLoopData = $group['sections']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $sectionNumber => $section): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>                                        <?php if(!empty($section['title']) && trim($section['title']) !== '' && !isset($section['is_intro']) && $section['title'] !== $titleGroup): ?>
+                                        <div style="margin-top: 1em; color: #333; font-weight: bold;"><?php echo e($section['title']); ?></div>
+                                    <?php endif; ?>
+                                    <?php if(!empty($section['text_content'])): ?>
                                         <div style="margin-left: 0.5em; margin-bottom: 1em;">
-                                            @if(!isset($section['is_intro']))
-                                                <strong>{{ $sectionNumber }}</strong>
-                                            @endif
-                                            {!! makeLinksClickableSimple($section['text_content'], $safeTableId, isset($section['is_intro']) ? null : $sectionNumber) !!}
+                                            <?php if(!isset($section['is_intro'])): ?>
+                                                <strong><?php echo e($sectionNumber); ?></strong>
+                                            <?php endif; ?>
+                                            <?php echo makeLinksClickableSimple($section['text_content'], $safeTableId, isset($section['is_intro']) ? null : $sectionNumber); ?>
+
                                         </div>
-                                    @endif
-                                    @foreach($section['subsections'] as $subsectionNumber => $subsection)
+                                    <?php endif; ?>
+                                    <?php $__currentLoopData = $section['subsections']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subsectionNumber => $subsection): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         <div style="margin-left: 2em;">
-                                            @if(!empty($subsection['text_content']))
+                                            <?php if(!empty($subsection['text_content'])): ?>
                                                 <div style="margin-bottom: 0.5em;">
-                                                    <strong>{{ $subsectionNumber }}</strong> {!! makeLinksClickableSimple($subsection['text_content'], $safeTableId, $sectionNumber . '(' . $subsectionNumber . ')') !!}
+                                                    <strong><?php echo e($subsectionNumber); ?></strong> <?php echo makeLinksClickableSimple($subsection['text_content'], $safeTableId, $sectionNumber . '(' . $subsectionNumber . ')'); ?>
+
                                                 </div>
-                                            @endif
-                                            @foreach($subsection['paragraphs'] as $paragraphNumber => $paragraph)
+                                            <?php endif; ?>
+                                            <?php $__currentLoopData = $subsection['paragraphs']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $paragraphNumber => $paragraph): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <div style="margin-left: 2em;">
                                                     <div style="margin-bottom: 0.5em;">
-                                                        <strong>{{ $paragraphNumber }}</strong> {!! makeLinksClickableSimple($paragraph['text_content'], $safeTableId, $sectionNumber . '(' . $subsectionNumber . ')(' . $paragraphNumber . ')') !!}
+                                                        <strong><?php echo e($paragraphNumber); ?></strong> <?php echo makeLinksClickableSimple($paragraph['text_content'], $safeTableId, $sectionNumber . '(' . $subsectionNumber . ')(' . $paragraphNumber . ')'); ?>
+
                                                     </div>
-                                                    @foreach($paragraph['sub_paragraphs'] as $subParagraph)
+                                                    <?php $__currentLoopData = $paragraph['sub_paragraphs']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subParagraph): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                         <div style="margin-left: 2em;">
                                                             <div style="margin-bottom: 0.5em;">
-                                                                <strong>{{ $subParagraph['sub_paragraph'] }}</strong> {!! makeLinksClickableSimple($subParagraph['text_content'], $safeTableId, $sectionNumber . '(' . $subsectionNumber . ')(' . $paragraphNumber . ')(' . $subParagraph['sub_paragraph'] . ')') !!}
+                                                                <strong><?php echo e($subParagraph['sub_paragraph']); ?></strong> <?php echo makeLinksClickableSimple($subParagraph['text_content'], $safeTableId, $sectionNumber . '(' . $subsectionNumber . ')(' . $paragraphNumber . ')(' . $subParagraph['sub_paragraph'] . ')'); ?>
+
                                                             </div>
                                                         </div>
-                                                    @endforeach
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                 </div>
-                                            @endforeach
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </div>
-                                    @endforeach
-                                    @foreach($section['paragraphs'] as $paragraphNumber => $paragraph)
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    <?php $__currentLoopData = $section['paragraphs']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $paragraphNumber => $paragraph): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         <div style="margin-left: 2em;">
                                             <div style="margin-bottom: 0.5em;">
-                                                <strong>{{ $paragraphNumber }}</strong> {!! makeLinksClickableSimple($paragraph['text_content'], $safeTableId, $sectionNumber . '(' . $paragraphNumber . ')') !!}
+                                                <strong><?php echo e($paragraphNumber); ?></strong> <?php echo makeLinksClickableSimple($paragraph['text_content'], $safeTableId, $sectionNumber . '(' . $paragraphNumber . ')'); ?>
+
                                             </div>
-                                            @foreach($paragraph['sub_paragraphs'] as $subParagraph)
+                                            <?php $__currentLoopData = $paragraph['sub_paragraphs']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subParagraph): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <div style="margin-left: 2em;">
                                                     <div style="margin-bottom: 0.5em;">
-                                                        <strong>{{ $subParagraph['sub_paragraph'] }}</strong> {!! makeLinksClickableSimple($subParagraph['text_content'], $safeTableId, $sectionNumber . '(' . $paragraphNumber . ')(' . $subParagraph['sub_paragraph'] . ')') !!}
+                                                        <strong><?php echo e($subParagraph['sub_paragraph']); ?></strong> <?php echo makeLinksClickableSimple($subParagraph['text_content'], $safeTableId, $sectionNumber . '(' . $paragraphNumber . ')(' . $subParagraph['sub_paragraph'] . ')'); ?>
+
                                                     </div>
                                                 </div>
-                                            @endforeach
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </div>
-                                    @endforeach
-                                    @if(!empty($section['footnote']))
-                                        <div class="footnote">{{ $section['footnote'] }}</div>
-                                    @endif
-                                @endforeach
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    <?php if(!empty($section['footnote'])): ?>
+                                        <div class="footnote"><?php echo e($section['footnote']); ?></div>
+                                    <?php endif; ?>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </div>
-                        @endforeach
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
-                        {{-- Render Parts Structure --}}
-                        @foreach($data as $partNumber => $part)
+                        
+                        <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $partNumber => $part): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <div style="margin-bottom: 2em;">
-                                <div style="font-size:1.15em; font-weight:bold; margin-bottom:0.5em;">Part {{ $partNumber }}: {{ $part['title'] }}</div>
-                                @if(!empty($part['sections']))
-                                    @foreach($part['sections'] as $sectionNumber => $section)
-                                        @if(!empty($section['title']) && trim($section['title']) !== '' && $section['title'] !== $part['title'])
-                                            <div style="margin-top: 1em; color: #333; font-weight: bold;">{{ $section['title'] }}</div>
-                                        @endif
-                                        @if(!empty($section['text_content']))
+                                <div style="font-size:1.15em; font-weight:bold; margin-bottom:0.5em;">Part <?php echo e($partNumber); ?>: <?php echo e($part['title']); ?></div>
+                                <?php if(!empty($part['sections'])): ?>
+                                    <?php $__currentLoopData = $part['sections']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $sectionNumber => $section): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <?php if(!empty($section['title']) && trim($section['title']) !== '' && $section['title'] !== $part['title']): ?>
+                                            <div style="margin-top: 1em; color: #333; font-weight: bold;"><?php echo e($section['title']); ?></div>
+                                        <?php endif; ?>
+                                        <?php if(!empty($section['text_content'])): ?>
                                             <div style="margin-left: 0.5em; margin-bottom: 1em;">
-                                                <strong>{{ $sectionNumber }}</strong> {!! makeLinksClickableSimple($section['text_content'], $safeTableId, $sectionNumber) !!}
+                                                <strong><?php echo e($sectionNumber); ?></strong> <?php echo makeLinksClickableSimple($section['text_content'], $safeTableId, $sectionNumber); ?>
+
                                             </div>
-                                        @endif
-                                        @foreach($section['subsections'] as $subsectionNumber => $subsection)
+                                        <?php endif; ?>
+                                        <?php $__currentLoopData = $section['subsections']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subsectionNumber => $subsection): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <div style="margin-left: 2em;">
-                                                @if(!empty($subsection['title']))
-                                                    <div style="font-style: italic;">{{ $subsection['title'] }}</div>
-                                                @endif
-                                                @if(!empty($subsection['text_content']))
+                                                <?php if(!empty($subsection['title'])): ?>
+                                                    <div style="font-style: italic;"><?php echo e($subsection['title']); ?></div>
+                                                <?php endif; ?>
+                                                <?php if(!empty($subsection['text_content'])): ?>
                                                     <div style="margin-bottom: 0.5em;">
-                                                        <strong>{{ $subsectionNumber }}</strong> {!! makeLinksClickableSimple($subsection['text_content'], $safeTableId, $sectionNumber . '(' . $subsectionNumber . ')') !!}
+                                                        <strong><?php echo e($subsectionNumber); ?></strong> <?php echo makeLinksClickableSimple($subsection['text_content'], $safeTableId, $sectionNumber . '(' . $subsectionNumber . ')'); ?>
+
                                                     </div>
-                                                @endif
-                                                @foreach($subsection['paragraphs'] as $paragraphNumber => $paragraph)
+                                                <?php endif; ?>
+                                                <?php $__currentLoopData = $subsection['paragraphs']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $paragraphNumber => $paragraph): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                     <div style="margin-left: 2em;">
                                                         <div style="margin-bottom: 0.5em;">
-                                                            <strong>{{ $paragraphNumber }}</strong> {!! makeLinksClickableSimple($paragraph['text_content'], $safeTableId, $sectionNumber . '(' . $subsectionNumber . ')(' . $paragraphNumber . ')') !!}
+                                                            <strong><?php echo e($paragraphNumber); ?></strong> <?php echo makeLinksClickableSimple($paragraph['text_content'], $safeTableId, $sectionNumber . '(' . $subsectionNumber . ')(' . $paragraphNumber . ')'); ?>
+
                                                         </div>
-                                                        @foreach($paragraph['sub_paragraphs'] as $subParagraph)
+                                                        <?php $__currentLoopData = $paragraph['sub_paragraphs']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subParagraph): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                             <div style="margin-left: 2em;">
                                                                 <div style="margin-bottom: 0.5em;">
-                                                                    <strong>{{ $subParagraph['sub_paragraph'] }}</strong> {!! makeLinksClickableSimple($subParagraph['text_content'], $safeTableId, $sectionNumber . '(' . $subsectionNumber . ')(' . $paragraphNumber . ')(' . $subParagraph['sub_paragraph'] . ')') !!}
+                                                                    <strong><?php echo e($subParagraph['sub_paragraph']); ?></strong> <?php echo makeLinksClickableSimple($subParagraph['text_content'], $safeTableId, $sectionNumber . '(' . $subsectionNumber . ')(' . $paragraphNumber . ')(' . $subParagraph['sub_paragraph'] . ')'); ?>
+
                                                                 </div>
                                                             </div>
-                                                        @endforeach
+                                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                     </div>
-                                                @endforeach
-                                                @if(!empty($subsection['footnote']))
-                                                    <div class="footnote"><em>{!! $subsection['footnote'] !!}</em></div>
-                                                @endif
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                <?php if(!empty($subsection['footnote'])): ?>
+                                                    <div class="footnote"><em><?php echo $subsection['footnote']; ?></em></div>
+                                                <?php endif; ?>
                                             </div>
-                                        @endforeach
-                                        @foreach($section['paragraphs'] as $paragraph)
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        <?php $__currentLoopData = $section['paragraphs']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $paragraph): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <div style="margin-left: 2em;">
                                                 <div style="margin-bottom: 0.5em;">
-                                                    <strong>{{ $paragraph['paragraph'] }}</strong> {!! makeLinksClickableSimple($paragraph['text_content'], $safeTableId, $sectionNumber . '(' . $paragraph['paragraph'] . ')') !!}
+                                                    <strong><?php echo e($paragraph['paragraph']); ?></strong> <?php echo makeLinksClickableSimple($paragraph['text_content'], $safeTableId, $sectionNumber . '(' . $paragraph['paragraph'] . ')'); ?>
+
                                                 </div>
-                                                @foreach($paragraph['sub_paragraphs'] as $subParagraph)
+                                                <?php $__currentLoopData = $paragraph['sub_paragraphs']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subParagraph): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                     <div style="margin-left: 2em;">
                                                         <div style="margin-bottom: 0.5em;">
-                                                            <strong>{{ $subParagraph['sub_paragraph'] }}</strong> {!! makeLinksClickableSimple($subParagraph['text_content'], $safeTableId, $sectionNumber . '(' . $paragraph['paragraph'] . ')(' . $subParagraph['sub_paragraph'] . ')') !!}
+                                                            <strong><?php echo e($subParagraph['sub_paragraph']); ?></strong> <?php echo makeLinksClickableSimple($subParagraph['text_content'], $safeTableId, $sectionNumber . '(' . $paragraph['paragraph'] . ')(' . $subParagraph['sub_paragraph'] . ')'); ?>
+
                                                         </div>
                                                     </div>
-                                                @endforeach
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                             </div>
-                                        @endforeach
-                                        @if(!empty($section['footnote']))
-                                            <div class="footnote">{{ $section['footnote'] }}</div>
-                                        @endif
-                                    @endforeach
-                                @endif
-                                @if(!empty($part['divisions']))
-                                    @foreach($part['divisions'] as $divisionNumber => $division)
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        <?php if(!empty($section['footnote'])): ?>
+                                            <div class="footnote"><?php echo e($section['footnote']); ?></div>
+                                        <?php endif; ?>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                <?php endif; ?>
+                                <?php if(!empty($part['divisions'])): ?>
+                                    <?php $__currentLoopData = $part['divisions']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $divisionNumber => $division): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         <div style="margin-left: 1.5em; margin-top: 1em;">
-                                            <div style="font-weight:bold; margin-bottom:0.5em;">Division {{ $divisionNumber }}: {{ $division['title'] }}</div>
-                                            @if(!empty($division['sub_divisions']))
-                                                @foreach($division['sub_divisions'] as $subDivisionNumber => $subDivision)
-                                                    @if($subDivision['title'] !== $division['title'])
-                                                        <div style="font-weight:bold; margin-bottom:0.5em; margin-left:1em;">Subdivision {{ $subDivisionNumber }}: {{ $subDivision['title'] }}</div>
-                                                    @endif
-                                                    @if(!empty($subDivision['sections']))
-                                                        @foreach($subDivision['sections'] as $sectionNumber => $section)
-                                                            @if(!empty($section['title']))
-                                                                <div style="margin-top: 1em; font-weight: bold;">{{ $section['title'] }}</div>
-                                                            @endif
-                                                            @if(!empty($section['text_content']))
+                                            <div style="font-weight:bold; margin-bottom:0.5em;">Division <?php echo e($divisionNumber); ?>: <?php echo e($division['title']); ?></div>
+                                            <?php if(!empty($division['sub_divisions'])): ?>
+                                                <?php $__currentLoopData = $division['sub_divisions']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subDivisionNumber => $subDivision): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                    <?php if($subDivision['title'] !== $division['title']): ?>
+                                                        <div style="font-weight:bold; margin-bottom:0.5em; margin-left:1em;">Subdivision <?php echo e($subDivisionNumber); ?>: <?php echo e($subDivision['title']); ?></div>
+                                                    <?php endif; ?>
+                                                    <?php if(!empty($subDivision['sections'])): ?>
+                                                        <?php $__currentLoopData = $subDivision['sections']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $sectionNumber => $section): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                            <?php if(!empty($section['title'])): ?>
+                                                                <div style="margin-top: 1em; font-weight: bold;"><?php echo e($section['title']); ?></div>
+                                                            <?php endif; ?>
+                                                            <?php if(!empty($section['text_content'])): ?>
                                                                 <div style="margin-left: 1em; margin-bottom: 0.5em;">
-                                                                    <strong>{{ $sectionNumber }}</strong> {!! makeLinksClickableSimple($section['text_content'], $safeTableId, $sectionNumber) !!}
+                                                                    <strong><?php echo e($sectionNumber); ?></strong> <?php echo makeLinksClickableSimple($section['text_content'], $safeTableId, $sectionNumber); ?>
+
                                                                 </div>
-                                                            @endif
-                                                            @foreach($section['subsections'] as $subsectionNumber => $subsection)
+                                                            <?php endif; ?>
+                                                            <?php $__currentLoopData = $section['subsections']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subsectionNumber => $subsection): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                                 <div style="margin-left: 2em;">
-                                                                    @if(!empty($subsection['title']))
-                                                                        <div style="font-style: italic;">{{ $subsection['title'] }}</div>
-                                                                    @endif
-                                                                    @if(!empty($subsection['text_content']))
+                                                                    <?php if(!empty($subsection['title'])): ?>
+                                                                        <div style="font-style: italic;"><?php echo e($subsection['title']); ?></div>
+                                                                    <?php endif; ?>
+                                                                    <?php if(!empty($subsection['text_content'])): ?>
                                                                         <div style="margin-bottom: 0.5em;">
-                                                                            <strong>{{ $subsectionNumber }}</strong> {!! makeLinksClickableSimple($subsection['text_content'], $safeTableId, $sectionNumber . '(' . $subsectionNumber . ')') !!}
+                                                                            <strong><?php echo e($subsectionNumber); ?></strong> <?php echo makeLinksClickableSimple($subsection['text_content'], $safeTableId, $sectionNumber . '(' . $subsectionNumber . ')'); ?>
+
                                                                         </div>
-                                                                    @endif
-                                                                    @foreach($subsection['paragraphs'] as $paragraph)
+                                                                    <?php endif; ?>
+                                                                    <?php $__currentLoopData = $subsection['paragraphs']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $paragraph): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                                         <div style="margin-left: 2em;">
                                                                             <div style="margin-bottom: 0.5em;">
-                                                                                <strong>{{ $paragraph['paragraph'] }}</strong> {!! makeLinksClickableSimple($paragraph['text_content'], $safeTableId, $sectionNumber . '(' . $subsectionNumber . ')(' . $paragraph['paragraph'] . ')') !!}
+                                                                                <strong><?php echo e($paragraph['paragraph']); ?></strong> <?php echo makeLinksClickableSimple($paragraph['text_content'], $safeTableId, $sectionNumber . '(' . $subsectionNumber . ')(' . $paragraph['paragraph'] . ')'); ?>
+
                                                                             </div>
-                                                                            @foreach($paragraph['sub_paragraphs'] as $subParagraph)
+                                                                            <?php $__currentLoopData = $paragraph['sub_paragraphs']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subParagraph): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                                                 <div style="margin-left: 2em;">
                                                                                     <div style="margin-bottom: 0.5em;">
-                                                                                        <strong>{{ $subParagraph['sub_paragraph'] }}</strong> {!! makeLinksClickableSimple($subParagraph['text_content'], $safeTableId, $sectionNumber . '(' . $subsectionNumber . ')(' . $paragraph['paragraph'] . ')(' . $subParagraph['sub_paragraph'] . ')') !!}
+                                                                                        <strong><?php echo e($subParagraph['sub_paragraph']); ?></strong> <?php echo makeLinksClickableSimple($subParagraph['text_content'], $safeTableId, $sectionNumber . '(' . $subsectionNumber . ')(' . $paragraph['paragraph'] . ')(' . $subParagraph['sub_paragraph'] . ')'); ?>
+
                                                                                     </div>
                                                                                 </div>
-                                                                            @endforeach
+                                                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                                         </div>
-                                                                    @endforeach
-                                                                    @if(!empty($subsection['footnote']))
-                                                                        <div class="footnote"><em>{!! $subsection['footnote'] !!}</em></div>
-                                                                    @endif
+                                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                                    <?php if(!empty($subsection['footnote'])): ?>
+                                                                        <div class="footnote"><em><?php echo $subsection['footnote']; ?></em></div>
+                                                                    <?php endif; ?>
                                                                 </div>
-                                                            @endforeach
-                                                            @foreach($section['paragraphs'] as $paragraph)
+                                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                            <?php $__currentLoopData = $section['paragraphs']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $paragraph): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                                 <div style="margin-left: 2em;">
                                                                     <div style="margin-bottom: 0.5em;">
-                                                                        <strong>{{ $paragraph['paragraph'] }}</strong> {!! makeLinksClickableSimple($paragraph['text_content'], $safeTableId, $sectionNumber . '(' . $paragraph['paragraph'] . ')') !!}
+                                                                        <strong><?php echo e($paragraph['paragraph']); ?></strong> <?php echo makeLinksClickableSimple($paragraph['text_content'], $safeTableId, $sectionNumber . '(' . $paragraph['paragraph'] . ')'); ?>
+
                                                                     </div>
-                                                                    @foreach($paragraph['sub_paragraphs'] as $subParagraph)
+                                                                    <?php $__currentLoopData = $paragraph['sub_paragraphs']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subParagraph): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                                         <div style="margin-left: 2em;">
                                                                             <div style="margin-bottom: 0.5em;">
-                                                                                <strong>{{ $subParagraph['sub_paragraph'] }}</strong> {!! makeLinksClickableSimple($subParagraph['text_content'], $safeTableId, $sectionNumber . '(' . $paragraph['paragraph'] . ')(' . $subParagraph['sub_paragraph'] . ')') !!}
+                                                                                <strong><?php echo e($subParagraph['sub_paragraph']); ?></strong> <?php echo makeLinksClickableSimple($subParagraph['text_content'], $safeTableId, $sectionNumber . '(' . $paragraph['paragraph'] . ')(' . $subParagraph['sub_paragraph'] . ')'); ?>
+
                                                                             </div>
                                                                         </div>
-                                                                    @endforeach
+                                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                                 </div>
-                                                            @endforeach
-                                                            @if(!empty($section['footnote']))
-                                                                <div class="footnote"><em>{!! $section['footnote'] !!}</em></div>
-                                                            @endif
-                                                        @endforeach
-                                                    @endif
-                                                @endforeach
-                                            @endif
+                                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                            <?php if(!empty($section['footnote'])): ?>
+                                                                <div class="footnote"><em><?php echo $section['footnote']; ?></em></div>
+                                                            <?php endif; ?>
+                                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                    <?php endif; ?>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                            <?php endif; ?>
                                         </div>
-                                    @endforeach
-                                @endif
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                <?php endif; ?>
                             </div>
-                        @endforeach
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </div>
                 </div>
             </div>
             
             <div class="pagination-controls d-flex justify-content-center align-items-center mt-3 gap-3">
-                <button id="prev-page-btn" class="btn theme-btn" style="color: var(--color-theme-3); border-color: var(--color-theme-3);" onclick="changePage(currentPage - 1, currentCategoryId)" {{ request('page', 1) <= 1 ? 'disabled' : '' }}>
+                <button id="prev-page-btn" class="btn theme-btn" style="color: var(--color-theme-3); border-color: var(--color-theme-3);" onclick="changePage(currentPage - 1, currentCategoryId)" <?php echo e(request('page', 1) <= 1 ? 'disabled' : ''); ?>>
                     Previous
                 </button>
                 
                 <select id="page-select" class="form-select" style="width: auto; border-color: var(--color-theme-3);" onchange="changePage(this.value, currentCategoryId)">
-                    @for($i = 1; $i <= $tableData->lastPage(); $i++)
-                        <option value="{{ $i }}" {{ request('page', 1) == $i ? 'selected' : '' }}>
-                            Page {{ $i }} of {{ $tableData->lastPage() }}
+                    <?php for($i = 1; $i <= $tableData->lastPage(); $i++): ?>
+                        <option value="<?php echo e($i); ?>" <?php echo e(request('page', 1) == $i ? 'selected' : ''); ?>>
+                            Page <?php echo e($i); ?> of <?php echo e($tableData->lastPage()); ?>
+
                         </option>
-                    @endfor
+                    <?php endfor; ?>
                 </select>
                 
-                <button id="next-page-btn" class="btn theme-btn" style="color: var(--color-theme-3); border-color: var(--color-theme-3);" onclick="changePage(currentPage + 1, currentCategoryId)" {{ request('page', 1) >= $tableData->lastPage() ? 'disabled' : '' }}>
+                <button id="next-page-btn" class="btn theme-btn" style="color: var(--color-theme-3); border-color: var(--color-theme-3);" onclick="changePage(currentPage + 1, currentCategoryId)" <?php echo e(request('page', 1) >= $tableData->lastPage() ? 'disabled' : ''); ?>>
                     Next
                 </button>
             </div>
-            @endif
+            <?php endif; ?>
                 
-@section('page-scripts')
+<?php $__env->startSection('page-scripts'); ?>
 <script>
-    var fullHierarchicalData = @json($tableData->items());
-    var currentPage = {{ request('page', 1) }};
-    var totalPages = {{ $tableData->lastPage() }};
-    var currentCategoryId = {{ $safeTableId }};
+    var fullHierarchicalData = <?php echo json_encode($tableData->items(), 15, 512) ?>;
+    var currentPage = <?php echo e(request('page', 1)); ?>;
+    var totalPages = <?php echo e($tableData->lastPage()); ?>;
+    var currentCategoryId = <?php echo e($safeTableId); ?>;
     
     // Function to change page with AJAX loading
     function changePage(page, category_id) {
@@ -1081,7 +1101,7 @@
         });
     });
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
 <!-- Content Viewer Modal -->
 <div class="modal fade" id="contentViewerModal" tabindex="-1" aria-labelledby="contentViewerModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -1110,15 +1130,15 @@
         <div id="debug-content" class="small font-monospace"></div>
     </div>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@push('page-scripts')
+<?php $__env->startPush('page-scripts'); ?>
 <!-- Custom scripts specific to this page -->
-<script src="{{ asset('user_assets/js/api-endpoint-tests.js') }}"></script>
-<script src="{{ asset('user_assets/js/reference-by-id.js') }}"></script>
-<script src="{{ asset('user_assets/js/legal-reference-popups.js') }}"></script>
-<script src="{{ asset('user_assets/js/sidebar-persistence.js') }}"></script>
-<script src="{{ asset('user_assets/js/user-centric-popups.js') }}"></script>
+<script src="<?php echo e(asset('user_assets/js/api-endpoint-tests.js')); ?>"></script>
+<script src="<?php echo e(asset('user_assets/js/reference-by-id.js')); ?>"></script>
+<script src="<?php echo e(asset('user_assets/js/legal-reference-popups.js')); ?>"></script>
+<script src="<?php echo e(asset('user_assets/js/sidebar-persistence.js')); ?>"></script>
+<script src="<?php echo e(asset('user_assets/js/user-centric-popups.js')); ?>"></script>
 
 <!-- Initialize TinyMCE and droppable area -->
 <script>
@@ -1179,7 +1199,7 @@ $(document).ready(function() {
                 editor.on('SaveContent', function() {
                     const content = editor.getContent();
                     // Save to database using Laravel route
-                    fetch('{{ route('editor.save') }}', {
+                    fetch('<?php echo e(route('editor.save')); ?>', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -1229,7 +1249,7 @@ $(document).ready(function() {
         // Pattern 1: section X references
         processedText = processedText.replace(
             /\b(section|sections)\s+(\d+(?:\.\d+)?)\b/gi,
-            '<span class="ref" data-section-id="$2" data-table-id="{{ $safeTableId }}">$1 $2</span>'
+            '<span class="ref" data-section-id="$2" data-table-id="<?php echo e($safeTableId); ?>">$1 $2</span>'
         );
         // Pattern 2: paragraph references
         processedText = processedText.replace(
@@ -1238,10 +1258,10 @@ $(document).ready(function() {
                 // Try to get context from parent .legal-text div
                 const section = $(this).closest('.legal-text').data('section-id') || '';
                 let sectionId = section ? section + '(' + firstRef + ')' : '(' + firstRef + ')';
-                let result = '<span class="ref" data-section-id="' + sectionId + '" data-table-id="{{ $safeTableId }}">' + type + ' (' + firstRef + ')</span>';
+                let result = '<span class="ref" data-section-id="' + sectionId + '" data-table-id="<?php echo e($safeTableId); ?>">' + type + ' (' + firstRef + ')</span>';
                 if (secondRef) {
                     let secondSectionId = section ? section + '(' + secondRef + ')' : '(' + secondRef + ')';
-                    result += ' or <span class="ref" data-section-id="' + secondSectionId + '" data-table-id="{{ $safeTableId }}">(' + secondRef + ')</span>';
+                    result += ' or <span class="ref" data-section-id="' + secondSectionId + '" data-table-id="<?php echo e($safeTableId); ?>">(' + secondRef + ')</span>';
                 }
                 return result;
             }
@@ -1252,10 +1272,10 @@ $(document).ready(function() {
             function(match, type, firstRef, secondRef) {
                 const section = $(this).closest('.legal-text').data('section-id') || '';
                 let sectionId = section ? section + '(' + firstRef + ')' : '(' + firstRef + ')';
-                let result = '<span class="ref" data-section-id="' + sectionId + '" data-table-id="{{ $safeTableId }}">' + type + ' (' + firstRef + ')</span>';
+                let result = '<span class="ref" data-section-id="' + sectionId + '" data-table-id="<?php echo e($safeTableId); ?>">' + type + ' (' + firstRef + ')</span>';
                 if (secondRef) {
                     let secondSectionId = section ? section + '(' + secondRef + ')' : '(' + secondRef + ')';
-                    result += ' or <span class="ref" data-section-id="' + secondSectionId + '" data-table-id="{{ $safeTableId }}">(' + secondRef + ')</span>';
+                    result += ' or <span class="ref" data-section-id="' + secondSectionId + '" data-table-id="<?php echo e($safeTableId); ?>">(' + secondRef + ')</span>';
                 }
                 return result;
             }
@@ -1263,7 +1283,7 @@ $(document).ready(function() {
         // Pattern 4: complex section references like 279.1(2)
         processedText = processedText.replace(
             /\b(\d+(?:\.\d+)?(?:\([^)]+\)){1,4})\b(?!\s*\([a-z](?:\.\d+)?\))(?![^<>]*<\/span>)/g,
-            '<span class="ref" data-section-id="$1" data-table-id="{{ $safeTableId }}">$1</span>'
+            '<span class="ref" data-section-id="$1" data-table-id="<?php echo e($safeTableId); ?>">$1</span>'
         );
         // Pattern 5: explicit section references
         processedText = processedText.replace(
@@ -1271,7 +1291,7 @@ $(document).ready(function() {
             function(match, type, section, subsection, paragraph) {
                 let sectionId = section + '(' + subsection + ')';
                 if (paragraph) sectionId += '(' + paragraph + ')';
-                return '<span class="ref" data-section-id="' + sectionId + '" data-table-id="{{ $safeTableId }}">' + match + '</span>';
+                return '<span class="ref" data-section-id="' + sectionId + '" data-table-id="<?php echo e($safeTableId); ?>">' + match + '</span>';
             }
         );
         $(this).html(processedText);
@@ -1299,8 +1319,8 @@ $(document).ready(function() {
 $(document).ready(function() {
     // Initialize database persistence (now user-wide, not document-specific)
     if (typeof setDocumentContext === 'function') {
-        const tableName = '{{ $tableName }}';
-        const categoryId = '{{ $categoryId }}';
+        const tableName = '<?php echo e($tableName); ?>';
+        const categoryId = '<?php echo e($categoryId); ?>';
         setDocumentContext(tableName, categoryId);
         console.log('Document context initialized (popups are now user-wide)');
     } else {
@@ -1682,7 +1702,7 @@ $(function() {
                 // Add a small reference button after each legal text
                 const refButton = document.createElement('button');
                 refButton.className = 'btn btn-sm btn-outline-primary ms-2';
-                refButton.setAttribute('data-ref-id', '{{ $safeTableId }}:' + rowId);
+                refButton.setAttribute('data-ref-id', '<?php echo e($safeTableId); ?>:' + rowId);
                 refButton.innerHTML = '<i class="fas fa-link"></i>';
                 refButton.title = 'Direct reference to this text';
                 textElem.appendChild(refButton);
@@ -2516,7 +2536,7 @@ $(function() {
                     const dummyRef = document.createElement('span');
                     dummyRef.className = 'ref';
                     dummyRef.setAttribute('data-section-id', '(a)');
-                    dummyRef.setAttribute('data-table-id', '{{ $safeTableId }}');
+                    dummyRef.setAttribute('data-table-id', '<?php echo e($safeTableId); ?>');
                     dummyRef.textContent = 'paragraph (a)';
                     
                     // Temporarily append it to the section
@@ -2612,10 +2632,12 @@ $(function() {
     const savedLanguage = localStorage.getItem('selectedLanguage') || 'en';
     translateViewLegalTablePage(savedLanguage);
 </script>
-@endpush
+<?php $__env->stopPush(); ?>
 
-@push('head-scripts')
+<?php $__env->startPush('head-scripts'); ?>
 <!-- Font Awesome Icons for enhanced UI -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-@endpush
+<?php $__env->stopPush(); ?>
 
+
+<?php echo $__env->make('layouts.with-sidebar-layout', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\Users\Ardent\Desktop\jurislocator_laravel\resources\views/view-legal-table-data-personal.blade.php ENDPATH**/ ?>

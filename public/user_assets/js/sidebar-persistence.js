@@ -31,7 +31,17 @@ function initializeSidebarPersistence() {
 
     // Auto-fetch popups on page load
     setTimeout(function() {
-        fetchPinnedPopups();
+        // Check if this is a user-centric page
+        const isUserCentric = window.location.pathname.includes('/user/') || 
+                             window.location.pathname.includes('view-user-legal-table') ||
+                             document.querySelector('meta[name="current-user-id"]');
+        
+        if (isUserCentric) {
+            console.log('User-centric page detected, skipping sidebar-persistence auto-fetch');
+            // The user-centric-popups.js will handle auto-loading
+        } else {
+            fetchPinnedPopups();
+        }
     }, 1000);
     
     // Convert any existing legacy pinned popups that might be in the DOM
@@ -41,7 +51,7 @@ function initializeSidebarPersistence() {
 /**
  * Save pinned popups to the database
  */
-function savePinnedPopups() {
+async function savePinnedPopups() {
     const $button = $('#save-pinned-popups');
     const originalText = $button.html();
     
@@ -60,8 +70,24 @@ function savePinnedPopups() {
 
         // Get client ID from meta tag or global variable
         const clientId = getClientId();
-        if (!clientId) {
+        
+        // Check if this is a user-centric page
+        const isUserCentric = clientId === null;
+        
+        if (!isUserCentric && !clientId) {
             showNotification('Client ID not found', 'error');
+            $button.html(originalText).prop('disabled', false);
+            return;
+        }
+        
+        // For user-centric pages, delegate to user-centric popup system
+        if (isUserCentric) {
+            console.log('Delegating to user-centric popup system');
+            if (typeof savePopupDataToDatabase === 'function') {
+                await savePopupDataToDatabase(true);
+            } else {
+                showNotification('User popup system not available', 'error');
+            }
             $button.html(originalText).prop('disabled', false);
             return;
         }
@@ -130,7 +156,7 @@ function savePinnedPopups() {
 /**
  * Fetch pinned popups from the database and restore them
  */
-function fetchPinnedPopups() {
+async function fetchPinnedPopups() {
     const $button = $('#fetch-pinned-popups');
     const originalText = $button.html();
     
@@ -139,8 +165,24 @@ function fetchPinnedPopups() {
 
     try {
         const clientId = getClientId();
-        if (!clientId) {
+        
+        // Check if this is a user-centric page
+        const isUserCentric = clientId === null;
+        
+        if (!isUserCentric && !clientId) {
             showNotification('Client ID not found', 'error');
+            $button.html(originalText).prop('disabled', false);
+            return;
+        }
+        
+        // For user-centric pages, delegate to user-centric popup system
+        if (isUserCentric) {
+            console.log('Delegating to user-centric popup system for fetch');
+            if (typeof loadSavedPopups === 'function') {
+                await loadSavedPopups(true); // Show notifications for manual fetch
+            } else {
+                showNotification('User popup system not available', 'error');
+            }
             $button.html(originalText).prop('disabled', false);
             return;
         }
@@ -193,7 +235,7 @@ function fetchPinnedPopups() {
 /**
  * Clear all pinned popups
  */
-function clearPinnedPopups() {
+async function clearPinnedPopups() {
     if (!confirm('Are you sure you want to clear all pinned popups?')) {
         return;
     }
@@ -206,8 +248,31 @@ function clearPinnedPopups() {
 
     try {
         const clientId = getClientId();
-        if (!clientId) {
+        
+        // Check if this is a user-centric page
+        const isUserCentric = clientId === null;
+        
+        if (!isUserCentric && !clientId) {
             showNotification('Client ID not found', 'error');
+            $button.html(originalText).prop('disabled', false);
+            return;
+        }
+        
+        // For user-centric pages, delegate to user-centric popup system
+        if (isUserCentric) {
+            console.log('Delegating to user-centric popup system for clear');
+            // Clear from UI first
+            $('.nested-droppable .pinned-popup').each(function() {
+                $(this)[0].style.animation = 'popupFadeOut 0.3s ease-in forwards';
+                setTimeout(() => $(this).remove(), 300);
+            });
+            
+            // Clear from database
+            if (typeof clearSavedPopups === 'function') {
+                await clearSavedPopups();
+            } else {
+                showNotification('User popup system not available', 'error');
+            }
             $button.html(originalText).prop('disabled', false);
             return;
         }
@@ -412,9 +477,19 @@ function initializePinnedPopupHandlers() {
 }
 
 /**
- * Get client ID from various sources
+ * Get client ID from various sources (or return null for user-centric pages)
  */
 function getClientId() {
+    // Check if this is a user-centric page (no client context required)
+    const isUserCentric = window.location.pathname.includes('/user/') || 
+                         window.location.pathname.includes('view-user-legal-table') ||
+                         document.querySelector('meta[name="current-user-id"]');
+    
+    if (isUserCentric) {
+        console.log('User-centric page detected, no client ID required');
+        return null; // Return null but don't treat as error
+    }
+    
     // Try to get from URL parameter
     const urlParams = new URLSearchParams(window.location.search);
     let clientId = urlParams.get('client_id');
