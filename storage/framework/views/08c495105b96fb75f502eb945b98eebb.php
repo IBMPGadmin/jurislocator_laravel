@@ -1,6 +1,6 @@
-@extends('layouts.user-layout')
 
-@section('content')
+
+<?php $__env->startSection('content'); ?>
 
 
    
@@ -98,18 +98,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Tools Card -->
-            <div class="dashboard-card" onclick="window.location.href='{{ route('user.tools') }}'">
-                <div class="card-icon tools-icon">
-                    <i class="fas fa-tools"></i>
-                </div>
-                <div class="card-content">
-                    <h3 data-en="Tools" data-fr="Outils">Tools</h3>
-                    <p data-en="Access useful calculators and time zone tools" data-fr="Accédez aux calculatrices utiles et aux outils de fuseau horaire">Access useful calculators and time zone tools</p>
-                    <button class="card-button" data-en="View Tools" data-fr="Voir les outils">View Tools</button>
-                </div>
-            </div>
         </div>
         <div class="row sec-title title-default px-4">
             <div class="col-12">
@@ -163,218 +151,82 @@
                         </div>
                     </div>
                 </div>
-                <div class="activity-item">
-                    <div class="activity-icon">
-                        <i class="fas fa-search"></i>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="widget sp-top widget-default widget-form widget-vertical shadow-sm">
+                    <div class="widget-title">
+                        <h5>Recent Activities</h5>
                     </div>
-                    <div class="activity-content">
-                        <h4 data-en="Searched for family class immigration regulations" data-fr="Recherché les règlements d'immigration de la classe familiale">Searched for family class immigration regulations</h4>
-                        <p data-en="1 day ago" data-fr="Il y a 1 jour">1 day ago</p>
+                    <div class="widget-body">
+                        <div class="recent-activity-list">
+                            <div class="activity-log mt-3">
+                                <div class="activity-item">
+                                    <div class="activity-icon">
+                                        <i class="fas fa-sticky-note"></i>
+                                    </div>
+                                    <div class="activity-text">
+                                        <strong>Added note:</strong> Updated PNP details<br>
+                                        <span class="activity-time">10 mins ago</span>
+                                    </div>
+                                </div>
+
+                                <div class="activity-item">
+                                    <div class="activity-icon">
+                                        <i class="fas fa-search"></i>
+                                    </div>
+                                    <div class="activity-text">
+                                        <strong>Searched:</strong> Family class rules<br>
+                                        <span class="activity-time">1 hour ago</span>
+                                    </div>
+                                </div>
+
+                                <div class="activity-item">
+                                    <div class="activity-icon">
+                                        <i class="fas fa-user-check"></i>
+                                    </div>
+                                    <div class="activity-text">
+                                        <strong>Client selected:</strong> Lisa Parker<br>
+                                        <span class="activity-time">Yesterday</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+   
+    <script>
+        //Error Reporting popup
+        document.addEventListener('DOMContentLoaded', function () {
+            const popup = document.getElementById('errorPopup');
+            const trigger = document.getElementById('info');
+            const closeBtn = document.getElementById('popupCloseBtn');
+            const cancelBtn = document.getElementById('popupCancelBtn');
 
-<style>
-.dashboard-container {
-    padding: 2rem;
-    max-width: 1400px;
-    margin: 0 auto;
-}
+            trigger.addEventListener('click', function (e) {
+                e.preventDefault();
+                popup.classList.add('is-visible');
+            });
 
-.welcome-section {
-    text-align: center;
-    margin-bottom: 3rem;
-}
+            closeBtn.addEventListener('click', function () {
+                popup.classList.remove('is-visible');
+            });
 
-.dashboard-title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: #2c3e50;
-    margin-bottom: 0.5rem;
-}
+            cancelBtn.addEventListener('click', function () {
+                popup.classList.remove('is-visible');
+            });
 
-.dashboard-subtitle {
-    font-size: 1.2rem;
-    color: #7f8c8d;
-    margin-bottom: 0;
-}
+            // Optional: close popup if click outside the form
+            window.addEventListener('click', function (e) {
+                if (e.target === popup) {
+                    popup.classList.remove('is-visible');
+                }
+            });
+        });
+        
+    </script>
+<?php $__env->stopSection(); ?>
 
-.dashboard-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 2rem;
-    margin-bottom: 3rem;
-}
-
-.dashboard-card {
-    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-    border: 1px solid #e9ecef;
-    border-radius: 15px;
-    padding: 2rem;
-    text-align: center;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
-}
-
-.dashboard-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-    border-color: #007bff;
-}
-
-.card-icon {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 1.5rem;
-    font-size: 2rem;
-    color: white;
-}
-
-.legislation-icon { background: linear-gradient(135deg, #3498db, #2980b9); }
-.caselaw-icon { background: linear-gradient(135deg, #f1c40f, #f39c12); }
-.notes-icon { background: linear-gradient(135deg, #2ecc71, #27ae60); }
-.immigration-icon { background: linear-gradient(135deg, #00bcd4, #0097a7); }
-.resources-icon { background: linear-gradient(135deg, #9b59b6, #8e44ad); }
-.support-icon { background: linear-gradient(135deg, #95a5a6, #7f8c8d); }
-
-.card-content h3 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: #2c3e50;
-    margin-bottom: 1rem;
-}
-
-.card-content p {
-    color: #7f8c8d;
-    margin-bottom: 1.5rem;
-    line-height: 1.6;
-}
-
-.card-button {
-    background: linear-gradient(135deg, #007bff, #0056b3);
-    color: white;
-    border: none;
-    padding: 0.75rem 2rem;
-    border-radius: 25px;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    cursor: pointer;
-}
-
-.card-button:hover {
-    background: linear-gradient(135deg, #0056b3, #004085);
-    transform: scale(1.05);
-}
-
-.quick-actions {
-    margin-bottom: 3rem;
-}
-
-.quick-actions h2 {
-    font-size: 1.8rem;
-    color: #2c3e50;
-    margin-bottom: 1.5rem;
-}
-
-.action-buttons {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-}
-
-.action-btn {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.75rem 1.5rem;
-    background: #f8f9fa;
-    border: 1px solid #dee2e6;
-    border-radius: 10px;
-    text-decoration: none;
-    color: #495057;
-    transition: all 0.3s ease;
-}
-
-.action-btn:hover {
-    background: #007bff;
-    color: white;
-    border-color: #007bff;
-    text-decoration: none;
-}
-
-.recent-activity h2 {
-    font-size: 1.8rem;
-    color: #2c3e50;
-    margin-bottom: 1.5rem;
-}
-
-.activity-list {
-    background: white;
-    border-radius: 10px;
-    border: 1px solid #e9ecef;
-    overflow: hidden;
-}
-
-.activity-item {
-    display: flex;
-    align-items: center;
-    padding: 1rem 1.5rem;
-    border-bottom: 1px solid #f8f9fa;
-}
-
-.activity-item:last-child {
-    border-bottom: none;
-}
-
-.activity-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #007bff, #0056b3);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    margin-right: 1rem;
-}
-
-.activity-content h4 {
-    margin: 0 0 0.25rem 0;
-    font-size: 1rem;
-    color: #2c3e50;
-}
-
-.activity-content p {
-    margin: 0;
-    color: #7f8c8d;
-    font-size: 0.9rem;
-}
-
-@media (max-width: 768px) {
-    .dashboard-grid {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-    }
-    
-    .dashboard-card {
-        padding: 1.5rem;
-    }
-    
-    .action-buttons {
-        flex-direction: column;
-    }
-    
-    .action-btn {
-        justify-content: center;
-    }
-}
-</style>
-@endsection
+<?php echo $__env->make('layouts.user-layout', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\Users\User\Desktop\15\jurislocator_laravel\resources\views/home-dashboard.blade.php ENDPATH**/ ?>
