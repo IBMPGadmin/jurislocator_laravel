@@ -1,6 +1,6 @@
-@extends('layouts.user-layout')
 
-@section('content')
+
+<?php $__env->startSection('content'); ?>
 
 
    
@@ -227,4 +227,6 @@
         });
         
     </script>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.user-layout', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\Users\User\Desktop\15\jurislocator_laravel\resources\views/home-dashboard.blade.php ENDPATH**/ ?>
