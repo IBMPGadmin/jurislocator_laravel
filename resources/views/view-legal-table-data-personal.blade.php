@@ -187,6 +187,31 @@
         margin: 0 0.25rem;
     }
     
+    .pagination-btn {
+        color: var(--color-theme-3) !important;
+        border-color: var(--color-theme-3) !important;
+        background-color: transparent !important;
+        padding: 8px 15px;
+        border: 2px solid var(--color-theme-3);
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .pagination-btn:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        background-color: var(--color-theme-3) !important;
+        color: white !important;
+    }
+    
+    .pagination-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: none !important;
+        box-shadow: none !important;
+    }
+    
     .cross-act-ref {
         background-color: rgba(255, 193, 7, 0.1);
         border: 1px solid #ffc107;
@@ -1011,11 +1036,11 @@
             </div>
             
             <div class="pagination-controls d-flex justify-content-center align-items-center mt-3 gap-3">
-                <button id="prev-page-btn" class="btn theme-btn" style="color: var(--color-theme-3); border-color: var(--color-theme-3);" onclick="changePage(currentPage - 1, currentCategoryId)" {{ request('page', 1) <= 1 ? 'disabled' : '' }}>
+                <button id="prev-page-btn" class="btn pagination-btn" style="color: var(--color-theme-3); border-color: var(--color-theme-3); background-color: transparent; padding: 8px 15px; border: 2px solid var(--color-theme-3); border-radius: 4px; cursor: pointer; transition: all 0.3s ease;" {{ request('page', 1) <= 1 ? 'disabled' : '' }}>
                     Previous
                 </button>
                 
-                <select id="page-select" class="form-select" style="width: auto; border-color: var(--color-theme-3);" onchange="changePage(this.value, currentCategoryId)">
+                <select id="page-select" class="form-select" style="width: auto; border-color: var(--color-theme-3);">
                     @for($i = 1; $i <= $tableData->lastPage(); $i++)
                         <option value="{{ $i }}" {{ request('page', 1) == $i ? 'selected' : '' }}>
                             Page {{ $i }} of {{ $tableData->lastPage() }}
@@ -1023,7 +1048,7 @@
                     @endfor
                 </select>
                 
-                <button id="next-page-btn" class="btn theme-btn" style="color: var(--color-theme-3); border-color: var(--color-theme-3);" onclick="changePage(currentPage + 1, currentCategoryId)" {{ request('page', 1) >= $tableData->lastPage() ? 'disabled' : '' }}>
+                <button id="next-page-btn" class="btn pagination-btn" style="color: var(--color-theme-3); border-color: var(--color-theme-3); background-color: transparent; padding: 8px 15px; border: 2px solid var(--color-theme-3); border-radius: 4px; cursor: pointer; transition: all 0.3s ease;" {{ request('page', 1) >= $tableData->lastPage() ? 'disabled' : '' }}>
                     Next
                 </button>
             </div>
@@ -1031,15 +1056,7 @@
                 
 @section('page-scripts')
 <script>
-    // Initialize reference handlers
-    document.addEventListener('DOMContentLoaded', function() {
-        // Make all clickable headings act like references
-        document.querySelectorAll('.clickable-heading').forEach(function(elem) {
-            elem.addEventListener('click', function(e) {
-                // Your click handler logic
-            });
-        });
-    });
+    var fullHierarchicalData = @json($tableData->items());
 </script>
 @endsection
 <!-- Content Viewer Modal -->
@@ -1378,19 +1395,26 @@ $(function() {
 </script>
 
 <script>
-    // Define pagination variables
-    var fullHierarchicalData = @json($tableData->items());
+    // Global pagination variables
     var currentPage = {{ request('page', 1) }};
     var totalPages = {{ $tableData->lastPage() }};
     var currentCategoryId = {{ $safeTableId }};
-    
+
     // Function to change page with AJAX loading
     function changePage(page, category_id) {
-        if (page < 1 || page > totalPages) return;
+        console.log('changePage called with:', { page, category_id, currentPage, totalPages, currentCategoryId });
+        
+        // Validate page bounds
+        if (page < 1 || page > totalPages) {
+            console.log('Page out of bounds, ignoring request');
+            return;
+        }
         
         const url = new URL(window.location.href);
         url.searchParams.set('page', page);
         url.searchParams.set('category_id', category_id);
+
+        console.log('Making AJAX request to:', url.toString());
 
         // Show loading state
         const contentArea = document.getElementById('legal-content-area');
@@ -1398,28 +1422,123 @@ $(function() {
             contentArea.innerHTML = '<div class="text-center p-5"><div class="spinner-border text-primary" role="status"></div><p class="mt-2">Loading content...</p></div>';
         }
 
+        // Get CSRF token
+        const token = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+
         fetch(url.toString(), { 
             method: 'GET',
             headers: {
-                'X-Requested-With': 'XMLHttpRequest'
-            }
+                'X-Requested-With': 'XMLHttpRequest',
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+                'X-CSRF-TOKEN': token || ''
+            },
+            credentials: 'same-origin'
         })
-        .then(response => response.text())
+        .then(response => {
+            console.log('Response received:', {
+                status: response.status,
+                statusText: response.statusText,
+                headers: Object.fromEntries(response.headers.entries())
+            });
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            return response.text();
+        })
         .then(html => {
+            console.log('AJAX response received, HTML length:', html.length);
+            console.log('HTML preview (first 500 chars):', html.substring(0, 500));
+            
             const parser = new DOMParser();
             const doc = parser.parseFromString(html, 'text/html');
 
             // Replace only the content area
             const newContent = doc.getElementById('legal-content-area');
             if (newContent && contentArea) {
+                console.log('Updating content area...');
                 contentArea.innerHTML = newContent.innerHTML;
+            } else {
+                console.error('Could not find legal-content-area in response');
+                console.log('Available elements with IDs:', Array.from(doc.querySelectorAll('[id]')).map(el => el.id));
             }
             
-            // Update pagination controls
+            // Update pagination controls properly while preserving theme and functionality
+            console.log('Updating pagination controls...');
             const newPaginationControls = doc.querySelector('.pagination-controls');
             const currentPaginationControls = document.querySelector('.pagination-controls');
             if (newPaginationControls && currentPaginationControls) {
-                currentPaginationControls.innerHTML = newPaginationControls.innerHTML;
+                // Get the new pagination data
+                const newPrevBtn = newPaginationControls.querySelector('#prev-page-btn');
+                const newNextBtn = newPaginationControls.querySelector('#next-page-btn');
+                const newPageSelect = newPaginationControls.querySelector('#page-select');
+                
+                // Update current pagination elements while preserving everything
+                const currentPrevBtn = currentPaginationControls.querySelector('#prev-page-btn');
+                const currentNextBtn = currentPaginationControls.querySelector('#next-page-btn');
+                const currentPageSelect = currentPaginationControls.querySelector('#page-select');
+                
+                if (currentPrevBtn && newPrevBtn) {
+                    console.log('Before update - currentPrevBtn style:', currentPrevBtn.getAttribute('style'));
+                    console.log('Before update - currentPrevBtn class:', currentPrevBtn.className);
+                    console.log('New button style:', newPrevBtn.getAttribute('style'));
+                    console.log('New button class:', newPrevBtn.className);
+                    
+                    // Copy all attributes from new button to current button
+                    currentPrevBtn.disabled = newPrevBtn.disabled;
+                    // Ensure we use pagination-btn class, not theme-btn
+                    currentPrevBtn.className = newPrevBtn.className.replace(/theme-btn/g, 'pagination-btn');
+                    currentPrevBtn.setAttribute('style', newPrevBtn.getAttribute('style') || '');
+                    // Copy any other attributes that might be different
+                    ['onclick'].forEach(attr => {
+                        if (newPrevBtn.hasAttribute(attr)) {
+                            currentPrevBtn.setAttribute(attr, newPrevBtn.getAttribute(attr));
+                        }
+                    });
+                    
+                    console.log('After update - currentPrevBtn style:', currentPrevBtn.getAttribute('style'));
+                    console.log('After update - currentPrevBtn class:', currentPrevBtn.className);
+                }
+                
+                if (currentNextBtn && newNextBtn) {
+                    console.log('Before update - currentNextBtn style:', currentNextBtn.getAttribute('style'));
+                    console.log('Before update - currentNextBtn class:', currentNextBtn.className);
+                    console.log('New next button style:', newNextBtn.getAttribute('style'));
+                    console.log('New next button class:', newNextBtn.className);
+                    
+                    // Copy all attributes from new button to current button
+                    currentNextBtn.disabled = newNextBtn.disabled;
+                    // Ensure we use pagination-btn class, not theme-btn
+                    currentNextBtn.className = newNextBtn.className.replace(/theme-btn/g, 'pagination-btn');
+                    currentNextBtn.setAttribute('style', newNextBtn.getAttribute('style') || '');
+                    // Copy any other attributes that might be different
+                    ['onclick'].forEach(attr => {
+                        if (newNextBtn.hasAttribute(attr)) {
+                            currentNextBtn.setAttribute(attr, newNextBtn.getAttribute(attr));
+                        }
+                    });
+                    
+                    console.log('After update - currentNextBtn style:', currentNextBtn.getAttribute('style'));
+                    console.log('After update - currentNextBtn class:', currentNextBtn.className);
+                }
+                
+                if (currentPageSelect && newPageSelect) {
+                    currentPageSelect.innerHTML = newPageSelect.innerHTML;
+                    currentPageSelect.value = newPageSelect.value;
+                    // Preserve theme styling
+                    currentPageSelect.style.borderColor = 'var(--color-theme-3)';
+                }
+                
+                // Update total pages from the new content
+                const newOptions = newPageSelect ? newPageSelect.querySelectorAll('option') : [];
+                if (newOptions.length > 0) {
+                    const lastOption = newOptions[newOptions.length - 1];
+                    const match = lastOption.textContent.match(/Page \d+ of (\d+)/);
+                    if (match) {
+                        totalPages = parseInt(match[1]);
+                    }
+                }
             }
             
             // Update URL without refresh
@@ -1428,10 +1547,11 @@ $(function() {
             // Update current page variable
             currentPage = page;
             
-            // Re-initialize reference handlers
+            // Re-initialize reference handlers and pagination
             setTimeout(() => {
                 attachReferenceHandlers();
                 initializeReferences();
+                reattachPaginationHandlers();
             }, 100);
         })
         .catch(error => {
@@ -1442,7 +1562,123 @@ $(function() {
         });
     }
 
+    // Global test function for manual debugging
+    window.testPaginationSetup = function() {
+        console.log('=== PAGINATION DEBUG TEST ===');
+        console.log('Global variables:', { currentPage, totalPages, currentCategoryId });
+        
+        const prevBtn = document.getElementById('prev-page-btn');
+        const nextBtn = document.getElementById('next-page-btn');
+        const pageSelect = document.getElementById('page-select');
+        
+        console.log('Elements found:', {
+            prevBtn: !!prevBtn,
+            nextBtn: !!nextBtn,
+            pageSelect: !!pageSelect
+        });
+        
+        if (prevBtn) {
+            console.log('Previous button:', prevBtn);
+            console.log('Previous button disabled:', prevBtn.disabled);
+        }
+        
+        if (nextBtn) {
+            console.log('Next button:', nextBtn);
+            console.log('Next button disabled:', nextBtn.disabled);
+        }
+        
+        if (pageSelect) {
+            console.log('Page select:', pageSelect);
+            console.log('Page select value:', pageSelect.value);
+        }
+        
+        // Test attaching a simple handler
+        if (prevBtn && !prevBtn.disabled) {
+            prevBtn.addEventListener('click', function() {
+                console.log('TEST: Prev button clicked manually!');
+            });
+            console.log('Test handler attached to prev button');
+        }
+        
+        console.log('=== END PAGINATION DEBUG TEST ===');
+    };
+
+    // Function to re-attach pagination event handlers after AJAX updates
+    function reattachPaginationHandlers() {
+        console.log('Re-attaching pagination handlers...');
+        console.log('Current scope variables - currentPage:', currentPage, 'totalPages:', totalPages, 'currentCategoryId:', currentCategoryId);
+        
+        const prevBtn = document.getElementById('prev-page-btn');
+        const nextBtn = document.getElementById('next-page-btn');
+        const pageSelect = document.getElementById('page-select');
+        
+        if (prevBtn) {
+            console.log('Attaching prev button handler');
+            // Remove any existing event listeners and add new one
+            prevBtn.onclick = null;
+            prevBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log('Prev button clicked, current page:', currentPage);
+                if (currentPage > 1) {
+                    changePage(currentPage - 1, currentCategoryId);
+                }
+                return false;
+            });
+        }
+        
+        if (nextBtn) {
+            console.log('Attaching next button handler');
+            // Remove any existing event listeners and add new one
+            nextBtn.onclick = null;
+            nextBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log('Next button clicked, current page:', currentPage);
+                if (currentPage < totalPages) {
+                    changePage(currentPage + 1, currentCategoryId);
+                }
+                return false;
+            });
+        }
+        
+        if (pageSelect) {
+            console.log('Attaching page select handler');
+            // Remove any existing event listeners and add new one
+            pageSelect.onchange = null;
+            pageSelect.addEventListener('change', function(e) {
+                console.log('Page select changed to:', this.value);
+                changePage(parseInt(this.value), currentCategoryId);
+            });
+        }
+        
+        console.log('Pagination handlers attached. Current page:', currentPage, 'Total pages:', totalPages, 'Category ID:', currentCategoryId);
+    }
+
+    console.log('Script block starting execution - before DOMContentLoaded');
+    console.log('Initial global variables:', { currentPage, totalPages, currentCategoryId });
+    console.log('jQuery available:', typeof $ !== 'undefined');
+    console.log('Document ready state:', document.readyState);
+    
+    // Test immediate execution
+    try {
+        console.log('Testing immediate pagination element access:');
+        const testPrevBtn = document.getElementById('prev-page-btn');
+        const testNextBtn = document.getElementById('next-page-btn');
+        const testPageSelect = document.getElementById('page-select');
+        console.log('Immediate element check:', {
+            prevBtn: !!testPrevBtn,
+            nextBtn: !!testNextBtn,
+            pageSelect: !!testPageSelect
+        });
+    } catch (error) {
+        console.error('Error in immediate element check:', error);
+    }
+    
     document.addEventListener('DOMContentLoaded', function() {
+        console.log('DOMContentLoaded fired - initializing pagination');
+        console.log('Global variables in DOMContentLoaded:', { currentPage, totalPages, currentCategoryId });
+        
         // Make all clickable headings act like references
         document.querySelectorAll('.clickable-heading').forEach(function(elem) {
             elem.addEventListener('click', function(e) {
@@ -1631,14 +1867,29 @@ $(function() {
             });
         });
 
-        // Initialize reference system on page load
+        // Initialize reference system and pagination on page load
         setTimeout(() => {
+            console.log('Initializing pagination handlers after timeout');
+            
+            // Check if elements exist
+            const prevBtn = document.getElementById('prev-page-btn');
+            const nextBtn = document.getElementById('next-page-btn');
+            const pageSelect = document.getElementById('page-select');
+            
+            console.log('Pagination elements found:', {
+                prevBtn: !!prevBtn,
+                nextBtn: !!nextBtn,
+                pageSelect: !!pageSelect
+            });
+            
             if (typeof attachReferenceHandlers === 'function') {
                 attachReferenceHandlers();
             }
             if (typeof initializeReferences === 'function') {
                 initializeReferences();
             }
+            // Initialize pagination handlers
+            reattachPaginationHandlers();
         }, 100);
 
         // Example of adding direct reference IDs to elements
@@ -2340,7 +2591,36 @@ $(function() {
         debugContent.innerHTML = '<div class="text-center">Running debug checks...</div>';
         
         setTimeout(() => {
-            let output = '<h5>Reference Elements</h5>';
+            let output = '<h5>Pagination Debug</h5>';
+            
+            // Test pagination elements
+            const prevBtn = document.getElementById('prev-page-btn');
+            const nextBtn = document.getElementById('next-page-btn');
+            const pageSelect = document.getElementById('page-select');
+            
+            output += `<p>Pagination Elements Check:</p><ul>`;
+            output += `<li><strong>Previous Button:</strong> ${prevBtn ? 'Found' : 'Missing'} ${prevBtn && prevBtn.disabled ? '(disabled)' : ''}</li>`;
+            output += `<li><strong>Next Button:</strong> ${nextBtn ? 'Found' : 'Missing'} ${nextBtn && nextBtn.disabled ? '(disabled)' : ''}</li>`;
+            output += `<li><strong>Page Select:</strong> ${pageSelect ? 'Found' : 'Missing'} ${pageSelect ? `(value: ${pageSelect.value})` : ''}</li>`;
+            output += `</ul>`;
+            
+            output += `<p>Global Variables:</p><ul>`;
+            output += `<li><strong>currentPage:</strong> ${typeof currentPage !== 'undefined' ? currentPage : 'undefined'}</li>`;
+            output += `<li><strong>totalPages:</strong> ${typeof totalPages !== 'undefined' ? totalPages : 'undefined'}</li>`;
+            output += `<li><strong>currentCategoryId:</strong> ${typeof currentCategoryId !== 'undefined' ? currentCategoryId : 'undefined'}</li>`;
+            output += `</ul>`;
+            
+            output += `<p>Manual Test Buttons:</p>`;
+            if (nextBtn && !nextBtn.disabled && typeof changePage === 'function') {
+                output += `<button class="btn btn-sm btn-primary me-2" onclick="changePage(${currentPage + 1}, ${currentCategoryId})">Test Next Page</button>`;
+            }
+            if (prevBtn && !prevBtn.disabled && typeof changePage === 'function') {
+                output += `<button class="btn btn-sm btn-primary me-2" onclick="changePage(${currentPage - 1}, ${currentCategoryId})">Test Prev Page</button>`;
+            }
+            output += `<button class="btn btn-sm btn-secondary me-2" onclick="window.testPaginationSetup()">Run Pagination Setup Test</button>`;
+            output += `<button class="btn btn-sm btn-warning" onclick="reattachPaginationHandlers()">Re-attach Handlers</button>`;
+            
+            output += '<h5>Reference Elements</h5>';
             
             // Count and display reference elements
             const refElements = document.querySelectorAll('.ref');
@@ -2584,4 +2864,9 @@ $(function() {
 <!-- Font Awesome Icons for enhanced UI -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 @endpush
+
+<script>
+console.log('DEBUG: Simple script at end of file executing');
+console.log('DEBUG: Document ready state:', document.readyState);
+</script>
 

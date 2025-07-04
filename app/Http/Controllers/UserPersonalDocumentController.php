@@ -29,6 +29,16 @@ class UserPersonalDocumentController extends Controller
             abort(403, 'Unauthorized access');
         }
 
+        // Log AJAX request detection
+        $isAjax = $request->ajax() || $request->wantsJson() || $request->header('X-Requested-With') === 'XMLHttpRequest';
+        \Log::info('UserPersonalDocumentController Request', [
+            'is_ajax' => $isAjax,
+            'headers' => $request->headers->all(),
+            'method' => $request->method(),
+            'url' => $request->url(),
+            'query_params' => $request->query->all()
+        ]);
+
         $categoryId = $request->query('category_id');
         $searchQuery = $request->query('search');
         
@@ -69,6 +79,62 @@ class UserPersonalDocumentController extends Controller
             
             // Get all data with pagination - just like the client-centric version
             $documents = $query->paginate(15);
+            
+            // Check if this is an AJAX request for pagination
+            if ($request->ajax() || $request->wantsJson() || $request->header('X-Requested-With') === 'XMLHttpRequest') {
+                // For AJAX requests, prepare all variables needed by the view
+                $tableData = $documents; // The view expects 'tableData'
+                
+                // Get user-specific text data (NO client_id, only user_id)
+                $userTextData = UserTextData::getOrCreateForUser(
+                    $userId, 
+                    $tableName, 
+                    $categoryId ?? 0  // Use 0 as fallback if no category
+                );
+
+                // Get user-specific popup data (NO client_id, only user_id)
+                $userPopupData = UserPopupData::getOrCreateForUser(
+                    $userId, 
+                    $tableName, 
+                    $categoryId ?? 0  // Use 0 as fallback if no category
+                );
+
+                // Get document table structure
+                $columns = DB::select("SHOW COLUMNS FROM {$tableName}");
+                $columnNames = array_column($columns, 'Field');
+
+                // Get legal table metadata for compatibility with view
+                $legalTable = null;
+                $metadata = null;
+                try {
+                    $legalTable = DB::table('legal_tables_master')
+                        ->where('id', $categoryId)
+                        ->first();
+                    $metadata = $legalTable; // Alias for compatibility
+                } catch (\Exception $e) {
+                    \Log::warning('Could not load legal table metadata: ' . $e->getMessage());
+                }
+
+                $annotations = []; // User annotations (empty for now)
+                
+                $html = view('view-legal-table-data-personal', compact(
+                    'documents', // For search results  
+                    'tableData', // Renamed for view compatibility
+                    'tableName',
+                    'categoryId',
+                    'columnNames',
+                    'columns',
+                    'userTextData',
+                    'userPopupData',
+                    'userId',
+                    'searchQuery',
+                    'legalTable', // Required by view
+                    'metadata', // Required by view
+                    'annotations' // Required by view
+                ) + ['user' => $userModel])->render();
+                
+                return response($html);
+            }
             
             \Log::info('User Personal Document Results', [
                 'documents_count' => $documents->count(),
@@ -198,6 +264,69 @@ class UserPersonalDocumentController extends Controller
             
             // Get all data with pagination - just like the client-centric version
             $documents = $query->paginate(15);
+
+            // Check if this is an AJAX request for pagination
+            if ($request->ajax() || $request->wantsJson() || $request->header('X-Requested-With') === 'XMLHttpRequest') {
+                // For AJAX requests, prepare all variables needed by the view
+                $tableData = $documents; // The view expects 'tableData'
+                
+                // Get user-specific text data (NO client_id, only user_id)
+                $userTextData = null;
+                $userPopupData = null;
+                
+                if ($categoryId) {
+                    $userTextData = UserTextData::getOrCreateForUser(
+                        $userId, 
+                        $tableName, 
+                        $categoryId
+                    );
+
+                    // Get user-specific popup data (NO client_id, only user_id)
+                    $userPopupData = UserPopupData::getOrCreateForUser(
+                        $userId, 
+                        $tableName, 
+                        $categoryId
+                    );
+                }
+
+                // Get document table structure
+                $columns = DB::select("SHOW COLUMNS FROM {$tableName}");
+                $columnNames = array_column($columns, 'Field');
+
+                // Get legal table metadata for compatibility with view
+                $legalTable = null;
+                $metadata = null;
+                try {
+                    $legalTable = DB::table('legal_tables_master')
+                        ->where('id', $categoryId)
+                        ->first();
+                    $metadata = $legalTable; // Alias for compatibility
+                } catch (\Exception $e) {
+                    \Log::warning('Could not load legal table metadata: ' . $e->getMessage());
+                }
+
+                $annotations = []; // User annotations (empty for now)
+                $document = $categoryId ? $documents->first() : null;
+                
+                $html = view('view-legal-table-data-personal', compact(
+                    'document',
+                    'documents', // For search results
+                    'tableData', // Renamed for view compatibility
+                    'tableName',
+                    'categoryId',
+                    'columnNames',
+                    'columns',
+                    'userTextData',
+                    'userPopupData',
+                    'userId',
+                    'searchQuery',
+                    'legalTable', // Required by view
+                    'metadata', // Required by view
+                    'annotations' // Required by view
+                ) + ['user' => $userModel])->render();
+                
+                return response($html);
+            }
 
             if ($documents->isEmpty() && $categoryId) {
                 return redirect()->route('user.legal-tables')

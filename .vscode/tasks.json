@@ -2,12 +2,11 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
-			"label": "Run Laravel Development Server",
+			"label": "Check Laravel Application",
 			"type": "shell",
-			"command": "php artisan serve",
-			"group": "test",
-			"isBackground": true,
-			"problemMatcher": []
+			"command": "php artisan --version && echo 'Laravel application is ready'",
+			"group": "build",
+			"isBackground": false
 		}
 	]
 }

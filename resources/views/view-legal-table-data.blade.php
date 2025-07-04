@@ -187,6 +187,31 @@
         margin: 0 0.25rem;
     }
     
+    .pagination-btn {
+        color: var(--color-theme-3) !important;
+        border-color: var(--color-theme-3) !important;
+        background-color: transparent !important;
+        padding: 8px 15px;
+        border: 2px solid var(--color-theme-3);
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .pagination-btn:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        background-color: var(--color-theme-3) !important;
+        color: white !important;
+    }
+    
+    .pagination-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: none !important;
+        box-shadow: none !important;
+    }
+    
     .cross-act-ref {
         background-color: rgba(255, 193, 7, 0.1);
         border: 1px solid #ffc107;
@@ -961,7 +986,7 @@
             </div>
             
             <div class="pagination-controls d-flex justify-content-center align-items-center mt-3 gap-3">
-                <button id="prev-page-btn" class="btn theme-btn" style="color: var(--color-theme-3); border-color: var(--color-theme-3);" onclick="changePage(currentPage - 1, currentCategoryId)" {{ request('page', 1) <= 1 ? 'disabled' : '' }}>
+                <button id="prev-page-btn" class="btn pagination-btn" style="color: var(--color-theme-3); border-color: var(--color-theme-3); background-color: transparent; padding: 8px 15px; border: 2px solid var(--color-theme-3); border-radius: 4px; cursor: pointer; transition: all 0.3s ease;" onclick="changePage(currentPage - 1, currentCategoryId)" {{ request('page', 1) <= 1 ? 'disabled' : '' }}>
                     Previous
                 </button>
                 
@@ -973,7 +998,7 @@
                     @endfor
                 </select>
                 
-                <button id="next-page-btn" class="btn theme-btn" style="color: var(--color-theme-3); border-color: var(--color-theme-3);" onclick="changePage(currentPage + 1, currentCategoryId)" {{ request('page', 1) >= $tableData->lastPage() ? 'disabled' : '' }}>
+                <button id="next-page-btn" class="btn pagination-btn" style="color: var(--color-theme-3); border-color: var(--color-theme-3); background-color: transparent; padding: 8px 15px; border: 2px solid var(--color-theme-3); border-radius: 4px; cursor: pointer; transition: all 0.3s ease;" onclick="changePage(currentPage + 1, currentCategoryId)" {{ request('page', 1) >= $tableData->lastPage() ? 'disabled' : '' }}>
                     Next
                 </button>
             </div>

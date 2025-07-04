@@ -6,7 +6,7 @@
     <div class="row mb-5">
         <div class="col-12">
             <div class="welcome-header text-center">
-                <h1 class="display-4 mb-3" data-en="Welcome to JurisLocator" data-fr="Bienvenue sur JurisLocator">Welcome to JurisLocator 2</h1>
+                <h1 class="display-4 mb-3" data-en="Welcome to JurisLocator" data-fr="Bienvenue sur JurisLocator">Welcome to JurisLocator</h1>
                 <p class="lead text-muted" data-en="Your personal legal research workspace. Access legal documents, create notes, and manage your research efficiently" data-fr="Votre espace de recherche juridique personnel. Accédez aux documents juridiques, créez des notes et gérez efficacement vos recherches">
                     2 our personal legal research workspace. Access legal documents, create notes, and manage your research efficiently
                 </p>
