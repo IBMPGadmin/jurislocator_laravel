@@ -19,8 +19,18 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'first_name',
+        'last_name',
         'email',
         'password',
+        'user_type',
+        'license_number',
+        'student_id_number',
+        'student_id_file',
+        'company_name',
+        'approval_status',
+        'approved_at',
+        'approved_by',
         'role', // Add role to fillable
         'profile_image', // Add profile_image to fillable
     ];
@@ -73,5 +83,37 @@ class User extends Authenticatable
             })
             ->latest('id')
             ->first();
+    }
+    
+    /**
+     * Check if user is approved
+     */
+    public function isApproved()
+    {
+        return $this->approval_status === 'approved';
+    }
+
+    /**
+     * Check if user is pending approval
+     */
+    public function isPending()
+    {
+        return $this->approval_status === 'pending';
+    }
+
+    /**
+     * Check if user is rejected
+     */
+    public function isRejected()
+    {
+        return $this->approval_status === 'rejected';
+    }
+
+    /**
+     * Get the user who approved this user
+     */
+    public function approver()
+    {
+        return $this->belongsTo(User::class, 'approved_by');
     }
 }

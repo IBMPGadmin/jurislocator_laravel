@@ -1,4 +1,4 @@
-{{-- Jurislocator Custom Register Design --}}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -223,7 +223,7 @@
                 <div class="col-lg-5">
                     <div class="signup-left h-100">
                         <div class="logo-section">
-                            <img src="{{ asset('user_assets/img/logo-01.png') }}" alt="Jurislocator Logo">
+                            <img src="<?php echo e(asset('user_assets/img/logo-01.png')); ?>" alt="Jurislocator Logo">
                             <h3 class="mb-0">Jurislocator</h3>
                         </div>
                         <div>
@@ -236,46 +236,48 @@
                     <div class="signup-right">
                         <h2 class="form-title">Create Account</h2>
                         <p class="form-subtitle">Fill in your details to get started</p>
-                        @if ($errors->any())
+                        <?php if($errors->any()): ?>
                             <div class="alert alert-danger">
                                 <i class="fas fa-exclamation-triangle me-2"></i>
-                                {{ $errors->first() }}
+                                <?php echo e($errors->first()); ?>
+
                             </div>
-                        @endif
-                        @if (session('status'))
+                        <?php endif; ?>
+                        <?php if(session('status')): ?>
                             <div class="alert alert-success">
                                 <i class="fas fa-check-circle me-2"></i>
-                                {{ session('status') }}
+                                <?php echo e(session('status')); ?>
+
                             </div>
-                        @endif
-                        <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
-                            @csrf
+                        <?php endif; ?>
+                        <form method="POST" action="<?php echo e(route('register')); ?>" enctype="multipart/form-data">
+                            <?php echo csrf_field(); ?>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control" id="first_name" name="first_name" placeholder="First Name" required value="{{ old('first_name') }}">
+                                        <input type="text" class="form-control" id="first_name" name="first_name" placeholder="First Name" required value="<?php echo e(old('first_name')); ?>">
                                         <label for="first_name"><i class="fas fa-user me-2"></i>First Name</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Last Name" required value="{{ old('last_name') }}">
+                                        <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Last Name" required value="<?php echo e(old('last_name')); ?>">
                                         <label for="last_name"><i class="fas fa-user me-2"></i>Last Name</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-floating">
-                                <input type="email" class="form-control" id="email" name="email" placeholder="Email" required value="{{ old('email') }}">
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Email" required value="<?php echo e(old('email')); ?>">
                                 <label for="email"><i class="fas fa-envelope me-2"></i>Email Address</label>
                             </div>
                             <div class="form-floating">
                                 <select class="form-control" id="user_type" name="user_type" required onchange="toggleConditionalFields()">
                                     <option value="">Select User Type</option>
-                                    <option value="licensed_practitioner" {{ old('user_type') == 'licensed_practitioner' ? 'selected' : '' }}>Licensed Canadian Immigration Practitioner</option>
-                                    <option value="immigration_lawyer" {{ old('user_type') == 'immigration_lawyer' ? 'selected' : '' }}>Canadian Immigration Lawyer</option>
-                                    <option value="notaire_quebec" {{ old('user_type') == 'notaire_quebec' ? 'selected' : '' }}>Member of Chambre des notaires du Québec</option>
-                                    <option value="student_queens" {{ old('user_type') == 'student_queens' ? 'selected' : '' }}>Immigration Law student - Queens University</option>
-                                    <option value="student_montreal" {{ old('user_type') == 'student_montreal' ? 'selected' : '' }}>Immigration Law student - Université de Montréal</option>
+                                    <option value="licensed_practitioner" <?php echo e(old('user_type') == 'licensed_practitioner' ? 'selected' : ''); ?>>Licensed Canadian Immigration Practitioner</option>
+                                    <option value="immigration_lawyer" <?php echo e(old('user_type') == 'immigration_lawyer' ? 'selected' : ''); ?>>Canadian Immigration Lawyer</option>
+                                    <option value="notaire_quebec" <?php echo e(old('user_type') == 'notaire_quebec' ? 'selected' : ''); ?>>Member of Chambre des notaires du Québec</option>
+                                    <option value="student_queens" <?php echo e(old('user_type') == 'student_queens' ? 'selected' : ''); ?>>Immigration Law student - Queens University</option>
+                                    <option value="student_montreal" <?php echo e(old('user_type') == 'student_montreal' ? 'selected' : ''); ?>>Immigration Law student - Université de Montréal</option>
                                 </select>
                                 <label for="user_type"><i class="fas fa-briefcase me-2"></i>User Type</label>
                             </div>
@@ -283,13 +285,13 @@
                             <!-- License Number Field (for licensed practitioners, lawyers, and notaires) -->
                             <div class="conditional-field" id="license_field" style="margin-bottom: 20px;">
                                 <label class="form-label"><i class="fas fa-certificate me-2"></i>License Number</label>
-                                <input type="text" class="form-control" id="license_number" name="license_number" placeholder="License Number" value="{{ old('license_number') }}">
+                                <input type="text" class="form-control" id="license_number" name="license_number" placeholder="License Number" value="<?php echo e(old('license_number')); ?>">
                             </div>
 
                             <!-- Student ID Number Field (for students) -->
                             <div class="conditional-field" id="student_id_number_field" style="margin-bottom: 20px;">
                                 <label class="form-label"><i class="fas fa-id-badge me-2"></i>Student ID Number</label>
-                                <input type="text" class="form-control" id="student_id_number" name="student_id_number" placeholder="Student ID Number" value="{{ old('student_id_number') }}">
+                                <input type="text" class="form-control" id="student_id_number" name="student_id_number" placeholder="Student ID Number" value="<?php echo e(old('student_id_number')); ?>">
                             </div>
 
                             <!-- Student ID Upload Field (for students) -->
@@ -327,7 +329,7 @@
                             </button>
                         </form>
                         <div class="login-link">
-                            <p>Already have an account? <a href="{{ route('login') }}">Sign In</a></p>
+                            <p>Already have an account? <a href="<?php echo e(route('login')); ?>">Sign In</a></p>
                         </div>
                     </div>
                 </div>
@@ -430,3 +432,4 @@
     </script>
 </body>
 </html>
+<?php /**PATH C:\Users\User\Desktop\14\jurislocator_laravel\resources\views/auth/register.blade.php ENDPATH**/ ?>
