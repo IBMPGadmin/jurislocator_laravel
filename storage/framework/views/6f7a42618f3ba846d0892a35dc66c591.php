@@ -5,7 +5,7 @@
     <div class="dashboard-content">
         <!-- Welcome Section -->
         <div class="welcome-section">
-            <h1 class="dashboard-title" data-en="Welcome to JurisLocator" data-fr="Bienvenue sur JurisLocator">Welcome to JurisLocator</h1>
+            <h1 class="dashboard-title" data-en="Welcome to JurisLocator 2" data-fr="Bienvenue sur JurisLocator">Welcome to JurisLocator 2</h1>
             <p class="dashboard-subtitle" data-en="Your comprehensive legal research platform" data-fr="Votre plateforme de recherche juridique complète">Your comprehensive legal research platform</p>
         </div>
 

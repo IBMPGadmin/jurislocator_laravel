@@ -1031,46 +1031,6 @@
                 
 @section('page-scripts')
 <script>
-    var fullHierarchicalData = @json($tableData->items());
-    var currentPage = {{ request('page', 1) }};
-    var totalPages = {{ $tableData->lastPage() }};
-    var currentCategoryId = {{ $safeTableId }};
-    
-    // Function to change page with AJAX loading
-    function changePage(page, category_id) {
-        if (page < 1 || page > totalPages) return;
-        
-        const url = new URL(window.location.href);
-        url.searchParams.set('page', page);
-        url.searchParams.set('category_id', category_id);
-
-        // Show loading state
-        const contentArea = document.getElementById('legal-content-area');
-        if (contentArea) {
-            contentArea.innerHTML = '<div class="text-center p-5"><div class="spinner-border text-primary" role="status"></div><p class="mt-2">Loading content...</p></div>';
-        }
-
-        fetch(url.toString(), { 
-            method: 'GET',
-            headers: {
-                'X-Requested-With': 'XMLHttpRequest'
-            }
-        })
-        .then(response => response.text())
-        .then(html => {
-            // Handle response
-            window.history.pushState({}, '', url.toString());
-            currentPage = page;
-            location.reload(); // Simple reload approach
-        })
-        .catch(error => {
-            console.error('Error loading page:', error);
-            if (contentArea) {
-                contentArea.innerHTML = '<div class="alert alert-danger">Error loading content. Please try again.</div>';
-            }
-        });
-    }
-
     // Initialize reference handlers
     document.addEventListener('DOMContentLoaded', function() {
         // Make all clickable headings act like references
@@ -1418,6 +1378,12 @@ $(function() {
 </script>
 
 <script>
+    // Define pagination variables
+    var fullHierarchicalData = @json($tableData->items());
+    var currentPage = {{ request('page', 1) }};
+    var totalPages = {{ $tableData->lastPage() }};
+    var currentCategoryId = {{ $safeTableId }};
+    
     // Function to change page with AJAX loading
     function changePage(page, category_id) {
         if (page < 1 || page > totalPages) return;
