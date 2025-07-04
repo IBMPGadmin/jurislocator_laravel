@@ -100,6 +100,22 @@ Route::middleware([\App\Http\Middleware\Authenticate::class, 'verified', \App\Ht
     // Legal Key Terms for users
     Route::get('/legal-key-terms', [App\Http\Controllers\User\LegalKeyTermController::class, 'index'])->name('user.legal-key-terms.index');
 
+    // Tools routes
+    Route::get('/tools', [App\Http\Controllers\User\ToolsController::class, 'index'])->name('user.tools');
+    Route::get('/tools/date-to-date', [App\Http\Controllers\User\ToolsController::class, 'dateToDate'])->name('user.tools.date-to-date');
+    Route::get('/tools/add-subtract-date', [App\Http\Controllers\User\ToolsController::class, 'addSubtractDate'])->name('user.tools.add-subtract-date');
+    Route::get('/tools/age-calculator', [App\Http\Controllers\User\ToolsController::class, 'ageCalculator'])->name('user.tools.age-calculator');
+    Route::get('/tools/time-zones', [App\Http\Controllers\User\ToolsController::class, 'timeZones'])->name('user.tools.time-zones');
+    Route::get('/tools/currency-converter', [App\Http\Controllers\User\ToolsController::class, 'currencyConverter'])->name('user.tools.currency-converter');
+    
+    // Tool API endpoints
+    Route::post('/tools/debug-test', [App\Http\Controllers\User\ToolsController::class, 'debugTest'])->name('tools.debug-test');
+    Route::post('/tools/calculate-date-difference', [App\Http\Controllers\User\ToolsController::class, 'calculateDateDifference'])->name('tools.calculate-date-difference');
+    Route::post('/tools/add-subtract-from-date', [App\Http\Controllers\User\ToolsController::class, 'addSubtractFromDate'])->name('tools.add-subtract-from-date');
+    Route::post('/tools/calculate-age', [App\Http\Controllers\User\ToolsController::class, 'calculateAge'])->name('tools.calculate-age');
+    Route::post('/tools/exchange-rates', [App\Http\Controllers\User\ToolsController::class, 'getExchangeRates'])->name('tools.exchange-rates');
+    Route::get('/tools/all-rates', [App\Http\Controllers\User\ToolsController::class, 'getAllRates'])->name('tools.all-rates');
+    
     // Client routes
     Route::post('/clients', [ClientController::class, 'store'])->name('clients.store');
     Route::post('/select-client', [ClientController::class, 'selectClient'])->name('clients.select');

@@ -1,6 +1,6 @@
-@extends('layouts.user-layout')
 
-@section('content')
+
+<?php $__env->startSection('content'); ?>
 <div class="dashboard-container">
     <div class="dashboard-content">
         <!-- Welcome Section -->
@@ -12,7 +12,7 @@
         <!-- Main Dashboard Grid -->
         <div class="dashboard-grid">
             <!-- Legislation Card -->
-            <div class="dashboard-card" onclick="window.location.href='{{ route('user.legal-tables') }}'">
+            <div class="dashboard-card" onclick="window.location.href='<?php echo e(route('user.legal-tables')); ?>'">
                 <div class="card-icon legislation-icon">
                     <i class="fas fa-balance-scale"></i>
                 </div>
@@ -24,7 +24,7 @@
             </div>
 
             <!-- CaseLaw Card -->
-            <div class="dashboard-card" onclick="window.location.href='{{ route('documents.index') }}'">
+            <div class="dashboard-card" onclick="window.location.href='<?php echo e(route('documents.index')); ?>'">
                 <div class="card-icon caselaw-icon">
                     <i class="fas fa-gavel"></i>
                 </div>
@@ -36,7 +36,7 @@
             </div>
 
             <!-- My Notes & Annotations Card -->
-            <div class="dashboard-card" onclick="window.location.href='{{ route('user.templates.index') }}'">
+            <div class="dashboard-card" onclick="window.location.href='<?php echo e(route('user.templates.index')); ?>'">
                 <div class="card-icon notes-icon">
                     <i class="fas fa-sticky-note"></i>
                 </div>
@@ -48,7 +48,7 @@
             </div>
 
             <!-- Immigration Programs Card -->
-            <div class="dashboard-card" onclick="window.location.href='{{ route('user.government-links') }}'">
+            <div class="dashboard-card" onclick="window.location.href='<?php echo e(route('user.government-links')); ?>'">
                 <div class="card-icon immigration-icon">
                     <i class="fas fa-globe"></i>
                 </div>
@@ -60,7 +60,7 @@
             </div>
 
             <!-- Resources Card -->
-            <div class="dashboard-card" onclick="window.location.href='{{ route('user.government-links') }}'">
+            <div class="dashboard-card" onclick="window.location.href='<?php echo e(route('user.government-links')); ?>'">
                 <div class="card-icon resources-icon">
                     <i class="fas fa-book"></i>
                 </div>
@@ -72,7 +72,7 @@
             </div>
 
             <!-- Support Card -->
-            <div class="dashboard-card" onclick="window.location.href='{{ route('profile.edit') }}'">
+            <div class="dashboard-card" onclick="window.location.href='<?php echo e(route('profile.edit')); ?>'">
                 <div class="card-icon support-icon">
                     <i class="fas fa-headset"></i>
                 </div>
@@ -84,7 +84,7 @@
             </div>
 
             <!-- Tools Card -->
-            <div class="dashboard-card" onclick="window.location.href='{{ route('user.tools') }}'">
+            <div class="dashboard-card" onclick="window.location.href='<?php echo e(route('user.tools')); ?>'">
                 <div class="card-icon tools-icon">
                     <i class="fas fa-tools"></i>
                 </div>
@@ -100,19 +100,19 @@
         <div class="quick-actions">
             <h2 data-en="Quick Actions" data-fr="Actions rapides">Quick Actions</h2>
             <div class="action-buttons">
-                <a href="{{ route('user.legal-tables') }}" class="action-btn quick-search">
+                <a href="<?php echo e(route('user.legal-tables')); ?>" class="action-btn quick-search">
                     <i class="fas fa-search"></i>
                     <span data-en="Quick Search" data-fr="Recherche rapide">Quick Search</span>
                 </a>
-                <a href="{{ route('user.templates.index') }}" class="action-btn my-templates">
+                <a href="<?php echo e(route('user.templates.index')); ?>" class="action-btn my-templates">
                     <i class="fas fa-file-alt"></i>
                     <span data-en="My Templates" data-fr="Mes modèles">My Templates</span>
                 </a>
-                <a href="{{ route('user.legal-key-terms.index') }}" class="action-btn legal-terms">
+                <a href="<?php echo e(route('user.legal-key-terms.index')); ?>" class="action-btn legal-terms">
                     <i class="fas fa-bookmark"></i>
                     <span data-en="Legal Terms" data-fr="Termes juridiques">Legal Terms</span>
                 </a>
-                <a href="{{ route('user.rcic-deadlines.index') }}" class="action-btn deadlines">
+                <a href="<?php echo e(route('user.rcic-deadlines.index')); ?>" class="action-btn deadlines">
                     <i class="fas fa-calendar-alt"></i>
                     <span data-en="Deadlines" data-fr="Délais">Deadlines</span>
                 </a>
@@ -356,4 +356,6 @@
     }
 }
 </style>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.user-layout', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\Users\Dileesha\Desktop\jurislocator_laravel\resources\views/home-dashboard.blade.php ENDPATH**/ ?>
