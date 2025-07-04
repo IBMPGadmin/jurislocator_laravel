@@ -3155,6 +3155,660 @@
 [2025-07-04 03:34:06] local.INFO: CheckSubscription: Active subscription found, proceeding  
 [2025-07-04 03:34:09] local.INFO: CheckSubscription: Checking subscription {"user_id":110,"subscription":{"id":57,"status":"trial","trial_ends_at":"2025-07-10 07:13:33","now":"2025-07-04 03:34:09"}} 
 [2025-07-04 03:34:09] local.INFO: CheckSubscription: Active subscription found, proceeding  
+<<<<<<< HEAD
+[2025-07-04 03:36:25] local.INFO: CheckSubscription: Checking subscription {"user_id":110,"subscription":{"id":57,"status":"trial","trial_ends_at":"2025-07-10 07:13:33","now":"2025-07-04 03:36:25"}} 
+[2025-07-04 03:36:25] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-04 04:14:08] local.INFO: CheckSubscription: Checking subscription {"user_id":111,"subscription":{"id":58,"status":"trial","trial_ends_at":"2025-07-11 04:14:08","now":"2025-07-04 04:14:08"}} 
+[2025-07-04 04:14:08] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-04 04:33:05] local.ERROR: This password does not use the Bcrypt algorithm. {"exception":"[object] (RuntimeException(code: 0): This password does not use the Bcrypt algorithm. at C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Hashing\\BcryptHasher.php:88)
+[stacktrace]
+#0 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Hashing\\HashManager.php(76): Illuminate\\Hashing\\BcryptHasher->check(Object(SensitiveParameterValue), 'e64c7d89f26bd19...', Array)
+#1 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Auth\\EloquentUserProvider.php(158): Illuminate\\Hashing\\HashManager->check(Object(SensitiveParameterValue), 'e64c7d89f26bd19...')
+#2 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Auth\\SessionGuard.php(481): Illuminate\\Auth\\EloquentUserProvider->validateCredentials(Object(App\\Models\\User), Object(SensitiveParameterValue))
+#3 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Auth\\SessionGuard.php(419): Illuminate\\Auth\\SessionGuard->hasValidCredentials(Object(App\\Models\\User), Array)
+#4 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Timebox.php(34): Illuminate\\Auth\\SessionGuard->Illuminate\\Auth\\{closure}(Object(Illuminate\\Support\\Timebox))
+#5 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Auth\\SessionGuard.php(411): Illuminate\\Support\\Timebox->call(Object(Closure), 200000)
+#6 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Auth\\AuthManager.php(339): Illuminate\\Auth\\SessionGuard->attempt(Array, false)
+#7 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Facades\\Facade.php(361): Illuminate\\Auth\\AuthManager->__call('attempt', Array)
+#8 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\app\\Http\\Requests\\Auth\\LoginRequest.php(44): Illuminate\\Support\\Facades\\Facade::__callStatic('attempt', Array)
+#9 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\app\\Http\\Controllers\\Auth\\AuthenticatedSessionController.php(27): App\\Http\\Requests\\Auth\\LoginRequest->authenticate()
+#10 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\ControllerDispatcher.php(46): App\\Http\\Controllers\\Auth\\AuthenticatedSessionController->store(Object(App\\Http\\Requests\\Auth\\LoginRequest))
+#11 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php(265): Illuminate\\Routing\\ControllerDispatcher->dispatch(Object(Illuminate\\Routing\\Route), Object(App\\Http\\Controllers\\Auth\\AuthenticatedSessionController), 'store')
+#12 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php(211): Illuminate\\Routing\\Route->runController()
+#13 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(808): Illuminate\\Routing\\Route->run()
+#14 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(169): Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#15 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Auth\\Middleware\\RedirectIfAuthenticated.php(35): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#16 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(208): Illuminate\\Auth\\Middleware\\RedirectIfAuthenticated->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#17 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\SubstituteBindings.php(50): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#18 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(208): Illuminate\\Routing\\Middleware\\SubstituteBindings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#19 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken.php(87): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#20 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(208): Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#21 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Middleware\\ShareErrorsFromSession.php(48): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#22 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(208): Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#23 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Session\\Middleware\\StartSession.php(120): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#24 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Session\\Middleware\\StartSession.php(63): Illuminate\\Session\\Middleware\\StartSession->handleStatefulRequest(Object(Illuminate\\Http\\Request), Object(Illuminate\\Session\\Store), Object(Closure))
+#25 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(208): Illuminate\\Session\\Middleware\\StartSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#26 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse.php(36): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#27 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(208): Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#28 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Cookie\\Middleware\\EncryptCookies.php(74): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#29 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(208): Illuminate\\Cookie\\Middleware\\EncryptCookies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#30 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(126): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#31 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(807): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#32 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(786): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#33 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(750): Illuminate\\Routing\\Router->runRoute(Object(Illuminate\\Http\\Request), Object(Illuminate\\Routing\\Route))
+#34 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(739): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#35 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(200): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#36 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(169): Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#37 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#38 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull.php(31): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#39 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(208): Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#40 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#41 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TrimStrings.php(51): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#42 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(208): Illuminate\\Foundation\\Http\\Middleware\\TrimStrings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#43 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\ValidatePostSize.php(27): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#44 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(208): Illuminate\\Http\\Middleware\\ValidatePostSize->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#45 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance.php(109): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#46 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(208): Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#47 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\HandleCors.php(48): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#48 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(208): Illuminate\\Http\\Middleware\\HandleCors->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#49 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\TrustProxies.php(58): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#50 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(208): Illuminate\\Http\\Middleware\\TrustProxies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#51 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\InvokeDeferredCallbacks.php(22): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#52 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(208): Illuminate\\Foundation\\Http\\Middleware\\InvokeDeferredCallbacks->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#53 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\ValidatePathEncoding.php(26): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#54 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(208): Illuminate\\Http\\Middleware\\ValidatePathEncoding->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#55 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(126): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#56 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(175): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#57 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(144): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#58 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(1219): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#59 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\public\\index.php(20): Illuminate\\Foundation\\Application->handleRequest(Object(Illuminate\\Http\\Request))
+#60 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\resources\\server.php(23): require_once('C:\\\\Users\\\\User\\\\D...')
+#61 {main}
+"} 
+[2025-07-04 04:57:13] local.DEBUG: From: jurislocator <hello@example.com>
+To: user@example.com
+Subject: Welcome to JurisLocator - Your Account is Now Active!
+MIME-Version: 1.0
+Date: Fri, 04 Jul 2025 04:57:13 +0000
+Message-ID: <5abe4d68e6857bcc8037d4d99abe8663@example.com>
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to JurisLocator</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .email-container {
+            background: white;
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e9ecef;
+        }
+        .logo {
+            width: 100px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        .success-icon {
+            width: 60px;
+            height: 60px;
+            background: #28a745;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 24px;
+        }
+        .title {
+            color: #002B5B;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #6c757d;
+            font-size: 16px;
+        }
+        .content {
+            margin: 30px 0;
+        }
+        .welcome-message {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            border-radius: 6px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .btn {
+            display: inline-block;
+            background: #C19A6B;
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        .btn:hover {
+            background: #002B5B;
+        }
+        .info-box {
+            background: #e7f3ff;
+            border: 1px solid #b8daff;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e9ecef;
+            color: #6c757d;
+            font-size: 14px;
+        }
+        .support-info {
+            background: #f8f9fa;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="header">
+            <div class="success-icon">✓</div>
+            <h1 class="title">Welcome to JurisLocator!</h1>
+            <p class="subtitle">Your account has been approved and is now active</p>
+        </div>
+
+        <div class="content">
+            <p>Dear  ,</p>
+
+            <div class="welcome-message">
+                <h3 style="margin: 0 0 10px 0; color: #155724;">🎉 Congratulations!</h3>
+                <p style="margin: 0;">Your JurisLocator account has been approved by our administrators. You can now access all features of our legal research platform.</p>
+            </div>
+
+            <p>Your account details:</p>
+            <ul>
+                <li><strong>Email:</strong> user@example.com</li>
+                <li><strong>User Type:</strong> </li>
+                <li><strong>Trial Period:</strong> 7 days (started today)</li>
+            </ul>
+
+            <div style="text-align: center; margin: 30px 0;">
+                <a href="http://127.0.0.1:8000/login" class="btn">Login to Your Account</a>
+            </div>
+
+            <div class="info-box">
+                <h4 style="margin: 0 0 10px 0; color: #004085;">What's Next?</h4>
+                <ul style="margin: 0; padding-left: 20px;">
+                    <li>Log in to your account using your registered email and password</li>
+                    <li>Explore our comprehensive legal database</li>
+                    <li>Access Acts, Regulations, Case Law, and Immigration Programs</li>
+                    <li>Create and manage your personal notes and templates</li>
+                    <li>Set up important deadlines and reminders</li>
+                </ul>
+            </div>
+
+            <div class="info-box">
+                <h4 style="margin: 0 0 10px 0; color: #004085;">Your 7-Day Free Trial</h4>
+                <p style="margin: 0;">Your trial subscription is now active and includes full access to all JurisLocator features. You'll receive a notification before your trial expires.</p>
+            </div>
+
+            <div class="support-info">
+                <h4 style="margin: 0 0 10px 0;">Need Help?</h4>
+                <p style="margin: 0;">Our support team is here to help you get started. Feel free to reach out if you have any questions.</p>
+                <p style="margin: 5px 0 0 0;"><strong>Email:</strong> support@jurislocator.com</p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Thank you for choosing JurisLocator for your legal research needs.</p>
+            <p>&copy; 2025 JurisLocator. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>
+  
+[2025-07-04 04:57:20] local.DEBUG: From: jurislocator <hello@example.com>
+To: user2@example.com
+Subject: Welcome to JurisLocator - Your Account is Now Active!
+MIME-Version: 1.0
+Date: Fri, 04 Jul 2025 04:57:20 +0000
+Message-ID: <62b771579fbf354304e563a362a5c6d8@example.com>
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to JurisLocator</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .email-container {
+            background: white;
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e9ecef;
+        }
+        .logo {
+            width: 100px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        .success-icon {
+            width: 60px;
+            height: 60px;
+            background: #28a745;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 24px;
+        }
+        .title {
+            color: #002B5B;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #6c757d;
+            font-size: 16px;
+        }
+        .content {
+            margin: 30px 0;
+        }
+        .welcome-message {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            border-radius: 6px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .btn {
+            display: inline-block;
+            background: #C19A6B;
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        .btn:hover {
+            background: #002B5B;
+        }
+        .info-box {
+            background: #e7f3ff;
+            border: 1px solid #b8daff;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e9ecef;
+            color: #6c757d;
+            font-size: 14px;
+        }
+        .support-info {
+            background: #f8f9fa;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="header">
+            <div class="success-icon">✓</div>
+            <h1 class="title">Welcome to JurisLocator!</h1>
+            <p class="subtitle">Your account has been approved and is now active</p>
+        </div>
+
+        <div class="content">
+            <p>Dear  ,</p>
+
+            <div class="welcome-message">
+                <h3 style="margin: 0 0 10px 0; color: #155724;">🎉 Congratulations!</h3>
+                <p style="margin: 0;">Your JurisLocator account has been approved by our administrators. You can now access all features of our legal research platform.</p>
+            </div>
+
+            <p>Your account details:</p>
+            <ul>
+                <li><strong>Email:</strong> user2@example.com</li>
+                <li><strong>User Type:</strong> </li>
+                <li><strong>Trial Period:</strong> 7 days (started today)</li>
+            </ul>
+
+            <div style="text-align: center; margin: 30px 0;">
+                <a href="http://127.0.0.1:8000/login" class="btn">Login to Your Account</a>
+            </div>
+
+            <div class="info-box">
+                <h4 style="margin: 0 0 10px 0; color: #004085;">What's Next?</h4>
+                <ul style="margin: 0; padding-left: 20px;">
+                    <li>Log in to your account using your registered email and password</li>
+                    <li>Explore our comprehensive legal database</li>
+                    <li>Access Acts, Regulations, Case Law, and Immigration Programs</li>
+                    <li>Create and manage your personal notes and templates</li>
+                    <li>Set up important deadlines and reminders</li>
+                </ul>
+            </div>
+
+            <div class="info-box">
+                <h4 style="margin: 0 0 10px 0; color: #004085;">Your 7-Day Free Trial</h4>
+                <p style="margin: 0;">Your trial subscription is now active and includes full access to all JurisLocator features. You'll receive a notification before your trial expires.</p>
+            </div>
+
+            <div class="support-info">
+                <h4 style="margin: 0 0 10px 0;">Need Help?</h4>
+                <p style="margin: 0;">Our support team is here to help you get started. Feel free to reach out if you have any questions.</p>
+                <p style="margin: 5px 0 0 0;"><strong>Email:</strong> support@jurislocator.com</p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Thank you for choosing JurisLocator for your legal research needs.</p>
+            <p>&copy; 2025 JurisLocator. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>
+  
+[2025-07-04 04:59:20] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-04 04:59:20"}} 
+[2025-07-04 04:59:20] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-04 05:26:29] local.ERROR: SQLSTATE[01000]: Warning: 1265 Data truncated for column 'user_type' at row 1 (Connection: mysql, SQL: insert into `users` (`name`, `first_name`, `last_name`, `email`, `user_type`, `license_number`, `student_id_number`, `student_id_file`, `company_name`, `approval_status`, `password`, `updated_at`, `created_at`) values (Anuradha Sampath, Anuradha, Sampath, anuradhasampath666@gmail.com, student_montreal, ?, 465465456, student_ids/6aoQA4QvMqXZH3J6zdeT6MpdduekvIuRwnlYqM11.png, ?, pending, $2y$12$AvRZ72923bP3dIEyfrl9CuBlLqB5JqTEyK3lfHh0cJBy2xeJmEaxu, 2025-07-04 05:26:29, 2025-07-04 05:26:29)) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 01000): SQLSTATE[01000]: Warning: 1265 Data truncated for column 'user_type' at row 1 (Connection: mysql, SQL: insert into `users` (`name`, `first_name`, `last_name`, `email`, `user_type`, `license_number`, `student_id_number`, `student_id_file`, `company_name`, `approval_status`, `password`, `updated_at`, `created_at`) values (Anuradha Sampath, Anuradha, Sampath, anuradhasampath666@gmail.com, student_montreal, ?, 465465456, student_ids/6aoQA4QvMqXZH3J6zdeT6MpdduekvIuRwnlYqM11.png, ?, pending, $2y$12$AvRZ72923bP3dIEyfrl9CuBlLqB5JqTEyK3lfHh0cJBy2xeJmEaxu, 2025-07-04 05:26:29, 2025-07-04 05:26:29)) at C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:822)
+[stacktrace]
+#0 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(776): Illuminate\\Database\\Connection->runQueryCallback('insert into `us...', Array, Object(Closure))
+#1 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\MySqlConnection.php(42): Illuminate\\Database\\Connection->run('insert into `us...', Array, Object(Closure))
+#2 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Processors\\MySqlProcessor.php(35): Illuminate\\Database\\MySqlConnection->insert('insert into `us...', Array, 'id')
+#3 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php(3796): Illuminate\\Database\\Query\\Processors\\MySqlProcessor->processInsertGetId(Object(Illuminate\\Database\\Query\\Builder), 'insert into `us...', Array, 'id')
+#4 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Builder.php(2205): Illuminate\\Database\\Query\\Builder->insertGetId(Array, 'id')
+#5 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Model.php(1410): Illuminate\\Database\\Eloquent\\Builder->__call('insertGetId', Array)
+#6 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Model.php(1375): Illuminate\\Database\\Eloquent\\Model->insertAndSetId(Object(Illuminate\\Database\\Eloquent\\Builder), Array)
+#7 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Model.php(1214): Illuminate\\Database\\Eloquent\\Model->performInsert(Object(Illuminate\\Database\\Eloquent\\Builder))
+#8 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Builder.php(1189): Illuminate\\Database\\Eloquent\\Model->save()
+#9 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\helpers.php(399): Illuminate\\Database\\Eloquent\\Builder->Illuminate\\Database\\Eloquent\\{closure}(Object(App\\Models\\User))
+#10 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Builder.php(1188): tap(Object(App\\Models\\User), Object(Closure))
+#11 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Traits\\ForwardsCalls.php(23): Illuminate\\Database\\Eloquent\\Builder->create(Array)
+#12 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Model.php(2496): Illuminate\\Database\\Eloquent\\Model->forwardCallTo(Object(Illuminate\\Database\\Eloquent\\Builder), 'create', Array)
+#13 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Model.php(2512): Illuminate\\Database\\Eloquent\\Model->__call('create', Array)
+#14 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\app\\Http\\Controllers\\Auth\\RegisteredUserController.php(58): Illuminate\\Database\\Eloquent\\Model::__callStatic('create', Array)
+#15 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\ControllerDispatcher.php(46): App\\Http\\Controllers\\Auth\\RegisteredUserController->store(Object(Illuminate\\Http\\Request))
+#16 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php(265): Illuminate\\Routing\\ControllerDispatcher->dispatch(Object(Illuminate\\Routing\\Route), Object(App\\Http\\Controllers\\Auth\\RegisteredUserController), 'store')
+#17 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php(211): Illuminate\\Routing\\Route->runController()
+#18 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(808): Illuminate\\Routing\\Route->run()
+#19 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(169): Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#20 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Auth\\Middleware\\RedirectIfAuthenticated.php(35): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#21 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(208): Illuminate\\Auth\\Middleware\\RedirectIfAuthenticated->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#22 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\SubstituteBindings.php(50): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#23 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(208): Illuminate\\Routing\\Middleware\\SubstituteBindings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#24 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken.php(87): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#25 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(208): Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#26 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Middleware\\ShareErrorsFromSession.php(48): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#27 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(208): Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#28 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Session\\Middleware\\StartSession.php(120): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#29 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Session\\Middleware\\StartSession.php(63): Illuminate\\Session\\Middleware\\StartSession->handleStatefulRequest(Object(Illuminate\\Http\\Request), Object(Illuminate\\Session\\Store), Object(Closure))
+#30 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(208): Illuminate\\Session\\Middleware\\StartSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#31 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse.php(36): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#32 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(208): Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#33 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Cookie\\Middleware\\EncryptCookies.php(74): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#34 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(208): Illuminate\\Cookie\\Middleware\\EncryptCookies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#35 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(126): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#36 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(807): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#37 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(786): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#38 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(750): Illuminate\\Routing\\Router->runRoute(Object(Illuminate\\Http\\Request), Object(Illuminate\\Routing\\Route))
+#39 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(739): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#40 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(200): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#41 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(169): Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#42 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#43 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull.php(31): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#44 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(208): Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#45 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#46 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TrimStrings.php(51): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#47 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(208): Illuminate\\Foundation\\Http\\Middleware\\TrimStrings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#48 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\ValidatePostSize.php(27): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#49 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(208): Illuminate\\Http\\Middleware\\ValidatePostSize->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#50 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance.php(109): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#51 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(208): Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#52 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\HandleCors.php(48): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#53 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(208): Illuminate\\Http\\Middleware\\HandleCors->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#54 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\TrustProxies.php(58): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#55 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(208): Illuminate\\Http\\Middleware\\TrustProxies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#56 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\InvokeDeferredCallbacks.php(22): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#57 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(208): Illuminate\\Foundation\\Http\\Middleware\\InvokeDeferredCallbacks->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#58 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\ValidatePathEncoding.php(26): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#59 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(208): Illuminate\\Http\\Middleware\\ValidatePathEncoding->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#60 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(126): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#61 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(175): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#62 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(144): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#63 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(1219): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#64 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\public\\index.php(20): Illuminate\\Foundation\\Application->handleRequest(Object(Illuminate\\Http\\Request))
+#65 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\resources\\server.php(23): require_once('C:\\\\Users\\\\User\\\\D...')
+#66 {main}
+
+[previous exception] [object] (PDOException(code: 01000): SQLSTATE[01000]: Warning: 1265 Data truncated for column 'user_type' at row 1 at C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\MySqlConnection.php:53)
+[stacktrace]
+#0 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\MySqlConnection.php(53): PDOStatement->execute()
+#1 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(809): Illuminate\\Database\\MySqlConnection->Illuminate\\Database\\{closure}('insert into `us...', Array)
+#2 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(776): Illuminate\\Database\\Connection->runQueryCallback('insert into `us...', Array, Object(Closure))
+#3 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\MySqlConnection.php(42): Illuminate\\Database\\Connection->run('insert into `us...', Array, Object(Closure))
+#4 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Processors\\MySqlProcessor.php(35): Illuminate\\Database\\MySqlConnection->insert('insert into `us...', Array, 'id')
+#5 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php(3796): Illuminate\\Database\\Query\\Processors\\MySqlProcessor->processInsertGetId(Object(Illuminate\\Database\\Query\\Builder), 'insert into `us...', Array, 'id')
+#6 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Builder.php(2205): Illuminate\\Database\\Query\\Builder->insertGetId(Array, 'id')
+#7 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Model.php(1410): Illuminate\\Database\\Eloquent\\Builder->__call('insertGetId', Array)
+#8 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Model.php(1375): Illuminate\\Database\\Eloquent\\Model->insertAndSetId(Object(Illuminate\\Database\\Eloquent\\Builder), Array)
+#9 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Model.php(1214): Illuminate\\Database\\Eloquent\\Model->performInsert(Object(Illuminate\\Database\\Eloquent\\Builder))
+#10 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Builder.php(1189): Illuminate\\Database\\Eloquent\\Model->save()
+#11 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\helpers.php(399): Illuminate\\Database\\Eloquent\\Builder->Illuminate\\Database\\Eloquent\\{closure}(Object(App\\Models\\User))
+#12 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Builder.php(1188): tap(Object(App\\Models\\User), Object(Closure))
+#13 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Traits\\ForwardsCalls.php(23): Illuminate\\Database\\Eloquent\\Builder->create(Array)
+#14 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Model.php(2496): Illuminate\\Database\\Eloquent\\Model->forwardCallTo(Object(Illuminate\\Database\\Eloquent\\Builder), 'create', Array)
+#15 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Model.php(2512): Illuminate\\Database\\Eloquent\\Model->__call('create', Array)
+#16 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\app\\Http\\Controllers\\Auth\\RegisteredUserController.php(58): Illuminate\\Database\\Eloquent\\Model::__callStatic('create', Array)
+#17 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\ControllerDispatcher.php(46): App\\Http\\Controllers\\Auth\\RegisteredUserController->store(Object(Illuminate\\Http\\Request))
+#18 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php(265): Illuminate\\Routing\\ControllerDispatcher->dispatch(Object(Illuminate\\Routing\\Route), Object(App\\Http\\Controllers\\Auth\\RegisteredUserController), 'store')
+#19 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php(211): Illuminate\\Routing\\Route->runController()
+#20 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(808): Illuminate\\Routing\\Route->run()
+#21 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(169): Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#22 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Auth\\Middleware\\RedirectIfAuthenticated.php(35): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#23 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(208): Illuminate\\Auth\\Middleware\\RedirectIfAuthenticated->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#24 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\SubstituteBindings.php(50): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#25 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(208): Illuminate\\Routing\\Middleware\\SubstituteBindings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#26 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken.php(87): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#27 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(208): Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#28 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Middleware\\ShareErrorsFromSession.php(48): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#29 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(208): Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#30 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Session\\Middleware\\StartSession.php(120): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#31 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Session\\Middleware\\StartSession.php(63): Illuminate\\Session\\Middleware\\StartSession->handleStatefulRequest(Object(Illuminate\\Http\\Request), Object(Illuminate\\Session\\Store), Object(Closure))
+#32 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(208): Illuminate\\Session\\Middleware\\StartSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#33 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse.php(36): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#34 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(208): Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#35 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Cookie\\Middleware\\EncryptCookies.php(74): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#36 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(208): Illuminate\\Cookie\\Middleware\\EncryptCookies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#37 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(126): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#38 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(807): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#39 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(786): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#40 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(750): Illuminate\\Routing\\Router->runRoute(Object(Illuminate\\Http\\Request), Object(Illuminate\\Routing\\Route))
+#41 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(739): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#42 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(200): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#43 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(169): Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#44 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#45 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull.php(31): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#46 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(208): Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#47 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#48 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TrimStrings.php(51): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#49 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(208): Illuminate\\Foundation\\Http\\Middleware\\TrimStrings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#50 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\ValidatePostSize.php(27): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#51 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(208): Illuminate\\Http\\Middleware\\ValidatePostSize->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#52 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance.php(109): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#53 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(208): Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#54 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\HandleCors.php(48): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#55 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(208): Illuminate\\Http\\Middleware\\HandleCors->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#56 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\TrustProxies.php(58): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#57 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(208): Illuminate\\Http\\Middleware\\TrustProxies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#58 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\InvokeDeferredCallbacks.php(22): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#59 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(208): Illuminate\\Foundation\\Http\\Middleware\\InvokeDeferredCallbacks->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#60 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\ValidatePathEncoding.php(26): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#61 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(208): Illuminate\\Http\\Middleware\\ValidatePathEncoding->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#62 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(126): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#63 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(175): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#64 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(144): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#65 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(1219): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#66 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\public\\index.php(20): Illuminate\\Foundation\\Application->handleRequest(Object(Illuminate\\Http\\Request))
+#67 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\resources\\server.php(23): require_once('C:\\\\Users\\\\User\\\\D...')
+#68 {main}
+"} 
+[2025-07-04 05:28:44] local.ERROR: PHP Parse error: Syntax error, unexpected T_NS_SEPARATOR on line 1 {"exception":"[object] (Psy\\Exception\\ParseErrorException(code: 0): PHP Parse error: Syntax error, unexpected T_NS_SEPARATOR on line 1 at C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\psy\\psysh\\src\\Exception\\ParseErrorException.php:44)
+[stacktrace]
+#0 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\psy\\psysh\\src\\CodeCleaner.php(306): Psy\\Exception\\ParseErrorException::fromParseError(Object(PhpParser\\Error))
+#1 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\psy\\psysh\\src\\CodeCleaner.php(240): Psy\\CodeCleaner->parse('<?php echo 'Tes...', false)
+#2 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\psy\\psysh\\src\\Shell.php(852): Psy\\CodeCleaner->clean(Array, false)
+#3 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\psy\\psysh\\src\\Shell.php(881): Psy\\Shell->addCode('echo 'Testing u...', true)
+#4 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\psy\\psysh\\src\\Shell.php(1390): Psy\\Shell->setCode('echo 'Testing u...', true)
+#5 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\tinker\\src\\Console\\TinkerCommand.php(76): Psy\\Shell->execute('echo 'Testing u...')
+#6 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(36): Laravel\\Tinker\\Console\\TinkerCommand->handle()
+#7 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Util.php(43): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#8 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(96): Illuminate\\Container\\Util::unwrapIfClosure(Object(Closure))
+#9 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#10 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(754): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#11 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(209): Illuminate\\Container\\Container->call(Array)
+#12 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\symfony\\console\\Command\\Command.php(318): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#13 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(178): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#14 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\symfony\\console\\Application.php(1092): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#15 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\symfony\\console\\Application.php(341): Symfony\\Component\\Console\\Application->doRunCommand(Object(Laravel\\Tinker\\Console\\TinkerCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#16 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\symfony\\console\\Application.php(192): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#17 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(197): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#18 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(1234): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#19 C:\\Users\\User\\Desktop\\14\\jurislocator_laravel\\artisan(16): Illuminate\\Foundation\\Application->handleCommand(Object(Symfony\\Component\\Console\\Input\\ArgvInput))
+#20 {main}
+"} 
+[2025-07-04 05:36:25] local.ERROR: Failed to send approval email to anuradhasampath666@gmail.com: Failed to authenticate on SMTP server with username "anuradha@immifocus.ca" using the following authenticators: "LOGIN", "PLAIN". Authenticator "LOGIN" returned "Expected response code "235" but got code "535", with message "535 Incorrect authentication data".". Authenticator "PLAIN" returned "Expected response code "235" but got code "535", with message "535 Incorrect authentication data".".  
+[2025-07-04 05:38:02] local.ERROR: Failed to send approval email to anuradhasampath64@gmail.com: Failed to authenticate on SMTP server with username "anuradha@immifocus.ca" using the following authenticators: "LOGIN", "PLAIN". Authenticator "LOGIN" returned "Expected response code "235" but got code "535", with message "535 Incorrect authentication data".". Authenticator "PLAIN" returned "Expected response code "235" but got code "535", with message "535 Incorrect authentication data".".  
+[2025-07-04 05:43:16] local.ERROR: Failed to send approval email to anuradhasampath64@gmail.com: Failed to authenticate on SMTP server with username "anuradha@immifocus.ca" using the following authenticators: "LOGIN", "PLAIN". Authenticator "LOGIN" returned "Expected response code "235" but got code "535", with message "535 Incorrect authentication data".". Authenticator "PLAIN" returned "Expected response code "235" but got code "535", with message "535 Incorrect authentication data".".  
+[2025-07-04 05:55:42] local.INFO: Attempting to send approval email to: anuradhasampath64@agmail.com  
+[2025-07-04 05:55:51] local.ERROR: Failed to send approval email to anuradhasampath64@agmail.com: Failed to authenticate on SMTP server with username "anuradha@immifocus.ca" using the following authenticators: "LOGIN", "PLAIN". Authenticator "LOGIN" returned "Expected response code "235" but got code "535", with message "535 Incorrect authentication data".". Authenticator "PLAIN" returned "Expected response code "235" but got code "535", with message "535 Incorrect authentication data".".  
+[2025-07-04 05:55:51] local.ERROR: Email error stack trace: #0 C:\Users\User\Desktop\14\jurislocator_laravel\vendor\symfony\mailer\Transport\Smtp\EsmtpTransport.php(199): Symfony\Component\Mailer\Transport\Smtp\EsmtpTransport->handleAuth(Array)
+#1 C:\Users\User\Desktop\14\jurislocator_laravel\vendor\symfony\mailer\Transport\Smtp\EsmtpTransport.php(150): Symfony\Component\Mailer\Transport\Smtp\EsmtpTransport->doEhloCommand()
+#2 C:\Users\User\Desktop\14\jurislocator_laravel\vendor\symfony\mailer\Transport\Smtp\SmtpTransport.php(255): Symfony\Component\Mailer\Transport\Smtp\EsmtpTransport->executeCommand('HELO app.jurisl...', Array)
+#3 C:\Users\User\Desktop\14\jurislocator_laravel\vendor\symfony\mailer\Transport\Smtp\SmtpTransport.php(281): Symfony\Component\Mailer\Transport\Smtp\SmtpTransport->doHeloCommand()
+#4 C:\Users\User\Desktop\14\jurislocator_laravel\vendor\symfony\mailer\Transport\Smtp\SmtpTransport.php(211): Symfony\Component\Mailer\Transport\Smtp\SmtpTransport->start()
+#5 C:\Users\User\Desktop\14\jurislocator_laravel\vendor\symfony\mailer\Transport\AbstractTransport.php(69): Symfony\Component\Mailer\Transport\Smtp\SmtpTransport->doSend(Object(Symfony\Component\Mailer\SentMessage))
+#6 C:\Users\User\Desktop\14\jurislocator_laravel\vendor\symfony\mailer\Transport\Smtp\SmtpTransport.php(138): Symfony\Component\Mailer\Transport\AbstractTransport->send(Object(Symfony\Component\Mime\Email), Object(Symfony\Component\Mailer\DelayedEnvelope))
+#7 C:\Users\User\Desktop\14\jurislocator_laravel\vendor\laravel\framework\src\Illuminate\Mail\Mailer.php(584): Symfony\Component\Mailer\Transport\Smtp\SmtpTransport->send(Object(Symfony\Component\Mime\Email), Object(Symfony\Component\Mailer\DelayedEnvelope))
+#8 C:\Users\User\Desktop\14\jurislocator_laravel\vendor\laravel\framework\src\Illuminate\Mail\Mailer.php(331): Illuminate\Mail\Mailer->sendSymfonyMessage(Object(Symfony\Component\Mime\Email))
+#9 C:\Users\User\Desktop\14\jurislocator_laravel\vendor\laravel\framework\src\Illuminate\Mail\MailManager.php(618): Illuminate\Mail\Mailer->send('emails.user-app...', Array, Object(Closure))
+#10 C:\Users\User\Desktop\14\jurislocator_laravel\vendor\laravel\framework\src\Illuminate\Support\Facades\Facade.php(361): Illuminate\Mail\MailManager->__call('send', Array)
+#11 C:\Users\User\Desktop\14\jurislocator_laravel\app\Http\Controllers\Admin\UserApprovalController.php(116): Illuminate\Support\Facades\Facade::__callStatic('send', Array)
+#12 C:\Users\User\Desktop\14\jurislocator_laravel\app\Http\Controllers\Admin\UserApprovalController.php(64): App\Http\Controllers\Admin\UserApprovalController->sendApprovalEmail(Object(App\Models\User))
+#13 C:\Users\User\Desktop\14\jurislocator_laravel\vendor\laravel\framework\src\Illuminate\Routing\ControllerDispatcher.php(46): App\Http\Controllers\Admin\UserApprovalController->approve(Object(App\Models\User))
+#14 C:\Users\User\Desktop\14\jurislocator_laravel\vendor\laravel\framework\src\Illuminate\Routing\Route.php(265): Illuminate\Routing\ControllerDispatcher->dispatch(Object(Illuminate\Routing\Route), Object(App\Http\Controllers\Admin\UserApprovalController), 'approve')
+#15 C:\Users\User\Desktop\14\jurislocator_laravel\vendor\laravel\framework\src\Illuminate\Routing\Route.php(211): Illuminate\Routing\Route->runController()
+#16 C:\Users\User\Desktop\14\jurislocator_laravel\vendor\laravel\framework\src\Illuminate\Routing\Router.php(808): Illuminate\Routing\Route->run()
+#17 C:\Users\User\Desktop\14\jurislocator_laravel\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(169): Illuminate\Routing\Router->Illuminate\Routing\{closure}(Object(Illuminate\Http\Request))
+#18 C:\Users\User\Desktop\14\jurislocator_laravel\app\Http\Middleware\AdminOnly.php(20): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#19 C:\Users\User\Desktop\14\jurislocator_laravel\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(208): App\Http\Middleware\AdminOnly->handle(Object(Illuminate\Http\Request), Object(Closure))
+#20 C:\Users\User\Desktop\14\jurislocator_laravel\vendor\laravel\framework\src\Illuminate\Auth\Middleware\EnsureEmailIsVerified.php(41): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#21 C:\Users\User\Desktop\14\jurislocator_laravel\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(208): Illuminate\Auth\Middleware\EnsureEmailIsVerified->handle(Object(Illuminate\Http\Request), Object(Closure))
+#22 C:\Users\User\Desktop\14\jurislocator_laravel\vendor\laravel\framework\src\Illuminate\Routing\Middleware\SubstituteBindings.php(50): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#23 C:\Users\User\Desktop\14\jurislocator_laravel\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(208): Illuminate\Routing\Middleware\SubstituteBindings->handle(Object(Illuminate\Http\Request), Object(Closure))
+#24 C:\Users\User\Desktop\14\jurislocator_laravel\vendor\laravel\framework\src\Illuminate\Auth\Middleware\Authenticate.php(63): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#25 C:\Users\User\Desktop\14\jurislocator_laravel\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(208): Illuminate\Auth\Middleware\Authenticate->handle(Object(Illuminate\Http\Request), Object(Closure))
+#26 C:\Users\User\Desktop\14\jurislocator_laravel\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\VerifyCsrfToken.php(87): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#27 C:\Users\User\Desktop\14\jurislocator_laravel\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(208): Illuminate\Foundation\Http\Middleware\VerifyCsrfToken->handle(Object(Illuminate\Http\Request), Object(Closure))
+#28 C:\Users\User\Desktop\14\jurislocator_laravel\vendor\laravel\framework\src\Illuminate\View\Middleware\ShareErrorsFromSession.php(48): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#29 C:\Users\User\Desktop\14\jurislocator_laravel\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(208): Illuminate\View\Middleware\ShareErrorsFromSession->handle(Object(Illuminate\Http\Request), Object(Closure))
+#30 C:\Users\User\Desktop\14\jurislocator_laravel\vendor\laravel\framework\src\Illuminate\Session\Middleware\StartSession.php(120): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#31 C:\Users\User\Desktop\14\jurislocator_laravel\vendor\laravel\framework\src\Illuminate\Session\Middleware\StartSession.php(63): Illuminate\Session\Middleware\StartSession->handleStatefulRequest(Object(Illuminate\Http\Request), Object(Illuminate\Session\Store), Object(Closure))
+#32 C:\Users\User\Desktop\14\jurislocator_laravel\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(208): Illuminate\Session\Middleware\StartSession->handle(Object(Illuminate\Http\Request), Object(Closure))
+#33 C:\Users\User\Desktop\14\jurislocator_laravel\vendor\laravel\framework\src\Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse.php(36): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#34 C:\Users\User\Desktop\14\jurislocator_laravel\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(208): Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse->handle(Object(Illuminate\Http\Request), Object(Closure))
+#35 C:\Users\User\Desktop\14\jurislocator_laravel\vendor\laravel\framework\src\Illuminate\Cookie\Middleware\EncryptCookies.php(74): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#36 C:\Users\User\Desktop\14\jurislocator_laravel\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(208): Illuminate\Cookie\Middleware\EncryptCookies->handle(Object(Illuminate\Http\Request), Object(Closure))
+#37 C:\Users\User\Desktop\14\jurislocator_laravel\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(126): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#38 C:\Users\User\Desktop\14\jurislocator_laravel\vendor\laravel\framework\src\Illuminate\Routing\Router.php(807): Illuminate\Pipeline\Pipeline->then(Object(Closure))
+#39 C:\Users\User\Desktop\14\jurislocator_laravel\vendor\laravel\framework\src\Illuminate\Routing\Router.php(786): Illuminate\Routing\Router->runRouteWithinStack(Object(Illuminate\Routing\Route), Object(Illuminate\Http\Request))
+#40 C:\Users\User\Desktop\14\jurislocator_laravel\vendor\laravel\framework\src\Illuminate\Routing\Router.php(750): Illuminate\Routing\Router->runRoute(Object(Illuminate\Http\Request), Object(Illuminate\Routing\Route))
+#41 C:\Users\User\Desktop\14\jurislocator_laravel\vendor\laravel\framework\src\Illuminate\Routing\Router.php(739): Illuminate\Routing\Router->dispatchToRoute(Object(Illuminate\Http\Request))
+#42 C:\Users\User\Desktop\14\jurislocator_laravel\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(200): Illuminate\Routing\Router->dispatch(Object(Illuminate\Http\Request))
+#43 C:\Users\User\Desktop\14\jurislocator_laravel\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(169): Illuminate\Foundation\Http\Kernel->Illuminate\Foundation\Http\{closure}(Object(Illuminate\Http\Request))
+#44 C:\Users\User\Desktop\14\jurislocator_laravel\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#45 C:\Users\User\Desktop\14\jurislocator_laravel\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull.php(31): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle(Object(Illuminate\Http\Request), Object(Closure))
+#46 C:\Users\User\Desktop\14\jurislocator_laravel\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(208): Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull->handle(Object(Illuminate\Http\Request), Object(Closure))
+#47 C:\Users\User\Desktop\14\jurislocator_laravel\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#48 C:\Users\User\Desktop\14\jurislocator_laravel\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\TrimStrings.php(51): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle(Object(Illuminate\Http\Request), Object(Closure))
+#49 C:\Users\User\Desktop\14\jurislocator_laravel\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(208): Illuminate\Foundation\Http\Middleware\TrimStrings->handle(Object(Illuminate\Http\Request), Object(Closure))
+#50 C:\Users\User\Desktop\14\jurislocator_laravel\vendor\laravel\framework\src\Illuminate\Http\Middleware\ValidatePostSize.php(27): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#51 C:\Users\User\Desktop\14\jurislocator_laravel\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(208): Illuminate\Http\Middleware\ValidatePostSize->handle(Object(Illuminate\Http\Request), Object(Closure))
+#52 C:\Users\User\Desktop\14\jurislocator_laravel\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance.php(109): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#53 C:\Users\User\Desktop\14\jurislocator_laravel\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(208): Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance->handle(Object(Illuminate\Http\Request), Object(Closure))
+#54 C:\Users\User\Desktop\14\jurislocator_laravel\vendor\laravel\framework\src\Illuminate\Http\Middleware\HandleCors.php(48): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#55 C:\Users\User\Desktop\14\jurislocator_laravel\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(208): Illuminate\Http\Middleware\HandleCors->handle(Object(Illuminate\Http\Request), Object(Closure))
+#56 C:\Users\User\Desktop\14\jurislocator_laravel\vendor\laravel\framework\src\Illuminate\Http\Middleware\TrustProxies.php(58): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#57 C:\Users\User\Desktop\14\jurislocator_laravel\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(208): Illuminate\Http\Middleware\TrustProxies->handle(Object(Illuminate\Http\Request), Object(Closure))
+#58 C:\Users\User\Desktop\14\jurislocator_laravel\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\InvokeDeferredCallbacks.php(22): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#59 C:\Users\User\Desktop\14\jurislocator_laravel\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(208): Illuminate\Foundation\Http\Middleware\InvokeDeferredCallbacks->handle(Object(Illuminate\Http\Request), Object(Closure))
+#60 C:\Users\User\Desktop\14\jurislocator_laravel\vendor\laravel\framework\src\Illuminate\Http\Middleware\ValidatePathEncoding.php(26): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#61 C:\Users\User\Desktop\14\jurislocator_laravel\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(208): Illuminate\Http\Middleware\ValidatePathEncoding->handle(Object(Illuminate\Http\Request), Object(Closure))
+#62 C:\Users\User\Desktop\14\jurislocator_laravel\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(126): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#63 C:\Users\User\Desktop\14\jurislocator_laravel\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(175): Illuminate\Pipeline\Pipeline->then(Object(Closure))
+#64 C:\Users\User\Desktop\14\jurislocator_laravel\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(144): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
+#65 C:\Users\User\Desktop\14\jurislocator_laravel\vendor\laravel\framework\src\Illuminate\Foundation\Application.php(1219): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
+#66 C:\Users\User\Desktop\14\jurislocator_laravel\public\index.php(20): Illuminate\Foundation\Application->handleRequest(Object(Illuminate\Http\Request))
+#67 C:\Users\User\Desktop\14\jurislocator_laravel\vendor\laravel\framework\src\Illuminate\Foundation\resources\server.php(23): require_once('C:\\Users\\User\\D...')
+#68 {main}  
+[2025-07-04 05:55:51] local.ERROR: Email authentication failed - check MAIL_PASSWORD in .env file  
+[2025-07-04 06:14:18] local.INFO: CheckSubscription: Checking subscription {"user_id":119,"subscription":{"id":64,"status":"trial","trial_ends_at":"2025-07-11 05:55:42","now":"2025-07-04 06:14:17"}} 
+[2025-07-04 06:14:18] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-04 06:14:21] local.INFO: CheckSubscription: Checking subscription {"user_id":119,"subscription":{"id":64,"status":"trial","trial_ends_at":"2025-07-11 05:55:42","now":"2025-07-04 06:14:21"}} 
+[2025-07-04 06:14:21] local.INFO: CheckSubscription: Active subscription found, proceeding  
+=======
 [2025-07-04 03:47:47] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"active","trial_ends_at":"2025-08-01 06:03:16","now":"2025-07-04 03:47:47"}} 
 [2025-07-04 03:47:47] local.INFO: CheckSubscription: Active subscription found, proceeding  
 [2025-07-04 03:53:15] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"active","trial_ends_at":"2025-08-01 06:03:16","now":"2025-07-04 03:53:15"}} 
@@ -3307,3 +3961,4 @@
 [2025-07-04 04:22:13] local.INFO: CheckSubscription: Active subscription found, proceeding  
 [2025-07-04 04:26:33] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"active","trial_ends_at":"2025-08-01 06:03:16","now":"2025-07-04 04:26:33"}} 
 [2025-07-04 04:26:33] local.INFO: CheckSubscription: Active subscription found, proceeding  
+>>>>>>> 1751c4b9786719133b1d3bd7709d1e49358ce97e

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Templates - Clean Preview</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: white;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+        .email-preview {
+            flex: 1;
+            border: none;
+            margin: 0;
+            padding: 0;
+        }
+        .divider {
+            width: 1px;
+            background: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Approval Email -->
+        <iframe class="email-preview" srcdoc='
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to JurisLocator</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .email-container {
+            background: white;
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e9ecef;
+        }
+        .success-icon {
+            width: 60px;
+            height: 60px;
+            background: #28a745;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 24px;
+        }
+        .title {
+            color: #002B5B;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #6c757d;
+            font-size: 16px;
+        }
+        .welcome-message {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            border-radius: 6px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .btn {
+            display: inline-block;
+            background: #C19A6B;
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        .info-box {
+            background: #e7f3ff;
+            border: 1px solid #b8daff;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e9ecef;
+            color: #6c757d;
+            font-size: 14px;
+        }
+        .support-info {
+            background: #f8f9fa;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="header">
+            <div class="success-icon">✓</div>
+            <h1 class="title">Welcome to JurisLocator!</h1>
+            <p class="subtitle">Your account has been approved and is now active</p>
+        </div>
+
+        <div class="content">
+            <p>Dear John Doe,</p>
+
+            <div class="welcome-message">
+                <h3 style="margin: 0 0 10px 0; color: #155724;">🎉 Congratulations!</h3>
+                <p style="margin: 0;">Your JurisLocator account has been approved by our administrators. You can now access all features of our legal research platform.</p>
+            </div>
+
+            <p>Your account details:</p>
+            <ul>
+                <li><strong>Email:</strong> john.doe@example.com</li>
+                <li><strong>User Type:</strong> Immigration Lawyer</li>
+                <li><strong>Trial Period:</strong> 7 days (started today)</li>
+            </ul>
+
+            <div style="text-align: center; margin: 30px 0;">
+                <a href="#" class="btn">Login to Your Account</a>
+            </div>
+
+            <div class="info-box">
+                <h4 style="margin: 0 0 10px 0; color: #004085;">What's Next?</h4>
+                <ul style="margin: 0; padding-left: 20px;">
+                    <li>Log in to your account using your registered email and password</li>
+                    <li>Explore our comprehensive legal database</li>
+                    <li>Access Acts, Regulations, Case Law, and Immigration Programs</li>
+                    <li>Create and manage your personal notes and templates</li>
+                    <li>Set up important deadlines and reminders</li>
+                </ul>
+            </div>
+
+            <div class="info-box">
+                <h4 style="margin: 0 0 10px 0; color: #004085;">Your 7-Day Free Trial</h4>
+                <p style="margin: 0;">Your trial subscription is now active and includes full access to all JurisLocator features. You'll receive a notification before your trial expires.</p>
+            </div>
+
+            <div class="support-info">
+                <h4 style="margin: 0 0 10px 0;">Need Help?</h4>
+                <p style="margin: 0;">Our support team is here to help you get started. Feel free to reach out if you have any questions.</p>
+                <p style="margin: 5px 0 0 0;"><strong>Email:</strong> support@jurislocator.com</p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Thank you for choosing JurisLocator for your legal research needs.</p>
+            <p>&copy; 2025 JurisLocator. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>'></iframe>
+
+        <div class="divider"></div>
+
+        <!-- Rejection Email -->
+        <iframe class="email-preview" srcdoc='
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JurisLocator Registration Update</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .email-container {
+            background: white;
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e9ecef;
+        }
+        .warning-icon {
+            width: 60px;
+            height: 60px;
+            background: #dc3545;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 24px;
+        }
+        .title {
+            color: #002B5B;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #6c757d;
+            font-size: 16px;
+        }
+        .rejection-message {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 6px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .info-box {
+            background: #e7f3ff;
+            border: 1px solid #b8daff;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e9ecef;
+            color: #6c757d;
+            font-size: 14px;
+        }
+        .support-info {
+            background: #f8f9fa;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .btn {
+            display: inline-block;
+            background: #C19A6B;
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="header">
+            <div class="warning-icon">!</div>
+            <h1 class="title">Registration Update</h1>
+            <p class="subtitle">Regarding your JurisLocator account application</p>
+        </div>
+
+        <div class="content">
+            <p>Dear Jane Smith,</p>
+
+            <div class="rejection-message">
+                <h3 style="margin: 0 0 10px 0; color: #721c24;">Application Status Update</h3>
+                <p style="margin: 0;">We appreciate your interest in JurisLocator. After careful review, we are unable to approve your account application at this time.</p>
+            </div>
+
+            <p>Your application details:</p>
+            <ul>
+                <li><strong>Email:</strong> jane.smith@example.com</li>
+                <li><strong>User Type:</strong> Student Queens</li>
+                <li><strong>Application Date:</strong> July 4, 2025</li>
+            </ul>
+
+            <div class="info-box">
+                <h4 style="margin: 0 0 10px 0; color: #004085;">Why was my application not approved?</h4>
+                <p style="margin: 0;">Applications may not be approved for various reasons, including:</p>
+                <ul style="margin: 10px 0 0 0; padding-left: 20px;">
+                    <li>Incomplete or insufficient documentation</li>
+                    <li>Verification requirements not met</li>
+                    <li>Account information discrepancies</li>
+                    <li>Platform eligibility criteria</li>
+                </ul>
+            </div>
+
+            <div class="info-box">
+                <h4 style="margin: 0 0 10px 0; color: #004085;">What can I do next?</h4>
+                <p style="margin: 0;">If you believe this decision was made in error or if you have additional information to support your application, please contact our support team.</p>
+            </div>
+
+            <div style="text-align: center; margin: 30px 0;">
+                <a href="mailto:support@jurislocator.com" class="btn">Contact Support</a>
+            </div>
+
+            <div class="support-info">
+                <h4 style="margin: 0 0 10px 0;">Need Assistance?</h4>
+                <p style="margin: 0;">Our support team is available to help clarify any questions about your application or to assist with a new application if appropriate.</p>
+                <p style="margin: 5px 0 0 0;"><strong>Email:</strong> support@jurislocator.com</p>
+                <p style="margin: 5px 0 0 0;"><strong>Business Hours:</strong> Monday - Friday, 9:00 AM - 5:00 PM</p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Thank you for your interest in JurisLocator.</p>
+            <p>&copy; 2025 JurisLocator. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>'></iframe>
+    </div>
+</body>
+</html>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\UserApprovalController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ClientSidebarController;
@@ -41,6 +42,12 @@ Route::middleware([\App\Http\Middleware\Authenticate::class, 'verified', \App\Ht
     Route::get('/admin/users/{user}', [UserController::class, 'show'])->name('admin.users.show');
     Route::patch('/admin/users/{user}/toggle', [UserController::class, 'toggleStatus'])->name('admin.users.toggle');
     Route::delete('/admin/users/{user}', [UserController::class, 'destroy'])->name('admin.users.delete');
+
+    // User Approvals
+    Route::get('/admin/user-approvals', [UserApprovalController::class, 'index'])->name('admin.user-approvals.index');
+    Route::get('/admin/user-approvals/{user}', [UserApprovalController::class, 'show'])->name('admin.user-approvals.show');
+    Route::patch('/admin/user-approvals/{user}/approve', [UserApprovalController::class, 'approve'])->name('admin.user-approvals.approve');
+    Route::patch('/admin/user-approvals/{user}/reject', [UserApprovalController::class, 'reject'])->name('admin.user-approvals.reject');
 
     // Payment Dashboard
     Route::get('/admin/payments', [\App\Http\Controllers\Admin\PaymentDetailsController::class, 'index'])->name('admin.payments.index');
