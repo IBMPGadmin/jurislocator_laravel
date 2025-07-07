@@ -1,6 +1,6 @@
-@extends('layouts.user-layout')
 
-@push('styles')
+
+<?php $__env->startPush('styles'); ?>
 <style>
     /* Override any existing styles that might be hiding elements */
     .toggle-tile-body .toggle-tile-content .act-data,
@@ -155,9 +155,9 @@
         overflow: visible !important;
     }
 </style>
-@endpush
+<?php $__env->stopPush(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div class="main-content container-fluid">
     <div class="row sec-title title-default px-4">
         <div class="col-12">
@@ -177,13 +177,15 @@
                         <div class="d-flex flex-wrap">
                             <div class="me-4 mb-2">
                                 <span class="d-flex align-items-center">
-                                    <strong data-en="Name:" data-fr="Nom :">Name:</strong>&nbsp;{{ $client->client_name ?? '-' }}
+                                    <strong data-en="Name:" data-fr="Nom :">Name:</strong>&nbsp;<?php echo e($client->client_name ?? '-'); ?>
+
                                 </span>
                             </div>
                             <div class="mb-2">
                                 <span class="d-flex align-items-center">
                                     <i class="fas fa-envelope me-2 text-secondary"></i>
-                                    <strong data-en="Email:" data-fr="Courriel :">Email:</strong>&nbsp;{{ $client->client_email ?? '-' }}
+                                    <strong data-en="Email:" data-fr="Courriel :">Email:</strong>&nbsp;<?php echo e($client->client_email ?? '-'); ?>
+
                                 </span>
                             </div>
                         </div>
@@ -200,7 +202,7 @@
                     <h5 data-en="Search Legislations" data-fr="Rechercher des législations">Search Legislations</h5>
                 </div>
                 <div class="widget-body sp-top-dbl">
-                    <form method="GET" action="{{ route('user.client.legal-tables', $client->id) }}" id="filterForm" class="row form vertical-form">
+                    <form method="GET" action="<?php echo e(route('user.client.legal-tables', $client->id)); ?>" id="filterForm" class="row form vertical-form">
                         <div class="row m-0">
                             <!-- Always visible (Simple Search) -->
                             <div class="col-lg-4 form-group mb-3">
@@ -210,7 +212,7 @@
                                            placeholder="Legal Act, Regulation.." 
                                            data-placeholder-en="Legal Act, Regulation.."
                                            data-placeholder-fr="Loi juridique, Règlement.."
-                                           value="{{ request('search') }}">
+                                           value="<?php echo e(request('search')); ?>">
                                     <button class="btn btn-neutral" type="button" id="quickSearchBtn">
                                         <i class="fas fa-search"></i>
                                     </button>
@@ -220,9 +222,9 @@
                                 <label for="language_id" class="form-label" data-en="Select Language" data-fr="Sélectionner la langue">Select Language</label>
                                 <select name="language_id" id="language_id" class="form-control form-select">
                                     <option value="" data-en="Language" data-fr="Langue">Language</option>
-                                    <option value="1" {{ request('language_id') == '1' ? 'selected' : '' }} data-en="English" data-fr="Anglais">English</option>
-                                    <option value="2" {{ request('language_id') == '2' ? 'selected' : '' }} data-en="French" data-fr="Français">French</option>
-                                    <option value="3" {{ request('language_id') == '3' ? 'selected' : '' }} data-en="Bilingual" data-fr="Bilingue">Bilingual</option>
+                                    <option value="1" <?php echo e(request('language_id') == '1' ? 'selected' : ''); ?> data-en="English" data-fr="Anglais">English</option>
+                                    <option value="2" <?php echo e(request('language_id') == '2' ? 'selected' : ''); ?> data-en="French" data-fr="Français">French</option>
+                                    <option value="3" <?php echo e(request('language_id') == '3' ? 'selected' : ''); ?> data-en="Bilingual" data-fr="Bilingue">Bilingual</option>
                                 </select>
                             </div>
                             <div class="col-lg-4 form-group mb-3">
@@ -230,23 +232,23 @@
                                     <label for="jurisdiction_id" class="form-label" data-en="Select Jurisdiction" data-fr="Sélectionner la juridiction">Select Jurisdiction</label>
                                     <select name="jurisdiction_id" id="jurisdiction_id" class="form-control form-select">
                                         <option value="" data-en="Select Jurisdiction" data-fr="Sélectionner la juridiction">Select Jurisdiction</option>
-                                        <option value="1" {{ request('jurisdiction_id') == '1' ? 'selected' : '' }} data-en="Federal" data-fr="Fédéral">Federal</option>
+                                        <option value="1" <?php echo e(request('jurisdiction_id') == '1' ? 'selected' : ''); ?> data-en="Federal" data-fr="Fédéral">Federal</option>
                                         <optgroup label="Provincial" data-label-en="Provincial" data-label-fr="Provincial">
-                                            <option value="2" {{ request('jurisdiction_id') == '2' ? 'selected' : '' }}>Alberta</option>
-                                            <option value="3" {{ request('jurisdiction_id') == '3' ? 'selected' : '' }} data-en="British Columbia" data-fr="Colombie-Britannique">British Columbia</option>
-                                            <option value="4" {{ request('jurisdiction_id') == '4' ? 'selected' : '' }}>Manitoba</option>
-                                            <option value="5" {{ request('jurisdiction_id') == '5' ? 'selected' : '' }} data-en="New Brunswick" data-fr="Nouveau-Brunswick">New Brunswick</option>
-                                            <option value="6" {{ request('jurisdiction_id') == '6' ? 'selected' : '' }} data-en="Newfoundland & Labarador" data-fr="Terre-Neuve-et-Labrador">Newfoundland & Labarador</option>
-                                            <option value="7" {{ request('jurisdiction_id') == '7' ? 'selected' : '' }} data-en="Nova Scotia" data-fr="Nouvelle-Écosse">Nova Scotia</option>
-                                            <option value="8" {{ request('jurisdiction_id') == '8' ? 'selected' : '' }}>Ontario</option>
-                                            <option value="9" {{ request('jurisdiction_id') == '9' ? 'selected' : '' }} data-en="Price Edward Island" data-fr="Île-du-Prince-Édouard">Price Edward Island</option>
-                                            <option value="10" {{ request('jurisdiction_id') == '10' ? 'selected' : '' }} data-en="Quebec" data-fr="Québec">Quebec</option>
-                                            <option value="11" {{ request('jurisdiction_id') == '11' ? 'selected' : '' }}>Saskatchewan</option>
+                                            <option value="2" <?php echo e(request('jurisdiction_id') == '2' ? 'selected' : ''); ?>>Alberta</option>
+                                            <option value="3" <?php echo e(request('jurisdiction_id') == '3' ? 'selected' : ''); ?> data-en="British Columbia" data-fr="Colombie-Britannique">British Columbia</option>
+                                            <option value="4" <?php echo e(request('jurisdiction_id') == '4' ? 'selected' : ''); ?>>Manitoba</option>
+                                            <option value="5" <?php echo e(request('jurisdiction_id') == '5' ? 'selected' : ''); ?> data-en="New Brunswick" data-fr="Nouveau-Brunswick">New Brunswick</option>
+                                            <option value="6" <?php echo e(request('jurisdiction_id') == '6' ? 'selected' : ''); ?> data-en="Newfoundland & Labarador" data-fr="Terre-Neuve-et-Labrador">Newfoundland & Labarador</option>
+                                            <option value="7" <?php echo e(request('jurisdiction_id') == '7' ? 'selected' : ''); ?> data-en="Nova Scotia" data-fr="Nouvelle-Écosse">Nova Scotia</option>
+                                            <option value="8" <?php echo e(request('jurisdiction_id') == '8' ? 'selected' : ''); ?>>Ontario</option>
+                                            <option value="9" <?php echo e(request('jurisdiction_id') == '9' ? 'selected' : ''); ?> data-en="Price Edward Island" data-fr="Île-du-Prince-Édouard">Price Edward Island</option>
+                                            <option value="10" <?php echo e(request('jurisdiction_id') == '10' ? 'selected' : ''); ?> data-en="Quebec" data-fr="Québec">Quebec</option>
+                                            <option value="11" <?php echo e(request('jurisdiction_id') == '11' ? 'selected' : ''); ?>>Saskatchewan</option>
                                         </optgroup>
                                         <optgroup label="Territorial" data-label-en="Territorial" data-label-fr="Territorial">
-                                            <option value="12" {{ request('jurisdiction_id') == '12' ? 'selected' : '' }} data-en="Nortwest Territories" data-fr="Territoires du Nord-Ouest">Nortwest Territories</option>
-                                            <option value="13" {{ request('jurisdiction_id') == '13' ? 'selected' : '' }}>Nunavut</option>
-                                            <option value="14" {{ request('jurisdiction_id') == '14' ? 'selected' : '' }}>Yukon</option>
+                                            <option value="12" <?php echo e(request('jurisdiction_id') == '12' ? 'selected' : ''); ?> data-en="Nortwest Territories" data-fr="Territoires du Nord-Ouest">Nortwest Territories</option>
+                                            <option value="13" <?php echo e(request('jurisdiction_id') == '13' ? 'selected' : ''); ?>>Nunavut</option>
+                                            <option value="14" <?php echo e(request('jurisdiction_id') == '14' ? 'selected' : ''); ?>>Yukon</option>
                                         </optgroup>
                                     </select>
                                 </div>
@@ -255,28 +257,28 @@
                                 <label for="law_id" class="form-label" data-en="Select Law Subject" data-fr="Sélectionner le sujet de droit">Select Law Subject</label>
                                 <select name="law_id" id="law_id" class="form-control form-select">
                                     <option value="" data-en="Subject" data-fr="Sujet">Subject</option>
-                                    <option value="1" {{ request('law_id') == '1' ? 'selected' : '' }} data-en="Immigration" data-fr="Immigration">Immigration</option>
-                                    <option value="2" {{ request('law_id') == '2' ? 'selected' : '' }} data-en="Citizenship" data-fr="Citoyenneté">Citizenship</option>
-                                    <option value="3" {{ request('law_id') == '3' ? 'selected' : '' }} data-en="Criminal" data-fr="Criminel">Criminal</option>
+                                    <option value="1" <?php echo e(request('law_id') == '1' ? 'selected' : ''); ?> data-en="Immigration" data-fr="Immigration">Immigration</option>
+                                    <option value="2" <?php echo e(request('law_id') == '2' ? 'selected' : ''); ?> data-en="Citizenship" data-fr="Citoyenneté">Citizenship</option>
+                                    <option value="3" <?php echo e(request('law_id') == '3' ? 'selected' : ''); ?> data-en="Criminal" data-fr="Criminel">Criminal</option>
                                 </select>
                             </div>
                             <div class="col-lg-4 form-group mb-3">
                                 <label for="act_id" class="form-label" data-en="Select Docs Category" data-fr="Sélectionner la catégorie de documents">Select Docs Category</label>
                                 <select name="act_id" id="act_id" class="form-control form-select">
                                     <option value="" data-en="Category" data-fr="Catégorie">Category</option>
-                                    <option value="1" {{ request('act_id') == '1' ? 'selected' : '' }} data-en="Acts" data-fr="Lois">Acts</option>
-                                    <option value="2" {{ request('act_id') == '2' ? 'selected' : '' }} data-en="Appeal & Review Processes" data-fr="Processus d'appel et de révision">Appeal & Review Processes</option>
-                                    <option value="3" {{ request('act_id') == '3' ? 'selected' : '' }} data-en="CaseLaw" data-fr="Jurisprudence">CaseLaw</option>
-                                    <option value="4" {{ request('act_id') == '4' ? 'selected' : '' }} data-en="Codes" data-fr="Codes">Codes</option>
-                                    <option value="5" {{ request('act_id') == '5' ? 'selected' : '' }} data-en="Enforcement" data-fr="Application">Enforcement</option>
-                                    <option value="6" {{ request('act_id') == '6' ? 'selected' : '' }} data-en="Forms" data-fr="Formulaires">Forms</option>
-                                    <option value="7" {{ request('act_id') == '7' ? 'selected' : '' }} data-en="Guidelines" data-fr="Directives">Guidelines</option>
-                                    <option value="8" {{ request('act_id') == '8' ? 'selected' : '' }} data-en="Agreements" data-fr="Accords">Agreements</option>
-                                    <option value="9" {{ request('act_id') == '9' ? 'selected' : '' }} data-en="Ministerial Instructions" data-fr="Instructions ministérielles">Ministerial Instructions</option>
-                                    <option value="10" {{ request('act_id') == '10' ? 'selected' : '' }} data-en="Operational Bulletins" data-fr="Bulletins opérationnels">Operational Bulletins</option>
-                                    <option value="11" {{ request('act_id') == '11' ? 'selected' : '' }} data-en="Policies" data-fr="Politiques">Policies</option>
-                                    <option value="12" {{ request('act_id') == '12' ? 'selected' : '' }} data-en="Procedures" data-fr="Procédures">Procedures</option>
-                                    <option value="13" {{ request('act_id') == '13' ? 'selected' : '' }} data-en="Regulations" data-fr="Règlements">Regulations</option>
+                                    <option value="1" <?php echo e(request('act_id') == '1' ? 'selected' : ''); ?> data-en="Acts" data-fr="Lois">Acts</option>
+                                    <option value="2" <?php echo e(request('act_id') == '2' ? 'selected' : ''); ?> data-en="Appeal & Review Processes" data-fr="Processus d'appel et de révision">Appeal & Review Processes</option>
+                                    <option value="3" <?php echo e(request('act_id') == '3' ? 'selected' : ''); ?> data-en="CaseLaw" data-fr="Jurisprudence">CaseLaw</option>
+                                    <option value="4" <?php echo e(request('act_id') == '4' ? 'selected' : ''); ?> data-en="Codes" data-fr="Codes">Codes</option>
+                                    <option value="5" <?php echo e(request('act_id') == '5' ? 'selected' : ''); ?> data-en="Enforcement" data-fr="Application">Enforcement</option>
+                                    <option value="6" <?php echo e(request('act_id') == '6' ? 'selected' : ''); ?> data-en="Forms" data-fr="Formulaires">Forms</option>
+                                    <option value="7" <?php echo e(request('act_id') == '7' ? 'selected' : ''); ?> data-en="Guidelines" data-fr="Directives">Guidelines</option>
+                                    <option value="8" <?php echo e(request('act_id') == '8' ? 'selected' : ''); ?> data-en="Agreements" data-fr="Accords">Agreements</option>
+                                    <option value="9" <?php echo e(request('act_id') == '9' ? 'selected' : ''); ?> data-en="Ministerial Instructions" data-fr="Instructions ministérielles">Ministerial Instructions</option>
+                                    <option value="10" <?php echo e(request('act_id') == '10' ? 'selected' : ''); ?> data-en="Operational Bulletins" data-fr="Bulletins opérationnels">Operational Bulletins</option>
+                                    <option value="11" <?php echo e(request('act_id') == '11' ? 'selected' : ''); ?> data-en="Policies" data-fr="Politiques">Policies</option>
+                                    <option value="12" <?php echo e(request('act_id') == '12' ? 'selected' : ''); ?> data-en="Procedures" data-fr="Procédures">Procedures</option>
+                                    <option value="13" <?php echo e(request('act_id') == '13' ? 'selected' : ''); ?> data-en="Regulations" data-fr="Règlements">Regulations</option>
                                 </select>
                             </div>
                             <div class="col-lg-4 form-group mb-3 d-flex justify-content-start align-items-start flex-column text-end">
@@ -359,54 +361,59 @@
                 <div class="widget-body sp-top-dbl">
                     <!-- Legal Documents Grid -->
                     <div id="toggleTileContainer" class="row toggle-tile-warpper sp-top">
-                        @if($results->count())
-                            @foreach($results as $index => $row)
-                            <div class="toggle-tile-body col-12 list" data-card-index="{{ $index }}">
+                        <?php if($results->count()): ?>
+                            <?php $__currentLoopData = $results; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <div class="toggle-tile-body col-12 list" data-card-index="<?php echo e($index); ?>">
                                 <div class="toggle-tile-content shadow-sm sp-top" 
-                                     data-en="{{ $row->act_name ?? 'Unknown' }}" 
-                                     data-fr="{{ $row->act_name ?? 'Unknown' }}"
-                                     data-table-name="{{ $row->table_name ?? 'unknown' }}"
-                                     data-act-id="{{ $row->act_id ?? '1' }}"
-                                     data-client-id="{{ $client->id ?? '1' }}"
-                                     data-language-id="{{ $row->language_id ?? '1' }}">
-                                    <h4><i class="fas fa-book act-icon"></i> {{ $row->act_name ?? 'Unknown Act' }}</h4>
+                                     data-en="<?php echo e($row->act_name ?? 'Unknown'); ?>" 
+                                     data-fr="<?php echo e($row->act_name ?? 'Unknown'); ?>"
+                                     data-table-name="<?php echo e($row->table_name ?? 'unknown'); ?>"
+                                     data-act-id="<?php echo e($row->act_id ?? '1'); ?>"
+                                     data-client-id="<?php echo e($client->id ?? '1'); ?>"
+                                     data-language-id="<?php echo e($row->language_id ?? '1'); ?>">
+                                    <h4><i class="fas fa-book act-icon"></i> <?php echo e($row->act_name ?? 'Unknown Act'); ?></h4>
                                     
                                     <ul>
                                         <li class="act-category">
                                             <i class="fas fa-folder-open act-icon"></i>
-                                            <strong>Category:</strong> {{ $acts[$row->act_id ?? 1] ?? 'N/A' }}
+                                            <strong>Category:</strong> <?php echo e($acts[$row->act_id ?? 1] ?? 'N/A'); ?>
+
                                         </li>
                                         <li class="act-law">
                                             <i class="fas fa-gavel act-icon"></i>
-                                            <strong>Law Subject:</strong> {{ $lawSubjects[$row->law_id ?? 1] ?? 'N/A' }}
+                                            <strong>Law Subject:</strong> <?php echo e($lawSubjects[$row->law_id ?? 1] ?? 'N/A'); ?>
+
                                         </li>
                                         <li class="act-jurisdiction">
                                             <i class="fas fa-map-marker-alt act-icon"></i>
-                                            <strong>Jurisdiction:</strong> {{ $jurisdictions[$row->jurisdiction_id ?? 1] ?? 'N/A' }}
+                                            <strong>Jurisdiction:</strong> <?php echo e($jurisdictions[$row->jurisdiction_id ?? 1] ?? 'N/A'); ?>
+
                                         </li>
                                         <li class="act-language">
                                             <i class="fas fa-language act-icon"></i>
-                                            <strong>Language:</strong> {{ $languages[$row->language_id ?? 1] ?? 'N/A' }}
+                                            <strong>Language:</strong> <?php echo e($languages[$row->language_id ?? 1] ?? 'N/A'); ?>
+
                                         </li>
                                         <li class="act-description">
                                             <i class="fas fa-calendar-alt act-icon"></i>
-                                            <strong>Created:</strong> {{ $row->created_at ? date('M d, Y', strtotime($row->created_at)) : 'N/A' }}
+                                            <strong>Created:</strong> <?php echo e($row->created_at ? date('M d, Y', strtotime($row->created_at)) : 'N/A'); ?>
+
                                         </li>
                                         <li class="view-button">
-                                            <a href="javascript:void(0)" onclick="redirectToDocument('{{ $row->table_name }}', '{{ $row->act_id }}', '{{ $client->id }}', '{{ $row->language_id }}')">
+                                            <a href="javascript:void(0)" onclick="redirectToDocument('<?php echo e($row->table_name); ?>', '<?php echo e($row->act_id); ?>', '<?php echo e($client->id); ?>', '<?php echo e($row->language_id); ?>')">
                                                 <i class="fas fa-eye act-icon"></i>View Document
                                             </a>
                                         </li>
                                     </ul>
                                 </div>
                             </div>
-                            @endforeach
-                        @else
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        <?php else: ?>
                             <div class="col-12 no-results">
                                 <i class="fas fa-search" style="font-size: 2rem; margin-bottom: 1rem; color: #999;"></i>
                                 <p data-en="No legal acts found matching your search criteria." data-fr="Aucune loi juridique trouvée correspondant à vos critères de recherche.">No legal acts found matching your search criteria.</p>
                             </div>
-                        @endif
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
@@ -454,9 +461,9 @@
         </div>
     </div>
 </footer>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@push('scripts')
+<?php $__env->startPush('scripts'); ?>
 <script>
     console.log('=== SCRIPT STARTED ===');
     
@@ -921,4 +928,6 @@
     });
 
 </script>
-@endpush
+<?php $__env->stopPush(); ?>
+
+<?php echo $__env->make('layouts.user-layout', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\Users\Dileesha\Desktop\jurislocator_laravel\resources\views/user-legal-tables.blade.php ENDPATH**/ ?>
