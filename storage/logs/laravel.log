@@ -5813,3 +5813,326 @@ Content-Transfer-Encoding: quoted-printable
 [2025-07-05 11:41:56] local.INFO: CheckSubscription: Active subscription found, proceeding  
 [2025-07-05 11:41:58] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-05 11:41:58"}} 
 [2025-07-05 11:41:58] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 04:06:16] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 04:06:16"}} 
+[2025-07-07 04:06:16] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 04:06:18] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 04:06:18"}} 
+[2025-07-07 04:06:18] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 04:06:20] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 04:06:20"}} 
+[2025-07-07 04:06:20] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 04:06:21] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 04:06:21"}} 
+[2025-07-07 04:06:21] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 04:15:23] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 04:15:23"}} 
+[2025-07-07 04:15:23] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 04:15:33] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 04:15:33"}} 
+[2025-07-07 04:15:33] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 04:15:34] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 04:15:34"}} 
+[2025-07-07 04:15:34] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 04:15:34] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 04:15:34"}} 
+[2025-07-07 04:15:34] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 04:16:00] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 04:16:00"}} 
+[2025-07-07 04:16:00] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 04:16:03] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 04:16:03"}} 
+[2025-07-07 04:16:03] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 04:16:05] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 04:16:05"}} 
+[2025-07-07 04:16:05] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 04:16:05] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 04:16:05"}} 
+[2025-07-07 04:16:05] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 04:18:03] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 04:18:03"}} 
+[2025-07-07 04:18:03] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 04:22:24] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 04:22:24"}} 
+[2025-07-07 04:22:24] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 04:22:30] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 04:22:30"}} 
+[2025-07-07 04:22:30] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 04:22:30] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 04:22:30"}} 
+[2025-07-07 04:22:30] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 04:22:30] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 04:22:30"}} 
+[2025-07-07 04:22:30] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 04:22:31] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 04:22:31"}} 
+[2025-07-07 04:22:31] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 04:25:07] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 04:25:07"}} 
+[2025-07-07 04:25:07] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 04:25:07] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 04:25:07"}} 
+[2025-07-07 04:25:07] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 04:25:08] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 04:25:08"}} 
+[2025-07-07 04:25:08] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 04:25:08] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 04:25:08"}} 
+[2025-07-07 04:25:08] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 04:25:08] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 04:25:08"}} 
+[2025-07-07 04:25:08] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 04:34:35] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 04:34:35"}} 
+[2025-07-07 04:34:35] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 04:34:50] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 04:34:50"}} 
+[2025-07-07 04:34:50] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 04:34:51] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 04:34:51"}} 
+[2025-07-07 04:34:51] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 04:34:53] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 04:34:53"}} 
+[2025-07-07 04:34:53] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 04:34:56] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 04:34:56"}} 
+[2025-07-07 04:34:56] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 04:35:01] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 04:35:01"}} 
+[2025-07-07 04:35:01] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 04:35:08] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 04:35:08"}} 
+[2025-07-07 04:35:08] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 04:36:55] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 04:36:55"}} 
+[2025-07-07 04:36:55] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 04:36:59] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 04:36:59"}} 
+[2025-07-07 04:36:59] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 04:37:02] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 04:37:02"}} 
+[2025-07-07 04:37:02] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 04:37:03] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 04:37:03"}} 
+[2025-07-07 04:37:03] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 04:37:14] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 04:37:14"}} 
+[2025-07-07 04:37:14] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 04:37:53] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 04:37:53"}} 
+[2025-07-07 04:37:53] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 04:40:22] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 04:40:22"}} 
+[2025-07-07 04:40:22] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 04:42:22] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 04:42:22"}} 
+[2025-07-07 04:42:22] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 04:42:34] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 04:42:34"}} 
+[2025-07-07 04:42:34] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 04:42:35] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 04:42:35"}} 
+[2025-07-07 04:42:35] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 04:45:29] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 04:45:29"}} 
+[2025-07-07 04:45:29] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 04:47:01] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 04:47:01"}} 
+[2025-07-07 04:47:01] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 04:47:04] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 04:47:04"}} 
+[2025-07-07 04:47:04] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 04:48:01] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 04:48:01"}} 
+[2025-07-07 04:48:01] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 04:54:46] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 04:54:46"}} 
+[2025-07-07 04:54:46] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 04:54:51] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 04:54:51"}} 
+[2025-07-07 04:54:51] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 04:55:04] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 04:55:04"}} 
+[2025-07-07 04:55:04] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 04:55:06] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 04:55:06"}} 
+[2025-07-07 04:55:06] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 04:55:09] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 04:55:09"}} 
+[2025-07-07 04:55:09] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 04:55:09] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 04:55:09"}} 
+[2025-07-07 04:55:09] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 04:55:58] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 04:55:58"}} 
+[2025-07-07 04:55:58] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 04:57:44] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 04:57:44"}} 
+[2025-07-07 04:57:44] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 05:12:28] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 05:12:28"}} 
+[2025-07-07 05:12:28] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 05:12:54] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 05:12:54"}} 
+[2025-07-07 05:12:54] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 05:12:55] local.INFO: Section content request for tableId=1, sectionRef=46  
+[2025-07-07 05:12:55] local.INFO: Found table: legaldocument1  
+[2025-07-07 05:12:55] local.INFO: Received current document context: table=legaldocument1, categoryId=1  
+[2025-07-07 05:12:55] local.INFO: Building search query for section_id: 46 in table: legaldocument1  
+[2025-07-07 05:12:55] local.INFO: Built query: select * from `legaldocument1` where `category_id` = ? and (`section_id` = ? or `section_id` like ? or `section_id` like ?) order by CASE 
+                    WHEN section_id = ? THEN 1
+                    WHEN section_id LIKE ? THEN 2
+                    ELSE 3
+                END limit 10 with bindings: ["1","46","46.%","46%","46","46.%"]  
+[2025-07-07 05:12:55] local.INFO: Executing query: select * from `legaldocument1` where `category_id` = ? and (`section_id` = ? or `section_id` like ? or `section_id` like ?) order by CASE 
+                    WHEN section_id = ? THEN 1
+                    WHEN section_id LIKE ? THEN 2
+                    ELSE 3
+                END limit 10 with bindings: ["1","46","46.%","46%","46","46.%"]  
+[2025-07-07 05:12:55] local.INFO: Raw SQL equivalent: select * from `legaldocument1` where `category_id` = 1 and (`section_id` = 1 or `section_id` like 1 or `section_id` like 1) order by CASE 
+                    WHEN section_id = 1 THEN 1
+                    WHEN section_id LIKE 1 THEN 2
+                    ELSE 3
+                END limit 10  
+[2025-07-07 05:12:55] local.INFO: Found 10 rows  
+[2025-07-07 05:12:56] local.INFO: Section content request for tableId=1, sectionRef=46  
+[2025-07-07 05:12:56] local.INFO: Found table: legaldocument1  
+[2025-07-07 05:12:56] local.INFO: Building search query for section_id: 46 in table: legaldocument1  
+[2025-07-07 05:12:56] local.INFO: Built query: select * from `legaldocument1` where `category_id` = ? and (`section_id` = ? or `section_id` like ? or `section_id` like ?) order by CASE 
+                    WHEN section_id = ? THEN 1
+                    WHEN section_id LIKE ? THEN 2
+                    ELSE 3
+                END limit 10 with bindings: ["1","46","46.%","46%","46","46.%"]  
+[2025-07-07 05:12:56] local.INFO: Executing query: select * from `legaldocument1` where `category_id` = ? and (`section_id` = ? or `section_id` like ? or `section_id` like ?) order by CASE 
+                    WHEN section_id = ? THEN 1
+                    WHEN section_id LIKE ? THEN 2
+                    ELSE 3
+                END limit 10 with bindings: ["1","46","46.%","46%","46","46.%"]  
+[2025-07-07 05:12:56] local.INFO: Raw SQL equivalent: select * from `legaldocument1` where `category_id` = 1 and (`section_id` = 1 or `section_id` like 1 or `section_id` like 1) order by CASE 
+                    WHEN section_id = 1 THEN 1
+                    WHEN section_id LIKE 1 THEN 2
+                    ELSE 3
+                END limit 10  
+[2025-07-07 05:12:56] local.INFO: Found 10 rows  
+[2025-07-07 05:16:38] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 05:16:38"}} 
+[2025-07-07 05:16:38] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 05:16:40] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 05:16:40"}} 
+[2025-07-07 05:16:40] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 05:16:43] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 05:16:43"}} 
+[2025-07-07 05:16:43] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 05:16:43] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 05:16:43"}} 
+[2025-07-07 05:16:43] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 05:16:49] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 05:16:49"}} 
+[2025-07-07 05:16:49] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 05:19:42] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 05:19:42"}} 
+[2025-07-07 05:19:42] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 05:19:45] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 05:19:45"}} 
+[2025-07-07 05:19:45] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 05:19:46] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 05:19:46"}} 
+[2025-07-07 05:19:46] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 05:19:48] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 05:19:48"}} 
+[2025-07-07 05:19:48] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 05:19:50] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 05:19:50"}} 
+[2025-07-07 05:19:50] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 05:20:51] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 05:20:51"}} 
+[2025-07-07 05:20:51] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 05:23:51] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 05:23:51"}} 
+[2025-07-07 05:23:51] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 05:30:46] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 05:30:46"}} 
+[2025-07-07 05:30:46] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 05:33:26] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 05:33:26"}} 
+[2025-07-07 05:33:26] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 05:43:27] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 05:43:27"}} 
+[2025-07-07 05:43:27] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 05:43:47] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 05:43:47"}} 
+[2025-07-07 05:43:47] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 05:43:48] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 05:43:48"}} 
+[2025-07-07 05:43:48] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 05:43:48] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 05:43:48"}} 
+[2025-07-07 05:43:48] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 05:51:57] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 05:51:57"}} 
+[2025-07-07 05:51:57] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 05:54:41] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 05:54:41"}} 
+[2025-07-07 05:54:41] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 05:54:43] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 05:54:43"}} 
+[2025-07-07 05:54:43] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 05:54:45] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 05:54:45"}} 
+[2025-07-07 05:54:45] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 05:54:47] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 05:54:47"}} 
+[2025-07-07 05:54:47] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 05:55:12] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 05:55:12"}} 
+[2025-07-07 05:55:12] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 05:55:13] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 05:55:13"}} 
+[2025-07-07 05:55:13] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 05:55:16] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 05:55:16"}} 
+[2025-07-07 05:55:16] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 05:59:47] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 05:59:47"}} 
+[2025-07-07 05:59:47] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 05:59:55] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 05:59:55"}} 
+[2025-07-07 05:59:55] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 05:59:58] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 05:59:58"}} 
+[2025-07-07 05:59:58] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 05:59:59] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 05:59:59"}} 
+[2025-07-07 05:59:59] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 06:00:00] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 06:00:00"}} 
+[2025-07-07 06:00:00] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 06:06:02] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 06:06:02"}} 
+[2025-07-07 06:06:02] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 06:06:06] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 06:06:06"}} 
+[2025-07-07 06:06:06] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 06:09:25] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 06:09:25"}} 
+[2025-07-07 06:09:25] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 06:09:29] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 06:09:29"}} 
+[2025-07-07 06:09:29] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 06:09:35] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 06:09:35"}} 
+[2025-07-07 06:09:35] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 06:09:38] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 06:09:37"}} 
+[2025-07-07 06:09:38] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 06:10:31] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 06:10:31"}} 
+[2025-07-07 06:10:31] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 06:17:07] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 06:17:07"}} 
+[2025-07-07 06:17:07] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 06:17:14] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 06:17:14"}} 
+[2025-07-07 06:17:14] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 06:17:14] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 06:17:14"}} 
+[2025-07-07 06:17:14] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 06:17:14] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 06:17:14"}} 
+[2025-07-07 06:17:14] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 06:17:32] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 06:17:32"}} 
+[2025-07-07 06:17:32] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 06:17:37] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 06:17:37"}} 
+[2025-07-07 06:17:37] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 06:17:37] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 06:17:37"}} 
+[2025-07-07 06:17:37] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 06:17:42] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 06:17:42"}} 
+[2025-07-07 06:17:42] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 06:17:46] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 06:17:46"}} 
+[2025-07-07 06:17:46] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 06:22:26] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 06:22:26"}} 
+[2025-07-07 06:22:26] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 06:22:31] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 06:22:31"}} 
+[2025-07-07 06:22:31] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 06:22:34] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 06:22:34"}} 
+[2025-07-07 06:22:34] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 06:22:56] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 06:22:56"}} 
+[2025-07-07 06:22:56] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 06:23:00] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 06:23:00"}} 
+[2025-07-07 06:23:00] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 06:23:02] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 06:23:02"}} 
+[2025-07-07 06:23:02] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 06:23:02] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 06:23:02"}} 
+[2025-07-07 06:23:02] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 06:23:06] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 06:23:06"}} 
+[2025-07-07 06:23:06] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 06:23:09] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 06:23:09"}} 
+[2025-07-07 06:23:09] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 06:23:10] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 06:23:10"}} 
+[2025-07-07 06:23:10] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 06:23:10] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 06:23:10"}} 
+[2025-07-07 06:23:10] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 06:30:21] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 06:30:21"}} 
+[2025-07-07 06:30:21] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 06:31:43] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 06:31:43"}} 
+[2025-07-07 06:31:43] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 06:31:45] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 06:31:45"}} 
+[2025-07-07 06:31:45] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 06:31:45] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 06:31:45"}} 
+[2025-07-07 06:31:45] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 06:32:30] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 06:32:30"}} 
+[2025-07-07 06:32:30] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 06:32:32] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 06:32:32"}} 
+[2025-07-07 06:32:32] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 06:32:34] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 06:32:34"}} 
+[2025-07-07 06:32:34] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 06:32:35] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 06:32:35"}} 
+[2025-07-07 06:32:35] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 06:35:08] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 06:35:08"}} 
+[2025-07-07 06:35:08] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 06:35:10] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 06:35:10"}} 
+[2025-07-07 06:35:10] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 06:35:11] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 06:35:11"}} 
+[2025-07-07 06:35:11] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 06:35:14] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 06:35:13"}} 
+[2025-07-07 06:35:14] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 06:35:15] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 06:35:15"}} 
+[2025-07-07 06:35:15] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 06:35:37] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 06:35:37"}} 
+[2025-07-07 06:35:37] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 06:35:39] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 06:35:39"}} 
+[2025-07-07 06:35:39] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 06:35:43] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 06:35:43"}} 
+[2025-07-07 06:35:43] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 06:36:21] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 06:36:21"}} 
+[2025-07-07 06:36:21] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 06:36:23] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 06:36:23"}} 
+[2025-07-07 06:36:23] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 06:36:26] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 06:36:26"}} 
+[2025-07-07 06:36:26] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 06:36:26] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 06:36:26"}} 
+[2025-07-07 06:36:26] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 06:37:45] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 06:37:45"}} 
+[2025-07-07 06:37:45] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 06:43:53] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 06:43:53"}} 
+[2025-07-07 06:43:53] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 06:47:00] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 06:47:00"}} 
+[2025-07-07 06:47:00] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 06:53:20] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 06:53:20"}} 
+[2025-07-07 06:53:20] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 06:56:15] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 06:56:15"}} 
+[2025-07-07 06:56:15] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 07:04:12] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 07:04:12"}} 
+[2025-07-07 07:04:12] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 07:04:12] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 07:04:12"}} 
+[2025-07-07 07:04:12] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 07:10:24] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 07:10:24"}} 
+[2025-07-07 07:10:24] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 07:10:27] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 07:10:27"}} 
+[2025-07-07 07:10:27] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-07 07:10:28] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 07:10:28"}} 
+[2025-07-07 07:10:28] local.INFO: CheckSubscription: Active subscription found, proceeding  
