@@ -622,8 +622,8 @@
                                 <li><a href="#G">G</a></li>
                                 <li><a href="#H">H</a></li>
                                 <li><a href="#I">I</a></li>
-                                <li><a class="disabled" href="#J">J</a></li>
-                                <li><a class="disabled" href="#K">K</a></li>
+                                <li><a  href="#J">J</a></li>
+                                <li><a  href="#K">K</a></li>
                                 <li><a href="#L">L</a></li>
                                 <li><a href="#M">M</a></li>
                                 <li><a href="#N">N</a></li>
@@ -636,9 +636,9 @@
                                 <li><a href="#U">U</a></li>
                                 <li><a href="#V">V</a></li>
                                 <li><a href="#W">W</a></li>
-                                <li><a class="disabled" href="#X">X</a></li>
+                                <li><a  href="#X">X</a></li>
                                 <li><a href="#Y">Y</a></li>
-                                <li><a class="disabled" href="#Z">Z</a></li>
+                                <li><a  href="#Z">Z</a></li>
                             </ul>
                         </div>
                     </div>
@@ -1042,7 +1042,7 @@
         const droppableArea = document.getElementById('droppableArea');
         if (droppableArea) {
             // Make legal table tiles draggable
-            const setupDragAndDrop = () => {
+            window.setupDragAndDrop = () => {
                 const tableTiles = document.querySelectorAll('.toggle-tile-content');
                 tableTiles.forEach(tile => {
                     tile.draggable = true;
@@ -1137,11 +1137,11 @@
             });
             
             // Initialize drag and drop on page load
-            setupDragAndDrop();
+            window.setupDragAndDrop();
             
             // Re-initialize drag and drop when content changes (for dynamically loaded content)
             const observer = new MutationObserver(() => {
-                setupDragAndDrop();
+                window.setupDragAndDrop();
             });
             
             observer.observe(document.querySelector('.act-content'), {
@@ -1481,6 +1481,43 @@
                     applyFilters();
                 });
             });
+        }
+
+        // View toggle (Grid/List) functionality
+        const viewToggleInputs = document.querySelectorAll('input[name="view-toggle"]');
+        viewToggleInputs.forEach(function(input) {
+            input.addEventListener('change', function() {
+                if (this.checked) {
+                    const viewType = this.value; // 'grid' or 'list'
+                    switchView(viewType);
+                }
+            });
+        });
+
+        function switchView(viewType) {
+            if (!tileContainer) return;
+            
+            const cards = tileContainer.querySelectorAll('.toggle-tile-body');
+            cards.forEach(card => {
+                // Remove both classes first
+                card.classList.remove('list', 'grid');
+                // Add the new view class
+                card.classList.add(viewType);
+                
+                // Update column classes for grid/list layout
+                if (viewType === 'grid') {
+                    card.classList.remove('col-12');
+                    card.classList.add('col-lg-4', 'col-md-6', 'col-12');
+                } else {
+                    card.classList.remove('col-lg-4', 'col-md-6');
+                    card.classList.add('col-12');
+                }
+            });
+            
+            // Re-initialize drag and drop after view change
+            if (typeof window.setupDragAndDrop === 'function') {
+                window.setupDragAndDrop();
+            }
         }
 
         function applyFilters() {

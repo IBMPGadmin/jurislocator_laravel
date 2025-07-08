@@ -620,8 +620,8 @@
                                 <li><a href="#G">G</a></li>
                                 <li><a href="#H">H</a></li>
                                 <li><a href="#I">I</a></li>
-                                <li><a class="disabled" href="#J">J</a></li>
-                                <li><a class="disabled" href="#K">K</a></li>
+                                <li><a  href="#J">J</a></li>
+                                <li><a  href="#K">K</a></li>
                                 <li><a href="#L">L</a></li>
                                 <li><a href="#M">M</a></li>
                                 <li><a href="#N">N</a></li>
@@ -634,9 +634,9 @@
                                 <li><a href="#U">U</a></li>
                                 <li><a href="#V">V</a></li>
                                 <li><a href="#W">W</a></li>
-                                <li><a class="disabled" href="#X">X</a></li>
+                                <li><a  href="#X">X</a></li>
                                 <li><a href="#Y">Y</a></li>
-                                <li><a class="disabled" href="#Z">Z</a></li>
+                                <li><a  href="#Z">Z</a></li>
                             </ul>
                         </div>
                     </div>
@@ -675,6 +675,78 @@
                             </div>
                         @endif
                     </div>
+                </div>
+            </div>
+            
+            <!-- Content Editor and Droppable Area - Always available -->
+            <div class="widget sp-top widget-blank widget-vertical shadow-sm">
+                <div class="widget-title d-flex align-items-center">
+                    <h5 data-en="Notes and Content" data-fr="Notes et contenu">Notes and Content</h5>
+                    
+                    <!-- Context selector for saving -->
+                    <div class="save-context-selector">
+                        <label data-en="Save under:" data-fr="Enregistrer sous:">Save under:</label>
+                        <select id="saveContext" class="form-select form-select-sm">
+                            <option value="user" {{ !isset($client) || !$client ? 'selected' : '' }} data-en="User Only" data-fr="Utilisateur seulement">User Only</option>
+                            @if(isset($client) && $client)
+                            <option value="client" selected data-en="Client Specific" data-fr="Spécifique au client">Client Specific</option>
+                            @else
+                            <option value="client" disabled data-en="Client Specific (Select a client first)" data-fr="Spécifique au client (Sélectionnez d'abord un client)">Client Specific (Select a client first)</option>
+                            @endif
+                        </select>
+                    </div>
+                </div>
+                <div class="widget-body">
+                    <!-- Droppable area -->
+                    <div id="droppableArea" class="droppable-container p-3 border rounded mb-4">
+                        @if(isset($savedContent) && $savedContent && $savedContent->droppable_content)
+                            {!! $savedContent->droppable_content !!}
+                        @else
+                            <div class="text-center p-5 drop-placeholder">
+                                <i class="fas fa-arrow-down mb-2"></i>
+                                <p data-en="Drop content here" data-fr="Déposer le contenu ici">Drop content here</p>
+                            </div>
+                        @endif
+                    </div>
+                    
+                    <!-- Save Popups button -->
+                    <div class="text-end mb-3">
+                        <button id="savePopups" class="btn btn-outline-primary btn-sm">
+                            <i class="fas fa-save me-1"></i>
+                            <span data-en="Save Popups" data-fr="Enregistrer les popups">Save Popups</span>
+                        </button>
+                    </div>
+                    
+                    <!-- Text editor -->
+                    <div id="textEditorContainer">
+                        <textarea id="contentEditor" class="form-control" placeholder="Enter your notes and content here..." data-placeholder-en="Enter your notes and content here..." data-placeholder-fr="Entrez vos notes et contenu ici...">{{ isset($savedContent) && $savedContent ? $savedContent->editor_content : '' }}</textarea>
+                    </div>
+                    
+                    <!-- Save button -->
+                    <div class="text-end mt-3">
+                        <button id="saveContent" class="btn btn-action">
+                            <span data-en="Save Content" data-fr="Enregistrer le contenu">Save Content</span>
+                        </button>
+                    </div>
+                    
+                    <!-- Context information -->
+                    @if(isset($client) && $client)
+                        <div class="text-muted small mt-2">
+                            <i class="fas fa-info-circle me-1"></i>
+                            <span data-en="Content can be saved for your personal use or specifically for this client." 
+                                  data-fr="Le contenu peut être enregistré pour votre usage personnel ou spécifiquement pour ce client.">
+                                Content can be saved for your personal use or specifically for this client.
+                            </span>
+                        </div>
+                    @else
+                        <div class="text-muted small mt-2">
+                            <i class="fas fa-info-circle me-1"></i>
+                            <span data-en="Content will be saved for your personal use. Select a client above to enable client-specific saving." 
+                                  data-fr="Le contenu sera enregistré pour votre usage personnel. Sélectionnez un client ci-dessus pour activer l'enregistrement spécifique au client.">
+                                Content will be saved for your personal use. Select a client above to enable client-specific saving.
+                            </span>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -967,7 +1039,7 @@
         const droppableArea = document.getElementById('droppableArea');
         if (droppableArea) {
             // Make legal table tiles draggable
-            const setupDragAndDrop = () => {
+            window.setupDragAndDrop = () => {
                 const tableTiles = document.querySelectorAll('.toggle-tile-content');
                 tableTiles.forEach(tile => {
                     tile.draggable = true;
@@ -1062,11 +1134,11 @@
             });
             
             // Initialize drag and drop on page load
-            setupDragAndDrop();
+            window.setupDragAndDrop();
             
             // Re-initialize drag and drop when content changes (for dynamically loaded content)
             const observer = new MutationObserver(() => {
-                setupDragAndDrop();
+                window.setupDragAndDrop();
             });
             
             observer.observe(document.querySelector('.act-content'), {
@@ -1408,6 +1480,43 @@
             });
         }
 
+        // View toggle (Grid/List) functionality
+        const viewToggleInputs = document.querySelectorAll('input[name="view-toggle"]');
+        viewToggleInputs.forEach(function(input) {
+            input.addEventListener('change', function() {
+                if (this.checked) {
+                    const viewType = this.value; // 'grid' or 'list'
+                    switchView(viewType);
+                }
+            });
+        });
+
+        function switchView(viewType) {
+            if (!tileContainer) return;
+            
+            const cards = tileContainer.querySelectorAll('.toggle-tile-body');
+            cards.forEach(card => {
+                // Remove both classes first
+                card.classList.remove('list', 'grid');
+                // Add the new view class
+                card.classList.add(viewType);
+                
+                // Update column classes for grid/list layout
+                if (viewType === 'grid') {
+                    card.classList.remove('col-12');
+                    card.classList.add('col-lg-4', 'col-md-6', 'col-12');
+                } else {
+                    card.classList.remove('col-lg-4', 'col-md-6');
+                    card.classList.add('col-12');
+                }
+            });
+            
+            // Re-initialize drag and drop after view change
+            if (typeof window.setupDragAndDrop === 'function') {
+                window.setupDragAndDrop();
+            }
+        }
+
         function applyFilters() {
             if (!tileContainer) return;
             const cards = tileContainer.querySelectorAll('.toggle-tile-body');
@@ -1451,726 +1560,5 @@
         
         window.location = url;
     }
-
-    // Reset form function
-    function resetForm() {
-        document.getElementById('filterForm').reset();
-        window.location.href = window.location.pathname;
-    }
-
-    // Simple function to ensure all card details are visible
-    function showAllCardDetails() {
-        console.log('=== CARD DIAGNOSTICS START ===');
-        
-        const cards = document.querySelectorAll('.toggle-tile-body');
-        const actData = document.querySelectorAll('.act-data');
-        const listItems = document.querySelectorAll('.act-data li');
-        const errorMessages = document.querySelectorAll('.alert-warning');
-        
-        // Check for list view and apply appropriate styling
-        const container = document.getElementById('toggleTileContainer');
-        const isListView = container && container.classList.contains('list-view');
-        
-        console.log('Cards found:', cards.length);
-        console.log('Act data elements found:', actData.length);
-        console.log('List items found:', listItems.length);
-        console.log('Error messages found:', errorMessages.length);
-        console.log('Is list view:', isListView);
-        
-        // Check and fix headers for all cards
-        cards.forEach((card, index) => {
-            const content = card.querySelector('.toggle-tile-content');
-            if (content) {
-                // First, look for all h4 headers and remove any duplicates
-                const headers = content.querySelectorAll('h4');
-                
-                // If more than one header, keep only the first and remove the rest
-                if (headers.length > 1) {
-                    console.log(`Found ${headers.length} headers in card ${index}, removing duplicates`);
-                    for (let i = 1; i < headers.length; i++) {
-                        headers[i].remove();
-                    }
-                }
-                
-                // Check if we still have a header after removing duplicates
-                const header = content.querySelector('h4');
-                if (!header) {
-                    // Missing header, create one
-                    console.log(`Missing header in card ${index}, adding it`);
-                    const title = content.getAttribute('data-en') || content.getAttribute('data-fr') || 'Legal Document';
-                    const newHeader = document.createElement('h4');
-                    newHeader.innerHTML = `<i class="fas fa-book act-icon"></i> ${title}`;
-                    content.prepend(newHeader);
-                }
-                
-                // Check for and remove any text nodes between h4 and ul.act-data
-                // This fixes the duplicate title issue (e.g. "French IRPA" text appearing twice)
-                const actData = content.querySelector('.act-data');
-                if (header && actData) {
-                    // Get all nodes between header and act-data
-                    let currentNode = header.nextSibling;
-                    while (currentNode && currentNode !== actData) {
-                        const nextNode = currentNode.nextSibling;
-                        // If it's a text node with non-whitespace content, remove it
-                        if (currentNode.nodeType === 3 && currentNode.textContent.trim()) {
-                            console.log(`Removing duplicate text node: "${currentNode.textContent.trim()}" in card ${index}`);
-                            currentNode.remove();
-                        }
-                        currentNode = nextNode;
-                    }
-                }
-
-                // Ensure header is correctly styled
-                const currentHeader = content.querySelector('h4');
-                if (currentHeader) {
-                    if (isListView) {
-                        currentHeader.style.display = 'flex';
-                        currentHeader.style.alignItems = 'center';
-                        currentHeader.style.justifyContent = 'flex-start';
-                        currentHeader.style.textAlign = 'left';
-                        currentHeader.style.width = '100%';
-                        
-                        // Ensure header has book icon
-                        if (!currentHeader.querySelector('.fa-book')) {
-                            const title = currentHeader.textContent.trim();
-                            currentHeader.innerHTML = `<i class="fas fa-book act-icon"></i> ${title}`;
-                        }
-                    } else {
-                        // Grid view - use left aligned header with book icon for consistency
-                        currentHeader.style.display = 'flex';
-                        currentHeader.style.alignItems = 'center';
-                        currentHeader.style.justifyContent = 'flex-start';
-                        currentHeader.style.textAlign = 'left';
-                        currentHeader.style.width = '100%';
-                        
-                        // Ensure header has book icon in grid view too
-                        if (!currentHeader.querySelector('.fa-book')) {
-                            const title = currentHeader.textContent.trim();
-                            currentHeader.innerHTML = `<i class="fas fa-book act-icon"></i> ${title}`;
-                        }
-                    }
-                }
-            }
-        });
-        
-        // Show any error messages
-        if (errorMessages.length > 0) {
-            errorMessages.forEach((error, index) => {
-                console.log(`Error ${index}:`, error.textContent);
-            });
-        }
-        
-        // Show details of first few cards
-        for (let i = 0; i < Math.min(5, cards.length); i++) {
-            const card = cards[i];
-            console.log(`=== CARD ${i} DETAILS ===`);
-            console.log('Card HTML length:', card.innerHTML.length);
-            console.log('Card HTML preview:', card.innerHTML.substring(0, 300) + '...');
-            
-            const cardActData = card.querySelectorAll('.act-data');
-            const cardListItems = card.querySelectorAll('.act-data li');
-            console.log(`Card ${i} - act-data elements:`, cardActData.length);
-            console.log(`Card ${i} - list items:`, cardListItems.length);
-            
-            // Check if the card has act-data but it's hidden
-            if (cardActData.length > 0) {
-                const actDataEl = cardActData[0];
-                const computedStyle = window.getComputedStyle(actDataEl);
-                console.log(`Card ${i} act-data computed display:`, computedStyle.display);
-                console.log(`Card ${i} act-data computed visibility:`, computedStyle.visibility);
-                console.log(`Card ${i} act-data computed opacity:`, computedStyle.opacity);
-            }
-        }
-        
-        // Force visibility on all elements and make them immutable
-        actData.forEach((data, index) => {
-            // Use direct style setting instead of setProperty
-            data.style.visibility = 'visible';
-            data.style.opacity = '1';
-            
-            // Check if we're in list view
-            if (isListView) {
-                data.style.display = 'flex';
-                data.style.flexDirection = 'row'; // Use row layout for horizontal display
-                data.style.flexWrap = 'nowrap'; // Keep items in a single row
-                data.style.alignItems = 'center';
-                data.style.justifyContent = 'flex-start';
-                data.style.gap = '25px'; // Consistent horizontal spacing
-                data.style.padding = '0 0 0 25px'; // Left padding to align with document title icon
-                data.style.backgroundColor = 'transparent';
-                data.style.overflowX = 'auto'; // Allow horizontal scrolling if needed
-                
-                // Force all child li elements to display horizontally
-                const listItems = data.querySelectorAll('li');
-                listItems.forEach(item => {
-                    item.style.display = 'flex';
-                    item.style.width = 'auto';
-                    item.style.whiteSpace = 'nowrap';
-                    item.style.fontSize = '13px';
-                    item.style.flexShrink = '0'; // Prevent items from shrinking
-                    
-                    // Remove any leftover icons from existing items
-                    const icons = item.querySelectorAll('i:not(.fa-arrow-right)');
-                    icons.forEach(icon => {
-                        icon.remove();
-                    });
-                    
-                    // Style the strong elements
-                    const strong = item.querySelector('strong');
-                    if (strong) {
-                        strong.style.fontWeight = '500';
-                        strong.style.color = '#555';
-                    }
-                    
-                    if (item.classList.contains('view-button')) {
-                        item.style.marginLeft = 'auto';
-                    }
-                });
-            } else {
-                data.style.display = 'block';
-                data.style.padding = '10px';
-            }
-            
-            // Try setProperty with error handling
-            try {
-                data.style.setProperty('visibility', 'visible', 'important');
-                data.style.setProperty('opacity', '1', 'important');
-                
-                if (isListView) {
-                    data.style.setProperty('display', 'flex', 'important');
-                    data.style.setProperty('flex-direction', 'row', 'important'); // Force horizontal layout
-                    data.style.setProperty('flex-wrap', 'nowrap', 'important'); // Keep items in a single row
-                    data.style.setProperty('align-items', 'center', 'important');
-                    data.style.setProperty('justify-content', 'flex-start', 'important');
-                    data.style.setProperty('gap', '25px', 'important'); // Consistent horizontal spacing
-                    data.style.setProperty('padding', '0 0 0 25px', 'important'); // Left padding
-                    data.style.setProperty('background-color', 'transparent', 'important');
-                    data.style.setProperty('overflow-x', 'auto', 'important'); // Allow horizontal scrolling if needed
-                    
-                    // Force all li elements inside to be horizontal
-                    const listItems = data.querySelectorAll('li');
-                    listItems.forEach(item => {
-                        item.style.setProperty('display', 'flex', 'important');
-                        item.style.setProperty('width', 'auto', 'important');
-                        item.style.setProperty('white-space', 'nowrap', 'important');
-                        item.style.setProperty('flex-shrink', '0', 'important'); // Prevent items from shrinking
-                        
-                        // Remove any leftover icons from existing items
-                        const icons = item.querySelectorAll('i:not(.fa-arrow-right)');
-                        icons.forEach(icon => {
-                            icon.remove();
-                        });
-                        
-                        if (item.classList.contains('view-button')) {
-                            item.style.setProperty('margin-left', 'auto', 'important');
-                        }
-                    });
-                } else {
-                    data.style.setProperty('display', 'block', 'important');
-                    data.style.setProperty('padding', '10px', 'important');
-                }
-            } catch (e) {
-                console.log('⚠️ setProperty failed, using direct assignment');
-            }
-            
-            console.log(`Act data ${index} forced visible with protection`);
-        });
-        
-        listItems.forEach((item, index) => {
-            // Use direct style setting
-            item.style.visibility = 'visible';
-            item.style.opacity = '1';
-            
-            if (isListView) {
-                item.style.display = 'flex';
-                item.style.alignItems = 'center';
-                item.style.border = 'none';
-                item.style.width = 'auto';
-                item.style.margin = '0';
-                item.style.whiteSpace = 'nowrap';
-                
-                // Push View Document button to the right
-                if (item.classList.contains('view-button')) {
-                    item.style.marginLeft = 'auto';
-                }
-            } else {
-                item.style.display = 'block';
-                item.style.width = '100%';
-            }
-            
-            try {
-                item.style.setProperty('visibility', 'visible', 'important');
-                item.style.setProperty('opacity', '1', 'important');
-                
-                if (isListView) {
-                    item.style.setProperty('display', 'flex', 'important');
-                    item.style.setProperty('align-items', 'center', 'important');
-                    item.style.setProperty('border', 'none', 'important');
-                    item.style.setProperty('width', 'auto', 'important');
-                    item.style.setProperty('margin', '0', 'important');
-                    item.style.setProperty('white-space', 'nowrap', 'important');
-                    
-                    // Push View Document button to the right
-                    if (item.classList.contains('view-button')) {
-                        item.style.setProperty('margin-left', 'auto', 'important');
-                    }
-                } else {
-                    item.style.setProperty('display', 'block', 'important');
-                    item.style.setProperty('width', '100%', 'important');
-                }
-            } catch (e) {
-                // Ignore setProperty errors
-            }
-        });
-        
-        console.log('=== DIAGNOSTICS COMPLETE ===');
-    }
-
-    // Function to load saved popups into the droppable area
-    function loadSavedPopups() {
-        const clientId = {{ isset($client) && $client ? $client->id : 'null' }};
-        
-        // Determine context: if we have a client, load client-specific popups, otherwise load user personal popups
-        const context = clientId ? 'client' : 'user';
-        
-        // Build the URL with appropriate parameters
-        let url = '/get-saved-popups?context=' + context;
-        if (clientId) {
-            url += '&client_id=' + clientId;
-        }
-        
-        fetch(url, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success && data.popups && data.popups.length > 0) {
-                console.log(`Loading ${data.popups.length} saved popups for ${context} context`);
-                loadPopupsIntoDroppableArea(data.popups);
-            } else {
-                console.log(`No saved popups found for ${context} context`);
-            }
-        })
-        .catch(error => {
-            console.error('Error loading saved popups:', error);
-        });
-    }
-
-    // Function to load popups into the droppable area
-    function loadPopupsIntoDroppableArea(popups) {
-        const droppableArea = document.getElementById('droppableArea');
-        if (!droppableArea) {
-            console.error('Droppable area not found');
-            return;
-        }
-
-        // Remove the placeholder if it exists
-        const placeholder = droppableArea.querySelector('.drop-placeholder');
-        if (placeholder) {
-            placeholder.remove();
-        }
-
-        // Add each popup to the droppable area
-        popups.forEach(popup => {
-            const droppedItem = document.createElement('div');
-            droppedItem.className = 'dropped-item mb-3 p-3 border rounded bg-light position-relative';
-            
-            // Store data attributes for popup saving
-            droppedItem.dataset.sectionId = popup.section_id || 'unknown';
-            droppedItem.dataset.categoryId = popup.category_id || '1';
-            droppedItem.dataset.tableName = popup.table_name || 'unknown';
-            if (popup.part) droppedItem.dataset.part = popup.part;
-            if (popup.division) droppedItem.dataset.division = popup.division;
-            
-            // Set the popup content with a close button
-            droppedItem.innerHTML = popup.popup_content + '<button type="button" class="btn-close position-absolute top-0 end-0 m-2" onclick="this.parentElement.remove()"></button>';
-            
-            droppableArea.appendChild(droppedItem);
-        });
-
-        console.log(`Loaded ${popups.length} popups into droppable area`);
-    }
-
-    // DOM ready handler
-    document.addEventListener('DOMContentLoaded', function() {
-        console.log('=== DOM CONTENT LOADED ===');
-        
-        // Initialize container with list view class
-        const container = document.getElementById('toggleTileContainer');
-        if (container) {
-            container.classList.add('act-content', 'list-view');
-            
-            // Make sure headings are visible in list view
-            const headings = container.querySelectorAll('.toggle-tile-content h4');
-            headings.forEach(function(heading) {
-                heading.style.display = 'flex';
-                heading.style.alignItems = 'center';
-                heading.style.justifyContent = 'flex-start';
-                heading.style.textAlign = 'left';
-                heading.style.width = '100%';
-                
-                // Remove any text nodes between this header and the ul.act-data
-                // This removes duplicate title text like "French IRPA" appearing twice
-                const content = heading.parentNode;
-                if (content) {
-                    const actData = content.querySelector('.act-data');
-                    if (actData) {
-                        let currentNode = heading.nextSibling;
-                        while (currentNode && currentNode !== actData) {
-                            const nextNode = currentNode.nextSibling;
-                            // If it's a text node with non-whitespace content, remove it
-                            if (currentNode.nodeType === 3 && currentNode.textContent.trim()) {
-                                console.log(`Removing duplicate text node: "${currentNode.textContent.trim()}"`);
-                                currentNode.remove();
-                            }
-                            currentNode = nextNode;
-                        }
-                    }
-                }
-            });
-        }
-        
-        // Immediate and repeated checks
-        showAllCardDetails();
-        
-        setTimeout(function() {
-            console.log('=== RUNNING DIAGNOSTICS AFTER 500ms ===');
-            showAllCardDetails();
-        }, 500);
-        
-        setTimeout(function() {
-            console.log('=== RUNNING DIAGNOSTICS AFTER 2000ms ===');
-            showAllCardDetails();
-        }, 2000);
-        
-        // Load saved popups on page load
-        loadSavedPopups();
-        
-        // Apply saved language
-        const savedLanguage = localStorage.getItem('selectedLanguage') || 'en';
-        if (typeof translateLegalTablesPage === 'function') {
-            translateLegalTablesPage(savedLanguage);
-        }
-    });
-
-    // jQuery ready handler (if jQuery is available)
-    if (typeof $ !== 'undefined') {
-        $(document).ready(function () {
-            console.log('=== JQUERY READY ===');
-            
-            // Client selection handler
-            $('#client_selector').on('change', function() {
-                const clientId = $(this).val();
-                if (clientId) {
-                    // Redirect to client management with client parameter
-                    window.location.href = '/client-management?client_id=' + clientId;
-                } else {
-                    // Redirect to user-centric mode
-                    window.location.href = '/client-management';
-                }
-            });
-            
-            // Save content with context awareness
-            $('#saveContent').on('click', function() {
-                const saveContext = $('#saveContext').val();
-                const editorContent = $('#contentEditor').val();
-                const droppableContent = $('#droppableArea').html();
-                const clientId = {{ isset($client) && $client ? $client->id : 'null' }};
-                
-                // Show loading state
-                const $this = $(this);
-                $this.prop('disabled', true);
-                $this.html('<i class="fas fa-spinner fa-spin"></i> Saving...');
-                
-                $.ajax({
-                    url: '/save-content',
-                    method: 'POST',
-                    data: {
-                        _token: '{{ csrf_token() }}',
-                        context: saveContext,
-                        editor_content: editorContent,
-                        droppable_content: droppableContent,
-                        client_id: clientId
-                    },
-                    success: function(response) {
-                        if (response.success) {
-                            alert('Content saved successfully!');
-                        } else {
-                            alert('Error: ' + response.message);
-                        }
-                    },
-                    error: function(xhr) {
-                        console.error('Error:', xhr);
-                        alert('Error saving content. Please try again.');
-                    },
-                    complete: function() {
-                        // Reset button state
-                        $this.prop('disabled', false);
-                        $this.html('<span data-en="Save Content" data-fr="Enregistrer le contenu">Save Content</span>');
-                    }
-                });
-            });
-            
-            // Immediately show all cards and details
-            showAllCardDetails();
-            
-            const $container = $('#toggleTileContainer');
-
-            // View toggle functionality
-            $('input[name="view-toggle"]').on('change', function () {
-                const view = $(this).val();
-                
-                // First update container class for proper styling context
-                if (view === 'list') {
-                    $container.addClass('act-content list-view').removeClass('grid-view');
-                    
-                    // Check for and remove duplicate headers
-                    $container.find('.toggle-tile-body .toggle-tile-content').each(function() {
-                        const $content = $(this);
-                        const $headers = $content.find('h4');
-                        
-                        // If more than one header, keep only the first and remove others
-                        if ($headers.length > 1) {
-                            console.log(`Found ${$headers.length} headers, removing duplicates`);
-                            $headers.slice(1).remove();
-                        }
-                        
-                        // Make sure headings are visible and left-aligned in list view
-                        const $header = $content.find('h4').first();
-                        
-                        if ($header.length) {
-                            // Ensure header styling
-                            $header.css({
-                                'display': 'flex',
-                                'align-items': 'center',
-                                'justify-content': 'flex-start',
-                                'text-align': 'left',
-                                'width': '100%'
-                            });
-                            
-                            // Ensure book icon exists
-                            if (!$header.find('.fa-book').length && !$header.find('.act-icon').length) {
-                                const title = $header.text().trim();
-                                $header.html(`<i class="fas fa-book act-icon"></i> ${title}`);
-                            }
-                            
-                            // Remove any text nodes between the header and the ul.act-data
-                            // This removes the duplicate title text
-                            const $actData = $content.find('.act-data');
-                            if ($actData.length) {
-                                $header.nextUntil('.act-data').each(function() {
-                                    const $node = $(this);
-                                    if (this.nodeType === 3 || !$node.hasClass('act-data')) {
-                                        // If it's a text node or not the act-data element, remove it
-                                        console.log('Removing node between header and act-data:', $node.text());
-                                        $node.remove();
-                                    }
-                                });
-                            }
-                        } else {
-                            // Create header if missing
-                            const title = $content.attr('data-en') || $content.attr('data-fr') || 'Legal Document';
-                            const $newHeader = $(`<h4><i class="fas fa-book act-icon"></i> ${title}</h4>`).css({
-                                'display': 'flex',
-                                'align-items': 'center',
-                                'justify-content': 'flex-start',
-                                'text-align': 'left',
-                                'width': '100%'
-                            });
-                            $content.prepend($newHeader);
-                        }
-                    });
-                    
-                    // Apply alternating row backgrounds
-                    $container.find('.toggle-tile-body:nth-child(even)').css('background-color', '#f8f9fa');
-                    $container.find('.toggle-tile-body:nth-child(odd)').css('background-color', 'white');
-                } else {
-                    $container.addClass('grid-view').removeClass('act-content list-view');
-                    
-                    // Check for duplicate headers in grid view
-                    $container.find('.toggle-tile-body .toggle-tile-content').each(function() {
-                        const $content = $(this);
-                        const $headers = $content.find('h4');
-                        
-                        // If more than one header, keep only the first and remove others
-                        if ($headers.length > 1) {
-                            console.log(`Found ${$headers.length} headers in grid view, removing duplicates`);
-                            $headers.slice(1).remove();
-                        }
-                        
-                        // Show headings in grid view with appropriate styling
-                        const $header = $content.find('h4').first();
-                        
-                        if ($header.length) {
-                            // Ensure header styling for grid view - make left aligned like list view
-                            $header.css({
-                                'display': 'flex',
-                                'align-items': 'center',
-                                'justify-content': 'flex-start',
-                                'text-align': 'left',
-                                'width': '100%'
-                            });
-                            
-                            // Ensure book icon exists
-                            if (!$header.find('.fa-book').length && !$header.find('.act-icon').length) {
-                                const title = $header.text().trim();
-                                $header.html(`<i class="fas fa-book act-icon"></i> ${title}`);
-                            }
-                            
-                            // Remove any text nodes between the header and the ul.act-data in grid view too
-                            const $actData = $content.find('.act-data');
-                            if ($actData.length) {
-                                $header.nextUntil('.act-data').each(function() {
-                                    const $node = $(this);
-                                    if (this.nodeType === 3 || !$node.hasClass('act-data')) {
-                                        console.log('Removing node between header and act-data in grid view:', $node.text());
-                                        $node.remove();
-                                    }
-                                });
-                            }
-                        } else {
-                            // Create header if missing
-                            const title = $content.attr('data-en') || $content.attr('data-fr') || 'Legal Document';
-                            const $newHeader = $(`<h4><i class="fas fa-book act-icon"></i> ${title}</h4>`).css({
-                                'display': 'flex',
-                                'align-items': 'center',
-                                'justify-content': 'flex-start',
-                                'text-align': 'left',
-                                'width': '100%'
-                            });
-                            $content.prepend($newHeader);
-                        }
-                    });
-                    
-                    // Reset backgrounds for grid view
-                    $container.find('.toggle-tile-body').css('background-color', '');
-                }
-                
-                // Then update individual tiles
-                $container.find('.toggle-tile-body').each(function () {
-                    $(this).removeClass('col-12 col-md-4 col-lg-3 grid list');
-                    if (view === 'list') {
-                        $(this).addClass('col-12 list');
-                    } else {
-                        $(this).addClass('col-12 col-md-4 col-lg-3 grid');
-                    }
-                });
-                
-                // Re-apply protection after layout change
-                setTimeout(showAllCardDetails, 100);
-            });
-
-            // Language filter
-            $('input[name="toggle"]').on('change', function () {
-                const langValue = $(this).val();
-                console.log('Language filter changed to:', langValue);
-                
-                if (langValue === '') {
-                    $container.find('.toggle-tile-body').show();
-                } else {
-                    $container.find('.toggle-tile-body').each(function () {
-                        const $item = $(this);
-                        const itemLanguage = $item.find('.act-language span').text().trim();
-                        
-                        if (langValue === '1' && (itemLanguage === 'English' || itemLanguage === 'Bilingual')) {
-                            $item.show();
-                        } else if (langValue === '2' && (itemLanguage === 'French' || itemLanguage === 'Bilingual')) {
-                            $item.show();
-                        } else if (langValue === '1' || langValue === '2') {
-                            $item.hide();
-                        } else {
-                            $item.show();
-                        }
-                    });
-                }
-                
-                setTimeout(showAllCardDetails, 100);
-            });
-
-            // A-Z toggle
-            $('#act-pagination-toggle').on('click', function () {
-                $('#act-pagination-content').toggleClass('active');
-                $(this).toggleClass('active');
-            });
-
-            // Search functionality
-            $('#quickSearchBtn').on('click', function() {
-                $('#filterForm').submit();
-            });
-            
-            $('#keyword').on('keypress', function(e) {
-                if (e.which === 13) {
-                    $('#filterForm').submit();
-                }
-            });
-            
-            // Card click handlers
-            $('.toggle-tile-content').on('click', function(e) {
-                // Don't trigger card click if clicking on the view button
-                if ($(e.target).closest('.view-button').length > 0) {
-                    return;
-                }
-                
-                const tableName = $(this).data('table-name');
-                const actId = $(this).data('act-id');
-                const clientId = $(this).data('client-id');
-                const languageId = $(this).data('language-id');
-                
-                if (tableName && actId) {
-                    // Use the same language ID that's on the card for consistency
-                    // clientId can be null for user-centric mode
-                    redirectToDocument(tableName, actId, clientId || null, languageId);
-                }
-            });
-        });
-    } else {
-        console.log('jQuery not available');
-    }
-
-    // Translation functionality
-    function translateLegalTablesPage(language) {
-        const elements = document.querySelectorAll('[data-en][data-fr]');
-        elements.forEach(element => {
-            const translation = element.getAttribute('data-' + language);
-            if (translation) {
-                element.textContent = translation;
-            }
-        });
-
-        const placeholderElements = document.querySelectorAll('[data-placeholder-en][data-placeholder-fr]');
-        placeholderElements.forEach(element => {
-            const placeholder = element.getAttribute('data-placeholder-' + language);
-            if (placeholder) {
-                element.placeholder = placeholder;
-            }
-        });
-
-        const options = document.querySelectorAll('option[data-en][data-fr]');
-        options.forEach(option => {
-            const translation = option.getAttribute('data-' + language);
-            if (translation) {
-                option.textContent = translation;
-            }
-        });
-
-        const optgroups = document.querySelectorAll('optgroup[data-label-en][data-label-fr]');
-        optgroups.forEach(optgroup => {
-            const label = optgroup.getAttribute('data-label-' + language);
-            if (label) {
-                optgroup.label = label;
-            }
-        });
-    }
-
-    // Language change listener
-    window.addEventListener('languageChanged', function(event) {
-        const selectedLanguage = event.detail.language;
-        translateLegalTablesPage(selectedLanguage);
-    });
-
 </script>
 @endpush
