@@ -1,5 +1,94 @@
 @extends('layouts.user-layout')
 
+@push('styles')
+<style>
+    /* Letter filter active state */
+    .act-pagination a.active {
+        background-color: #007bff !important;
+        color: white !important;
+        border-color: #007bff !important;
+    }
+    
+    .letter-toggle.active {
+        background-color: #007bff;
+        color: white;
+        border-radius: 4px;
+        padding: 4px 8px;
+    }
+    
+    /* Results counter styling */
+    .results-counter {
+        margin-left: auto;
+        padding: 8px 12px;
+        background-color: #f8f9fa;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        color: #6c757d;
+        border: 1px solid #e9ecef;
+    }
+    
+    .widget-title.with-filters {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+    
+    /* Smooth transitions for filtering */
+    .toggle-tile-body {
+        transition: opacity 0.3s ease-in-out;
+    }
+    
+    .toggle-tile-body:not([style*="display: none"]) {
+        opacity: 1;
+    }
+    
+    /* Disabled letter styling */
+    .act-pagination a.disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+    
+    /* Hover effects for letter filter */
+    .act-pagination a:not(.disabled):hover {
+        background-color: #e9ecef;
+        transform: translateY(-1px);
+        transition: all 0.2s ease;
+    }
+    
+    /* Clear filters button styling */
+    #clearFilters {
+        padding: 6px 12px;
+        font-size: 0.85rem;
+        border-radius: 4px;
+        transition: all 0.2s ease;
+    }
+    
+    #clearFilters:hover {
+        background-color: #6c757d;
+        border-color: #6c757d;
+        color: white;
+        transform: translateY(-1px);
+    }
+    
+    /* Mobile responsive adjustments */
+    @media (max-width: 768px) {
+        .results-counter {
+            margin-left: 0;
+            margin-top: 0.5rem;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .widget-title.with-filters {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    }
+</style>
+@endpush
+
 @section('content')
 <div class="main-content container-fluid">
     <div class="row sec-title title-default px-4">
@@ -148,13 +237,15 @@
                         <div class="single-filter">
                             <span class="toggle-label" data-en="Language " data-fr="Langue ">Language </span>
                             <div class="ln-toggle">
-                                <input type="radio" id="lang-en" name="toggle" value="1">
-                                <label for="lang-en" class="toggle">EN</label>
-                                <input type="radio" id="lang-fr" name="toggle" value="2">
-                                <label for="lang-fr" class="toggle">FR</label>
-                                <input type="radio" id="lang-all" name="toggle" value="" checked>
-                                <label for="lang-all" class="toggle">ALL</label>
-                                <span></span>
+                                <form id="languageFilterForm" method="GET" action="{{ route('user.client.legal-tables', $client->id) }}" style="display:inline;">
+                                    <input type="radio" id="lang-en" name="language_filter" value="en" {{ request('language_filter') == 'en' ? 'checked' : '' }}>
+                                    <label for="lang-en" class="toggle">EN</label>
+                                    <input type="radio" id="lang-fr" name="language_filter" value="fr" {{ request('language_filter') == 'fr' ? 'checked' : '' }}>
+                                    <label for="lang-fr" class="toggle">FR</label>
+                                    <input type="radio" id="lang-all" name="language_filter" value="" {{ request('language_filter', '') == '' ? 'checked' : '' }}>
+                                    <label for="lang-all" class="toggle">ALL</label>
+                                    <span></span>
+                                </form>
                             </div>
                         </div>
                         <div class="single-filter">
@@ -166,6 +257,9 @@
                                 <label for="view-list" class="toggle">List</label>
                                 <span></span>
                             </div>
+                        </div>
+                        <div class="single-filter">
+                            <button type="button" id="clearFilters" class="btn btn-sm btn-outline-secondary" data-en="Clear Filters" data-fr="Effacer les filtres">Clear Filters</button>
                         </div>
                         <div id="act-pagination-content" class="widget-filters-extended letter-filter">
                             <ul class="act-pagination">
@@ -316,18 +410,114 @@
     }
 
     $(document).ready(function () {
-        // Toggle A-Z filter section
+        // --- FILTER LOGIC REWRITE ---
+        const $container = $('#toggleTileContainer');
+
+        // Helper: get language value
+        function getLangValue() {
+            return $('input[name="toggle"]:checked').val();
+        }
+
+        // Helper: get selected letter
+        function getSelectedLetter() {
+            return $('#act-pagination-toggle').attr('data-selected-letter');
+        }
+
+        // Main filter function
+        function applyFilters() {
+            const langValue = getLangValue();
+            const selectedLetter = getSelectedLetter();
+            let anyVisible = false;
+
+            $container.find('.toggle-tile-body').each(function () {
+                const $item = $(this);
+                const itemLanguage = $item.find('.act-language span').text().trim();
+                const itemName = $item.find('h4').text().replace(/^\s*[^A-Za-z0-9]*\s*/, '').trim();
+                const firstLetter = itemName.charAt(0).toUpperCase();
+
+                let showItem = true;
+
+                // Language filter
+                if (langValue === '1') {
+                    if (!(itemLanguage === 'English' || itemLanguage === 'Bilingual')) showItem = false;
+                } else if (langValue === '2') {
+                    if (!(itemLanguage === 'French' || itemLanguage === 'Bilingual')) showItem = false;
+                }
+
+                // Letter filter
+                if (selectedLetter && firstLetter !== selectedLetter) {
+                    showItem = false;
+                }
+
+                if (showItem) {
+                    $item.show();
+                    anyVisible = true;
+                } else {
+                    $item.hide();
+                }
+            });
+
+            updateResultsCount();
+        }
+
+        // Update results counter and no-results message
+        function updateResultsCount() {
+            const visibleItems = $container.find('.toggle-tile-body:visible').length;
+            const totalItems = $container.find('.toggle-tile-body').length;
+            let $counter = $('.results-counter');
+            if ($counter.length === 0) {
+                $counter = $('<div class="results-counter"></div>');
+                $('.widget-title.with-filters').append($counter);
+            }
+            $counter.html(`<span data-en="Showing ${visibleItems} of ${totalItems} results" data-fr="Affichage de ${visibleItems} sur ${totalItems} résultats">Showing ${visibleItems} of ${totalItems} results</span>`);
+
+            // Show/hide no results
+            let $noResults = $('.no-filter-results');
+            if (visibleItems === 0 && totalItems > 0) {
+                if ($noResults.length === 0) {
+                    $noResults = $('<div class="col-12 no-filter-results text-center py-5"><i class="fas fa-filter" style="font-size: 2rem; margin-bottom: 1rem; color: #999;"></i><h4 data-en="No results match your filters" data-fr="Aucun résultat ne correspond à vos filtres">No results match your filters</h4><p data-en="Try adjusting your filters or clear them to see all results." data-fr="Essayez d\'ajuster vos filtres ou effacez-les pour voir tous les résultats.">Try adjusting your filters or clear them to see all results.</p></div>');
+                    $container.append($noResults);
+                }
+                $noResults.show();
+            } else {
+                $noResults.hide();
+            }
+        }
+
+        // --- Event bindings ---
+
+        // Language radio (server-side fetch)
+        $('input[name="language_filter"]').on('change', function () {
+            $('#languageFilterForm').submit();
+        });
+
+        // Letter click
+        $('.act-pagination a').on('click', function (e) {
+            e.preventDefault();
+            if ($(this).hasClass('disabled')) return;
+            const letter = $(this).attr('href').substring(1);
+            $('.act-pagination a').removeClass('active');
+            $(this).addClass('active');
+            $('#act-pagination-toggle').attr('data-selected-letter', letter);
+            $('#act-pagination-toggle').text(' ' + letter);
+            applyFilters();
+        });
+
+        // A to Z toggle
         $('#act-pagination-toggle').on('click', function () {
             $('#act-pagination-content').toggleClass('active');
             $(this).toggleClass('active');
+            if (!$('#act-pagination-content').hasClass('active')) {
+                $('.act-pagination a').removeClass('active');
+                $(this).removeAttr('data-selected-letter');
+                $(this).text(' A to Z');
+                applyFilters();
+            }
         });
 
-        const $container = $('#toggleTileContainer');
-
-        // View toggle functionality
+        // View toggle
         $('input[name="view-toggle"]').on('change', function () {
             const view = $(this).val();
-
             $container.find('.toggle-tile-body').each(function () {
                 $(this).removeClass('col-12 col-md-4 col-lg-3 grid list');
                 if (view === 'list') {
@@ -338,29 +528,24 @@
             });
         });
 
-        // Language filter functionality
-        $('input[name="toggle"]').on('change', function () {
-            const langValue = $(this).val();
-            
-            // Apply language filter to visible items
+        // Clear filters
+        $('#clearFilters').on('click', function() {
+            $('#lang-all').prop('checked', true);
+            $('.act-pagination a').removeClass('active');
+            $('#act-pagination-toggle').removeAttr('data-selected-letter');
+            $('#act-pagination-toggle').text(' A to Z');
+            $('#act-pagination-content').removeClass('active');
+            $('#act-pagination-toggle').removeClass('active');
+            $('#view-grid').prop('checked', true);
+            applyFilters();
             $container.find('.toggle-tile-body').each(function () {
-                const $item = $(this);
-                const itemLanguage = $item.find('.act-language span').text().trim();
-                
-                if (langValue === '') {
-                    // Show all
-                    $item.show();
-                } else if (langValue === '1' && (itemLanguage === 'English' || itemLanguage === 'Bilingual')) {
-                    // Show English
-                    $item.show();
-                } else if (langValue === '2' && (itemLanguage === 'French' || itemLanguage === 'Bilingual')) {
-                    // Show French
-                    $item.show();
-                } else {
-                    $item.hide();
-                }
+                $(this).removeClass('col-12 col-md-4 col-lg-3 grid list');
+                $(this).addClass('col-12 col-md-4 col-lg-3 grid');
             });
         });
+
+        // Initial filter
+        applyFilters();
 
         // Quick search functionality
         $('#quickSearchBtn').on('click', function() {

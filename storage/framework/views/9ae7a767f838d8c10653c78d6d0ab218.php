@@ -1,6 +1,6 @@
-@extends('layouts.user-layout')
 
-@push('styles')
+
+<?php $__env->startPush('styles'); ?>
 <style>
     /* Client selection dropdown styling */
     .client-selector {
@@ -399,9 +399,9 @@
         margin-left: auto !important;
     }
 </style>
-@endpush
+<?php $__env->stopPush(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div class="main-content container-fluid">
     <div class="row sec-title title-default px-4">
         <div class="col-12">
@@ -410,7 +410,7 @@
     </div>
     
     <!-- Client Selection Area - Shows only if no client is selected -->
-    @if(!isset($client) || !$client)
+    <?php if(!isset($client) || !$client): ?>
     <div class="row gap_top">
         <div class="col-12 mb-4">
             <div class="client-selector">
@@ -418,18 +418,18 @@
                     <label for="client_selector">Select Client</label>
                     <select name="client_id" id="client_selector" class="form-control form-select">
                         <option value="">-- Select a client --</option>
-                        @foreach($allClients as $clientOption)
-                            <option value="{{ $clientOption->id }}">{{ $clientOption->client_name }} ({{ $clientOption->client_email }})</option>
-                        @endforeach
+                        <?php $__currentLoopData = $allClients; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $clientOption): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <option value="<?php echo e($clientOption->id); ?>"><?php echo e($clientOption->client_name); ?> (<?php echo e($clientOption->client_email); ?>)</option>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </select>
                 </form>
             </div>
         </div>
     </div>
-    @endif
+    <?php endif; ?>
     
     <!-- Client Details Area - Shows only if client is selected -->
-    @if(isset($client) && $client)
+    <?php if(isset($client) && $client): ?>
             <div class="bg_custom p-4 rounded shadow-sm">
                 <div class="d-flex align-items-center">
                     <div class="client-avatar me-4 d-flex justify-content-center align-items-center rounded-circle bg-light text-primary" style="width: 60px; height: 60px; font-size: 24px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
@@ -440,13 +440,15 @@
                         <div class="d-flex flex-wrap">
                             <div class="me-4 mb-2">
                                 <span class="d-flex align-items-center">
-                                    <strong>Name:</strong>&nbsp;{{ $client->client_name ?? '-' }}
+                                    <strong>Name:</strong>&nbsp;<?php echo e($client->client_name ?? '-'); ?>
+
                                 </span>
                             </div>
                             <div class="mb-2">
                                 <span class="d-flex align-items-center">
                                     <i class="fas fa-envelope me-2 text-secondary"></i>
-                                    <strong>Email:</strong>&nbsp;{{ $client->client_email ?? '-' }}
+                                    <strong>Email:</strong>&nbsp;<?php echo e($client->client_email ?? '-'); ?>
+
                                 </span>
                             </div>
                         </div>
@@ -455,7 +457,7 @@
             </div>
         </div>
     </div>
-    @endif
+    <?php endif; ?>
     
     <div class="row p-4 rounded shadow-sm">
         <div class="col-12">
@@ -464,10 +466,10 @@
                     <h5>Search Legislations</h5>
                 </div>
                 <div class="widget-body sp-top-dbl">
-                    <form method="GET" action="{{ isset($client) && $client ? route('user.client.legal-tables', $client->id) : route('client.management') }}" id="filterForm" class="row form vertical-form">
-                        @if(isset($client) && $client)
-                            <input type="hidden" name="client_id" value="{{ $client->id }}">
-                        @endif
+                    <form method="GET" action="<?php echo e(isset($client) && $client ? route('user.client.legal-tables', $client->id) : route('client.management')); ?>" id="filterForm" class="row form vertical-form">
+                        <?php if(isset($client) && $client): ?>
+                            <input type="hidden" name="client_id" value="<?php echo e($client->id); ?>">
+                        <?php endif; ?>
                         <div class="row m-0">
                             <!-- Always visible (Simple Search) -->
                             <div class="col-lg-4 form-group mb-3">
@@ -475,7 +477,7 @@
                                 <div class="input-group">
                                     <input type="text" name="search" id="keyword" class="form-control" 
                                            placeholder="Legal Act, Regulation.." 
-                                           value="{{ request('search') }}">
+                                           value="<?php echo e(request('search')); ?>">
                                     <button class="btn btn-neutral" type="button" id="quickSearchBtn">
                                         <i class="fas fa-search"></i>
                                     </button>
@@ -485,9 +487,9 @@
                                 <label for="law_id" class="form-label">Select Law Subject</label>
                                 <select name="law_id" id="law_id" class="form-control form-select">
                                     <option value="">Subject</option>
-                                    <option value="1" {{ request('law_id') == '1' ? 'selected' : '' }}>Immigration</option>
-                                    <option value="2" {{ request('law_id') == '2' ? 'selected' : '' }}>Citizenship</option>
-                                    <option value="3" {{ request('law_id') == '3' ? 'selected' : '' }}>Criminal</option>
+                                    <option value="1" <?php echo e(request('law_id') == '1' ? 'selected' : ''); ?>>Immigration</option>
+                                    <option value="2" <?php echo e(request('law_id') == '2' ? 'selected' : ''); ?>>Citizenship</option>
+                                    <option value="3" <?php echo e(request('law_id') == '3' ? 'selected' : ''); ?>>Criminal</option>
                                 </select>
                             </div>
                             <div class="col-lg-4 form-group mb-3">
@@ -495,23 +497,23 @@
                                     <label for="jurisdiction_id" class="form-label">Select Jurisdiction</label>
                                     <select name="jurisdiction_id" id="jurisdiction_id" class="form-control form-select">
                                         <option value="">Select Jurisdiction</option>
-                                        <option value="1" {{ request('jurisdiction_id') == '1' ? 'selected' : '' }}>Federal</option>
+                                        <option value="1" <?php echo e(request('jurisdiction_id') == '1' ? 'selected' : ''); ?>>Federal</option>
                                         <optgroup label="Provincial">
-                                            <option value="2" {{ request('jurisdiction_id') == '2' ? 'selected' : '' }}>Alberta</option>
-                                            <option value="3" {{ request('jurisdiction_id') == '3' ? 'selected' : '' }}>British Columbia</option>
-                                            <option value="4" {{ request('jurisdiction_id') == '4' ? 'selected' : '' }}>Manitoba</option>
-                                            <option value="5" {{ request('jurisdiction_id') == '5' ? 'selected' : '' }}>New Brunswick</option>
-                                            <option value="6" {{ request('jurisdiction_id') == '6' ? 'selected' : '' }}>Newfoundland & Labarador</option>
-                                            <option value="7" {{ request('jurisdiction_id') == '7' ? 'selected' : '' }}>Nova Scotia</option>
-                                            <option value="8" {{ request('jurisdiction_id') == '8' ? 'selected' : '' }}>Ontario</option>
-                                            <option value="9" {{ request('jurisdiction_id') == '9' ? 'selected' : '' }}>Price Edward Island</option>
-                                            <option value="10" {{ request('jurisdiction_id') == '10' ? 'selected' : '' }}>Quebec</option>
-                                            <option value="11" {{ request('jurisdiction_id') == '11' ? 'selected' : '' }}>Saskatchewan</option>
+                                            <option value="2" <?php echo e(request('jurisdiction_id') == '2' ? 'selected' : ''); ?>>Alberta</option>
+                                            <option value="3" <?php echo e(request('jurisdiction_id') == '3' ? 'selected' : ''); ?>>British Columbia</option>
+                                            <option value="4" <?php echo e(request('jurisdiction_id') == '4' ? 'selected' : ''); ?>>Manitoba</option>
+                                            <option value="5" <?php echo e(request('jurisdiction_id') == '5' ? 'selected' : ''); ?>>New Brunswick</option>
+                                            <option value="6" <?php echo e(request('jurisdiction_id') == '6' ? 'selected' : ''); ?>>Newfoundland & Labarador</option>
+                                            <option value="7" <?php echo e(request('jurisdiction_id') == '7' ? 'selected' : ''); ?>>Nova Scotia</option>
+                                            <option value="8" <?php echo e(request('jurisdiction_id') == '8' ? 'selected' : ''); ?>>Ontario</option>
+                                            <option value="9" <?php echo e(request('jurisdiction_id') == '9' ? 'selected' : ''); ?>>Price Edward Island</option>
+                                            <option value="10" <?php echo e(request('jurisdiction_id') == '10' ? 'selected' : ''); ?>>Quebec</option>
+                                            <option value="11" <?php echo e(request('jurisdiction_id') == '11' ? 'selected' : ''); ?>>Saskatchewan</option>
                                         </optgroup>
                                         <optgroup label="Territorial">
-                                            <option value="12" {{ request('jurisdiction_id') == '12' ? 'selected' : '' }}>Nortwest Territories</option>
-                                            <option value="13" {{ request('jurisdiction_id') == '13' ? 'selected' : '' }}>Nunavut</option>
-                                            <option value="14" {{ request('jurisdiction_id') == '14' ? 'selected' : '' }}>Yukon</option>
+                                            <option value="12" <?php echo e(request('jurisdiction_id') == '12' ? 'selected' : ''); ?>>Nortwest Territories</option>
+                                            <option value="13" <?php echo e(request('jurisdiction_id') == '13' ? 'selected' : ''); ?>>Nunavut</option>
+                                            <option value="14" <?php echo e(request('jurisdiction_id') == '14' ? 'selected' : ''); ?>>Yukon</option>
                                         </optgroup>
                                     </select>
                                 </div>
@@ -520,28 +522,28 @@
                                 <label for="act_id" class="form-label">Select Docs Category</label>
                                 <select name="act_id" id="act_id" class="form-control form-select">
                                     <option value="">Category</option>
-                                    <option value="1" {{ request('act_id') == '1' ? 'selected' : '' }}>Acts</option>
-                                    <option value="2" {{ request('act_id') == '2' ? 'selected' : '' }}>Appeal & Review Processes</option>
-                                    <option value="3" {{ request('act_id') == '3' ? 'selected' : '' }}>CaseLaw</option>
-                                    <option value="4" {{ request('act_id') == '4' ? 'selected' : '' }}>Codes</option>
-                                    <option value="5" {{ request('act_id') == '5' ? 'selected' : '' }}>Enforcement</option>
-                                    <option value="6" {{ request('act_id') == '6' ? 'selected' : '' }}>Forms</option>
-                                    <option value="7" {{ request('act_id') == '7' ? 'selected' : '' }}>Guidelines</option>
-                                    <option value="8" {{ request('act_id') == '8' ? 'selected' : '' }}>Agreements</option>
-                                    <option value="9" {{ request('act_id') == '9' ? 'selected' : '' }}>Ministerial Instructions</option>
-                                    <option value="10" {{ request('act_id') == '10' ? 'selected' : '' }}>Operational Bulletins</option>
-                                    <option value="11" {{ request('act_id') == '11' ? 'selected' : '' }}>Policies</option>
-                                    <option value="12" {{ request('act_id') == '12' ? 'selected' : '' }}>Procedures</option>
-                                    <option value="13" {{ request('act_id') == '13' ? 'selected' : '' }}>Regulations</option>
+                                    <option value="1" <?php echo e(request('act_id') == '1' ? 'selected' : ''); ?>>Acts</option>
+                                    <option value="2" <?php echo e(request('act_id') == '2' ? 'selected' : ''); ?>>Appeal & Review Processes</option>
+                                    <option value="3" <?php echo e(request('act_id') == '3' ? 'selected' : ''); ?>>CaseLaw</option>
+                                    <option value="4" <?php echo e(request('act_id') == '4' ? 'selected' : ''); ?>>Codes</option>
+                                    <option value="5" <?php echo e(request('act_id') == '5' ? 'selected' : ''); ?>>Enforcement</option>
+                                    <option value="6" <?php echo e(request('act_id') == '6' ? 'selected' : ''); ?>>Forms</option>
+                                    <option value="7" <?php echo e(request('act_id') == '7' ? 'selected' : ''); ?>>Guidelines</option>
+                                    <option value="8" <?php echo e(request('act_id') == '8' ? 'selected' : ''); ?>>Agreements</option>
+                                    <option value="9" <?php echo e(request('act_id') == '9' ? 'selected' : ''); ?>>Ministerial Instructions</option>
+                                    <option value="10" <?php echo e(request('act_id') == '10' ? 'selected' : ''); ?>>Operational Bulletins</option>
+                                    <option value="11" <?php echo e(request('act_id') == '11' ? 'selected' : ''); ?>>Policies</option>
+                                    <option value="12" <?php echo e(request('act_id') == '12' ? 'selected' : ''); ?>>Procedures</option>
+                                    <option value="13" <?php echo e(request('act_id') == '13' ? 'selected' : ''); ?>>Regulations</option>
                                 </select>
                             </div>
                             <div class="col-lg-4 form-group mb-3">
                                 <label for="language_id" class="form-label">Select Language</label>
                                 <select name="language_id" id="language_id" class="form-control form-select">
                                     <option value="">Language</option>
-                                    <option value="1" {{ request('language_id') == '1' ? 'selected' : '' }}>English</option>
-                                    <option value="2" {{ request('language_id') == '2' ? 'selected' : '' }}>French</option>
-                                    <option value="3" {{ request('language_id') == '3' ? 'selected' : '' }}>Bilingual</option>
+                                    <option value="1" <?php echo e(request('language_id') == '1' ? 'selected' : ''); ?>>English</option>
+                                    <option value="2" <?php echo e(request('language_id') == '2' ? 'selected' : ''); ?>>French</option>
+                                    <option value="3" <?php echo e(request('language_id') == '3' ? 'selected' : ''); ?>>Bilingual</option>
                                 </select>
                             </div>
                             <div class="col-lg-4 form-group mb-3 d-flex justify-content-start align-items-start flex-column text-end">
@@ -624,38 +626,38 @@
                 <div class="widget-body sp-top-dbl">
                     <!-- Legal Documents Grid -->
                     <div id="toggleTileContainer" class="row toggle-tile-warpper sp-top">
-                        @if($results->count())
-                            @foreach($results as $index => $row)
-                            <div class="toggle-tile-body col-12 list" data-card-index="{{ $index }}">
+                        <?php if($results->count()): ?>
+                            <?php $__currentLoopData = $results; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <div class="toggle-tile-body col-12 list" data-card-index="<?php echo e($index); ?>">
                                 <div class="toggle-tile-content shadow-sm sp-top" 
-                                     data-table-name="{{ $row->table_name ?? 'unknown' }}"
-                                     data-act-id="{{ $row->act_id ?? '1' }}"
-                                     data-client-id="{{ isset($client) && $client ? $client->id : '' }}"
-                                     data-language-id="{{ $row->language_id ?? '1' }}">
+                                     data-table-name="<?php echo e($row->table_name ?? 'unknown'); ?>"
+                                     data-act-id="<?php echo e($row->act_id ?? '1'); ?>"
+                                     data-client-id="<?php echo e(isset($client) && $client ? $client->id : ''); ?>"
+                                     data-language-id="<?php echo e($row->language_id ?? '1'); ?>">
                                     <!-- Single header with book icon for all card views -->
-                                    <h4><i class="fas fa-book act-icon"></i> {{ $row->act_name ?? 'Unknown Act' }}</h4>
-                                    {{-- No text nodes between h4 and ul.act-data --}}
+                                    <h4><i class="fas fa-book act-icon"></i> <?php echo e($row->act_name ?? 'Unknown Act'); ?></h4>
+                                    
                                     <ul class="act-data">
-                                        <li class="act-category"><strong>Category: </strong><span>{{ $acts[$row->act_id ?? 1] ?? 'Acts' }}</span></li>
-                                        <li class="act-law"><strong>Law Subject: </strong><span>{{ $lawSubjects[$row->law_id ?? 1] ?? 'N/A' }}</span></li>
-                                        <li class="act-jurisdiction"><strong>Jurisdiction: </strong><span>{{ $jurisdictions[$row->jurisdiction_id ?? 1] ?? 'Federal' }}</span></li>
-                                        <li class="act-language"><strong>Language: </strong><span>{{ $languages[$row->language_id ?? 1] ?? 'English' }}</span></li>
-                                        <li class="act-description"><strong>Created: </strong><span>{{ $row->created_at ? date('Y-m-d', strtotime($row->created_at)) : date('Y-m-d') }}</span></li>
-                                        @if(isset($client) && $client)
-                                            <li class="view-button"><a href="javascript:void(0)" onclick="redirectToDocument('{{ $row->table_name }}', '{{ $row->act_id }}', '{{ isset($client) && $client ? $client->id : "null" }}', '{{ $row->language_id }}')"><strong>View Document</strong> <i class="fas fa-arrow-right"></i></a></li>
-                                        @else
+                                        <li class="act-category"><strong>Category: </strong><span><?php echo e($acts[$row->act_id ?? 1] ?? 'Acts'); ?></span></li>
+                                        <li class="act-law"><strong>Law Subject: </strong><span><?php echo e($lawSubjects[$row->law_id ?? 1] ?? 'N/A'); ?></span></li>
+                                        <li class="act-jurisdiction"><strong>Jurisdiction: </strong><span><?php echo e($jurisdictions[$row->jurisdiction_id ?? 1] ?? 'Federal'); ?></span></li>
+                                        <li class="act-language"><strong>Language: </strong><span><?php echo e($languages[$row->language_id ?? 1] ?? 'English'); ?></span></li>
+                                        <li class="act-description"><strong>Created: </strong><span><?php echo e($row->created_at ? date('Y-m-d', strtotime($row->created_at)) : date('Y-m-d')); ?></span></li>
+                                        <?php if(isset($client) && $client): ?>
+                                            <li class="view-button"><a href="javascript:void(0)" onclick="redirectToDocument('<?php echo e($row->table_name); ?>', '<?php echo e($row->act_id); ?>', '<?php echo e(isset($client) && $client ? $client->id : "null"); ?>', '<?php echo e($row->language_id); ?>')"><strong>View Document</strong> <i class="fas fa-arrow-right"></i></a></li>
+                                        <?php else: ?>
                                             <li class="view-button"><a href="javascript:void(0)" onclick="alert('Please select a client first to view documents.')" style="color: #999;"><strong>Select Client First</strong> <i class="fas fa-lock"></i></a></li>
-                                        @endif
+                                        <?php endif; ?>
                                     </ul>
                                 </div>
                             </div>
-                            @endforeach
-                        @else
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        <?php else: ?>
                             <div class="col-12 no-results">
                                 <i class="fas fa-search" style="font-size: 2rem; margin-bottom: 1rem; color: #999;"></i>
                                 <p>No legal acts found matching your search criteria.</p>
                             </div>
-                        @endif
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
@@ -669,26 +671,27 @@
                     <div class="save-context-selector">
                         <label data-en="Save under:" data-fr="Enregistrer sous:">Save under:</label>
                         <select id="saveContext" class="form-select form-select-sm">
-                            <option value="user" {{ !isset($client) || !$client ? 'selected' : '' }} data-en="User Only" data-fr="Utilisateur seulement">User Only</option>
-                            @if(isset($client) && $client)
+                            <option value="user" <?php echo e(!isset($client) || !$client ? 'selected' : ''); ?> data-en="User Only" data-fr="Utilisateur seulement">User Only</option>
+                            <?php if(isset($client) && $client): ?>
                             <option value="client" selected data-en="Client Specific" data-fr="Spécifique au client">Client Specific</option>
-                            @else
+                            <?php else: ?>
                             <option value="client" disabled data-en="Client Specific (Select a client first)" data-fr="Spécifique au client (Sélectionnez d'abord un client)">Client Specific (Select a client first)</option>
-                            @endif
+                            <?php endif; ?>
                         </select>
                     </div>
                 </div>
                 <div class="widget-body">
                     <!-- Droppable area -->
                     <div id="droppableArea" class="droppable-container p-3 border rounded mb-4">
-                        @if(isset($savedContent) && $savedContent && $savedContent->droppable_content)
-                            {!! $savedContent->droppable_content !!}
-                        @else
+                        <?php if(isset($savedContent) && $savedContent && $savedContent->droppable_content): ?>
+                            <?php echo $savedContent->droppable_content; ?>
+
+                        <?php else: ?>
                             <div class="text-center p-5 drop-placeholder">
                                 <i class="fas fa-arrow-down mb-2"></i>
                                 <p data-en="Drop content here" data-fr="Déposer le contenu ici">Drop content here</p>
                             </div>
-                        @endif
+                        <?php endif; ?>
                     </div>
                     
                     <!-- Save Popups button -->
@@ -701,7 +704,7 @@
                     
                     <!-- Text editor -->
                     <div id="textEditorContainer">
-                        <textarea id="contentEditor" class="form-control" placeholder="Enter your notes and content here..." data-placeholder-en="Enter your notes and content here..." data-placeholder-fr="Entrez vos notes et contenu ici...">{{ isset($savedContent) && $savedContent ? $savedContent->editor_content : '' }}</textarea>
+                        <textarea id="contentEditor" class="form-control" placeholder="Enter your notes and content here..." data-placeholder-en="Enter your notes and content here..." data-placeholder-fr="Entrez vos notes et contenu ici..."><?php echo e(isset($savedContent) && $savedContent ? $savedContent->editor_content : ''); ?></textarea>
                     </div>
                     
                     <!-- Save button -->
@@ -712,7 +715,7 @@
                     </div>
                     
                     <!-- Context information -->
-                    @if(isset($client) && $client)
+                    <?php if(isset($client) && $client): ?>
                         <div class="text-muted small mt-2">
                             <i class="fas fa-info-circle me-1"></i>
                             <span data-en="Content can be saved for your personal use or specifically for this client." 
@@ -720,7 +723,7 @@
                                 Content can be saved for your personal use or specifically for this client.
                             </span>
                         </div>
-                    @else
+                    <?php else: ?>
                         <div class="text-muted small mt-2">
                             <i class="fas fa-info-circle me-1"></i>
                             <span data-en="Content will be saved for your personal use. Select a client above to enable client-specific saving." 
@@ -728,7 +731,7 @@
                                 Content will be saved for your personal use. Select a client above to enable client-specific saving.
                             </span>
                         </div>
-                    @endif
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
@@ -759,17 +762,17 @@
                         </div>
                     </button>
                     
-                    @if(isset($client) && $client)
+                    <?php if(isset($client) && $client): ?>
                     <button type="button" class="btn btn-outline-success btn-lg" id="saveToClientRecords">
                         <div class="d-flex align-items-center">
                             <i class="fas fa-user-tie me-3" style="font-size: 1.5rem;"></i>
                             <div class="text-start">
                                 <div class="fw-bold">Save to Client Records</div>
-                                <small class="text-muted">Specific to {{ $client->client_name }} - only visible when this client is selected</small>
+                                <small class="text-muted">Specific to <?php echo e($client->client_name); ?> - only visible when this client is selected</small>
                             </div>
                         </div>
                     </button>
-                    @else
+                    <?php else: ?>
                     <button type="button" class="btn btn-outline-secondary btn-lg" disabled>
                         <div class="d-flex align-items-center">
                             <i class="fas fa-user-tie me-3" style="font-size: 1.5rem;"></i>
@@ -779,7 +782,7 @@
                             </div>
                         </div>
                     </button>
-                    @endif
+                    <?php endif; ?>
                 </div>
             </div>
             <div class="modal-footer">
@@ -831,9 +834,9 @@
         </div>
     </div>
 </footer>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@push('scripts')
+<?php $__env->startPush('scripts'); ?>
 <script>
     console.log('=== SCRIPT STARTED ===');
     
@@ -863,7 +866,7 @@
                 const saveContext = document.getElementById('saveContext').value;
                 const editorContent = document.getElementById('contentEditor').value;
                 const droppableContent = document.getElementById('droppableArea').innerHTML;
-                const clientId = {{ isset($client) && $client ? $client->id : 'null' }};
+                const clientId = <?php echo e(isset($client) && $client ? $client->id : 'null'); ?>;
                 
                 // Validate save context
                 if (saveContext === 'client' && !clientId) {
@@ -879,7 +882,7 @@
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        'X-CSRF-TOKEN': '<?php echo e(csrf_token()); ?>'
                     },
                     body: JSON.stringify({
                         context: saveContext,
@@ -939,7 +942,7 @@
         const saveToClientBtn = document.getElementById('saveToClientRecords');
         if (saveToClientBtn) {
             saveToClientBtn.addEventListener('click', function() {
-                const clientId = {{ isset($client) && $client ? $client->id : 'null' }};
+                const clientId = <?php echo e(isset($client) && $client ? $client->id : 'null'); ?>;
                 if (!clientId) {
                     alert('Please select a client first.');
                     return;
@@ -989,7 +992,7 @@
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    'X-CSRF-TOKEN': '<?php echo e(csrf_token()); ?>'
                 },
                 body: JSON.stringify({
                     save_type: saveType,
@@ -1463,4 +1466,6 @@
         }
     });
 </script>
-@endpush
+<?php $__env->stopPush(); ?>
+
+<?php echo $__env->make('layouts.user-layout', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\Users\User\Desktop\12\jurislocator_laravel\resources\views/user-legal-tables.blade.php ENDPATH**/ ?>
