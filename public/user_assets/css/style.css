@@ -1500,7 +1500,7 @@ custom-ref.unmatched-ref:hover {
   --color-link: #61dafb;
   --color-link-hover: #4fa3d1;
   --color-ref: #8aad28;
-  --color-footer: #c8d47c;
+  --color-footer: #666;;
   --color-button: #1a1a1a;
   --color-card-bg: #1f1f1f;
   --color-button-bg: #ebf989;
@@ -1578,7 +1578,7 @@ custom-ref.unmatched-ref:hover {
   --color-link: #2e7d32;
   --color-link-hover: #1b5e20;
   --color-ref: #654216;
-  --color-footer: #c8e6c9;
+  --color-footer: #444f47;
   --color-card-bg: #84a492;
   --color-button-bg: #84a492;
   --color-button-bg-hover-1: #4f735f;
@@ -2131,8 +2131,8 @@ custom-ref.unmatched-ref:hover {
   margin: 0;
 }
 .footer .errorWrapper .error-toggle{
-	background-color: var(--color-04);
-	color:var(--color-01);
+	background-color: var(--color-footer);
+	color:var(--color-04);
 	padding: 5px;
 	border-radius: var(--border-radious);
 	position: relative;
@@ -2152,7 +2152,7 @@ custom-ref.unmatched-ref:hover {
 	Position: absolute;
 	right: 3px;
 	bottom: 3px;
-	background-color: var(--color-05);
+	background-color: var(--color-theme-4);
 	transition: transform 0.3s ease;
 }
 .footer .copyright{

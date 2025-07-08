@@ -89,6 +89,25 @@
         cursor: grabbing;
         transform: scale(0.98);
     }
+    
+    /* Clickable card styling */
+    .clickable-card {
+        transition: all 0.3s ease !important;
+        border: 1px solid transparent !important;
+    }
+    
+    .clickable-card:hover {
+        transform: translateY(-2px) !important;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+        border-color: #d68c2c !important;
+        background-color: #f8f9fa !important;
+    }
+    
+    .clickable-card:active {
+        transform: translateY(0) !important;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1) !important;
+    }
+    
         background-color: #f8f9fa;
         border: 2px dashed #dee2e6;
         border-radius: 6px;
@@ -398,6 +417,24 @@
     .toggle-tile-body.list .toggle-tile-content .act-data li.view-button {
         margin-left: auto !important;
     }
+    
+    /* Clickable card styling */
+    .clickable-card {
+        transition: all 0.3s ease !important;
+        border: 1px solid transparent !important;
+    }
+    
+    .clickable-card:hover {
+        transform: translateY(-2px) !important;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+        border-color: #d68c2c !important;
+        background-color: #f8f9fa !important;
+    }
+    
+    .clickable-card:active {
+        transform: translateY(0) !important;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1) !important;
+    }
 </style>
 <?php $__env->stopPush(); ?>
 
@@ -409,24 +446,7 @@
         </div>
     </div>
     
-    <!-- Client Selection Area - Shows only if no client is selected -->
-    <?php if(!isset($client) || !$client): ?>
-    <div class="row gap_top">
-        <div class="col-12 mb-4">
-            <div class="client-selector">
-                <form method="GET" id="clientSelectForm">
-                    <label for="client_selector">Select Client</label>
-                    <select name="client_id" id="client_selector" class="form-control form-select">
-                        <option value="">-- Select a client --</option>
-                        <?php $__currentLoopData = $allClients; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $clientOption): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            <option value="<?php echo e($clientOption->id); ?>"><?php echo e($clientOption->client_name); ?> (<?php echo e($clientOption->client_email); ?>)</option>
-                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                    </select>
-                </form>
-            </div>
-        </div>
-    </div>
-    <?php endif; ?>
+
     
     <!-- Client Details Area - Shows only if client is selected -->
     <?php if(isset($client) && $client): ?>
@@ -629,11 +649,13 @@
                         <?php if($results->count()): ?>
                             <?php $__currentLoopData = $results; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <div class="toggle-tile-body col-12 list" data-card-index="<?php echo e($index); ?>">
-                                <div class="toggle-tile-content shadow-sm sp-top" 
+                                <div class="toggle-tile-content shadow-sm sp-top clickable-card" 
                                      data-table-name="<?php echo e($row->table_name ?? 'unknown'); ?>"
                                      data-act-id="<?php echo e($row->act_id ?? '1'); ?>"
                                      data-client-id="<?php echo e(isset($client) && $client ? $client->id : ''); ?>"
-                                     data-language-id="<?php echo e($row->language_id ?? '1'); ?>">
+                                     data-language-id="<?php echo e($row->language_id ?? '1'); ?>"
+                                     onclick="redirectToDocument('<?php echo e($row->table_name); ?>', '<?php echo e($row->act_id); ?>', '<?php echo e(isset($client) && $client ? $client->id : ""); ?>', '<?php echo e($row->language_id); ?>')"
+                                     style="cursor: pointer;">
                                     <!-- Single header with book icon for all card views -->
                                     <h4><i class="fas fa-book act-icon"></i> <?php echo e($row->act_name ?? 'Unknown Act'); ?></h4>
                                     
@@ -642,10 +664,8 @@
                                         <li class="act-law"><strong>Law Subject: </strong><span><?php echo e($lawSubjects[$row->law_id ?? 1] ?? 'N/A'); ?></span></li>
                                         <li class="act-jurisdiction"><strong>Jurisdiction: </strong><span><?php echo e($jurisdictions[$row->jurisdiction_id ?? 1] ?? 'Federal'); ?></span></li>
                                         <li class="act-language"><strong>Language: </strong><span><?php echo e($languages[$row->language_id ?? 1] ?? 'English'); ?></span></li>
-                                        <li class="act-description"><strong>Created: </strong><span><?php echo e($row->created_at ? date('Y-m-d', strtotime($row->created_at)) : date('Y-m-d')); ?></span></li>
-                                        <?php if(isset($client) && $client): ?>
-                                            <li class="view-button"><a href="javascript:void(0)" onclick="redirectToDocument('<?php echo e($row->table_name); ?>', '<?php echo e($row->act_id); ?>', '<?php echo e(isset($client) && $client ? $client->id : "null"); ?>', '<?php echo e($row->language_id); ?>')"><strong>View Document</strong> <i class="fas fa-arrow-right"></i></a></li>
-                                        <?php endif; ?>
+                                        <li class="act-description"><strong>Current to: </strong><span><?php echo e($row->created_at ? date('Y-m-d', strtotime($row->created_at)) : date('Y-m-d')); ?></span></li>
+                                        <li class="view-button"><a href="javascript:void(0)" onclick="event.stopPropagation(); redirectToDocument('<?php echo e($row->table_name); ?>', '<?php echo e($row->act_id); ?>', '<?php echo e(isset($client) && $client ? $client->id : ""); ?>', '<?php echo e($row->language_id); ?>')"><strong>View Document</strong> <i class="fas fa-arrow-right"></i></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -953,7 +973,12 @@
                 const tableTiles = document.querySelectorAll('.toggle-tile-content');
                 tableTiles.forEach(tile => {
                     tile.draggable = true;
+                    
+                    // Track drag state to prevent click during drag
+                    let isDragging = false;
+                    
                     tile.addEventListener('dragstart', function(e) {
+                        isDragging = true;
                         const tileContent = this.cloneNode(true);
                         
                         // Store additional data for popup saving
@@ -969,6 +994,21 @@
                         e.dataTransfer.setData('text/html', tileContent.outerHTML);
                         e.dataTransfer.setData('application/json', JSON.stringify(tileData));
                         e.dataTransfer.effectAllowed = 'copy';
+                    });
+                    
+                    tile.addEventListener('dragend', function(e) {
+                        // Reset drag state after a short delay
+                        setTimeout(() => {
+                            isDragging = false;
+                        }, 100);
+                    });
+                    
+                    // Prevent click during drag operations
+                    tile.addEventListener('click', function(e) {
+                        if (isDragging) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                        }
                     });
                 });
             };
@@ -1328,28 +1368,85 @@
         console.log('⚠️ Could not override innerHTML:', e);
     }
     
+    // --- FILTER LOGIC FOR AVAILABLE LEGISLATIONS ---
+    document.addEventListener('DOMContentLoaded', function() {
+        // Language filter (client-side)
+        let selectedLang = '';
+        document.querySelectorAll('input[name="toggle"]').forEach(function(radio) {
+            radio.addEventListener('change', function() {
+                selectedLang = this.value;
+                applyFilters();
+            });
+        });
+
+        // A-Z filter (client-side)
+        const tileContainer = document.getElementById('toggleTileContainer');
+        const azToggle = document.getElementById('act-pagination-toggle');
+        const azContent = document.getElementById('act-pagination-content');
+        let selectedLetter = null;
+
+        if (azToggle && azContent) {
+            azToggle.addEventListener('click', function() {
+                azContent.classList.toggle('active');
+                azToggle.classList.toggle('active');
+                if (!azContent.classList.contains('active')) {
+                    // Reset letter filter
+                    selectedLetter = null;
+                    azToggle.textContent = ' A to Z';
+                    azContent.querySelectorAll('a').forEach(a => a.classList.remove('active'));
+                    applyFilters();
+                }
+            });
+            azContent.querySelectorAll('a').forEach(function(a) {
+                a.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    if (a.classList.contains('disabled')) return;
+                    selectedLetter = a.textContent.trim();
+                    azContent.querySelectorAll('a').forEach(x => x.classList.remove('active'));
+                    a.classList.add('active');
+                    azToggle.textContent = ' ' + selectedLetter;
+                    applyFilters();
+                });
+            });
+        }
+
+        function applyFilters() {
+            if (!tileContainer) return;
+            const cards = tileContainer.querySelectorAll('.toggle-tile-body');
+            cards.forEach(card => {
+                const langSpan = card.querySelector('.act-language span');
+                const title = card.querySelector('h4');
+                if (!title) return;
+                let text = title.textContent.replace(/^[^A-Za-z0-9]+/, '').trim();
+                let first = text.charAt(0).toUpperCase();
+                let lang = langSpan ? langSpan.textContent.trim().toLowerCase() : '';
+                let show = true;
+                // Language filter
+                if (selectedLang === '1' && lang !== 'english' && lang !== 'bilingual') show = false;
+                if (selectedLang === '2' && lang !== 'french' && lang !== 'bilingual') show = false;
+                // Letter filter
+                if (selectedLetter && first !== selectedLetter) show = false;
+                card.style.display = show ? '' : 'none';
+            });
+        }
+    });
+    
     // Function to redirect to appropriate document view based on language
     function redirectToDocument(tableName, categoryId, clientId, language) {
-        // Check if the language indicates French (2, fr, or French)
-        const isFrench = (language === '2' || language === 2 || language === 'fr' || language === 'French');
+        // Check if it's a French document
+        const isFrench = (language === '2' || language === 'fr' || language === 'French');
         
-        console.log('Redirecting to document:', {
-            tableName,
-            categoryId,
-            clientId,
-            language,
-            isFrench
-        });
-        
-        // Build URL with or without client_id
+        // Build the URL with proper client handling
         let url;
         if (isFrench) {
+            // Redirect to French view
             url = `/view-legal-table-french/${tableName}?category_id=${categoryId}`;
         } else {
+            // Redirect to normal view
             url = `/view-legal-table/${tableName}?category_id=${categoryId}`;
         }
         
-        // Add client_id parameter only if client is selected
+        // Add client_id if available
         if (clientId && clientId !== 'null' && clientId !== '') {
             url += `&client_id=${clientId}`;
         }
