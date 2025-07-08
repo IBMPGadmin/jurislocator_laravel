@@ -3100,8 +3100,233 @@ $(function() {
     }
 </script>
 
+<!-- Client Dropdown Styles -->
+<style>
+.client-dropdown-container {
+    position: relative;
+}
+
+.client-search-input {
+    padding-right: 40px;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.client-search-input:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+.client-search-input.dropdown-active {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-color: transparent;
+}
+
+.client-dropdown-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 2px solid #0d6efd;
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 1050;
+    display: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.client-dropdown-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    cursor: pointer;
+    border-bottom: 1px solid #f8f9fa;
+    transition: all 0.2s ease;
+}
+
+.client-dropdown-item:hover,
+.client-dropdown-item.keyboard-active {
+    background-color: #f8f9fa;
+    border-left: 3px solid #0d6efd;
+}
+
+.client-dropdown-item:last-child {
+    border-bottom: none;
+}
+
+.client-dropdown-avatar {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+    flex-shrink: 0;
+}
+
+.client-dropdown-avatar i {
+    color: white;
+    font-size: 16px;
+}
+
+.client-dropdown-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.client-dropdown-name {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 2px;
+    font-size: 14px;
+}
+
+.client-dropdown-email {
+    color: #6c757d;
+    font-size: 12px;
+    margin-bottom: 4px;
+}
+
+.client-dropdown-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.client-dropdown-status .badge {
+    font-size: 10px;
+    padding: 2px 6px;
+}
+
+.client-dropdown-status .badge.status-active {
+    background-color: #198754;
+}
+
+.client-dropdown-status .badge.status-inactive {
+    background-color: #6c757d;
+}
+
+.client-dropdown-last-accessed {
+    color: #adb5bd;
+    font-size: 10px;
+}
+
+.client-dropdown-action {
+    margin-left: 12px;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.client-dropdown-item:hover .client-dropdown-action,
+.client-dropdown-item.keyboard-active .client-dropdown-action {
+    opacity: 1;
+}
+
+.client-dropdown-action i {
+    font-size: 18px;
+}
+
+.client-dropdown-footer {
+    padding: 8px 16px;
+    background: #f8f9fa;
+    border-top: 1px solid #dee2e6;
+}
+
+.no-search-results {
+    padding: 20px;
+    background: #f8f9fa;
+}
+
+/* Scrollbar styling for dropdown */
+.client-dropdown-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.client-dropdown-list::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.client-dropdown-list::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 3px;
+}
+
+.client-dropdown-list::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+/* Loading animation for search */
+.client-search-input.loading {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24'%3E%3Cpath fill='%23999' d='M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z' opacity='.25'/%3E%3Cpath fill='%23999' d='M12,4a8,8,0,0,1,7.89,6.7A1.53,1.53,0,0,0,21.38,12h0a1.5,1.5,0,0,0,1.48-1.75,11,11,0,0,0-21.72,0A1.5,1.5,0,0,0,2.62,12h0a1.53,1.53,0,0,0,1.49-1.3A8,8,0,0,1,12,4Z'%3E%3CanimateTransform attributeName='transform' dur='0.75s' repeatCount='indefinite' type='rotate' values='0 12 12;360 12 12'/%3E%3C/path%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+}
+</style>
+
 <!-- Popup Saving Functionality for Document View Page -->
 <script>
+// Define global functions first (before DOMContentLoaded)
+window.selectClientFromModal = function(clientId, clientName) {
+    // Show confirmation and save
+    if (confirm(`Save popups to ${clientName}'s records?`)) {
+        window.savePopupsDataFromSidebar('client', clientId);
+    } else {
+        // Just collapse back to save options if user cancels
+        const modal = document.getElementById('popupSaveModal');
+        const saveOptionsSection = document.getElementById('saveOptionsSection');
+        const clientSelectionSection = document.getElementById('clientSelectionSection');
+        
+        // Remove expanded class from modal
+        modal.classList.remove('expanded');
+        
+        // Show save options and hide client selection
+        saveOptionsSection.style.display = 'block';
+        clientSelectionSection.style.display = 'none';
+    }
+};
+
+window.selectClientFromDropdown = function(clientId, clientName) {
+    // Hide the dropdown
+    const dropdownList = document.getElementById('clientDropdownList');
+    const searchInput = document.getElementById('clientSearchInput');
+    
+    if (dropdownList) {
+        dropdownList.style.display = 'none';
+    }
+    if (searchInput) {
+        searchInput.classList.remove('dropdown-active');
+        searchInput.value = clientName; // Show selected client name in input
+    }
+    
+    // Call the main selection function
+    window.selectClientFromModal(clientId, clientName);
+};
+
+window.selectClientForSaving = function(clientId, clientName) {
+    // Close the client selection modal
+    const clientModal = bootstrap.Modal.getInstance(document.getElementById('clientSelectionModal'));
+    clientModal.hide();
+    
+    // Show confirmation and save
+    if (confirm(`Save popups to ${clientName}'s records?`)) {
+        window.savePopupsDataFromSidebar('client', clientId);
+    } else {
+        // Re-show the popup save modal if user cancels
+        setTimeout(() => {
+            const popupSaveModal = new bootstrap.Modal(document.getElementById('popupSaveModal'));
+            popupSaveModal.show();
+        }, 500);
+    }
+};
+
 document.addEventListener('DOMContentLoaded', function() {
     // Define the savePopupsDataFromSidebar function first
     window.savePopupsDataFromSidebar = function(saveType, clientId = null) {
@@ -3212,7 +3437,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const saveToUserBtn = document.getElementById('saveToUserRecords');
     if (saveToUserBtn) {
         saveToUserBtn.addEventListener('click', function() {
-            savePopupsDataFromSidebar('user');
+            window.savePopupsDataFromSidebar('user');
         });
     }
     
@@ -3227,7 +3452,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
             // Client already selected, save directly
-            savePopupsDataFromSidebar('client', clientId);
+            window.savePopupsDataFromSidebar('client', clientId);
         });
     }
 
@@ -3356,31 +3581,176 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
         
-        let html = '';
+        // Create a searchable dropdown for clients
+        let html = `
+            <div class="col-12">
+                <div class="client-dropdown-container">
+                    <label for="clientSearchInput" class="form-label">
+                        <i class="fas fa-search me-2"></i>Search and Select Client
+                    </label>
+                    <div class="position-relative">
+                        <input type="text" 
+                               id="clientSearchInput" 
+                               class="form-control client-search-input" 
+                               placeholder="Type to search clients by name or email..."
+                               autocomplete="off">
+                        <div id="clientDropdownList" class="client-dropdown-list">
+        `;
+        
+        // Add each client as a dropdown option
         clients.forEach(client => {
             const lastAccessed = client.last_accessed ? new Date(client.last_accessed).toLocaleDateString() : 'Never';
+            const escapedClientName = client.client_name.replace(/'/g, "\\'").replace(/"/g, '\\"');
+            
             html += `
-                <div class="col-md-6 mb-3">
-                    <div class="client-selection-card" data-client-id="${client.id}" onclick="selectClientFromModal(${client.id}, '${client.client_name}')">
-                        <div class="client-avatar-large">
-                            <i class="fas fa-user"></i>
+                <div class="client-dropdown-item" 
+                     data-client-id="${client.id}" 
+                     data-client-name="${escapedClientName}"
+                     data-client-email="${client.client_email}"
+                     onclick="selectClientFromDropdown(${client.id}, '${escapedClientName}')">
+                    <div class="client-dropdown-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="client-dropdown-info">
+                        <div class="client-dropdown-name">${client.client_name}</div>
+                        <div class="client-dropdown-email">${client.client_email}</div>
+                        <div class="client-dropdown-status">
+                            <span class="badge status-${client.client_status.toLowerCase()}">${client.client_status}</span>
+                            <span class="client-dropdown-last-accessed">Last accessed: ${lastAccessed}</span>
                         </div>
-                        <div class="client-info-large">
-                            <h6>${client.client_name}</h6>
-                            <p class="client-email-large">${client.client_email}</p>
-                            <span class="client-status-large status-${client.client_status.toLowerCase()}">${client.client_status}</span>
-                        </div>
-                        <div class="client-actions-large">
-                            <button type="button" class="btn btn-select-client btn-sm">
-                                <i class="fas fa-check me-1"></i>Select
-                            </button>
-                        </div>
+                    </div>
+                    <div class="client-dropdown-action">
+                        <i class="fas fa-check-circle text-success"></i>
                     </div>
                 </div>
             `;
         });
         
+        html += `
+                        </div>
+                    </div>
+                    <div class="client-dropdown-footer mt-3">
+                        <small class="text-muted">
+                            <i class="fas fa-info-circle me-1"></i>
+                            ${clients.length} client${clients.length !== 1 ? 's' : ''} available. Click on a client to select.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        `;
+        
         clientsList.innerHTML = html;
+        
+        // Initialize search functionality
+        initializeClientSearch(clients);
+    }
+
+    // Function to initialize client search functionality
+    function initializeClientSearch(clients) {
+        const searchInput = document.getElementById('clientSearchInput');
+        const dropdownList = document.getElementById('clientDropdownList');
+        
+        if (!searchInput || !dropdownList) return;
+        
+        // Show dropdown when input is focused
+        searchInput.addEventListener('focus', function() {
+            dropdownList.style.display = 'block';
+            searchInput.classList.add('dropdown-active');
+        });
+        
+        // Hide dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.client-dropdown-container')) {
+                dropdownList.style.display = 'none';
+                searchInput.classList.remove('dropdown-active');
+            }
+        });
+        
+        // Search functionality
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase().trim();
+            const dropdownItems = dropdownList.querySelectorAll('.client-dropdown-item');
+            
+            let visibleCount = 0;
+            dropdownItems.forEach(item => {
+                const clientName = item.getAttribute('data-client-name').toLowerCase();
+                const clientEmail = item.getAttribute('data-client-email').toLowerCase();
+                
+                if (clientName.includes(searchTerm) || clientEmail.includes(searchTerm)) {
+                    item.style.display = 'flex';
+                    visibleCount++;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+            
+            // Show "no results" message if no clients match
+            let noResultsDiv = dropdownList.querySelector('.no-search-results');
+            if (visibleCount === 0 && searchTerm) {
+                if (!noResultsDiv) {
+                    noResultsDiv = document.createElement('div');
+                    noResultsDiv.className = 'no-search-results text-center py-3 text-muted';
+                    noResultsDiv.innerHTML = `
+                        <i class="fas fa-search me-2"></i>
+                        No clients found matching "${searchTerm}"
+                    `;
+                    dropdownList.appendChild(noResultsDiv);
+                }
+                noResultsDiv.style.display = 'block';
+            } else if (noResultsDiv) {
+                noResultsDiv.style.display = 'none';
+            }
+            
+            // Show dropdown if there's input
+            if (searchTerm) {
+                dropdownList.style.display = 'block';
+                searchInput.classList.add('dropdown-active');
+            }
+        });
+        
+        // Handle keyboard navigation
+        searchInput.addEventListener('keydown', function(e) {
+            const visibleItems = dropdownList.querySelectorAll('.client-dropdown-item[style*="flex"], .client-dropdown-item:not([style*="none"])');
+            const currentActive = dropdownList.querySelector('.client-dropdown-item.keyboard-active');
+            
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                if (currentActive) {
+                    currentActive.classList.remove('keyboard-active');
+                    const nextItem = Array.from(visibleItems).find(item => 
+                        Array.from(visibleItems).indexOf(item) > Array.from(visibleItems).indexOf(currentActive)
+                    );
+                    if (nextItem) {
+                        nextItem.classList.add('keyboard-active');
+                        nextItem.scrollIntoView({ block: 'nearest' });
+                    }
+                } else if (visibleItems.length > 0) {
+                    visibleItems[0].classList.add('keyboard-active');
+                    visibleItems[0].scrollIntoView({ block: 'nearest' });
+                }
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                if (currentActive) {
+                    currentActive.classList.remove('keyboard-active');
+                    const prevItem = Array.from(visibleItems).reverse().find(item => 
+                        Array.from(visibleItems).indexOf(item) < Array.from(visibleItems).indexOf(currentActive)
+                    );
+                    if (prevItem) {
+                        prevItem.classList.add('keyboard-active');
+                        prevItem.scrollIntoView({ block: 'nearest' });
+                    }
+                }
+            } else if (e.key === 'Enter') {
+                e.preventDefault();
+                if (currentActive) {
+                    currentActive.click();
+                }
+            } else if (e.key === 'Escape') {
+                dropdownList.style.display = 'none';
+                searchInput.classList.remove('dropdown-active');
+                searchInput.blur();
+            }
+        });
     }
 
     // Function to render no clients message in modal
@@ -3472,7 +3842,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Save popups to the new client
                     setTimeout(() => {
                         if (confirm(`Save popups to ${data.client.client_name}'s records?`)) {
-                            savePopupsDataFromSidebar('client', data.client.id);
+                            window.savePopupsDataFromSidebar('client', data.client.id);
                         } else {
                             // Refresh the clients list
                             loadClientsForModalSelection();
@@ -3697,7 +4067,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Save popups to the new client
                     setTimeout(() => {
                         if (confirm(`Client "${data.client.client_name}" created successfully! Save popups to this client's records?`)) {
-                            savePopupsDataFromSidebar('client', data.client.id);
+                            window.savePopupsDataFromSidebar('client', data.client.id);
                         } else {
                             // Re-show the popup save modal if user cancels
                             const popupSaveModal = new bootstrap.Modal(document.getElementById('popupSaveModal'));
@@ -3836,37 +4206,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const savedLanguage = localStorage.getItem('selectedLanguage') || 'en';
     translateViewLegalTablePage(savedLanguage);
 });
-
-// Global function for client selection from expanded modal
-function selectClientFromModal(clientId, clientName) {
-    // Show confirmation and save
-    if (confirm(`Save popups to ${clientName}'s records?`)) {
-        savePopupsDataFromSidebar('client', clientId);
-    } else {
-        // Just collapse back to save options if user cancels
-        collapseModalToSaveOptions();
-    }
-}
-
-// Global function for client selection (needs to be outside document ready for onclick access)
-function selectClientForSaving(clientId, clientName) {
-    // Close the client selection modal
-    const clientModal = bootstrap.Modal.getInstance(document.getElementById('clientSelectionModal'));
-    clientModal.hide();
-    
-    // Show confirmation and save
-    if (confirm(`Save popups to ${clientName}'s records?`)) {
-        savePopupsDataFromSidebar('client', clientId);
-    } else {
-        // Re-show the popup save modal if user cancels
-        setTimeout(() => {
-            const popupSaveModal = new bootstrap.Modal(document.getElementById('popupSaveModal'));
-            popupSaveModal.show();
-        }, 500);
-    }
-}
-
-}
 
 // Test function to check API connectivity - can be called from browser console
 window.testClientAPI = function() {
