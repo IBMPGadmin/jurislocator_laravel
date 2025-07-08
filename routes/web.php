@@ -313,6 +313,7 @@ Route::middleware([\App\Http\Middleware\Authenticate::class, 'verified', \App\Ht
     // Popup saving routes with user choice
     Route::post('/save-popups', [App\Http\Controllers\PopupController::class, 'savePopups'])->name('save.popups');
     Route::get('/get-saved-popups', [App\Http\Controllers\PopupController::class, 'getSavedPopups'])->name('get.saved.popups');
+    Route::delete('/delete-popups', [App\Http\Controllers\PopupController::class, 'deletePopups'])->name('delete.popups');
     
     // User-centric legal tables routes
     Route::get('/user/legal-tables', [App\Http\Controllers\UserLegalTableController::class, 'index'])
