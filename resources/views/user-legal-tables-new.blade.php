@@ -325,7 +325,7 @@
                                             @endphp
                                             {{ $languageDisplay }}
                                         </span></li>
-                                        <li class="act-description"><strong data-en="Created: " data-fr="Créé: ">Created: </strong> {{ $row->created_at }}</li>
+                                        <li class="act-description"><strong data-en="Created: " data-fr="Créé: ">Current to: </strong> {{ $row->created_at }}</li>
                                         <li class="view-button"><a href="javascript:void(0)"><strong data-en="View Document" data-fr="Voir le document">View Document</strong> <i class="fas fa-arrow-right"></i></a></li>
                                     </ul>
                                 </div>
