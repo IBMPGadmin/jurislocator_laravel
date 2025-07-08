@@ -60,12 +60,12 @@
                                 </div>
                             </div>
                             <div class="col-lg-4 form-group mb-3">
-                                <label for="language_id" class="form-label" data-en="Select Language" data-fr="Sélectionner la langue">Select Language</label>
-                                <select name="language_id" id="language_id" class="form-control form-select">
-                                    <option value="" data-en="Language" data-fr="Langue">Language</option>
-                                    <option value="1" {{ request('language_id') == '1' ? 'selected' : '' }} data-en="English" data-fr="Anglais">English</option>
-                                    <option value="2" {{ request('language_id') == '2' ? 'selected' : '' }} data-en="French" data-fr="Français">French</option>
-                                    <option value="3" {{ request('language_id') == '3' ? 'selected' : '' }} data-en="Bilingual" data-fr="Bilingue">Bilingual</option>
+                                <label for="law_id" class="form-label" data-en="Select Law Subject" data-fr="Sélectionner le sujet de droit">Select Law Subject</label>
+                                <select name="law_id" id="law_id" class="form-control form-select">
+                                    <option value="" data-en="Subject" data-fr="Sujet">Subject</option>
+                                    <option value="1" {{ request('law_id') == '1' ? 'selected' : '' }} data-en="Immigration" data-fr="Immigration">Immigration</option>
+                                    <option value="2" {{ request('law_id') == '2' ? 'selected' : '' }} data-en="Citizenship" data-fr="Citoyenneté">Citizenship</option>
+                                    <option value="3" {{ request('law_id') == '3' ? 'selected' : '' }} data-en="Criminal" data-fr="Criminel">Criminal</option>
                                 </select>
                             </div>
                             <div class="col-lg-4 form-group mb-3">
@@ -95,15 +95,6 @@
                                 </div>
                             </div>
                             <div class="col-lg-4 form-group mb-3">
-                                <label for="law_id" class="form-label" data-en="Select Law Subject" data-fr="Sélectionner le sujet de droit">Select Law Subject</label>
-                                <select name="law_id" id="law_id" class="form-control form-select">
-                                    <option value="" data-en="Subject" data-fr="Sujet">Subject</option>
-                                    <option value="1" {{ request('law_id') == '1' ? 'selected' : '' }} data-en="Immigration" data-fr="Immigration">Immigration</option>
-                                    <option value="2" {{ request('law_id') == '2' ? 'selected' : '' }} data-en="Citizenship" data-fr="Citoyenneté">Citizenship</option>
-                                    <option value="3" {{ request('law_id') == '3' ? 'selected' : '' }} data-en="Criminal" data-fr="Criminel">Criminal</option>
-                                </select>
-                            </div>
-                            <div class="col-lg-4 form-group mb-3">
                                 <label for="act_id" class="form-label" data-en="Select Docs Category" data-fr="Sélectionner la catégorie de documents">Select Docs Category</label>
                                 <select name="act_id" id="act_id" class="form-control form-select">
                                     <option value="" data-en="Category" data-fr="Catégorie">Category</option>
@@ -120,6 +111,15 @@
                                     <option value="11" {{ request('act_id') == '11' ? 'selected' : '' }} data-en="Policies" data-fr="Politiques">Policies</option>
                                     <option value="12" {{ request('act_id') == '12' ? 'selected' : '' }} data-en="Procedures" data-fr="Procédures">Procedures</option>
                                     <option value="13" {{ request('act_id') == '13' ? 'selected' : '' }} data-en="Regulations" data-fr="Règlements">Regulations</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-4 form-group mb-3">
+                                <label for="language_id" class="form-label" data-en="Select Language" data-fr="Sélectionner la langue">Select Language</label>
+                                <select name="language_id" id="language_id" class="form-control form-select">
+                                    <option value="" data-en="Language" data-fr="Langue">Language</option>
+                                    <option value="1" {{ request('language_id') == '1' ? 'selected' : '' }} data-en="English" data-fr="Anglais">English</option>
+                                    <option value="2" {{ request('language_id') == '2' ? 'selected' : '' }} data-en="French" data-fr="Français">French</option>
+                                    <option value="3" {{ request('language_id') == '3' ? 'selected' : '' }} data-en="Bilingual" data-fr="Bilingue">Bilingual</option>
                                 </select>
                             </div>
                             <div class="col-lg-4 form-group mb-3 d-flex justify-content-start align-items-start flex-column text-end">
