@@ -8794,3 +8794,7 @@ Content-Transfer-Encoding: quoted-printable
 [2025-07-08 07:13:01] local.INFO: Getting clients for user ID: 2  
 [2025-07-08 07:13:01] local.INFO: Found 2 clients for user 2  
 [2025-07-08 07:13:01] local.INFO: Clients data: [{"id":2,"user_id":2,"client_name":"client 1","client_email":"client1@gmail.com","client_status":"Active","last_accessed":"2025-07-08T05:07:44.000000Z","created_at":"2025-06-24T09:30:50.000000Z","updated_at":"2025-07-08T05:07:44.000000Z"},{"id":3,"user_id":2,"client_name":"Client Name 02","client_email":"Email2@gmail.com","client_status":"Active","last_accessed":"2025-07-02T05:21:41.000000Z","created_at":"2025-06-26T05:37:58.000000Z","updated_at":"2025-07-02T05:21:41.000000Z"}]  
+[2025-07-08 11:01:19] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 11:01:19"}} 
+[2025-07-08 11:01:19] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 11:03:45] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 11:03:45"}} 
+[2025-07-08 11:03:45] local.INFO: CheckSubscription: Active subscription found, proceeding  
