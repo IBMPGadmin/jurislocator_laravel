@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ $title ?? 'JurisLocator' }}</title>
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
+    <title><?php echo e($title ?? 'JurisLocator'); ?></title>
     
     <!-- Custom meta tags -->
-    @yield('meta')
+    <?php echo $__env->yieldContent('meta'); ?>
     
     <!-- CSS Dependencies -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="{{ asset('user_assets/css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('user_assets/css/login_styles.css') }}">
+    <link rel="stylesheet" href="<?php echo e(asset('user_assets/css/style.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('user_assets/css/login_styles.css')); ?>">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     
@@ -583,7 +583,7 @@
     }
     </style>
     
-    @php
+    <?php
     // Add this for pages that use TinyMCE
     if (session_status() == PHP_SESSION_NONE) {
         session_start();
@@ -593,14 +593,14 @@
     echo '<script>';
     echo 'window.selectedClientId = ' . (isset($_SESSION['selected_client_id']) ? $_SESSION['selected_client_id'] : 'null') . ';';
     echo '</script>';
-    @endphp
+    ?>
 
-    @stack('styles')
+    <?php echo $__env->yieldPushContent('styles'); ?>
 </head>
 <body id="body-pd" class="gap_right_home">
     <header class="header gradient-background" id="header">
         <div class="logo">
-            <img src="{{ asset('user_assets/img/jurislocator-logo.png') }}" alt="jurislocator" />
+            <img src="<?php echo e(asset('user_assets/img/jurislocator-logo.png')); ?>" alt="jurislocator" />
         </div>
 
         <div class="header_toggle"> 
@@ -670,14 +670,14 @@
 
             <!-- User Profile -->
             <div class="header_img"> 
-                <a href="{{ route('profile.edit') }}" title="Edit Profile">
-                    @if(Auth::user() && Auth::user()->profile_image)
-                        <img src="{{ asset(Auth::user()->profile_image) }}" alt="{{ Auth::user()->name }}'s Profile" class="profile-header-img">
-                    @else
+                <a href="<?php echo e(route('profile.edit')); ?>" title="Edit Profile">
+                    <?php if(Auth::user() && Auth::user()->profile_image): ?>
+                        <img src="<?php echo e(asset(Auth::user()->profile_image)); ?>" alt="<?php echo e(Auth::user()->name); ?>'s Profile" class="profile-header-img">
+                    <?php else: ?>
                         <div class="profile-header-placeholder">
                             <i class="bi bi-person-fill"></i>
                         </div>
-                    @endif
+                    <?php endif; ?>
                 </a> 
             </div>
         </div>
@@ -685,7 +685,7 @@
     
     <div class="l-navbar" id="nav-bar">
         <nav class="nav">            <div class="nav_list"> 
-                <a href="{{ route('user.dashboard') }}" class="nav_link {{ request()->routeIs('user.dashboard') ? 'active' : '' }}"> 
+                <a href="<?php echo e(route('user.dashboard')); ?>" class="nav_link <?php echo e(request()->routeIs('user.dashboard') ? 'active' : ''); ?>"> 
                     <i class='bx bx-grid-alt nav_icon'>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
                             <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z"/>
@@ -694,7 +694,7 @@
                     <span class="nav_name" data-en="Dashboard" data-fr="Tableau de bord">Dashboard</span> 
                 </a> 
 
-                <a href="{{ route('client.management') }}" class="nav_link {{ request()->routeIs('client.management') ? 'active' : '' }}"> 
+                <a href="<?php echo e(route('client.management')); ?>" class="nav_link <?php echo e(request()->routeIs('client.management') ? 'active' : ''); ?>"> 
                     <i class='bx bx-user-plus nav_icon'>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people" viewBox="0 0 16 16">
                             <path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1zm-7.978-1L7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002-.014.002zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4m3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0M6.936 9.28a6 6 0 0 0-1.23-.247A7 7 0 0 0 5 9c-4 0-5 3-5 4q0 1 1 1h4.216A2.24 2.24 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816M4.92 10A5.5 5.5 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0m3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4"/>
@@ -703,7 +703,7 @@
                     <span class="nav_name" data-en="Client Management" data-fr="Gestion des clients">Client Management</span> 
                 </a> 
 
-                <a href="{{ route('templates.select-client') }}" class="nav_link {{ request()->routeIs('templates.select-client') || request()->routeIs('templates.index') || request()->routeIs('templates.edit') ? 'active' : '' }}"> 
+                <a href="<?php echo e(route('templates.select-client')); ?>" class="nav_link <?php echo e(request()->routeIs('templates.select-client') || request()->routeIs('templates.index') || request()->routeIs('templates.edit') ? 'active' : ''); ?>"> 
                     <i class='bx bx-message-square-detail nav_icon'>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark" viewBox="0 0 16 16">
                             <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z"/>
@@ -712,7 +712,7 @@
                     <span class="nav_name" data-en="Templates" data-fr="Modèles">Templates</span> 
                 </a> 
 
-                <a href="{{ route('user.government-links') }}" class="nav_link {{ request()->routeIs('user.government-links*') ? 'active' : '' }}"> 
+                <a href="<?php echo e(route('user.government-links')); ?>" class="nav_link <?php echo e(request()->routeIs('user.government-links*') ? 'active' : ''); ?>"> 
                     <i class='bx bx-bookmark nav_icon'>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmark-check-fill" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5m8.854-9.646a.5.5 0 0 0-.708-.708L7.5 7.793 6.354 6.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0z"/>
@@ -721,7 +721,7 @@
                     <span class="nav_name" data-en="Government Links" data-fr="Liens gouvernementaux">Government Links</span>
                 </a> 
 
-                <a href="{{ route('user.rcic-deadlines.index') }}" class="nav_link"> 
+                <a href="<?php echo e(route('user.rcic-deadlines.index')); ?>" class="nav_link"> 
                     <i class='bx bx-time nav_icon'>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-event" viewBox="0 0 16 16">
                             <path d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5z"/>
@@ -731,7 +731,7 @@
                     <span class="nav_name" data-en="RCIC Deadlines" data-fr="Délais RCIC">RCIC Deadlines</span>
                 </a>
 
-                <a href="{{ route('user.legal-key-terms.index') }}" class="nav_link"> 
+                <a href="<?php echo e(route('user.legal-key-terms.index')); ?>" class="nav_link"> 
                     <i class='bx bx-book nav_icon'>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-journal-text" viewBox="0 0 16 16">
                             <path d="M5 10.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5m0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5"/>
@@ -742,7 +742,7 @@
                     <span class="nav_name" data-en="Legal Key Terms" data-fr="Termes juridiques clés">Legal Key Terms</span>
                 </a> 
 
-                <a href="{{ route('payment.details') }}" class="nav_link {{ request()->routeIs('payment.details') ? 'active' : '' }}"> 
+                <a href="<?php echo e(route('payment.details')); ?>" class="nav_link <?php echo e(request()->routeIs('payment.details') ? 'active' : ''); ?>"> 
                     <i class='bx bx-bar-chart-alt-2 nav_icon'>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-credit-card" viewBox="0 0 16 16">
                             <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1z"/>
@@ -753,7 +753,7 @@
                 </a>
 
           
-                <a href="{{ route('profile.edit') }}" class="nav_link {{ request()->routeIs('profile.edit') ? 'active' : '' }}"> 
+                <a href="<?php echo e(route('profile.edit')); ?>" class="nav_link <?php echo e(request()->routeIs('profile.edit') ? 'active' : ''); ?>"> 
                     <i class='bx bx-user nav_icon'>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
                             <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
@@ -765,7 +765,7 @@
 
             </div>
 
-            <a href="{{ route('logout') }}" 
+            <a href="<?php echo e(route('logout')); ?>" 
                class="nav_link" 
                id="logout-link" 
                onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> 
@@ -777,19 +777,19 @@
                 </i> 
                 <span class="nav_name" data-en="Sign Out" data-fr="Se déconnecter">Sign Out</span>
             </a>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                @csrf
+            <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" class="d-none">
+                <?php echo csrf_field(); ?>
             </form>
         </nav>
     </div>
 
     <div class="main-content">
-        @yield('content')
+        <?php echo $__env->yieldContent('content'); ?>
     </div>
 
     <footer class="gap_footer footer">
         <div class="row container">
-            <p>&copy;<a target="_blank" href="https://immifocus.ca">immigopro</a> {{ date("Y") }} - All Rights Reserved</p>
+            <p>&copy;<a target="_blank" href="https://immifocus.ca">immigopro</a> <?php echo e(date("Y")); ?> - All Rights Reserved</p>
         </div>
     </footer>
 
@@ -802,11 +802,11 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Custom Scripts -->
-    <script src="{{ asset('user_assets/js/template-manager.js') }}"></script>
-    <script src="{{ asset('user_assets/js/config.js') }}"></script>
-    <script src="{{ asset('user_assets/js/script.js') }}"></script>
-    <script src="{{ asset('user_assets/js/side_bar.js') }}"></script>
-    <script src="{{ asset('user_assets/js/navigation.js') }}"></script>
+    <script src="<?php echo e(asset('user_assets/js/template-manager.js')); ?>"></script>
+    <script src="<?php echo e(asset('user_assets/js/config.js')); ?>"></script>
+    <script src="<?php echo e(asset('user_assets/js/script.js')); ?>"></script>
+    <script src="<?php echo e(asset('user_assets/js/side_bar.js')); ?>"></script>
+    <script src="<?php echo e(asset('user_assets/js/navigation.js')); ?>"></script>
     
     <script>
     // Language and Theme functionality
@@ -1176,6 +1176,7 @@
     });
     </script>
     
-    @stack('scripts')
+    <?php echo $__env->yieldPushContent('scripts'); ?>
 </body>
 </html>
+<?php /**PATH C:\Users\Ardent\Desktop\jurislocator new\jurislocator_laravel\resources\views/layouts/user-layout.blade.php ENDPATH**/ ?>

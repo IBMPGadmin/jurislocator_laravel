@@ -1,6 +1,6 @@
-@extends('layouts.user-layout')
 
-@section('content')
+
+<?php $__env->startSection('content'); ?>
 <div class="tools-container">
     <div class="tools-content">
         <!-- Header Section -->
@@ -215,7 +215,7 @@
 
         <!-- Back to Dashboard -->
         <div class="tools-navigation sp-top-dbl">
-            <a href="{{ route('user.dashboard') }}" class="btn btn-custom2">
+            <a href="<?php echo e(route('user.dashboard')); ?>" class="btn btn-custom2">
                 <i class="fas fa-arrow-left"></i>
                 <span data-en="Back to Dashboard" data-fr="Retour au tableau de bord">Back to Dashboard</span>
             </a>
@@ -745,4 +745,5 @@ function toggleTool(toolName) {
     }
 }
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.user-layout', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\Users\Ardent\Desktop\jurislocator new\jurislocator_laravel\resources\views/user/tools/index.blade.php ENDPATH**/ ?>
