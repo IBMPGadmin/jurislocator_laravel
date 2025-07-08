@@ -213,6 +213,100 @@ Route::middleware([\App\Http\Middleware\Authenticate::class, 'verified', \App\Ht
     Route::post('/clients', [ClientController::class, 'store'])->name('clients.store');
     Route::post('/select-client', [ClientController::class, 'selectClient'])->name('clients.select');
     
+    // Test route for client API debugging
+    Route::get('/test-client-api', function() {
+        try {
+            $controller = new \App\Http\Controllers\ClientController();
+            $request = new \Illuminate\Http\Request();
+            $response = $controller->getClients($request);
+            
+            $currentUser = \Illuminate\Support\Facades\Auth::user();
+            $totalClients = \App\Models\Client::count();
+            $userClients = \App\Models\Client::where('user_id', \Illuminate\Support\Facades\Auth::id())->count();
+            $allClientsWithUsers = \App\Models\Client::with('user')->get();
+            
+            return response()->json([
+                'test_result' => 'success',
+                'response_content' => json_decode($response->getContent(), true),
+                'current_user' => $currentUser ? [
+                    'id' => $currentUser->id,
+                    'name' => $currentUser->name,
+                    'email' => $currentUser->email
+                ] : null,
+                'database_stats' => [
+                    'total_clients_in_db' => $totalClients,
+                    'user_clients_in_db' => $userClients,
+                    'all_clients_sample' => $allClientsWithUsers->take(5)->map(function($client) {
+                        return [
+                            'id' => $client->id,
+                            'client_name' => $client->client_name,
+                            'client_email' => $client->client_email,
+                            'user_id' => $client->user_id,
+                            'user_name' => $client->user ? $client->user->name : 'No user found'
+                        ];
+                    })
+                ]
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'test_result' => 'error',
+                'error_message' => $e->getMessage(),
+                'error_trace' => $e->getTraceAsString(),
+                'current_user' => \Illuminate\Support\Facades\Auth::user(),
+                'auth_check' => \Illuminate\Support\Facades\Auth::check()
+            ]);
+        }
+    })->name('test.client.api');
+    
+    // Test route for client creation
+    Route::post('/test-client-create', function(\Illuminate\Http\Request $request) {
+        try {
+            $controller = new \App\Http\Controllers\ClientController();
+            $response = $controller->storeApi($request);
+            
+            return response()->json([
+                'test_result' => 'success',
+                'create_response' => json_decode($response->getContent(), true),
+                'request_data' => $request->all(),
+                'current_user' => \Illuminate\Support\Facades\Auth::user()
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'test_result' => 'error',
+                'error_message' => $e->getMessage(),
+                'error_trace' => $e->getTraceAsString(),
+                'request_data' => $request->all(),
+                'current_user' => \Illuminate\Support\Facades\Auth::user()
+            ]);
+        }
+    })->name('test.client.create');
+    
+    // Debug route to check what routes are loaded
+    Route::get('/debug-api-routes', function() {
+        $routes = [];
+        foreach (\Illuminate\Support\Facades\Route::getRoutes() as $route) {
+            if (str_contains($route->uri(), 'api') || str_contains($route->uri(), 'client')) {
+                $routes[] = [
+                    'method' => implode('|', $route->methods()),
+                    'uri' => $route->uri(),
+                    'name' => $route->getName(),
+                    'action' => $route->getActionName()
+                ];
+            }
+        }
+        
+        return response()->json([
+            'total_routes' => count(\Illuminate\Support\Facades\Route::getRoutes()),
+            'api_client_routes' => $routes,
+            'api_routes_file_exists' => file_exists(base_path('routes/api.php')),
+            'bootstrap_app_content' => file_get_contents(base_path('bootstrap/app.php'))
+        ]);
+    })->name('debug.api.routes');
+    
+    // Web-based client API routes (fallback for when API routes don't work)
+    Route::get('/web-api/clients', [ClientController::class, 'getClients'])->name('web.api.clients.get');
+    Route::post('/web-api/clients', [ClientController::class, 'storeApi'])->name('web.api.clients.store');
+    
     // Content saving route for client management
     Route::post('/save-content', [App\Http\Controllers\ContentController::class, 'saveContent'])->name('save.content');
     

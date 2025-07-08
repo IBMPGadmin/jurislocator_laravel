@@ -7,13 +7,20 @@ Successfully updated both `popupSaveModal` and `clientSelectionModal` to display
 
 ### 1. Enhanced CSS Styling
 
-#### **Backdrop Blur Effect**
+#### **Custom Backdrop Effect**
 ```css
-.modal-backdrop.show {
-    opacity: 0.8;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    background-color: rgba(0, 0, 0, 0.6);
+/* Hide Bootstrap modal backdrop completely */
+.modal-backdrop {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+}
+
+/* Add backdrop effect directly to modal */
+.modal.modal-centered {
+    background-color: rgba(0, 0, 0, 0.6) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
 }
 ```
 
@@ -77,6 +84,145 @@ Successfully updated both `popupSaveModal` and `clientSelectionModal` to display
 - Smooth hover effects
 - Professional gradients
 
+## Recent Enhancement: Unified Modal Experience
+
+### Recent Enhancement: Unified Modal Experience + Client Integration
+
+#### **Client Database Integration:**
+- **Model**: `App\Models\Client` (uses `client_table`)
+- **API Endpoints**: 
+  - `GET /api/clients` - Fetch user's clients
+  - `POST /api/clients` - Create new client
+- **Authentication**: Protected with `auth` middleware
+- **User Association**: Clients are linked to `user_id`
+
+#### **Database Schema:**
+```sql
+client_table:
+- id (primary key)
+- client_name (string)
+- client_email (email)
+- client_status (Active/Inactive)
+- user_id (foreign key)
+- last_accessed (timestamp)
+- created_at, updated_at (timestamps)
+```
+
+#### **Debug Features Added:**
+- Console logging for API calls
+- Error handling with detailed messages
+- API connection test on page load
+- Response status checking
+
+#### **Testing the Implementation:**
+1. Open browser console (F12)
+2. Look for "API Test" messages on page load
+3. Check for "Loading clients for modal selection..." when expanding modal
+4. Verify client creation responses
+
+### New Feature: Expanded Modal for Client Selection
+
+Instead of opening a separate modal for client selection, the "Choose Save Context" modal now expands within the same window to show client management options.
+
+#### **User Flow:**
+1. User clicks "Save Popups" → Opens "Choose Save Context" modal
+2. User clicks "Save to Personal Records" → Saves immediately 
+3. User clicks "Save to Client Records" → Modal expands to show:
+   - **Create New Client Form** (at the top)
+   - **Select Existing Client** (dropdown/list below)
+   - **Back to Save Options** (button to return)
+
+#### **Implementation:**
+```html
+<!-- Single Modal with Expandable Content -->
+<div class="modal fade modal-centered" id="popupSaveModal">
+  <!-- Initial Save Options Section -->
+  <div id="saveOptionsSection">
+    <button id="saveToUserRecords">Save to Personal Records</button>
+    <button id="saveToClientRecordsExpand">Save to Client Records</button>
+  </div>
+  
+  <!-- Expandable Client Selection Section -->
+  <div id="clientSelectionSection" style="display: none;">
+    <!-- Create New Client Form -->
+    <!-- Select Existing Client List -->
+    <!-- Back Button -->
+  </div>
+</div>
+```
+
+#### **CSS Enhancements:**
+```css
+/* Modal expands when client selection is shown */
+#popupSaveModal.modal-centered.expanded .modal-dialog {
+    max-width: 1000px;
+    width: 95vw;
+}
+
+/* Smooth transitions between states */
+#popupSaveModal .modal-content {
+    transition: all 0.3s ease;
+}
+```
+
+#### **JavaScript Functions:**
+- `expandModalForClientSelection()` - Shows client management section
+- `collapseModalToSaveOptions()` - Returns to initial save options
+- `selectClientFromModal()` - Handles client selection from expanded view
+- `loadClientsForModalSelection()` - Loads clients into modal list
+
+### Benefits:
+- ✅ **Unified Experience**: Single modal for entire save workflow
+- ✅ **Better UX**: No modal switching or overlapping
+- ✅ **Space Efficient**: Compact client cards designed for modal space
+- ✅ **Intuitive Flow**: Clear progression from save choice to client selection
+- ✅ **Responsive**: Works well on both desktop and mobile
+
+---
+
+## Recent Fix: Modal Backdrop Issue
+
+### Problem
+- Bootstrap modal backdrop was appearing in the corner of the screen
+- Backdrop was creating visual interference with black/blur background
+- Multiple backdrop elements were being created
+
+### Solution
+1. **Disabled Bootstrap Backdrop**: Changed `data-bs-backdrop="static"` to `data-bs-backdrop="false"`
+2. **Custom Backdrop**: Applied backdrop effect directly to modal element using CSS
+3. **Complete Hiding**: Used `display: none !important` for all `.modal-backdrop` elements
+
+### Implementation
+```css
+/* Hide Bootstrap modal backdrop completely */
+.modal-backdrop {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+}
+
+/* Apply backdrop effect directly to modal */
+.modal.modal-centered {
+    background-color: rgba(0, 0, 0, 0.6) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+}
+```
+
+```html
+<!-- Updated modal attributes -->
+<div class="modal fade modal-centered" id="popupSaveModal" data-bs-backdrop="false">
+<div class="modal fade modal-centered" id="clientSelectionModal" data-bs-backdrop="false">
+```
+
+### Result
+- ✅ No more backdrop appearing in corners
+- ✅ Clean, centered modal with integrated backdrop
+- ✅ Smooth blur effect without interference
+- ✅ Proper modal positioning and visibility
+
+---
+
 ## Visual Features
 
 ### 🎨 **Design Elements**
@@ -103,10 +249,10 @@ Successfully updated both `popupSaveModal` and `clientSelectionModal` to display
 ### Modal Classes
 ```html
 <!-- Popup Save Modal -->
-<div class="modal fade modal-centered" id="popupSaveModal" data-bs-backdrop="static">
+<div class="modal fade modal-centered" id="popupSaveModal" data-bs-backdrop="false">
 
 <!-- Client Selection Modal -->
-<div class="modal fade modal-centered" id="clientSelectionModal" data-bs-backdrop="static">
+<div class="modal fade modal-centered" id="clientSelectionModal" data-bs-backdrop="false">
 ```
 
 ### JavaScript Integration

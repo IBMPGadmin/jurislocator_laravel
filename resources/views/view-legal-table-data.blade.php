@@ -226,12 +226,17 @@
         color: #dee2e6;
     }
     
-    /* Backdrop blur effect */
+    /* Hide modal backdrop completely - we don't need it for centered modals */
+    .modal-backdrop {
+        display: none !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+    }
+    
     .modal-backdrop.show {
-        opacity: 0.8;
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        background-color: rgba(0, 0, 0, 0.6);
+        display: none !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
     }
     
     /* Custom centered modal styles like iCloud - Bootstrap compatible */
@@ -246,6 +251,10 @@
         width: 100% !important; /* Override any conflicting width */
         height: 100% !important;
         margin: 0 !important;
+        /* Add backdrop effect directly to modal */
+        background-color: rgba(0, 0, 0, 0.6) !important;
+        backdrop-filter: blur(10px) !important;
+        -webkit-backdrop-filter: blur(10px) !important;
         /* Let Bootstrap handle display property for show/hide */
     }
     
@@ -288,6 +297,79 @@
     #popupSaveModal.modal-centered .modal-dialog {
         max-width: 500px;
         width: 100%;
+        transition: max-width 0.3s ease, width 0.3s ease;
+    }
+
+    #popupSaveModal.modal-centered.expanded .modal-dialog {
+        max-width: 1000px;
+        width: 95vw;
+    }
+
+    #popupSaveModal .modal-content {
+        transition: all 0.3s ease;
+    }
+
+    #popupSaveModal.expanded .modal-content {
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+
+    /* Smaller client cards for modal */
+    #popupSaveModal .client-selection-card {
+        background: white;
+        border: 2px solid #e9ecef;
+        border-radius: 8px;
+        padding: 1rem;
+        margin-bottom: 0.75rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+    
+    #popupSaveModal .client-selection-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        border-color: #007bff;
+        background: #f8f9fa;
+    }
+    
+    #popupSaveModal .client-avatar-large {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #007bff, #0056b3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1rem;
+        flex-shrink: 0;
+    }
+    
+    #popupSaveModal .client-info-large h6 {
+        margin: 0 0 0.25rem 0;
+        color: #2c3e50;
+        font-size: 1rem;
+        font-weight: 600;
+    }
+    
+    #popupSaveModal .client-email-large {
+        color: #7f8c8d;
+        margin: 0 0 0.25rem 0;
+        font-size: 0.85rem;
+    }
+    
+    #popupSaveModal .btn-select-client {
+        background: linear-gradient(135deg, #28a745, #20c997);
+        border: none;
+        color: white;
+        padding: 0.375rem 1rem;
+        border-radius: 20px;
+        font-weight: 600;
+        font-size: 0.8rem;
+        transition: all 0.3s ease;
     }
     
     #popupSaveModal .modal-header {
@@ -1388,7 +1470,7 @@
 </div>
 
 <!-- Popup Save Choice Modal -->
-<div class="modal fade modal-centered" id="popupSaveModal" tabindex="-1" aria-labelledby="popupSaveModalLabel" aria-hidden="true" data-bs-backdrop="static">
+<div class="modal fade modal-centered" id="popupSaveModal" tabindex="-1" aria-labelledby="popupSaveModalLabel" aria-hidden="true" data-bs-backdrop="false">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -1402,13 +1484,13 @@
                 <p class="text-center mb-4" data-en="How would you like to save these popups?" data-fr="Comment souhaitez-vous sauvegarder ces popups ?">
                     <strong>How would you like to save these popups?</strong>
                 </p>
-                <div class="d-grid gap-3">
+                <div class="d-grid gap-3" id="saveOptionsSection">
                     <button type="button" class="btn btn-outline-primary btn-lg" id="saveToUserRecords">
                         <i class="fas fa-user me-2"></i>
                         <span data-en="Save to Personal Records" data-fr="Sauvegarder dans les dossiers personnels">Save to Personal Records</span>
                         <br><small class="text-muted" data-en="(Available in all contexts)" data-fr="(Disponible dans tous les contextes)">(Available in all contexts)</small>
                     </button>
-                    <button type="button" class="btn btn-outline-success btn-lg" id="saveToClientRecords">
+                    <button type="button" class="btn btn-outline-success btn-lg" id="saveToClientRecordsExpand">
                         <i class="fas fa-briefcase me-2"></i>
                         <span data-en="Save to Client Records" data-fr="Sauvegarder dans les dossiers clients">Save to Client Records</span>
                         @if(isset($client) && $client)
@@ -1417,6 +1499,86 @@
                         <br><small class="text-muted" data-en="(Select or create a client)" data-fr="(Sélectionner ou créer un client)">(Select or create a client)</small>
                         @endif
                     </button>
+                </div>
+
+                <!-- Client Selection Section (Initially Hidden) -->
+                <div id="clientSelectionSection" style="display: none;">
+                    <hr class="my-4">
+                    <h6 class="text-center mb-4" data-en="Client Management" data-fr="Gestion des clients">
+                        <i class="fas fa-briefcase me-2"></i>Client Management
+                    </h6>
+                    
+                    <!-- Add New Client Section -->
+                    <div class="card border-primary shadow-sm mb-4">
+                        <div class="card-header bg-primary text-white">
+                            <h6 class="mb-0" data-en="Create New Client" data-fr="Créer un nouveau client">
+                                <i class="fas fa-plus me-2"></i>Create New Client
+                            </h6>
+                        </div>
+                        <div class="card-body bg-white bg-opacity-90">
+                            <form id="newClientFormInModal">
+                                @csrf
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <label for="modal_client_name" class="form-label fw-bold" data-en="Client Name" data-fr="Nom du client">Client Name</label>
+                                            <input type="text" class="form-control" id="modal_client_name" name="client_name" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <label for="modal_client_email" class="form-label fw-bold" data-en="Email" data-fr="Courriel">Email</label>
+                                            <input type="email" class="form-control" id="modal_client_email" name="client_email" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <label for="modal_client_status" class="form-label fw-bold" data-en="Status" data-fr="Statut">Status</label>
+                                            <select class="form-control" id="modal_client_status" name="client_status" required>
+                                                <option value="Active" data-en="Active" data-fr="Actif">Active</option>
+                                                <option value="Inactive" data-en="Inactive" data-fr="Inactif">Inactive</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary btn-sm">
+                                        <i class="fas fa-plus me-2"></i>
+                                        <span data-en="Create and Select Client" data-fr="Créer et sélectionner le client">Create and Select Client</span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Existing Clients Section -->
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-light">
+                            <h6 class="mb-1" data-en="Select Existing Client" data-fr="Sélectionner un client existant">
+                                <i class="fas fa-users me-2"></i>Select Existing Client
+                            </h6>
+                            <p class="mb-0 text-muted small" data-en="Choose a client to save popups to their records" data-fr="Choisissez un client pour enregistrer les popups dans ses dossiers">Choose a client to save popups to their records</p>
+                        </div>
+                        <div class="card-body bg-white bg-opacity-90" style="max-height: 300px; overflow-y: auto;">
+                            <div id="modalClientsList" class="row">
+                                <!-- Clients will be loaded here dynamically -->
+                                <div class="col-12 text-center py-3">
+                                    <div class="spinner-border text-primary" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                    <p class="mt-2 text-muted" data-en="Loading clients..." data-fr="Chargement des clients...">Loading clients...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Back Button -->
+                    <div class="text-center mt-3">
+                        <button type="button" class="btn btn-outline-secondary" id="backToSaveOptions">
+                            <i class="fas fa-arrow-left me-2"></i>
+                            <span data-en="Back to Save Options" data-fr="Retour aux options de sauvegarde">Back to Save Options</span>
+                        </button>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer justify-content-center">
@@ -1427,7 +1589,7 @@
 </div>
 
 <!-- Full-page Client Selection Modal -->
-<div class="modal fade modal-centered" id="clientSelectionModal" tabindex="-1" aria-labelledby="clientSelectionModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+<div class="modal fade modal-centered" id="clientSelectionModal" tabindex="-1" aria-labelledby="clientSelectionModalLabel" aria-hidden="true" data-bs-backdrop="false" data-bs-keyboard="false">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -2938,9 +3100,320 @@ $(function() {
     }
 </script>
 
+<!-- Client Dropdown Styles -->
+<style>
+.client-dropdown-container {
+    position: relative;
+}
+
+.client-search-input {
+    padding-right: 40px;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.client-search-input:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+.client-search-input.dropdown-active {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-color: transparent;
+}
+
+.client-dropdown-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 2px solid #0d6efd;
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 1050;
+    display: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.client-dropdown-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    cursor: pointer;
+    border-bottom: 1px solid #f8f9fa;
+    transition: all 0.2s ease;
+}
+
+.client-dropdown-item:hover,
+.client-dropdown-item.keyboard-active {
+    background-color: #f8f9fa;
+    border-left: 3px solid #0d6efd;
+}
+
+.client-dropdown-item:last-child {
+    border-bottom: none;
+}
+
+.client-dropdown-avatar {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+    flex-shrink: 0;
+}
+
+.client-dropdown-avatar i {
+    color: white;
+    font-size: 16px;
+}
+
+.client-dropdown-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.client-dropdown-name {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 2px;
+    font-size: 14px;
+}
+
+.client-dropdown-email {
+    color: #6c757d;
+    font-size: 12px;
+    margin-bottom: 4px;
+}
+
+.client-dropdown-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.client-dropdown-status .badge {
+    font-size: 10px;
+    padding: 2px 6px;
+}
+
+.client-dropdown-status .badge.status-active {
+    background-color: #198754;
+}
+
+.client-dropdown-status .badge.status-inactive {
+    background-color: #6c757d;
+}
+
+.client-dropdown-last-accessed {
+    color: #adb5bd;
+    font-size: 10px;
+}
+
+.client-dropdown-action {
+    margin-left: 12px;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.client-dropdown-item:hover .client-dropdown-action,
+.client-dropdown-item.keyboard-active .client-dropdown-action {
+    opacity: 1;
+}
+
+.client-dropdown-action i {
+    font-size: 18px;
+}
+
+.client-dropdown-footer {
+    padding: 8px 16px;
+    background: #f8f9fa;
+    border-top: 1px solid #dee2e6;
+}
+
+.no-search-results {
+    padding: 20px;
+    background: #f8f9fa;
+}
+
+/* Scrollbar styling for dropdown */
+.client-dropdown-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.client-dropdown-list::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.client-dropdown-list::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 3px;
+}
+
+.client-dropdown-list::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+/* Loading animation for search */
+.client-search-input.loading {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24'%3E%3Cpath fill='%23999' d='M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z' opacity='.25'/%3E%3Cpath fill='%23999' d='M12,4a8,8,0,0,1,7.89,6.7A1.53,1.53,0,0,0,21.38,12h0a1.5,1.5,0,0,0,1.48-1.75,11,11,0,0,0-21.72,0A1.5,1.5,0,0,0,2.62,12h0a1.53,1.53,0,0,0,1.49-1.3A8,8,0,0,1,12,4Z'%3E%3CanimateTransform attributeName='transform' dur='0.75s' repeatCount='indefinite' type='rotate' values='0 12 12;360 12 12'/%3E%3C/path%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+}
+</style>
+
 <!-- Popup Saving Functionality for Document View Page -->
 <script>
+// Define global functions first (before DOMContentLoaded)
+window.selectClientFromModal = function(clientId, clientName) {
+    // Show confirmation and save
+    if (confirm(`Save popups to ${clientName}'s records?`)) {
+        window.savePopupsDataFromSidebar('client', clientId);
+    } else {
+        // Just collapse back to save options if user cancels
+        const modal = document.getElementById('popupSaveModal');
+        const saveOptionsSection = document.getElementById('saveOptionsSection');
+        const clientSelectionSection = document.getElementById('clientSelectionSection');
+        
+        // Remove expanded class from modal
+        modal.classList.remove('expanded');
+        
+        // Show save options and hide client selection
+        saveOptionsSection.style.display = 'block';
+        clientSelectionSection.style.display = 'none';
+    }
+};
+
+window.selectClientFromDropdown = function(clientId, clientName) {
+    // Hide the dropdown
+    const dropdownList = document.getElementById('clientDropdownList');
+    const searchInput = document.getElementById('clientSearchInput');
+    
+    if (dropdownList) {
+        dropdownList.style.display = 'none';
+    }
+    if (searchInput) {
+        searchInput.classList.remove('dropdown-active');
+        searchInput.value = clientName; // Show selected client name in input
+    }
+    
+    // Call the main selection function
+    window.selectClientFromModal(clientId, clientName);
+};
+
+window.selectClientForSaving = function(clientId, clientName) {
+    // Close the client selection modal
+    const clientModal = bootstrap.Modal.getInstance(document.getElementById('clientSelectionModal'));
+    clientModal.hide();
+    
+    // Show confirmation and save
+    if (confirm(`Save popups to ${clientName}'s records?`)) {
+        window.savePopupsDataFromSidebar('client', clientId);
+    } else {
+        // Re-show the popup save modal if user cancels
+        setTimeout(() => {
+            const popupSaveModal = new bootstrap.Modal(document.getElementById('popupSaveModal'));
+            popupSaveModal.show();
+        }, 500);
+    }
+};
+
 document.addEventListener('DOMContentLoaded', function() {
+    // Define the savePopupsDataFromSidebar function first
+    window.savePopupsDataFromSidebar = function(saveType, clientId = null) {
+        const droppableArea = document.querySelector('.nested-droppable');
+        const pinnedPopups = droppableArea.querySelectorAll('.pinned-popup');
+        
+        // Extract popup data from pinned popups
+        const popups = [];
+        pinnedPopups.forEach(popup => {
+            // Extract content and metadata from pinned popup
+            const titleElement = popup.querySelector('.popup-header h6, .popup-header .modal-title, h5, h6');
+            const contentElement = popup.querySelector('.popup-content, .modal-body');
+            
+            if (titleElement && contentElement) {
+                // Try to extract section ID from content or title
+                const sectionMatch = titleElement.textContent.match(/(\d+(?:\([^)]+\))*)/);
+                const sectionId = sectionMatch ? sectionMatch[1] : 'unknown';
+                
+                // Try to get category ID from meta tags or use current document
+                const categoryId = document.querySelector('meta[name="current-document-category-id"]')?.content || '1';
+                
+                const popupData = {
+                    section_id: sectionId,
+                    category_id: parseInt(categoryId) || 1,
+                    part: null,
+                    division: null,
+                    popup_title: titleElement.textContent.trim(),
+                    popup_content: popup.outerHTML,
+                    section_title: titleElement.textContent.trim(),
+                    table_name: document.querySelector('meta[name="current-document-table"]')?.content || 'unknown'
+                };
+                popups.push(popupData);
+            }
+        });
+        
+        if (popups.length === 0) {
+            alert('No valid popup data found.');
+            return;
+        }
+        
+        console.log('Collected popup data from sidebar:', popups);
+        
+        // Show loading state
+        const modal = document.getElementById('popupSaveModal');
+        const buttons = modal.querySelectorAll('button');
+        buttons.forEach(btn => btn.disabled = true);
+        
+        // Save the popups
+        fetch('/save-popups', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            },
+            body: JSON.stringify({
+                save_type: saveType,
+                client_id: clientId,
+                popups: popups
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert(data.message);
+                // Close modal if still open
+                const modalInstance = bootstrap.Modal.getInstance(modal);
+                if (modalInstance) {
+                    modalInstance.hide();
+                }
+            } else {
+                alert('Error: ' + data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Error saving popups. Please try again.');
+        })
+        .finally(() => {
+            // Reset button states
+            buttons.forEach(btn => btn.disabled = false);
+        });
+    };
+
+    // Test API connection on page load
+    console.log('Testing API connection...');
+    testAPIConnection();
+    
     // Handle the new save popups button in sidebar
     const savePopupsSidebarBtn = document.getElementById('save-popups-sidebar');
     if (savePopupsSidebarBtn) {
@@ -2964,22 +3437,492 @@ document.addEventListener('DOMContentLoaded', function() {
     const saveToUserBtn = document.getElementById('saveToUserRecords');
     if (saveToUserBtn) {
         saveToUserBtn.addEventListener('click', function() {
-            savePopupsDataFromSidebar('user');
+            window.savePopupsDataFromSidebar('user');
         });
     }
     
-    // Handle save to client records
-    const saveToClientBtn = document.getElementById('saveToClientRecords');
+    // Handle save to client records (new expand functionality)
+    const saveToClientBtn = document.getElementById('saveToClientRecordsExpand');
     if (saveToClientBtn) {
         saveToClientBtn.addEventListener('click', function() {
             const clientId = {{ isset($client) && $client ? $client->id : 'null' }};
             if (!clientId) {
-                // No client selected, show client selection modal
-                showClientSelectionModal();
+                // No client selected, expand the modal to show client selection
+                expandModalForClientSelection();
                 return;
             }
             // Client already selected, save directly
-            savePopupsDataFromSidebar('client', clientId);
+            window.savePopupsDataFromSidebar('client', clientId);
+        });
+    }
+
+    // Handle back to save options button
+    const backToSaveOptionsBtn = document.getElementById('backToSaveOptions');
+    if (backToSaveOptionsBtn) {
+        backToSaveOptionsBtn.addEventListener('click', function() {
+            collapseModalToSaveOptions();
+        });
+    }
+
+    // Function to expand modal for client selection
+    function expandModalForClientSelection() {
+        const modal = document.getElementById('popupSaveModal');
+        const saveOptionsSection = document.getElementById('saveOptionsSection');
+        const clientSelectionSection = document.getElementById('clientSelectionSection');
+        
+        // Add expanded class to modal
+        modal.classList.add('expanded');
+        
+        // Hide save options and show client selection
+        saveOptionsSection.style.display = 'none';
+        clientSelectionSection.style.display = 'block';
+        
+        // Load clients for the modal
+        loadClientsForModalSelection();
+    }
+
+    // Function to collapse modal back to save options
+    function collapseModalToSaveOptions() {
+        const modal = document.getElementById('popupSaveModal');
+        const saveOptionsSection = document.getElementById('saveOptionsSection');
+        const clientSelectionSection = document.getElementById('clientSelectionSection');
+        
+        // Remove expanded class from modal
+        modal.classList.remove('expanded');
+        
+        // Show save options and hide client selection
+        saveOptionsSection.style.display = 'block';
+        clientSelectionSection.style.display = 'none';
+    }
+
+    // Function to load clients for modal selection
+    function loadClientsForModalSelection() {
+        const clientsList = document.getElementById('modalClientsList');
+        
+        console.log('Loading clients for modal selection...');
+        console.log('API URL: /api/clients');
+        console.log('CSRF Token:', '{{ csrf_token() }}');
+        
+        // Try API route first
+        fetch('/api/clients', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                'Accept': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest'
+            },
+            credentials: 'same-origin'
+        })
+        .then(response => {
+            console.log('API Response status:', response.status);
+            console.log('API Response headers:', response.headers);
+            console.log('API Response URL:', response.url);
+            
+            // If API route returns 401, try web route instead
+            if (response.status === 401) {
+                console.log('API route returned 401, trying web route...');
+                return fetch('/web-api/clients', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'Accept': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest'
+                    },
+                    credentials: 'same-origin'
+                });
+            }
+            return response;
+        })
+        .then(response => {
+            console.log('Final Response status:', response.status);
+            console.log('Final Response headers:', response.headers);
+            console.log('Final Response URL:', response.url);
+            
+            // Log response text for debugging
+            return response.text().then(text => {
+                console.log('Raw response text:', text);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}, body: ${text}`);
+                }
+                
+                try {
+                    return JSON.parse(text);
+                } catch (e) {
+                    console.error('Failed to parse JSON:', e);
+                    throw new Error('Invalid JSON response: ' + text);
+                }
+            });
+        })
+        .then(data => {
+            console.log('Clients data received:', data);
+            if (data.success && data.clients) {
+                console.log('Number of clients:', data.clients.length);
+                renderModalClientsList(data.clients);
+            } else {
+                console.warn('No clients found or API error:', data);
+                renderModalNoClients();
+            }
+        })
+        .catch(error => {
+            console.error('Error loading clients:', error);
+            renderModalNoClients();
+        });
+    }
+
+    // Function to render clients list in modal
+    function renderModalClientsList(clients) {
+        const clientsList = document.getElementById('modalClientsList');
+        
+        if (clients.length === 0) {
+            renderModalNoClients();
+            return;
+        }
+        
+        // Create a searchable dropdown for clients
+        let html = `
+            <div class="col-12">
+                <div class="client-dropdown-container">
+                    <label for="clientSearchInput" class="form-label">
+                        <i class="fas fa-search me-2"></i>Search and Select Client
+                    </label>
+                    <div class="position-relative">
+                        <input type="text" 
+                               id="clientSearchInput" 
+                               class="form-control client-search-input" 
+                               placeholder="Type to search clients by name or email..."
+                               autocomplete="off">
+                        <div id="clientDropdownList" class="client-dropdown-list">
+        `;
+        
+        // Add each client as a dropdown option
+        clients.forEach(client => {
+            const lastAccessed = client.last_accessed ? new Date(client.last_accessed).toLocaleDateString() : 'Never';
+            const escapedClientName = client.client_name.replace(/'/g, "\\'").replace(/"/g, '\\"');
+            
+            html += `
+                <div class="client-dropdown-item" 
+                     data-client-id="${client.id}" 
+                     data-client-name="${escapedClientName}"
+                     data-client-email="${client.client_email}"
+                     onclick="selectClientFromDropdown(${client.id}, '${escapedClientName}')">
+                    <div class="client-dropdown-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="client-dropdown-info">
+                        <div class="client-dropdown-name">${client.client_name}</div>
+                        <div class="client-dropdown-email">${client.client_email}</div>
+                        <div class="client-dropdown-status">
+                            <span class="badge status-${client.client_status.toLowerCase()}">${client.client_status}</span>
+                            <span class="client-dropdown-last-accessed">Last accessed: ${lastAccessed}</span>
+                        </div>
+                    </div>
+                    <div class="client-dropdown-action">
+                        <i class="fas fa-check-circle text-success"></i>
+                    </div>
+                </div>
+            `;
+        });
+        
+        html += `
+                        </div>
+                    </div>
+                    <div class="client-dropdown-footer mt-3">
+                        <small class="text-muted">
+                            <i class="fas fa-info-circle me-1"></i>
+                            ${clients.length} client${clients.length !== 1 ? 's' : ''} available. Click on a client to select.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        clientsList.innerHTML = html;
+        
+        // Initialize search functionality
+        initializeClientSearch(clients);
+    }
+
+    // Function to initialize client search functionality
+    function initializeClientSearch(clients) {
+        const searchInput = document.getElementById('clientSearchInput');
+        const dropdownList = document.getElementById('clientDropdownList');
+        
+        if (!searchInput || !dropdownList) return;
+        
+        // Show dropdown when input is focused
+        searchInput.addEventListener('focus', function() {
+            dropdownList.style.display = 'block';
+            searchInput.classList.add('dropdown-active');
+        });
+        
+        // Hide dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.client-dropdown-container')) {
+                dropdownList.style.display = 'none';
+                searchInput.classList.remove('dropdown-active');
+            }
+        });
+        
+        // Search functionality
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase().trim();
+            const dropdownItems = dropdownList.querySelectorAll('.client-dropdown-item');
+            
+            let visibleCount = 0;
+            dropdownItems.forEach(item => {
+                const clientName = item.getAttribute('data-client-name').toLowerCase();
+                const clientEmail = item.getAttribute('data-client-email').toLowerCase();
+                
+                if (clientName.includes(searchTerm) || clientEmail.includes(searchTerm)) {
+                    item.style.display = 'flex';
+                    visibleCount++;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+            
+            // Show "no results" message if no clients match
+            let noResultsDiv = dropdownList.querySelector('.no-search-results');
+            if (visibleCount === 0 && searchTerm) {
+                if (!noResultsDiv) {
+                    noResultsDiv = document.createElement('div');
+                    noResultsDiv.className = 'no-search-results text-center py-3 text-muted';
+                    noResultsDiv.innerHTML = `
+                        <i class="fas fa-search me-2"></i>
+                        No clients found matching "${searchTerm}"
+                    `;
+                    dropdownList.appendChild(noResultsDiv);
+                }
+                noResultsDiv.style.display = 'block';
+            } else if (noResultsDiv) {
+                noResultsDiv.style.display = 'none';
+            }
+            
+            // Show dropdown if there's input
+            if (searchTerm) {
+                dropdownList.style.display = 'block';
+                searchInput.classList.add('dropdown-active');
+            }
+        });
+        
+        // Handle keyboard navigation
+        searchInput.addEventListener('keydown', function(e) {
+            const visibleItems = dropdownList.querySelectorAll('.client-dropdown-item[style*="flex"], .client-dropdown-item:not([style*="none"])');
+            const currentActive = dropdownList.querySelector('.client-dropdown-item.keyboard-active');
+            
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                if (currentActive) {
+                    currentActive.classList.remove('keyboard-active');
+                    const nextItem = Array.from(visibleItems).find(item => 
+                        Array.from(visibleItems).indexOf(item) > Array.from(visibleItems).indexOf(currentActive)
+                    );
+                    if (nextItem) {
+                        nextItem.classList.add('keyboard-active');
+                        nextItem.scrollIntoView({ block: 'nearest' });
+                    }
+                } else if (visibleItems.length > 0) {
+                    visibleItems[0].classList.add('keyboard-active');
+                    visibleItems[0].scrollIntoView({ block: 'nearest' });
+                }
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                if (currentActive) {
+                    currentActive.classList.remove('keyboard-active');
+                    const prevItem = Array.from(visibleItems).reverse().find(item => 
+                        Array.from(visibleItems).indexOf(item) < Array.from(visibleItems).indexOf(currentActive)
+                    );
+                    if (prevItem) {
+                        prevItem.classList.add('keyboard-active');
+                        prevItem.scrollIntoView({ block: 'nearest' });
+                    }
+                }
+            } else if (e.key === 'Enter') {
+                e.preventDefault();
+                if (currentActive) {
+                    currentActive.click();
+                }
+            } else if (e.key === 'Escape') {
+                dropdownList.style.display = 'none';
+                searchInput.classList.remove('dropdown-active');
+                searchInput.blur();
+            }
+        });
+    }
+
+    // Function to render no clients message in modal
+    function renderModalNoClients() {
+        const clientsList = document.getElementById('modalClientsList');
+        clientsList.innerHTML = `
+            <div class="col-12 text-center py-4">
+                <div class="no-clients-found">
+                    <i class="fas fa-users no-clients-icon"></i>
+                    <h6 data-en="No clients found" data-fr="Aucun client trouvé">No clients found</h6>
+                    <p class="text-muted" data-en="Create your first client using the form above" data-fr="Créez votre premier client en utilisant le formulaire ci-dessus">
+                        Create your first client using the form above
+                    </p>
+                </div>
+            </div>
+        `;
+    }
+
+    // Handle new client form submission in modal
+    const newClientFormInModal = document.getElementById('newClientFormInModal');
+    if (newClientFormInModal) {
+        newClientFormInModal.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            
+            // Show loading state
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Creating...';
+            submitBtn.disabled = true;
+            
+            const formData = new FormData(this);
+            
+            // Debug: Log form data
+            console.log('Submitting client form...');
+            console.log('Form data entries:');
+            for (let [key, value] of formData.entries()) {
+                console.log(`${key}: ${value}`);
+            }
+            
+            // Function to try client creation with fallback
+            function tryClientCreation(url, isWebRoute = false) {
+                console.log(`Trying client creation via: ${url}`);
+                
+                return fetch(url, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'Accept': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                })
+                .then(response => {
+                    console.log(`${isWebRoute ? 'Web' : 'API'} create client response status:`, response.status);
+                    console.log('Response headers:', Object.fromEntries(response.headers.entries()));
+                    
+                    // If API route returns 401 and this is not already the web route, try web route
+                    if (response.status === 401 && !isWebRoute) {
+                        console.log('API route returned 401, trying web route...');
+                        return tryClientCreation('/web-api/clients', true);
+                    }
+                    
+                    // Get response text first to see what we actually received
+                    return response.text().then(text => {
+                        console.log('Raw response text:', text);
+                        
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}, body: ${text}`);
+                        }
+                        
+                        try {
+                            return JSON.parse(text);
+                        } catch (e) {
+                            console.error('Failed to parse JSON:', e);
+                            throw new Error('Invalid JSON response: ' + text);
+                        }
+                    });
+                });
+            }
+            
+            // Start with API route
+            tryClientCreation('/api/clients')
+            .then(data => {
+                console.log('Create client response:', data);
+                if (data.success) {
+                    alert(`Client "${data.client.client_name}" created successfully!`);
+                    
+                    // Save popups to the new client
+                    setTimeout(() => {
+                        if (confirm(`Save popups to ${data.client.client_name}'s records?`)) {
+                            window.savePopupsDataFromSidebar('client', data.client.id);
+                        } else {
+                            // Refresh the clients list
+                            loadClientsForModalSelection();
+                        }
+                    }, 500);
+                    
+                    // Reset form
+                    this.reset();
+                } else {
+                    console.error('Client creation failed:', data);
+                    alert('Error creating client: ' + (data.message || 'Unknown error'));
+                    if (data.errors) {
+                        console.error('Validation errors:', data.errors);
+                    }
+                    if (data.debug) {
+                        console.error('Debug info:', data.debug);
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('Error creating client:', error);
+                alert('Error creating client. Please check the console for details.');
+                alert('Error creating client. Please try again.');
+            })
+            .finally(() => {
+                // Reset button state
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            });
+        });
+    }
+    
+    // Test API connection function
+    function testAPIConnection() {
+        console.log('=== Testing API Connection ===');
+        
+        // Test API route first
+        fetch('/api/clients', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                'Accept': 'application/json'
+            }
+        })
+        .then(response => {
+            console.log('API Test - Response status:', response.status);
+            
+            // If API route fails with 401, try web route
+            if (response.status === 401) {
+                console.log('API route returned 401, testing web route...');
+                return fetch('/web-api/clients', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'Accept': 'application/json'
+                    }
+                });
+            }
+            return response;
+        })
+        .then(response => {
+            console.log('Final Test - Response status:', response.status);
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error(`API Test failed with status: ${response.status}`);
+            }
+        })
+        .then(data => {
+            console.log('API Test - Success! Clients found:', data.clients ? data.clients.length : 0);
+            console.log('API Test - Data:', data);
+            
+            if (data.user_id) {
+                console.log('API Test - Authenticated as user ID:', data.user_id);
+            }
+        })
+        .catch(error => {
+            console.error('API Test - Error:', error);
         });
     }
     
@@ -3003,12 +3946,27 @@ document.addEventListener('DOMContentLoaded', function() {
     function loadClientsForSelection() {
         const clientsList = document.getElementById('clientsList');
         
+        // Try API route first, fall back to web route if 401
         fetch('/api/clients', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             }
+        })
+        .then(response => {
+            // If API route returns 401, try web route
+            if (response.status === 401) {
+                console.log('API route returned 401, trying web route...');
+                return fetch('/web-api/clients', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    }
+                });
+            }
+            return response;
         })
         .then(response => response.json())
         .then(data => {
@@ -3109,7 +4067,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Save popups to the new client
                     setTimeout(() => {
                         if (confirm(`Client "${data.client.client_name}" created successfully! Save popups to this client's records?`)) {
-                            savePopupsDataFromSidebar('client', data.client.id);
+                            window.savePopupsDataFromSidebar('client', data.client.id);
                         } else {
                             // Re-show the popup save modal if user cancels
                             const popupSaveModal = new bootstrap.Modal(document.getElementById('popupSaveModal'));
@@ -3249,105 +4207,173 @@ document.addEventListener('DOMContentLoaded', function() {
     translateViewLegalTablePage(savedLanguage);
 });
 
-// Global function for client selection (needs to be outside document ready for onclick access)
-function selectClientForSaving(clientId, clientName) {
-    // Close the client selection modal
-    const clientModal = bootstrap.Modal.getInstance(document.getElementById('clientSelectionModal'));
-    clientModal.hide();
+// Test function to check API connectivity - can be called from browser console
+window.testClientAPI = function() {
+    console.log('=== Testing Client API ===');
+    console.log('Testing /api/clients endpoint...');
+    console.log('Current URL:', window.location.href);
+    console.log('CSRF Token:', '{{ csrf_token() }}');
     
-    // Show confirmation and save
-    if (confirm(`Save popups to ${clientName}'s records?`)) {
-        savePopupsDataFromSidebar('client', clientId);
-    } else {
-        // Re-show the popup save modal if user cancels
-        setTimeout(() => {
-            const popupSaveModal = new bootstrap.Modal(document.getElementById('popupSaveModal'));
-            popupSaveModal.show();
-        }, 500);
-    }
-}
-
-// Global function to save popups (accessible by selectClientForSaving)
-function savePopupsDataFromSidebar(saveType, clientId = null) {
-    const droppableArea = document.querySelector('.nested-droppable');
-    const pinnedPopups = droppableArea.querySelectorAll('.pinned-popup');
-    
-    // Extract popup data from pinned popups
-    const popups = [];
-    pinnedPopups.forEach(popup => {
-        // Extract content and metadata from pinned popup
-        const titleElement = popup.querySelector('.popup-header h6, .popup-header .modal-title, h5, h6');
-        const contentElement = popup.querySelector('.popup-content, .modal-body');
-        
-        if (titleElement && contentElement) {
-            // Try to extract section ID from content or title
-            const sectionMatch = titleElement.textContent.match(/(\d+(?:\([^)]+\))*)/);
-            const sectionId = sectionMatch ? sectionMatch[1] : 'unknown';
-            
-            // Try to get category ID from meta tags or use current document
-            const categoryId = document.querySelector('meta[name="current-document-category-id"]')?.content || '1';
-            
-            const popupData = {
-                section_id: sectionId,
-                category_id: parseInt(categoryId) || 1,
-                part: null,
-                division: null,
-                popup_title: titleElement.textContent.trim(),
-                popup_content: popup.outerHTML,
-                section_title: titleElement.textContent.trim(),
-                table_name: document.querySelector('meta[name="current-document-table"]')?.content || 'unknown'
-            };
-            popups.push(popupData);
-        }
-    });
-    
-    if (popups.length === 0) {
-        alert('No valid popup data found.');
-        return;
-    }
-    
-    console.log('Collected popup data from sidebar:', popups);
-    
-    // Show loading state
-    const modal = document.getElementById('popupSaveModal');
-    const buttons = modal.querySelectorAll('button');
-    buttons.forEach(btn => btn.disabled = true);
-    
-    // Save the popups
-    fetch('/save-popups', {
-        method: 'POST',
+    // First test the debug route to see what routes are available
+    fetch('/debug-api-routes', {
+        method: 'GET',
         headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            'Accept': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest'
         },
-        body: JSON.stringify({
-            save_type: saveType,
-            client_id: clientId,
-            popups: popups
-        })
+        credentials: 'same-origin'
     })
     .then(response => response.json())
     .then(data => {
-        if (data.success) {
-            alert(data.message);
-            // Close modal if still open
-            const modalInstance = bootstrap.Modal.getInstance(modal);
-            if (modalInstance) {
-                modalInstance.hide();
+        console.log('=== Route Debug Info ===');
+        console.log('Total routes:', data.total_routes);
+        console.log('API/Client routes found:', data.api_client_routes.length);
+        console.log('Routes:', data.api_client_routes);
+        console.log('API routes file exists:', data.api_routes_file_exists);
+        
+        // Now test the actual API endpoint
+        return fetch('/api/clients', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                'Accept': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest'
+            },
+            credentials: 'same-origin'
+        });
+    })
+    .then(response => {
+        console.log('API Test - Response status:', response.status);
+        console.log('API Test - Response headers:', Object.fromEntries(response.headers.entries()));
+        
+        return response.text().then(text => {
+            console.log('API Test - Raw response:', text);
+            
+            if (!response.ok) {
+                console.error('API Test - HTTP error:', response.status, text);
+                
+                // If API route failed, test the web test route as fallback
+                console.log('API route failed, testing web test route...');
+                return fetch('/test-client-api', {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest'
+                    },
+                    credentials: 'same-origin'
+                })
+                .then(webResponse => webResponse.json())
+                .then(webData => {
+                    console.log('Web test route result:', webData);
+                    return { api_failed: true, web_test_result: webData };
+                });
             }
+            
+            try {
+                return JSON.parse(text);
+            } catch (e) {
+                console.error('API Test - JSON parse error:', e);
+                return { error: 'Invalid JSON', body: text };
+            }
+        });
+    })
+    .then(data => {
+        console.log('API Test - Final result:', data);
+        
+        if (data.api_failed) {
+            console.log('API route is not working, but web test shows:', data.web_test_result);
+        } else if (data.success && data.clients) {
+            console.log(`API Test - Success! Found ${data.clients.length} clients for user ${data.user_id}`);
+            data.clients.forEach((client, index) => {
+                console.log(`  Client ${index + 1}:`, {
+                    id: client.id,
+                    name: client.client_name,
+                    email: client.client_email,
+                    status: client.client_status,
+                    user_id: client.user_id
+                });
+            });
+        } else if (data.error) {
+            console.error('API Test - Error:', data.error);
+            console.error('API Test - Body:', data.body);
         } else {
-            alert('Error: ' + data.message);
+            console.warn('API Test - Unexpected response:', data);
+            if (data.debug) {
+                console.log('API Test - Debug info:', data.debug);
+            }
         }
     })
     .catch(error => {
-        console.error('Error:', error);
-        alert('Error saving popups. Please try again.');
-    })
-    .finally(() => {
-        // Reset button states
-        buttons.forEach(btn => btn.disabled = false);
+        console.error('API Test - Network/fetch error:', error);
     });
-}
+    
+    console.log('API test initiated. Check console for results.');
+};
+
+// Test function to create a test client
+window.testCreateClient = function() {
+    console.log('=== Testing Client Creation ===');
+    
+    const testData = {
+        client_name: 'Test Client ' + Date.now(),
+        client_email: 'test' + Date.now() + '@example.com',
+        client_status: 'Active'
+    };
+    
+    console.log('Creating test client with data:', testData);
+    
+    const formData = new FormData();
+    Object.keys(testData).forEach(key => {
+        formData.append(key, testData[key]);
+    });
+    
+    fetch('/api/clients', {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+            'Accept': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest'
+        }
+    })
+    .then(response => {
+        console.log('Create Test - Response status:', response.status);
+        return response.text().then(text => {
+            console.log('Create Test - Raw response:', text);
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}, body: ${text}`);
+            }
+            
+            try {
+                return JSON.parse(text);
+            } catch (e) {
+                console.error('Create Test - JSON parse error:', e);
+                throw new Error('Invalid JSON response: ' + text);
+            }
+        });
+    })
+    .then(data => {
+        console.log('Create Test - Result:', data);
+        if (data.success) {
+            console.log('✅ Client created successfully!', data.client);
+        } else {
+            console.error('❌ Failed to create client:', data.message);
+            if (data.errors) console.error('Validation errors:', data.errors);
+            if (data.debug) console.error('Debug info:', data.debug);
+        }
+    })
+    .catch(error => {
+        console.error('Create Test - Error:', error);
+    });
+};
+
+// Auto-run test on page load for debugging
+console.log('Client API test functions available:');
+console.log('- Run testClientAPI() to test fetching clients');
+console.log('- Run testCreateClient() to test creating a client');
+console.log('- Both functions provide detailed debugging output');
 </script>
 @endpush
 

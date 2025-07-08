@@ -485,21 +485,44 @@ class ClientController extends Controller
     public function getClients(Request $request)
     {
         try {
-            $clients = Client::where('user_id', Auth::id())
+            $userId = Auth::id();
+            Log::info('Getting clients for user ID: ' . $userId);
+            
+            if (!$userId) {
+                Log::error('No authenticated user found');
+                return response()->json([
+                    'success' => false,
+                    'message' => 'User not authenticated'
+                ], 401);
+            }
+            
+            $clients = Client::where('user_id', $userId)
                 ->orderBy('last_accessed', 'desc')
                 ->orderBy('created_at', 'desc')
                 ->get();
 
+            Log::info('Found ' . $clients->count() . ' clients for user ' . $userId);
+            Log::info('Clients data: ' . $clients->toJson());
+
             return response()->json([
                 'success' => true,
-                'clients' => $clients
+                'clients' => $clients,
+                'user_id' => $userId,
+                'total_count' => $clients->count()
             ]);
         } catch (\Exception $e) {
             Log::error('Error fetching clients: ' . $e->getMessage());
+            Log::error('Stack trace: ' . $e->getTraceAsString());
             
             return response()->json([
                 'success' => false,
-                'message' => 'Error fetching clients'
+                'message' => 'Error fetching clients: ' . $e->getMessage(),
+                'debug' => [
+                    'user_id' => Auth::id(),
+                    'error_message' => $e->getMessage(),
+                    'error_line' => $e->getLine(),
+                    'error_file' => $e->getFile()
+                ]
             ], 500);
         }
     }
@@ -507,34 +530,66 @@ class ClientController extends Controller
     // API method to create a client (for AJAX requests)
     public function storeApi(Request $request)
     {
-        // Validate the request
-        $request->validate([
-            'client_name' => 'required|string|max:255',
-            'client_email' => 'required|email|max:255',
-            'client_status' => 'required|in:Active,Inactive',
-        ]);
-
         try {
+            $userId = Auth::id();
+            Log::info('Creating client for user ID: ' . $userId);
+            Log::info('Request data: ' . json_encode($request->all()));
+            
+            if (!$userId) {
+                Log::error('No authenticated user found for client creation');
+                return response()->json([
+                    'success' => false,
+                    'message' => 'User not authenticated'
+                ], 401);
+            }
+
+            // Validate the request
+            $validated = $request->validate([
+                'client_name' => 'required|string|max:255',
+                'client_email' => 'required|email|max:255',
+                'client_status' => 'required|in:Active,Inactive',
+            ]);
+            
+            Log::info('Validation passed, creating client with data: ' . json_encode($validated));
+
             // Create a new client
             $client = Client::create([
-                'client_name' => $request->client_name,
-                'client_email' => $request->client_email,
-                'client_status' => $request->client_status,
-                'user_id' => Auth::id(),
+                'client_name' => $validated['client_name'],
+                'client_email' => $validated['client_email'],
+                'client_status' => $validated['client_status'],
+                'user_id' => $userId,
                 'last_accessed' => now(),
             ]);
+
+            Log::info('Client created successfully with ID: ' . $client->id);
 
             return response()->json([
                 'success' => true,
                 'message' => 'Client created successfully!',
-                'client' => $client
+                'client' => $client,
+                'user_id' => $userId
             ]);
-        } catch (\Exception $e) {
-            Log::error('Error creating client via API: ' . $e->getMessage());
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            Log::error('Validation error creating client: ' . json_encode($e->errors()));
             
             return response()->json([
                 'success' => false,
-                'message' => 'Failed to create client. Please try again.'
+                'message' => 'Validation failed',
+                'errors' => $e->errors()
+            ], 422);
+        } catch (\Exception $e) {
+            Log::error('Error creating client via API: ' . $e->getMessage());
+            Log::error('Stack trace: ' . $e->getTraceAsString());
+            
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to create client: ' . $e->getMessage(),
+                'debug' => [
+                    'user_id' => Auth::id(),
+                    'error_message' => $e->getMessage(),
+                    'error_line' => $e->getLine(),
+                    'error_file' => $e->getFile()
+                ]
             ], 500);
         }
     }

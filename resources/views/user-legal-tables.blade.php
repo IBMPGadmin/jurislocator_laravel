@@ -663,17 +663,17 @@
             <!-- Content Editor and Droppable Area - Always available -->
             <div class="widget sp-top widget-blank widget-vertical shadow-sm">
                 <div class="widget-title d-flex align-items-center">
-                    <h5>Notes and Content</h5>
+                    <h5 data-en="Notes and Content" data-fr="Notes et contenu">Notes and Content</h5>
                     
                     <!-- Context selector for saving -->
                     <div class="save-context-selector">
-                        <label>Save under:</label>
+                        <label data-en="Save under:" data-fr="Enregistrer sous:">Save under:</label>
                         <select id="saveContext" class="form-select form-select-sm">
-                            <option value="user" {{ !isset($client) || !$client ? 'selected' : '' }}>User Only</option>
+                            <option value="user" {{ !isset($client) || !$client ? 'selected' : '' }} data-en="User Only" data-fr="Utilisateur seulement">User Only</option>
                             @if(isset($client) && $client)
-                            <option value="client" selected>Client Specific</option>
+                            <option value="client" selected data-en="Client Specific" data-fr="Spécifique au client">Client Specific</option>
                             @else
-                            <option value="client" disabled>Client Specific (Select a client first)</option>
+                            <option value="client" disabled data-en="Client Specific (Select a client first)" data-fr="Spécifique au client (Sélectionnez d'abord un client)">Client Specific (Select a client first)</option>
                             @endif
                         </select>
                     </div>
@@ -686,7 +686,7 @@
                         @else
                             <div class="text-center p-5 drop-placeholder">
                                 <i class="fas fa-arrow-down mb-2"></i>
-                                <p>Drop content here</p>
+                                <p data-en="Drop content here" data-fr="Déposer le contenu ici">Drop content here</p>
                             </div>
                         @endif
                     </div>
@@ -695,19 +695,19 @@
                     <div class="text-end mb-3">
                         <button id="savePopups" class="btn btn-outline-primary btn-sm">
                             <i class="fas fa-save me-1"></i>
-                            <span>Save Popups</span>
+                            <span data-en="Save Popups" data-fr="Enregistrer les popups">Save Popups</span>
                         </button>
                     </div>
                     
                     <!-- Text editor -->
                     <div id="textEditorContainer">
-                        <textarea id="contentEditor" class="form-control" placeholder="Enter your notes and content here...">{{ isset($savedContent) && $savedContent ? $savedContent->editor_content : '' }}</textarea>
+                        <textarea id="contentEditor" class="form-control" placeholder="Enter your notes and content here..." data-placeholder-en="Enter your notes and content here..." data-placeholder-fr="Entrez vos notes et contenu ici...">{{ isset($savedContent) && $savedContent ? $savedContent->editor_content : '' }}</textarea>
                     </div>
                     
                     <!-- Save button -->
                     <div class="text-end mt-3">
                         <button id="saveContent" class="btn btn-action">
-                            <span>Save Content</span>
+                            <span data-en="Save Content" data-fr="Enregistrer le contenu">Save Content</span>
                         </button>
                     </div>
                     
@@ -715,12 +715,18 @@
                     @if(isset($client) && $client)
                         <div class="text-muted small mt-2">
                             <i class="fas fa-info-circle me-1"></i>
-                            <span>Content can be saved for your personal use or specifically for this client.</span>
+                            <span data-en="Content can be saved for your personal use or specifically for this client." 
+                                  data-fr="Le contenu peut être enregistré pour votre usage personnel ou spécifiquement pour ce client.">
+                                Content can be saved for your personal use or specifically for this client.
+                            </span>
                         </div>
                     @else
                         <div class="text-muted small mt-2">
                             <i class="fas fa-info-circle me-1"></i>
-                            <span>Content will be saved for your personal use. Select a client above to enable client-specific saving.</span>
+                            <span data-en="Content will be saved for your personal use. Select a client above to enable client-specific saving." 
+                                  data-fr="Le contenu sera enregistré pour votre usage personnel. Sélectionnez un client ci-dessus pour activer l'enregistrement spécifique au client.">
+                                Content will be saved for your personal use. Select a client above to enable client-specific saving.
+                            </span>
                         </div>
                     @endif
                 </div>
