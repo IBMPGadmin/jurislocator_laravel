@@ -19,7 +19,7 @@
                     <div class="tile-content">
                         <h5 class="tile-title">Legislation</h5>
                         <p class="tile-desc">Access comprehensive and up-to-date compilations of Acts, Regulations, and legal amendments. JurisLocator enables you to browse or search legal statutes easily and efficiently.</p>
-                        <a href="/user/legal-tables" class="btn btn-neutral">Access Now</a>
+                        <a href="<?php echo e(route('client.management')); ?>" class="btn btn-neutral">Access Now</a>
                     </div>
                 </div>
             </div>

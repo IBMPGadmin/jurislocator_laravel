@@ -1,0 +1,1 @@
+<?php /**PATH C:\Users\Dileesha\Desktop\jurislocator_laravel\resources\views\admin\legal-documents\add-alternative.blade.php ENDPATH**/ ?>

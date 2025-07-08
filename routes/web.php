@@ -208,10 +208,17 @@ Route::middleware([\App\Http\Middleware\Authenticate::class, 'verified', \App\Ht
     Route::get('/user/client/{client}/legal-tables', [App\Http\Controllers\UserLegalTableController::class, 'show'])
         ->name('user.client.legal-tables');
     
-    // Client management routes (moved to sidebar submenu)
-    Route::get('/client-management', [ClientController::class, 'index'])->name('client.management');
+    // Client management routes (updated workflow)
+    Route::get('/client-management', [ClientController::class, 'legalTables'])->name('client.management');
     Route::post('/clients', [ClientController::class, 'store'])->name('clients.store');
     Route::post('/select-client', [ClientController::class, 'selectClient'])->name('clients.select');
+    
+    // Content saving route for client management
+    Route::post('/save-content', [App\Http\Controllers\ContentController::class, 'saveContent'])->name('save.content');
+    
+    // Popup saving routes with user choice
+    Route::post('/save-popups', [App\Http\Controllers\PopupController::class, 'savePopups'])->name('save.popups');
+    Route::get('/get-saved-popups', [App\Http\Controllers\PopupController::class, 'getSavedPopups'])->name('get.saved.popups');
     
     // User-centric legal tables routes
     Route::get('/user/legal-tables', [App\Http\Controllers\UserLegalTableController::class, 'index'])

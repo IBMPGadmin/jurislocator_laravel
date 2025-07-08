@@ -4,7 +4,7 @@
     <!-- Current document context meta tags -->
     <meta name="current-document-table" content="<?php echo e($tableName); ?>">
     <meta name="current-document-category-id" content="<?php echo e($categoryId); ?>">
-    <meta name="current-client-id" content="<?php echo e($client->id); ?>">
+    <meta name="current-client-id" content="<?php echo e($client ? $client->id : ''); ?>">
     <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
 <?php $__env->stopSection(); ?>
 
@@ -106,6 +106,319 @@
         background-color: var(--primary-color);
         color: #fff;
         cursor: default;
+    }
+    
+    /* Full-screen client selection modal styles */
+    .modal-fullscreen .modal-content {
+        height: 100vh;
+        border-radius: 0;
+    }
+    
+    .modal-fullscreen .modal-body {
+        overflow-y: auto;
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    }
+    
+    .client-selection-card {
+        background: white;
+        border: 2px solid #e9ecef;
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+    
+    .client-selection-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        border-color: #007bff;
+        background: #f8f9fa;
+    }
+    
+    .client-selection-card.selected {
+        border-color: #007bff;
+        background: #e3f2fd;
+        box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2);
+    }
+    
+    .client-avatar-large {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #007bff, #0056b3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.5rem;
+        flex-shrink: 0;
+    }
+    
+    .client-info-large {
+        flex: 1;
+    }
+    
+    .client-info-large h5 {
+        margin: 0 0 0.25rem 0;
+        color: #2c3e50;
+        font-size: 1.2rem;
+        font-weight: 600;
+    }
+    
+    .client-email-large {
+        color: #7f8c8d;
+        margin: 0 0 0.25rem 0;
+        font-size: 0.95rem;
+    }
+    
+    .client-status-large {
+        display: inline-block;
+        padding: 0.25rem 0.75rem;
+        border-radius: 15px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        margin: 0.25rem 0;
+    }
+    
+    .status-active {
+        background: #d4edda;
+        color: #155724;
+    }
+    
+    .status-inactive {
+        background: #f8d7da;
+        color: #721c24;
+    }
+    
+    .client-actions-large {
+        flex-shrink: 0;
+    }
+    
+    .btn-select-client {
+        background: linear-gradient(135deg, #28a745, #20c997);
+        border: none;
+        color: white;
+        padding: 0.5rem 1.5rem;
+        border-radius: 25px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-select-client:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+        color: white;
+    }
+    
+    .no-clients-found {
+        text-align: center;
+        padding: 3rem;
+        color: #7f8c8d;
+    }
+    
+    .no-clients-icon {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+        color: #dee2e6;
+    }
+    
+    /* Backdrop blur effect */
+    .modal-backdrop.show {
+        opacity: 0.8;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        background-color: rgba(0, 0, 0, 0.6);
+        display: none;
+    }
+    
+    /* Custom centered modal styles like iCloud - Bootstrap compatible */
+    .modal.modal-centered {
+        align-items: center !important;
+        justify-content: center !important;
+        min-height: 100vh !important;
+        padding: 15px !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important; /* Override any conflicting width */
+        height: 100% !important;
+        margin: 0 !important;
+        /* Let Bootstrap handle display property for show/hide */
+    }
+    
+    .modal.modal-centered.show {
+        display: flex !important; /* Show when active */
+        z-index: 1055 !important; /* Bootstrap modal z-index */
+        pointer-events: auto !important; /* Allow interactions when shown */
+        width: 100% !important; /* Ensure full width even with conflicting CSS */
+    }
+    
+    /* Force hide when not in use - but don't override Bootstrap's display handling */
+    .modal.modal-centered:not(.show) {
+        visibility: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+        width: 100% !important;
+        z-index: -1 !important; /* Behind everything when not shown */
+    }
+    
+    .modal.modal-centered .modal-dialog {
+        margin: 0 !important;
+        max-width: 90vw !important;
+        width: auto !important;
+        position: relative !important;
+        pointer-events: auto !important;
+    }
+    
+    .modal-centered .modal-content {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 20px;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+        overflow: hidden;
+        min-width: 400px;
+    }
+    
+    /* Popup save modal specific styles */
+    #popupSaveModal.modal-centered .modal-dialog {
+        max-width: 500px;
+        width: 100%;
+    }
+    
+    #popupSaveModal .modal-header {
+        background: linear-gradient(135deg, #007bff, #0056b3);
+        color: white;
+        border-bottom: none;
+        padding: 1.5rem 2rem 1rem 2rem;
+        border-radius: 20px 20px 0 0;
+    }
+    
+    #popupSaveModal .modal-body {
+        padding: 2rem;
+        background: rgba(255, 255, 255, 0.9);
+    }
+    
+    #popupSaveModal .modal-footer {
+        background: rgba(248, 249, 250, 0.9);
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        padding: 1rem 2rem 1.5rem 2rem;
+        border-radius: 0 0 20px 20px;
+    }
+    
+    /* Client selection modal specific styles */
+    #clientSelectionModal.modal-centered .modal-dialog {
+        max-width: 1200px;
+        width: 95vw;
+        max-height: 90vh;
+    }
+    
+    #clientSelectionModal .modal-content {
+        height: 85vh;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    #clientSelectionModal .modal-header {
+        background: linear-gradient(135deg, #28a745, #20c997);
+        color: white;
+        border-bottom: none;
+        padding: 1.5rem 2rem 1rem 2rem;
+        border-radius: 20px 20px 0 0;
+        flex-shrink: 0;
+    }
+    
+    #clientSelectionModal .modal-body {
+        flex: 1;
+        overflow-y: auto;
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        padding: 2rem;
+    }
+    
+    #clientSelectionModal .modal-footer {
+        background: rgba(248, 249, 250, 0.9);
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        padding: 1rem 2rem 1.5rem 2rem;
+        border-radius: 0 0 20px 20px;
+        flex-shrink: 0;
+    }
+    
+    /* Enhanced button styles for the modals */
+    .modal-centered .btn {
+        border-radius: 25px;
+        padding: 12px 24px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .modal-centered .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+    
+    .modal-centered .btn-outline-primary {
+        border: 2px solid #007bff;
+        background: rgba(255, 255, 255, 0.9);
+    }
+    
+    .modal-centered .btn-outline-success {
+        border: 2px solid #28a745;
+        background: rgba(255, 255, 255, 0.9);
+    }
+    
+    /* Close button styling */
+    .modal-centered .btn-close {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        width: 35px;
+        height: 35px;
+        opacity: 0.8;
+        transition: all 0.3s ease;
+    }
+    
+    .modal-centered .btn-close:hover {
+        background: rgba(255, 255, 255, 0.3);
+        opacity: 1;
+        transform: scale(1.1);
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .modal-centered .modal-dialog {
+            max-width: 95vw;
+            margin: 10px;
+        }
+        
+        #clientSelectionModal .modal-content {
+            height: 95vh;
+        }
+        
+        .modal-centered .modal-content {
+            border-radius: 15px;
+        }
+        
+        #popupSaveModal .modal-header,
+        #clientSelectionModal .modal-header {
+            padding: 1rem 1.5rem 0.5rem 1.5rem;
+            border-radius: 15px 15px 0 0;
+        }
+        
+        #popupSaveModal .modal-body,
+        #clientSelectionModal .modal-body {
+            padding: 1.5rem;
+        }
+        
+        #popupSaveModal .modal-footer,
+        #clientSelectionModal .modal-footer {
+            padding: 0.75rem 1.5rem 1rem 1.5rem;
+            border-radius: 0 0 15px 15px;
+        }
     }
     /* Visual enhancement for dropable areas */
     .nested-droppable.ui-droppable-hover {
@@ -1096,6 +1409,138 @@
     </div>
 </div>
 
+<!-- Popup Save Choice Modal -->
+<div class="modal fade modal-centered" id="popupSaveModal" tabindex="-1" aria-labelledby="popupSaveModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="popupSaveModalLabel">
+                    <i class="fas fa-save me-2"></i>
+                    <span data-en="Choose Save Context" data-fr="Choisir le contexte de sauvegarde">Choose Save Context</span>
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p class="text-center mb-4" data-en="How would you like to save these popups?" data-fr="Comment souhaitez-vous sauvegarder ces popups ?">
+                    <strong>How would you like to save these popups?</strong>
+                </p>
+                <div class="d-grid gap-3">
+                    <button type="button" class="btn btn-outline-primary btn-lg" id="saveToUserRecords">
+                        <i class="fas fa-user me-2"></i>
+                        <span data-en="Save to Personal Records" data-fr="Sauvegarder dans les dossiers personnels">Save to Personal Records</span>
+                        <br><small class="text-muted" data-en="(Available in all contexts)" data-fr="(Disponible dans tous les contextes)">(Available in all contexts)</small>
+                    </button>
+                    <button type="button" class="btn btn-outline-success btn-lg" id="saveToClientRecords">
+                        <i class="fas fa-briefcase me-2"></i>
+                        <span data-en="Save to Client Records" data-fr="Sauvegarder dans les dossiers clients">Save to Client Records</span>
+                        <?php if(isset($client) && $client): ?>
+                        <br><small class="text-muted" data-en="(For client: <?php echo e($client->client_name); ?>)" data-fr="(Pour le client : <?php echo e($client->client_name); ?>)">(For client: <?php echo e($client->client_name); ?>)</small>
+                        <?php else: ?>
+                        <br><small class="text-muted" data-en="(Select or create a client)" data-fr="(Sélectionner ou créer un client)">(Select or create a client)</small>
+                        <?php endif; ?>
+                    </button>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-en="Cancel" data-fr="Annuler">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Full-page Client Selection Modal -->
+<div class="modal fade modal-centered" id="clientSelectionModal" tabindex="-1" aria-labelledby="clientSelectionModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="clientSelectionModalLabel">
+                    <i class="fas fa-briefcase me-2"></i>
+                    <span data-en="Select or Create Client" data-fr="Sélectionner ou créer un client">Select or Create Client</span>
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <!-- Add New Client Section -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <div class="card border-primary shadow-sm">
+                                <div class="card-header bg-primary text-white">
+                                    <h5 class="mb-0" data-en="Create New Client" data-fr="Créer un nouveau client">
+                                        <i class="fas fa-plus me-2"></i>Create New Client
+                                    </h5>
+                                </div>
+                                <div class="card-body bg-white bg-opacity-90">
+                                    <form id="newClientForm">
+                                        <?php echo csrf_field(); ?>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="mb-3">
+                                                    <label for="new_client_name" class="form-label fw-bold" data-en="Client Name" data-fr="Nom du client">Client Name</label>
+                                                    <input type="text" class="form-control" id="new_client_name" name="client_name" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="mb-3">
+                                                    <label for="new_client_email" class="form-label fw-bold" data-en="Email" data-fr="Courriel">Email</label>
+                                                    <input type="email" class="form-control" id="new_client_email" name="client_email" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="mb-3">
+                                                    <label for="new_client_status" class="form-label fw-bold" data-en="Status" data-fr="Statut">Status</label>
+                                                    <select class="form-control" id="new_client_status" name="client_status" required>
+                                                        <option value="Active" data-en="Active" data-fr="Actif">Active</option>
+                                                        <option value="Inactive" data-en="Inactive" data-fr="Inactif">Inactive</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="text-center">
+                                            <button type="submit" class="btn btn-primary btn-lg">
+                                                <i class="fas fa-plus me-2"></i>
+                                                <span data-en="Create and Select Client" data-fr="Créer et sélectionner le client">Create and Select Client</span>
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Existing Clients Section -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card shadow-sm">
+                                <div class="card-header bg-light">
+                                    <h5 class="mb-1" data-en="Select Existing Client" data-fr="Sélectionner un client existant">
+                                        <i class="fas fa-users me-2"></i>Select Existing Client
+                                    </h5>
+                                    <p class="mb-0 text-muted small" data-en="Choose a client to save popups to their records" data-fr="Choisissez un client pour enregistrer les popups dans ses dossiers">Choose a client to save popups to their records</p>
+                                </div>
+                                <div class="card-body bg-white bg-opacity-90" style="max-height: 400px; overflow-y: auto;">
+                                    <div id="clientsList" class="row">
+                                        <!-- Clients will be loaded here dynamically -->
+                                        <div class="col-12 text-center py-5">
+                                            <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
+                                                <span class="visually-hidden">Loading...</span>
+                                            </div>
+                                            <p class="mt-3 text-muted" data-en="Loading clients..." data-fr="Chargement des clients...">Loading clients...</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-en="Cancel" data-fr="Annuler">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Debug info and script for testing -->
 <div id="debug-output" class="card mt-3 mb-3" style="display: none;">
     <div class="card-header bg-secondary text-white d-flex justify-content-between align-items-center">
@@ -1126,6 +1571,44 @@ $(document).ready(function() {
             // Handle drop logic here
         }
     });
+
+    // Initialize modal event listeners to handle custom CSS classes
+    const popupSaveModalEl = document.getElementById('popupSaveModal');
+    const clientSelectionModalEl = document.getElementById('clientSelectionModal');
+    
+    if (popupSaveModalEl) {
+        popupSaveModalEl.addEventListener('show.bs.modal', function() {
+            this.style.display = 'flex';
+            this.style.zIndex = '1055';
+            this.style.pointerEvents = 'auto';
+        });
+        
+        popupSaveModalEl.addEventListener('hide.bs.modal', function() {
+            this.style.zIndex = '-1';
+            this.style.pointerEvents = 'none';
+        });
+        
+        popupSaveModalEl.addEventListener('hidden.bs.modal', function() {
+            this.style.display = 'none';
+        });
+    }
+    
+    if (clientSelectionModalEl) {
+        clientSelectionModalEl.addEventListener('show.bs.modal', function() {
+            this.style.display = 'flex';
+            this.style.zIndex = '1055';
+            this.style.pointerEvents = 'auto';
+        });
+        
+        clientSelectionModalEl.addEventListener('hide.bs.modal', function() {
+            this.style.zIndex = '-1';
+            this.style.pointerEvents = 'none';
+        });
+        
+        clientSelectionModalEl.addEventListener('hidden.bs.modal', function() {
+            this.style.display = 'none';
+        });
+    }
 
     // Debug TinyMCE loading
     if (typeof tinymce === 'undefined') {
@@ -2515,6 +2998,274 @@ $(function() {
     }
 </script>
 
+<!-- Popup Saving Functionality for Document View Page -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Handle the new save popups button in sidebar
+    const savePopupsSidebarBtn = document.getElementById('save-popups-sidebar');
+    if (savePopupsSidebarBtn) {
+        savePopupsSidebarBtn.addEventListener('click', function() {
+            // Extract popups from nested-droppable area
+            const droppableArea = document.querySelector('.nested-droppable');
+            const pinnedPopups = droppableArea.querySelectorAll('.pinned-popup');
+            
+            if (pinnedPopups.length === 0) {
+                alert('No popups to save. Please drag some legal sections to the droppable area first.');
+                return;
+            }
+            
+            // Show the choice modal
+            const modal = new bootstrap.Modal(document.getElementById('popupSaveModal'));
+            modal.show();
+        });
+    }
+    
+    // Handle save to user records
+    const saveToUserBtn = document.getElementById('saveToUserRecords');
+    if (saveToUserBtn) {
+        saveToUserBtn.addEventListener('click', function() {
+            savePopupsDataFromSidebar('user');
+        });
+    }
+    
+    // Handle save to client records
+    const saveToClientBtn = document.getElementById('saveToClientRecords');
+    if (saveToClientBtn) {
+        saveToClientBtn.addEventListener('click', function() {
+            const clientId = <?php echo e(isset($client) && $client ? $client->id : 'null'); ?>;
+            if (!clientId) {
+                // No client selected, show client selection modal
+                showClientSelectionModal();
+                return;
+            }
+            // Client already selected, save directly
+            savePopupsDataFromSidebar('client', clientId);
+        });
+    }
+    
+    // Function to show client selection modal
+    function showClientSelectionModal() {
+        // Hide the popup save modal first
+        const popupSaveModal = bootstrap.Modal.getInstance(document.getElementById('popupSaveModal'));
+        if (popupSaveModal) {
+            popupSaveModal.hide();
+        }
+        
+        // Show client selection modal
+        const clientModal = new bootstrap.Modal(document.getElementById('clientSelectionModal'));
+        clientModal.show();
+        
+        // Load clients when modal is shown
+        loadClientsForSelection();
+    }
+    
+    // Function to load clients for selection
+    function loadClientsForSelection() {
+        const clientsList = document.getElementById('clientsList');
+        
+        fetch('/api/clients', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '<?php echo e(csrf_token()); ?>'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success && data.clients) {
+                renderClientsList(data.clients);
+            } else {
+                renderNoClients();
+            }
+        })
+        .catch(error => {
+            console.error('Error loading clients:', error);
+            renderNoClients();
+        });
+    }
+    
+    // Function to render clients list
+    function renderClientsList(clients) {
+        const clientsList = document.getElementById('clientsList');
+        
+        if (clients.length === 0) {
+            renderNoClients();
+            return;
+        }
+        
+        let html = '';
+        clients.forEach(client => {
+            const lastAccessed = client.last_accessed ? new Date(client.last_accessed).toLocaleDateString() : 'Never';
+            html += `
+                <div class="col-md-6 col-lg-4">
+                    <div class="client-selection-card" data-client-id="${client.id}" onclick="selectClientForSaving(${client.id}, '${client.client_name}')">
+                        <div class="client-avatar-large">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="client-info-large">
+                            <h5>${client.client_name}</h5>
+                            <p class="client-email-large">${client.client_email}</p>
+                            <span class="client-status-large status-${client.client_status.toLowerCase()}">${client.client_status}</span>
+                            <p class="small text-muted mb-0">Last accessed: ${lastAccessed}</p>
+                        </div>
+                        <div class="client-actions-large">
+                            <button class="btn btn-select-client" type="button">
+                                <i class="fas fa-check me-2"></i>Select
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+        
+        clientsList.innerHTML = html;
+    }
+    
+    // Function to render no clients found message
+    function renderNoClients() {
+        const clientsList = document.getElementById('clientsList');
+        clientsList.innerHTML = `
+            <div class="col-12">
+                <div class="no-clients-found">
+                    <div class="no-clients-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h4 data-en="No Clients Found" data-fr="Aucun client trouvé">No Clients Found</h4>
+                    <p data-en="Create your first client using the form above to save popups to client records." data-fr="Créez votre premier client en utilisant le formulaire ci-dessus pour enregistrer les popups dans les dossiers clients.">Create your first client using the form above to save popups to client records.</p>
+                </div>
+            </div>
+        `;
+    }
+    
+    // Handle new client form submission in modal
+    const newClientForm = document.getElementById('newClientForm');
+    if (newClientForm) {
+        newClientForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            formData.append('add_client', '1');
+            
+            // Show loading state
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Creating...';
+            submitBtn.disabled = true;
+            
+            fetch('/api/clients', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRF-TOKEN': '<?php echo e(csrf_token()); ?>'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Close the client selection modal
+                    const clientModal = bootstrap.Modal.getInstance(document.getElementById('clientSelectionModal'));
+                    clientModal.hide();
+                    
+                    // Save popups to the new client
+                    setTimeout(() => {
+                        if (confirm(`Client "${data.client.client_name}" created successfully! Save popups to this client's records?`)) {
+                            savePopupsDataFromSidebar('client', data.client.id);
+                        } else {
+                            // Re-show the popup save modal if user cancels
+                            const popupSaveModal = new bootstrap.Modal(document.getElementById('popupSaveModal'));
+                            popupSaveModal.show();
+                        }
+                    }, 500);
+                    
+                    // Reset form
+                    this.reset();
+                } else {
+                    alert('Error creating client: ' + (data.message || 'Unknown error'));
+                }
+            })
+            .catch(error => {
+                console.error('Error creating client:', error);
+                alert('Error creating client. Please try again.');
+            })
+            .finally(() => {
+                // Reset button state
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            });
+        });
+    }
+    
+    // Function to load saved popups into the sidebar
+    function loadSavedPopupsIntoSidebar() {
+        const clientId = <?php echo e(isset($client) && $client ? $client->id : 'null'); ?>;
+        
+        // Determine context: if we have a client, load client-specific popups, otherwise load user personal popups
+        const context = clientId ? 'client' : 'user';
+        
+        // Build the URL with appropriate parameters
+        let url = '/get-saved-popups?context=' + context;
+        if (clientId) {
+            url += '&client_id=' + clientId;
+        }
+        
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '<?php echo e(csrf_token()); ?>'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success && data.popups && data.popups.length > 0) {
+                console.log(`Loading ${data.popups.length} saved popups for ${context} context into sidebar`);
+                loadPopupsIntoSidebarDroppableArea(data.popups);
+            } else {
+                console.log(`No saved popups found for ${context} context`);
+            }
+        })
+        .catch(error => {
+            console.error('Error loading saved popups:', error);
+        });
+    }
+
+    // Function to load popups into the sidebar droppable area
+    function loadPopupsIntoSidebarDroppableArea(popups) {
+        const droppableArea = document.querySelector('.nested-droppable');
+        if (!droppableArea) {
+            console.error('Sidebar droppable area not found');
+            return;
+        }
+
+        // Clear existing popups except the title
+        const existingPopups = droppableArea.querySelectorAll('.pinned-popup');
+        existingPopups.forEach(popup => popup.remove());
+
+        // Add each popup to the droppable area
+        popups.forEach(popup => {
+            // Create a container for the popup content
+            const popupContainer = document.createElement('div');
+            popupContainer.className = 'pinned-popup card mb-2';
+            
+            // Set the popup content directly from saved HTML
+            popupContainer.innerHTML = popup.popup_content;
+            
+            // Ensure it has proper styling for the sidebar
+            popupContainer.style.cssText = '';
+            
+            droppableArea.appendChild(popupContainer);
+        });
+
+        console.log(`Loaded ${popups.length} popups into sidebar droppable area`);
+    }
+    
+    // Auto-load saved popups on page load
+    setTimeout(() => {
+        loadSavedPopupsIntoSidebar();
+    }, 1000);
+});
+</script>
+
 <!-- Translation functionality for view-legal-table page -->
 <script>
     // Translation functionality for view-legal-table page
@@ -2556,6 +3307,107 @@ $(function() {
     // Apply saved language on page load
     const savedLanguage = localStorage.getItem('selectedLanguage') || 'en';
     translateViewLegalTablePage(savedLanguage);
+});
+
+// Global function for client selection (needs to be outside document ready for onclick access)
+function selectClientForSaving(clientId, clientName) {
+    // Close the client selection modal
+    const clientModal = bootstrap.Modal.getInstance(document.getElementById('clientSelectionModal'));
+    clientModal.hide();
+    
+    // Show confirmation and save
+    if (confirm(`Save popups to ${clientName}'s records?`)) {
+        savePopupsDataFromSidebar('client', clientId);
+    } else {
+        // Re-show the popup save modal if user cancels
+        setTimeout(() => {
+            const popupSaveModal = new bootstrap.Modal(document.getElementById('popupSaveModal'));
+            popupSaveModal.show();
+        }, 500);
+    }
+}
+
+// Global function to save popups (accessible by selectClientForSaving)
+function savePopupsDataFromSidebar(saveType, clientId = null) {
+    const droppableArea = document.querySelector('.nested-droppable');
+    const pinnedPopups = droppableArea.querySelectorAll('.pinned-popup');
+    
+    // Extract popup data from pinned popups
+    const popups = [];
+    pinnedPopups.forEach(popup => {
+        // Extract content and metadata from pinned popup
+        const titleElement = popup.querySelector('.popup-header h6, .popup-header .modal-title, h5, h6');
+        const contentElement = popup.querySelector('.popup-content, .modal-body');
+        
+        if (titleElement && contentElement) {
+            // Try to extract section ID from content or title
+            const sectionMatch = titleElement.textContent.match(/(\d+(?:\([^)]+\))*)/);
+            const sectionId = sectionMatch ? sectionMatch[1] : 'unknown';
+            
+            // Try to get category ID from meta tags or use current document
+            const categoryId = document.querySelector('meta[name="current-document-category-id"]')?.content || '1';
+            
+            const popupData = {
+                section_id: sectionId,
+                category_id: parseInt(categoryId) || 1,
+                part: null,
+                division: null,
+                popup_title: titleElement.textContent.trim(),
+                popup_content: popup.outerHTML,
+                section_title: titleElement.textContent.trim(),
+                table_name: document.querySelector('meta[name="current-document-table"]')?.content || 'unknown'
+            };
+            popups.push(popupData);
+        }
+    });
+    
+    if (popups.length === 0) {
+        alert('No valid popup data found.');
+        return;
+    }
+    
+    console.log('Collected popup data from sidebar:', popups);
+    
+    // Show loading state
+    const modal = document.getElementById('popupSaveModal');
+    const buttons = modal.querySelectorAll('button');
+    buttons.forEach(btn => btn.disabled = true);
+    
+    // Save the popups
+    fetch('/save-popups', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        },
+        body: JSON.stringify({
+            save_type: saveType,
+            client_id: clientId,
+            popups: popups
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert(data.message);
+            // Close modal if still open
+            const modalInstance = bootstrap.Modal.getInstance(modal);
+            if (modalInstance) {
+                modalInstance.hide();
+            }
+        } else {
+            alert('Error: ' + data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Error saving popups. Please try again.');
+    })
+    .finally(() => {
+        // Reset button states
+        buttons.forEach(btn => btn.disabled = false);
+    });
+}
 </script>
 <?php $__env->stopPush(); ?>
 

@@ -2,6 +2,140 @@
 
 <?php $__env->startPush('styles'); ?>
 <style>
+    /* Client selection dropdown styling */
+    .client-selector {
+        background-color: #fff;
+        border-radius: 6px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    
+    .client-selector label {
+        font-weight: 500;
+        margin-bottom: 10px;
+        display: block;
+    }
+    
+    .client-selector select {
+        width: 100%;
+        padding: 10px;
+        border-radius: 4px;
+        border: 1px solid #ddd;
+        background-color: #f9f9f9;
+    }
+
+    /* Save context selector styling */
+    .save-context-selector {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-left: auto;
+    }
+    
+    .save-context-selector label {
+        font-size: 14px;
+        font-weight: 500;
+        margin: 0;
+    }
+    
+    .save-context-selector select {
+        padding: 5px 10px;
+        border-radius: 4px;
+        border: 1px solid #ddd;
+        font-size: 14px;
+    }
+
+    /* Droppable area styling */
+    .droppable-container {
+        min-height: 150px;
+        border: 2px dashed #ddd !important;
+        transition: all 0.3s ease;
+        background-color: #fafafa;
+    }
+    
+    .droppable-container.drag-over {
+        border-color: #007bff !important;
+        background-color: #f0f8ff;
+        transform: scale(1.02);
+    }
+    
+    .drop-placeholder {
+        color: #999;
+        font-style: italic;
+    }
+    
+    .dropped-item {
+        cursor: move;
+        transition: all 0.2s ease;
+    }
+    
+    .dropped-item:hover {
+        box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+    
+    /* Make legal table tiles appear draggable */
+    .toggle-tile-content[draggable="true"] {
+        cursor: grab;
+        transition: all 0.2s ease;
+    }
+    
+    .toggle-tile-content[draggable="true"]:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    
+    .toggle-tile-content[draggable="true"]:active {
+        cursor: grabbing;
+        transform: scale(0.98);
+    }
+        background-color: #f8f9fa;
+        border: 2px dashed #dee2e6;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+    }
+    
+    .droppable-container:hover {
+        border-color: #d68c2c;
+        background-color: #fff8f0;
+    }
+    
+    .drop-placeholder {
+        color: #6c757d;
+        text-align: center;
+    }
+    
+    .drop-placeholder i {
+        font-size: 2rem;
+        color: #d68c2c;
+    }
+
+    /* Text editor styling */
+    #contentEditor {
+        min-height: 200px;
+        border-radius: 6px;
+        border: 1px solid #ddd;
+        padding: 15px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        resize: vertical;
+    }
+
+    /* Button styling */
+    .btn-action {
+        background-color: #d68c2c;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 6px;
+        font-weight: 500;
+        transition: background-color 0.3s ease;
+    }
+    
+    .btn-action:hover {
+        background-color: #c07a26;
+        color: white;
+    }
+
     /* Override any existing styles from style.css and ensure consistent layout */
     .toggle-tile-body .toggle-tile-content .act-data,
     .toggle-tile-body.grid .toggle-tile-content .act-data,
@@ -172,6 +306,8 @@
     /* View document button */
     .toggle-tile-body.list .toggle-tile-content .act-data li.view-button {
         margin-left: auto !important;
+        border: none !important; /* Prevent any border from appearing */
+        background: none !important; /* Ensure no background */
     }
     
     .toggle-tile-body.list .toggle-tile-content .act-data li.view-button a {
@@ -180,6 +316,8 @@
         display: flex !important;
         align-items: center !important;
         text-decoration: none !important;
+        border: none !important; /* Prevent any border from appearing */
+        background: none !important; /* Ensure no background */
     }
     
     .toggle-tile-body.list .toggle-tile-content .act-data li.view-button a i {
@@ -192,10 +330,19 @@
     
     .toggle-tile-body.list .toggle-tile-content .act-data li.view-button a:hover {
         color: #e67e22 !important;
+        text-decoration: none !important; /* Prevent any underline */
+        border: none !important; /* Prevent any border from appearing */
+        background: none !important; /* Ensure no background */
     }
     
     .toggle-tile-body.list .toggle-tile-content .act-data li.view-button a:hover i {
         transform: translateX(3px) !important;
+    }
+    
+    /* Additional rule to prevent any underline or border on the strong element */
+    .toggle-tile-body.list .toggle-tile-content .act-data li.view-button a strong {
+        border: none !important;
+        text-decoration: none !important;
     }
     
     /* Strong tags in list items */
@@ -262,8 +409,27 @@
         </div>
     </div>
     
+    <!-- Client Selection Area - Shows only if no client is selected -->
+    <?php if(!isset($client) || !$client): ?>
     <div class="row gap_top">
-        <div class="gap_top col-12 mb-4 p-0">
+        <div class="col-12 mb-4">
+            <div class="client-selector">
+                <form method="GET" id="clientSelectForm">
+                    <label for="client_selector" data-en="Select Client" data-fr="Sélectionner un client">Select Client</label>
+                    <select name="client_id" id="client_selector" class="form-control form-select">
+                        <option value="" data-en="-- Select a client --" data-fr="-- Sélectionner un client --">-- Select a client --</option>
+                        <?php $__currentLoopData = $allClients; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $clientOption): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <option value="<?php echo e($clientOption->id); ?>"><?php echo e($clientOption->client_name); ?> (<?php echo e($clientOption->client_email); ?>)</option>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    </select>
+                </form>
+            </div>
+        </div>
+    </div>
+    <?php endif; ?>
+    
+    <!-- Client Details Area - Shows only if client is selected -->
+    <?php if(isset($client) && $client): ?>
             <div class="bg_custom p-4 rounded shadow-sm">
                 <div class="d-flex align-items-center">
                     <div class="client-avatar me-4 d-flex justify-content-center align-items-center rounded-circle bg-light text-primary" style="width: 60px; height: 60px; font-size: 24px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
@@ -291,6 +457,7 @@
             </div>
         </div>
     </div>
+    <?php endif; ?>
     
     <div class="row p-4 rounded shadow-sm">
         <div class="col-12">
@@ -299,7 +466,10 @@
                     <h5 data-en="Search Legislations" data-fr="Rechercher des législations">Search Legislations</h5>
                 </div>
                 <div class="widget-body sp-top-dbl">
-                    <form method="GET" action="<?php echo e(route('user.client.legal-tables', $client->id)); ?>" id="filterForm" class="row form vertical-form">
+                    <form method="GET" action="<?php echo e(isset($client) && $client ? route('user.client.legal-tables', $client->id) : route('client.management')); ?>" id="filterForm" class="row form vertical-form">
+                        <?php if(isset($client) && $client): ?>
+                            <input type="hidden" name="client_id" value="<?php echo e($client->id); ?>">
+                        <?php endif; ?>
                         <div class="row m-0">
                             <!-- Always visible (Simple Search) -->
                             <div class="col-lg-4 form-group mb-3">
@@ -466,7 +636,7 @@
                                      data-fr="<?php echo e($row->act_name ?? 'Unknown'); ?>"
                                      data-table-name="<?php echo e($row->table_name ?? 'unknown'); ?>"
                                      data-act-id="<?php echo e($row->act_id ?? '1'); ?>"
-                                     data-client-id="<?php echo e($client->id ?? '1'); ?>"
+                                     data-client-id="<?php echo e(isset($client) && $client ? $client->id : ''); ?>"
                                      data-language-id="<?php echo e($row->language_id ?? '1'); ?>">
                                     <!-- Single header with book icon for all card views -->
                                     <h4><i class="fas fa-book act-icon"></i> <?php echo e($row->act_name ?? 'Unknown Act'); ?></h4>
@@ -477,7 +647,11 @@
                                         <li class="act-jurisdiction"><strong>Jurisdiction: </strong><span><?php echo e($jurisdictions[$row->jurisdiction_id ?? 1] ?? 'Federal'); ?></span></li>
                                         <li class="act-language"><strong>Language: </strong><span><?php echo e($languages[$row->language_id ?? 1] ?? 'English'); ?></span></li>
                                         <li class="act-description"><strong>Created: </strong><span><?php echo e($row->created_at ? date('Y-m-d', strtotime($row->created_at)) : date('Y-m-d')); ?></span></li>
-                                        <li class="view-button"><a href="javascript:void(0)" onclick="redirectToDocument('<?php echo e($row->table_name); ?>', '<?php echo e($row->act_id); ?>', '<?php echo e($client->id); ?>', '<?php echo e($row->language_id); ?>')"><strong>View Document</strong> <i class="fas fa-arrow-right"></i></a></li>
+                                        <?php if(isset($client) && $client): ?>
+                                            <li class="view-button"><a href="javascript:void(0)" onclick="redirectToDocument('<?php echo e($row->table_name); ?>', '<?php echo e($row->act_id); ?>', '<?php echo e(isset($client) && $client ? $client->id : "null"); ?>', '<?php echo e($row->language_id); ?>')"><strong>View Document</strong> <i class="fas fa-arrow-right"></i></a></li>
+                                        <?php else: ?>
+                                            <li class="view-button"><a href="javascript:void(0)" onclick="alert('Please select a client first to view documents.')" style="color: #999;"><strong>Select Client First</strong> <i class="fas fa-lock"></i></a></li>
+                                        <?php endif; ?>
                                     </ul>
                                 </div>
                             </div>
@@ -490,6 +664,137 @@
                         <?php endif; ?>
                     </div>
                 </div>
+            </div>
+            
+            <!-- Content Editor and Droppable Area - Always available -->
+            <div class="widget sp-top widget-blank widget-vertical shadow-sm">
+                <div class="widget-title d-flex align-items-center">
+                    <h5 data-en="Notes and Content" data-fr="Notes et contenu">Notes and Content</h5>
+                    
+                    <!-- Context selector for saving -->
+                    <div class="save-context-selector">
+                        <label data-en="Save under:" data-fr="Enregistrer sous:">Save under:</label>
+                        <select id="saveContext" class="form-select form-select-sm">
+                            <option value="user" <?php echo e(!isset($client) || !$client ? 'selected' : ''); ?> data-en="User Only" data-fr="Utilisateur seulement">User Only</option>
+                            <?php if(isset($client) && $client): ?>
+                            <option value="client" selected data-en="Client Specific" data-fr="Spécifique au client">Client Specific</option>
+                            <?php else: ?>
+                            <option value="client" disabled data-en="Client Specific (Select a client first)" data-fr="Spécifique au client (Sélectionnez d'abord un client)">Client Specific (Select a client first)</option>
+                            <?php endif; ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="widget-body">
+                    <!-- Droppable area -->
+                    <div id="droppableArea" class="droppable-container p-3 border rounded mb-4">
+                        <?php if(isset($savedContent) && $savedContent && $savedContent->droppable_content): ?>
+                            <?php echo $savedContent->droppable_content; ?>
+
+                        <?php else: ?>
+                            <div class="text-center p-5 drop-placeholder">
+                                <i class="fas fa-arrow-down mb-2"></i>
+                                <p data-en="Drop content here" data-fr="Déposer le contenu ici">Drop content here</p>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                    
+                    <!-- Save Popups button -->
+                    <div class="text-end mb-3">
+                        <button id="savePopups" class="btn btn-outline-primary btn-sm">
+                            <i class="fas fa-save me-1"></i>
+                            <span data-en="Save Popups" data-fr="Enregistrer les popups">Save Popups</span>
+                        </button>
+                    </div>
+                    
+                    <!-- Text editor -->
+                    <div id="textEditorContainer">
+                        <textarea id="contentEditor" class="form-control" placeholder="Enter your notes and content here..." data-placeholder-en="Enter your notes and content here..." data-placeholder-fr="Entrez vos notes et contenu ici..."><?php echo e(isset($savedContent) && $savedContent ? $savedContent->editor_content : ''); ?></textarea>
+                    </div>
+                    
+                    <!-- Save button -->
+                    <div class="text-end mt-3">
+                        <button id="saveContent" class="btn btn-action">
+                            <span data-en="Save Content" data-fr="Enregistrer le contenu">Save Content</span>
+                        </button>
+                    </div>
+                    
+                    <!-- Context information -->
+                    <?php if(isset($client) && $client): ?>
+                        <div class="text-muted small mt-2">
+                            <i class="fas fa-info-circle me-1"></i>
+                            <span data-en="Content can be saved for your personal use or specifically for this client." 
+                                  data-fr="Le contenu peut être enregistré pour votre usage personnel ou spécifiquement pour ce client.">
+                                Content can be saved for your personal use or specifically for this client.
+                            </span>
+                        </div>
+                    <?php else: ?>
+                        <div class="text-muted small mt-2">
+                            <i class="fas fa-info-circle me-1"></i>
+                            <span data-en="Content will be saved for your personal use. Select a client above to enable client-specific saving." 
+                                  data-fr="Le contenu sera enregistré pour votre usage personnel. Sélectionnez un client ci-dessus pour activer l'enregistrement spécifique au client.">
+                                Content will be saved for your personal use. Select a client above to enable client-specific saving.
+                            </span>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Popup Save Choice Modal -->
+<div class="modal fade" id="popupSaveModal" tabindex="-1" aria-labelledby="popupSaveModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="popupSaveModalLabel">
+                    <i class="fas fa-save me-2"></i>
+                    <span data-en="Save Popups" data-fr="Enregistrer les popups">Save Popups</span>
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p class="mb-3" data-en="Where would you like to save these popups?" data-fr="Où souhaitez-vous enregistrer ces popups ?">
+                    Where would you like to save these popups?
+                </p>
+                <div class="d-grid gap-3">
+                    <button type="button" class="btn btn-outline-primary btn-lg" id="saveToUserRecords">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-user me-3" style="font-size: 1.5rem;"></i>
+                            <div class="text-start">
+                                <div class="fw-bold" data-en="Save to Your Records" data-fr="Enregistrer dans vos dossiers">Save to Your Records</div>
+                                <small class="text-muted" data-en="Personal use only - accessible across all clients" data-fr="Usage personnel uniquement - accessible pour tous les clients">Personal use only - accessible across all clients</small>
+                            </div>
+                        </div>
+                    </button>
+                    
+                    <?php if(isset($client) && $client): ?>
+                    <button type="button" class="btn btn-outline-success btn-lg" id="saveToClientRecords">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-user-tie me-3" style="font-size: 1.5rem;"></i>
+                            <div class="text-start">
+                                <div class="fw-bold" data-en="Save to Client Records" data-fr="Enregistrer dans les dossiers client">Save to Client Records</div>
+                                <small class="text-muted" data-en="Specific to <?php echo e($client->client_name); ?> - only visible when this client is selected" data-fr="Spécifique à <?php echo e($client->client_name); ?> - visible uniquement quand ce client est sélectionné">Specific to <?php echo e($client->client_name); ?> - only visible when this client is selected</small>
+                            </div>
+                        </div>
+                    </button>
+                    <?php else: ?>
+                    <button type="button" class="btn btn-outline-secondary btn-lg" disabled>
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-user-tie me-3" style="font-size: 1.5rem;"></i>
+                            <div class="text-start">
+                                <div class="fw-bold" data-en="Save to Client Records" data-fr="Enregistrer dans les dossiers client">Save to Client Records</div>
+                                <small class="text-muted" data-en="Select a client first to enable this option" data-fr="Sélectionnez d'abord un client pour activer cette option">Select a client first to enable this option</small>
+                            </div>
+                        </div>
+                    </button>
+                    <?php endif; ?>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <span data-en="Cancel" data-fr="Annuler">Cancel</span>
+                </button>
             </div>
         </div>
     </div>
@@ -545,6 +850,274 @@
     let savedCardHTML = {};
     
     document.addEventListener('DOMContentLoaded', function() {
+        // Client selection handler
+        const clientSelector = document.getElementById('client_selector');
+        if (clientSelector) {
+            clientSelector.addEventListener('change', function() {
+                const clientId = this.value;
+                if (clientId) {
+                    // Redirect to client management with client parameter
+                    window.location.href = '/client-management?client_id=' + clientId;
+                } else {
+                    // Redirect to user-centric mode
+                    window.location.href = '/client-management';
+                }
+            });
+        }
+        
+        // Save content handler
+        const saveContentBtn = document.getElementById('saveContent');
+        if (saveContentBtn) {
+            saveContentBtn.addEventListener('click', function() {
+                const saveContext = document.getElementById('saveContext').value;
+                const editorContent = document.getElementById('contentEditor').value;
+                const droppableContent = document.getElementById('droppableArea').innerHTML;
+                const clientId = <?php echo e(isset($client) && $client ? $client->id : 'null'); ?>;
+                
+                // Validate save context
+                if (saveContext === 'client' && !clientId) {
+                    alert('Please select a client first to save content under client context.');
+                    return;
+                }
+                
+                // Show loading state
+                this.disabled = true;
+                this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
+                
+                fetch('/save-content', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '<?php echo e(csrf_token()); ?>'
+                    },
+                    body: JSON.stringify({
+                        context: saveContext,
+                        editor_content: editorContent,
+                        droppable_content: droppableContent,
+                        client_id: clientId
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Content saved successfully!');
+                    } else {
+                        alert('Error: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error saving content. Please try again.');
+                })
+                .finally(() => {
+                    // Reset button state
+                    this.disabled = false;
+                    this.innerHTML = '<span data-en="Save Content" data-fr="Enregistrer le contenu">Save Content</span>';
+                });
+            });
+        }
+        
+        // Save popups handler
+        const savePopupsBtn = document.getElementById('savePopups');
+        if (savePopupsBtn) {
+            savePopupsBtn.addEventListener('click', function() {
+                // Extract popups from droppable area
+                const droppableArea = document.getElementById('droppableArea');
+                const droppedItems = droppableArea.querySelectorAll('.dropped-item');
+                
+                if (droppedItems.length === 0) {
+                    alert('No popups to save. Please drag some legal document tiles to the droppable area first.');
+                    return;
+                }
+                
+                // Show the choice modal
+                const modal = new bootstrap.Modal(document.getElementById('popupSaveModal'));
+                modal.show();
+            });
+        }
+        
+        // Handle save to user records
+        const saveToUserBtn = document.getElementById('saveToUserRecords');
+        if (saveToUserBtn) {
+            saveToUserBtn.addEventListener('click', function() {
+                savePopupsData('user');
+            });
+        }
+        
+        // Handle save to client records
+        const saveToClientBtn = document.getElementById('saveToClientRecords');
+        if (saveToClientBtn) {
+            saveToClientBtn.addEventListener('click', function() {
+                const clientId = <?php echo e(isset($client) && $client ? $client->id : 'null'); ?>;
+                if (!clientId) {
+                    alert('Please select a client first.');
+                    return;
+                }
+                savePopupsData('client', clientId);
+            });
+        }
+        
+        // Function to save popups data
+        function savePopupsData(saveType, clientId = null) {
+            const droppableArea = document.getElementById('droppableArea');
+            const droppedItems = droppableArea.querySelectorAll('.dropped-item');
+            
+            // Extract popup data from dropped items
+            const popups = [];
+            droppedItems.forEach(item => {
+                // Try to extract data from the dropped content
+                const actData = item.querySelector('.act-data');
+                if (actData) {
+                    const listItems = actData.querySelectorAll('li');
+                    const popupData = {
+                        section_id: item.dataset.sectionId || 'unknown',
+                        category_id: parseInt(item.dataset.categoryId) || 1,
+                        part: item.dataset.part || null,
+                        division: item.dataset.division || null,
+                        popup_title: item.querySelector('h4') ? item.querySelector('h4').textContent.trim() : 'Legal Document',
+                        popup_content: item.innerHTML,
+                        section_title: item.querySelector('h4') ? item.querySelector('h4').textContent.trim() : null,
+                        table_name: item.dataset.tableName || null
+                    };
+                    popups.push(popupData);
+                }
+            });
+            
+            if (popups.length === 0) {
+                alert('No valid popup data found.');
+                return;
+            }
+            
+            // Show loading state
+            const modal = document.getElementById('popupSaveModal');
+            const buttons = modal.querySelectorAll('button');
+            buttons.forEach(btn => btn.disabled = true);
+            
+            // Save the popups
+            fetch('/save-popups', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '<?php echo e(csrf_token()); ?>'
+                },
+                body: JSON.stringify({
+                    save_type: saveType,
+                    client_id: clientId,
+                    popups: popups
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert(data.message);
+                    // Close modal
+                    bootstrap.Modal.getInstance(modal).hide();
+                } else {
+                    alert('Error: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error saving popups. Please try again.');
+            })
+            .finally(() => {
+                // Reset button states
+                buttons.forEach(btn => btn.disabled = false);
+            });
+        }
+        
+        // Set up drag and drop functionality for legal tables
+        const droppableArea = document.getElementById('droppableArea');
+        if (droppableArea) {
+            // Make legal table tiles draggable
+            const setupDragAndDrop = () => {
+                const tableTiles = document.querySelectorAll('.toggle-tile-content');
+                tableTiles.forEach(tile => {
+                    tile.draggable = true;
+                    tile.addEventListener('dragstart', function(e) {
+                        const tileContent = this.cloneNode(true);
+                        
+                        // Store additional data for popup saving
+                        const tileData = {
+                            html: tileContent.outerHTML,
+                            sectionId: this.dataset.sectionId || 'unknown',
+                            categoryId: this.dataset.categoryId || this.dataset.actId || '1',
+                            tableName: this.dataset.tableName || 'unknown',
+                            part: this.dataset.part || null,
+                            division: this.dataset.division || null
+                        };
+                        
+                        e.dataTransfer.setData('text/html', tileContent.outerHTML);
+                        e.dataTransfer.setData('application/json', JSON.stringify(tileData));
+                        e.dataTransfer.effectAllowed = 'copy';
+                    });
+                });
+            };
+            
+            // Set up droppable area event handlers
+            droppableArea.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                e.dataTransfer.dropEffect = 'copy';
+                this.classList.add('drag-over');
+            });
+            
+            droppableArea.addEventListener('dragleave', function(e) {
+                this.classList.remove('drag-over');
+            });
+            
+            droppableArea.addEventListener('drop', function(e) {
+                e.preventDefault();
+                this.classList.remove('drag-over');
+                
+                const htmlContent = e.dataTransfer.getData('text/html');
+                const tileDataJson = e.dataTransfer.getData('application/json');
+                
+                if (htmlContent) {
+                    // Remove the placeholder if it exists
+                    const placeholder = this.querySelector('.drop-placeholder');
+                    if (placeholder) {
+                        placeholder.remove();
+                    }
+                    
+                    // Parse tile data if available
+                    let tileData = {};
+                    try {
+                        tileData = JSON.parse(tileDataJson) || {};
+                    } catch (e) {
+                        console.warn('Could not parse tile data:', e);
+                    }
+                    
+                    // Create a wrapper for the dropped content
+                    const droppedItem = document.createElement('div');
+                    droppedItem.className = 'dropped-item mb-3 p-3 border rounded bg-light position-relative';
+                    
+                    // Store data attributes for popup saving
+                    droppedItem.dataset.sectionId = tileData.sectionId || 'unknown';
+                    droppedItem.dataset.categoryId = tileData.categoryId || '1';
+                    droppedItem.dataset.tableName = tileData.tableName || 'unknown';
+                    if (tileData.part) droppedItem.dataset.part = tileData.part;
+                    if (tileData.division) droppedItem.dataset.division = tileData.division;
+                    
+                    droppedItem.innerHTML = htmlContent + '<button type="button" class="btn-close position-absolute top-0 end-0 m-2" onclick="this.parentElement.remove()"></button>';
+                    
+                    this.appendChild(droppedItem);
+                }
+            });
+            
+            // Initialize drag and drop on page load
+            setupDragAndDrop();
+            
+            // Re-initialize drag and drop when content changes (for dynamically loaded content)
+            const observer = new MutationObserver(() => {
+                setupDragAndDrop();
+            });
+            
+            observer.observe(document.querySelector('.act-content'), {
+                childList: true,
+                subtree: true
+            });
+        }
+        
         // Save the HTML of each card with act-data
         const cards = document.querySelectorAll('.toggle-tile-content');
         console.log(`🔍 Found ${cards.length} total cards on page load`);
@@ -838,13 +1411,31 @@
     
     // Function to redirect to appropriate document view based on language
     function redirectToDocument(tableName, categoryId, clientId, language) {
-        const isFrench = (language === '2' || language === 'fr' || language === 'French');
+        // Check if the language indicates French (2, fr, or French)
+        const isFrench = (language === '2' || language === 2 || language === 'fr' || language === 'French');
         
+        console.log('Redirecting to document:', {
+            tableName,
+            categoryId,
+            clientId,
+            language,
+            isFrench
+        });
+        
+        // Build URL with or without client_id
+        let url;
         if (isFrench) {
-            window.location = `/view-legal-table-french/${tableName}?category_id=${categoryId}&client_id=${clientId}`;
+            url = `/view-legal-table-french/${tableName}?category_id=${categoryId}`;
         } else {
-            window.location = `/view-legal-table/${tableName}?category_id=${categoryId}&client_id=${clientId}`;
+            url = `/view-legal-table/${tableName}?category_id=${categoryId}`;
         }
+        
+        // Add client_id parameter only if client is selected
+        if (clientId && clientId !== 'null' && clientId !== '') {
+            url += `&client_id=${clientId}`;
+        }
+        
+        window.location = url;
     }
 
     // Reset form function
@@ -1121,6 +1712,75 @@
         console.log('=== DIAGNOSTICS COMPLETE ===');
     }
 
+    // Function to load saved popups into the droppable area
+    function loadSavedPopups() {
+        const clientId = <?php echo e(isset($client) && $client ? $client->id : 'null'); ?>;
+        
+        // Determine context: if we have a client, load client-specific popups, otherwise load user personal popups
+        const context = clientId ? 'client' : 'user';
+        
+        // Build the URL with appropriate parameters
+        let url = '/get-saved-popups?context=' + context;
+        if (clientId) {
+            url += '&client_id=' + clientId;
+        }
+        
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '<?php echo e(csrf_token()); ?>'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success && data.popups && data.popups.length > 0) {
+                console.log(`Loading ${data.popups.length} saved popups for ${context} context`);
+                loadPopupsIntoDroppableArea(data.popups);
+            } else {
+                console.log(`No saved popups found for ${context} context`);
+            }
+        })
+        .catch(error => {
+            console.error('Error loading saved popups:', error);
+        });
+    }
+
+    // Function to load popups into the droppable area
+    function loadPopupsIntoDroppableArea(popups) {
+        const droppableArea = document.getElementById('droppableArea');
+        if (!droppableArea) {
+            console.error('Droppable area not found');
+            return;
+        }
+
+        // Remove the placeholder if it exists
+        const placeholder = droppableArea.querySelector('.drop-placeholder');
+        if (placeholder) {
+            placeholder.remove();
+        }
+
+        // Add each popup to the droppable area
+        popups.forEach(popup => {
+            const droppedItem = document.createElement('div');
+            droppedItem.className = 'dropped-item mb-3 p-3 border rounded bg-light position-relative';
+            
+            // Store data attributes for popup saving
+            droppedItem.dataset.sectionId = popup.section_id || 'unknown';
+            droppedItem.dataset.categoryId = popup.category_id || '1';
+            droppedItem.dataset.tableName = popup.table_name || 'unknown';
+            if (popup.part) droppedItem.dataset.part = popup.part;
+            if (popup.division) droppedItem.dataset.division = popup.division;
+            
+            // Set the popup content with a close button
+            droppedItem.innerHTML = popup.popup_content + '<button type="button" class="btn-close position-absolute top-0 end-0 m-2" onclick="this.parentElement.remove()"></button>';
+            
+            droppableArea.appendChild(droppedItem);
+        });
+
+        console.log(`Loaded ${popups.length} popups into droppable area`);
+    }
+
     // DOM ready handler
     document.addEventListener('DOMContentLoaded', function() {
         console.log('=== DOM CONTENT LOADED ===');
@@ -1173,6 +1833,9 @@
             showAllCardDetails();
         }, 2000);
         
+        // Load saved popups on page load
+        loadSavedPopups();
+        
         // Apply saved language
         const savedLanguage = localStorage.getItem('selectedLanguage') || 'en';
         if (typeof translateLegalTablesPage === 'function') {
@@ -1184,6 +1847,59 @@
     if (typeof $ !== 'undefined') {
         $(document).ready(function () {
             console.log('=== JQUERY READY ===');
+            
+            // Client selection handler
+            $('#client_selector').on('change', function() {
+                const clientId = $(this).val();
+                if (clientId) {
+                    // Redirect to client management with client parameter
+                    window.location.href = '/client-management?client_id=' + clientId;
+                } else {
+                    // Redirect to user-centric mode
+                    window.location.href = '/client-management';
+                }
+            });
+            
+            // Save content with context awareness
+            $('#saveContent').on('click', function() {
+                const saveContext = $('#saveContext').val();
+                const editorContent = $('#contentEditor').val();
+                const droppableContent = $('#droppableArea').html();
+                const clientId = <?php echo e(isset($client) && $client ? $client->id : 'null'); ?>;
+                
+                // Show loading state
+                const $this = $(this);
+                $this.prop('disabled', true);
+                $this.html('<i class="fas fa-spinner fa-spin"></i> Saving...');
+                
+                $.ajax({
+                    url: '/save-content',
+                    method: 'POST',
+                    data: {
+                        _token: '<?php echo e(csrf_token()); ?>',
+                        context: saveContext,
+                        editor_content: editorContent,
+                        droppable_content: droppableContent,
+                        client_id: clientId
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            alert('Content saved successfully!');
+                        } else {
+                            alert('Error: ' + response.message);
+                        }
+                    },
+                    error: function(xhr) {
+                        console.error('Error:', xhr);
+                        alert('Error saving content. Please try again.');
+                    },
+                    complete: function() {
+                        // Reset button state
+                        $this.prop('disabled', false);
+                        $this.html('<span data-en="Save Content" data-fr="Enregistrer le contenu">Save Content</span>');
+                    }
+                });
+            });
             
             // Immediately show all cards and details
             showAllCardDetails();
@@ -1380,6 +2096,7 @@
             
             // Card click handlers
             $('.toggle-tile-content').on('click', function(e) {
+                // Don't trigger card click if clicking on the view button
                 if ($(e.target).closest('.view-button').length > 0) {
                     return;
                 }
@@ -1389,8 +2106,10 @@
                 const clientId = $(this).data('client-id');
                 const languageId = $(this).data('language-id');
                 
-                if (tableName && actId && clientId) {
-                    redirectToDocument(tableName, actId, clientId, languageId);
+                if (tableName && actId) {
+                    // Use the same language ID that's on the card for consistency
+                    // clientId can be null for user-centric mode
+                    redirectToDocument(tableName, actId, clientId || null, languageId);
                 }
             });
         });

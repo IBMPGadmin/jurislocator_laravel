@@ -17,8 +17,16 @@ class ViewLegalTableController extends Controller
         $categoryId = $request->category_id;
         $client_id = $request->client_id;
         
-        // Get client information
-        $client = DB::table('client_table')->where('id', $client_id)->first();
+        // Get client information - allow null client for user-centric mode
+        $client = null;
+        if ($client_id) {
+            $client = DB::table('client_table')->where('id', $client_id)->first();
+            
+            // Verify client belongs to current user
+            if ($client && $client->user_id != Auth::id()) {
+                return redirect()->back()->with('error', 'Access denied to this client.');
+            }
+        }
         
         // Get metadata about this legal table
         $metadata = null;

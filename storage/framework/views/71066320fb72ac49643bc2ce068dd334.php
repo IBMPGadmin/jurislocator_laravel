@@ -5,8 +5,7 @@
         <div class="card-body">
             <div class="droppable-controls d-flex justify-content-between mb-2">
                 <div>
-                    <button id="save-pinned-popups" class="btn btn-save btn-sm btn-primary" 
-                        data-client-id="<?php echo e($client->id ?? 0); ?>">
+                    <button id="save-popups-sidebar" class="btn btn-save btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#popupSaveModal">
                         <i class="fas fa-save"></i> <span data-en="Save Popups" data-fr="Sauvegarder les popups">Save Popups</span>
                     </button>
                     <button id="fetch-pinned-popups" class="btn btn-fetch btn-sm btn-secondary ms-2" 
