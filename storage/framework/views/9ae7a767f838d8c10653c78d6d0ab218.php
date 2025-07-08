@@ -1041,8 +1041,8 @@
         // Set up drag and drop functionality for legal tables
         const droppableArea = document.getElementById('droppableArea');
         if (droppableArea) {
-            // Make legal table tiles draggable
-            const setupDragAndDrop = () => {
+            // Make legal table tiles draggable - Global function
+            window.setupDragAndDrop = () => {
                 const tableTiles = document.querySelectorAll('.toggle-tile-content');
                 tableTiles.forEach(tile => {
                     tile.draggable = true;
@@ -1443,6 +1443,36 @@
     
     // --- FILTER LOGIC FOR AVAILABLE LEGISLATIONS ---
     document.addEventListener('DOMContentLoaded', function() {
+        // View toggle functionality (Grid/List)
+        document.querySelectorAll('input[name="view-toggle"]').forEach(function(radio) {
+            radio.addEventListener('change', function() {
+                const container = document.getElementById('toggleTileContainer');
+                const cards = container.querySelectorAll('.toggle-tile-body');
+                
+                if (this.value === 'grid') {
+                    // Switch to grid view
+                    cards.forEach(card => {
+                        card.className = 'toggle-tile-body col-12 col-md-6 col-lg-4 grid';
+                    });
+                    container.className = 'row toggle-tile-warpper sp-top';
+                } else if (this.value === 'list') {
+                    // Switch to list view
+                    cards.forEach(card => {
+                        card.className = 'toggle-tile-body col-12 list';
+                    });
+                    container.className = 'row toggle-tile-warpper sp-top';
+                }
+                
+                // Re-initialize drag and drop after view change
+                setTimeout(() => {
+                    const setupFunction = window.setupDragAndDrop;
+                    if (typeof setupFunction === 'function') {
+                        setupFunction();
+                    }
+                }, 100);
+            });
+        });
+        
         // Language filter (client-side)
         let selectedLang = '';
         document.querySelectorAll('input[name="toggle"]').forEach(function(radio) {
@@ -1526,6 +1556,33 @@
         
         window.location = url;
     }
+    
+    // View toggle functionality (Grid/List)
+    document.querySelectorAll('input[name="view-toggle"]').forEach(function(radio) {
+        radio.addEventListener('change', function() {
+            const container = document.getElementById('toggleTileContainer');
+            const cards = container.querySelectorAll('.toggle-tile-body');
+            
+            if (this.value === 'grid') {
+                // Switch to grid view
+                cards.forEach(card => {
+                    card.className = 'toggle-tile-body col-12 col-md-6 col-lg-4 grid';
+                });
+                container.className = 'row toggle-tile-warpper sp-top';
+            } else if (this.value === 'list') {
+                // Switch to list view
+                cards.forEach(card => {
+                    card.className = 'toggle-tile-body col-12 list';
+                });
+                container.className = 'row toggle-tile-warpper sp-top';
+            }
+            
+            // Re-initialize drag and drop after view change
+            if (typeof setupDragAndDrop === 'function') {
+                setupDragAndDrop();
+            }
+        });
+    });
 </script>
 <?php $__env->stopPush(); ?>
 
