@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ $title ?? 'JurisLocator' }}</title>
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
+    <title><?php echo e($title ?? 'JurisLocator'); ?></title>
     
     <!-- Custom meta tags -->
-    @yield('meta')
+    <?php echo $__env->yieldContent('meta'); ?>
     
     <!-- CSS Dependencies -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="{{ asset('user_assets/css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('user_assets/css/login_styles.css') }}">
+    <link rel="stylesheet" href="<?php echo e(asset('user_assets/css/style.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('user_assets/css/login_styles.css')); ?>">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     
@@ -60,7 +60,92 @@
         gap: 15px;
     }
 
+    .language-switcher {
+        position: relative;
+    }
 
+    .language-toggle {
+        background: none;
+        border: none;
+        color: var(--header-text-color);
+        font-size: 1rem;
+        cursor: pointer;
+        padding: 6px 10px;
+        border-radius: 20px;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .language-toggle:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        transform: scale(1.05);
+    }
+
+    .current-lang {
+        font-size: 0.8rem;
+        font-weight: 600;
+    }
+
+    .language-panel {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        padding: 15px;
+        min-width: 150px;
+        z-index: 1000;
+        margin-top: 10px;
+    }
+
+    .language-panel.hidden {
+        display: none;
+    }
+
+    .language-panel h4 {
+        margin: 0 0 10px 0;
+        color: #333;
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+
+    .language-options {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .lang-btn {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 10px;
+        border: none;
+        background: #f8f9fa;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 0.85rem;
+        text-align: left;
+    }
+
+    .lang-btn:hover {
+        background: #e9ecef;
+        transform: translateX(2px);
+    }
+
+    .lang-btn.active {
+        background: var(--color-button-bg-hover-2);
+        color: white;
+    }
+
+    .flag {
+        font-size: 1.2rem;
+    }
 
     .notification-icon {
         position: relative;
@@ -549,7 +634,7 @@
     }
     </style>
     
-    @php
+    <?php
     // Add this for pages that use TinyMCE
     if (session_status() == PHP_SESSION_NONE) {
         session_start();
@@ -559,14 +644,14 @@
     echo '<script>';
     echo 'window.selectedClientId = ' . (isset($_SESSION['selected_client_id']) ? $_SESSION['selected_client_id'] : 'null') . ';';
     echo '</script>';
-    @endphp
+    ?>
 
-    @stack('styles')
+    <?php echo $__env->yieldPushContent('styles'); ?>
 </head>
 <body id="body-pd" class="gap_right_home">
     <header class="header gradient-background" id="header">
         <div class="logo">
-            <img src="{{ asset('user_assets/img/jurislocator-logo.png') }}" alt="jurislocator" />
+            <img src="<?php echo e(asset('user_assets/img/jurislocator-logo.png')); ?>" alt="jurislocator" />
         </div>
 
         <div class="header_toggle"> 
@@ -576,6 +661,27 @@
         <div class="header-controls">
             <!-- Pinned Timezones - Inline with header controls -->
             <div id="pinned-timezones-inline" class="pinned-timezones-inline"></div>
+
+            <!-- Language Switcher -->
+            <div class="language-switcher">
+                <button class="language-toggle" id="language-toggle" title="Change Language">
+                    <i class="bi bi-translate"></i>
+                    <span class="current-lang" id="current-lang">EN</span>
+                </button>
+                <div id="language-panel" class="language-panel hidden">
+                    <h4>Select Language</h4>
+                    <div class="language-options">
+                        <button class="lang-btn active" data-lang="en" data-flag="🇺🇸">
+                            <span class="flag">🇺🇸</span>
+                            English
+                        </button>
+                        <button class="lang-btn" data-lang="fr" data-flag="🇫🇷">
+                            <span class="flag">🇫🇷</span>
+                            Français
+                        </button>
+                    </div>
+                </div>
+            </div>
 
             <!-- Notification Icon -->
             <div class="notification-icon">
@@ -615,14 +721,14 @@
 
             <!-- User Profile -->
             <div class="header_img"> 
-                <a href="{{ route('profile.edit') }}" title="Edit Profile">
-                    @if(Auth::user() && Auth::user()->profile_image)
-                        <img src="{{ asset(Auth::user()->profile_image) }}" alt="{{ Auth::user()->name }}'s Profile" class="profile-header-img">
-                    @else
+                <a href="<?php echo e(route('profile.edit')); ?>" title="Edit Profile">
+                    <?php if(Auth::user() && Auth::user()->profile_image): ?>
+                        <img src="<?php echo e(asset(Auth::user()->profile_image)); ?>" alt="<?php echo e(Auth::user()->name); ?>'s Profile" class="profile-header-img">
+                    <?php else: ?>
                         <div class="profile-header-placeholder">
                             <i class="bi bi-person-fill"></i>
                         </div>
-                    @endif
+                    <?php endif; ?>
                 </a> 
             </div>
         </div>
@@ -632,13 +738,13 @@
         <nav class="nav">
             <div class="nav_list"> 
                 <!-- Dashboard -->
-                <a href="{{ route('user.dashboard') }}" class="nav_link {{ request()->routeIs('user.dashboard') ? 'active' : '' }}"> 
+                <a href="<?php echo e(route('user.dashboard')); ?>" class="nav_link <?php echo e(request()->routeIs('user.dashboard') ? 'active' : ''); ?>"> 
                     <i class='bx bx-grid-alt nav_icon'>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
                             <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z"/>
                         </svg>
                     </i> 
-                    <span class="nav_name">Dashboard</span> 
+                    <span class="nav_name" data-en="Dashboard" data-fr="Tableau de bord">Dashboard</span> 
                 </a> 
 
                 <!-- Calendar -->
@@ -652,17 +758,13 @@
                 </a>
 
                 <!-- Contacts (Clients module) -->
-                <a href="{{ route('client.management') }}" class="nav_link {{ request()->routeIs('client.management') ? 'active' : '' }}"> 
+                <a href="<?php echo e(route('client.management')); ?>" class="nav_link <?php echo e(request()->routeIs('client.management') ? 'active' : ''); ?>"> 
                     <i class='bx bx-user-plus nav_icon'>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people" viewBox="0 0 16 16">
                             <path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1zm-7.978-1L7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002-.014.002zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4m3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0M6.936 9.28a6 6 0 0 0-1.23-.247A7 7 0 0 0 5 9c-4 0-5 3-5 4q0 1 1 1h4.216A2.24 2.24 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816M4.92 10A5.5 5.5 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0m3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4"/>
                         </svg>
                     </i> 
-<<<<<<< HEAD
-                    <span class="nav_name">Client Management</span> 
-=======
                     <span class="nav_name" data-en="Contacts" data-fr="Contacts">Contacts</span> 
->>>>>>> eb22763ea73e2c7b7880bfe1dd7af32597f9a7da
                 </a> 
 
                 <!-- Legislation -->
@@ -700,27 +802,23 @@
                 </a>
 
                 <!-- Templates -->
-                <a href="{{ route('templates.select-client') }}" class="nav_link {{ request()->routeIs('templates.select-client') || request()->routeIs('templates.index') || request()->routeIs('templates.edit') ? 'active' : '' }}"> 
+                <a href="<?php echo e(route('templates.select-client')); ?>" class="nav_link <?php echo e(request()->routeIs('templates.select-client') || request()->routeIs('templates.index') || request()->routeIs('templates.edit') ? 'active' : ''); ?>"> 
                     <i class='bx bx-message-square-detail nav_icon'>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark" viewBox="0 0 16 16">
                             <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z"/>
                         </svg>
                     </i> 
-                    <span class="nav_name">Templates</span> 
+                    <span class="nav_name" data-en="Templates" data-fr="Modèles">Templates</span> 
                 </a> 
 
                 <!-- Resources -->
-                <a href="{{ route('user.government-links') }}" class="nav_link {{ request()->routeIs('user.government-links*') ? 'active' : '' }}"> 
+                <a href="<?php echo e(route('user.government-links')); ?>" class="nav_link <?php echo e(request()->routeIs('user.government-links*') ? 'active' : ''); ?>"> 
                     <i class='bx bx-bookmark nav_icon'>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmark-check-fill" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5m8.854-9.646a.5.5 0 0 0-.708-.708L7.5 7.793 6.354 6.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0z"/>
                         </svg>
                     </i> 
-<<<<<<< HEAD
-                    <span class="nav_name">Government Links</span>
-=======
                     <span class="nav_name" data-en="Resources" data-fr="Ressources">Resources</span>
->>>>>>> eb22763ea73e2c7b7880bfe1dd7af32597f9a7da
                 </a> 
 
                 <!-- Immigration Programs -->
@@ -729,13 +827,8 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-globe" viewBox="0 0 16 16">
                             <path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m7.5-6.923c-.67.204-1.335.82-1.887 1.855A8 8 0 0 0 5.145 4H7.5zM4.09 4a9.3 9.3 0 0 1 .64-1.539 7 7 0 0 1 .597-.933A7.03 7.03 0 0 0 2.255 4zm-.582 3.5c.03-.877.138-1.718.312-2.5H1.674a7 7 0 0 0-.656 2.5zM4.847 5a12.5 12.5 0 0 0-.338 2.5H7.5V5zM8.5 5v2.5h2.99a12.5 12.5 0 0 0-.337-2.5zM4.51 8.5a12.5 12.5 0 0 0 .337 2.5H7.5V8.5zm3.99 0V11h2.653c.187-.765.306-1.608.338-2.5zM5.145 12q.208.58.468 1.068c.552 1.035 1.218 1.65 1.887 1.855V12zm.182 2.472a7 7 0 0 1-.597-.933A9.3 9.3 0 0 1 4.09 12H2.255a7 7 0 0 0 3.072 2.472M3.82 11a13.7 13.7 0 0 1-.312-2.5h-2.49c.062.89.291 1.733.656 2.5zm6.853 3.472A7 7 0 0 0 13.745 12H11.91a9.3 9.3 0 0 1-.64 1.539 7 7 0 0 1-.597.933M8.5 12v2.923c.67-.204 1.335-.82 1.887-1.855q.26-.487.468-1.068zm3.68-1h2.146c.365-.767.594-1.61.656-2.5h-2.49a13.7 13.7 0 0 1-.312 2.5m2.802-3.5a7 7 0 0 0-.656-2.5H12.18c.174.782.282 1.623.312 2.5zM11.27 2.461c.247.464.462.98.64 1.539h1.835a7 7 0 0 0-3.072-2.472c.218.284.418.598.597.933M10.855 4a8 8 0 0 0-.468-1.068C9.835 1.897 9.17 1.282 8.5 1.077V4z"/>
                         </svg>
-<<<<<<< HEAD
-                    </i>
-                    <span class="nav_name">RCIC Deadlines</span>
-=======
                     </i> 
                     <span class="nav_name" data-en="Immigration Programs" data-fr="Programmes d'immigration">Immigration Programs</span> 
->>>>>>> eb22763ea73e2c7b7880bfe1dd7af32597f9a7da
                 </a>
 
                 <!-- Immigration Calculators -->
@@ -747,15 +840,9 @@
                             <path d="M7.5 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5z"/>
                             <path d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5z"/>
                         </svg>
-<<<<<<< HEAD
-                    </i>
-                    <span class="nav_name">Legal Key Terms</span>
-                </a> 
-=======
                     </i> 
                     <span class="nav_name" data-en="Immigration Calculators" data-fr="Calculateurs d'immigration">Immigration Calculators</span> 
                 </a>
->>>>>>> eb22763ea73e2c7b7880bfe1dd7af32597f9a7da
 
                 <!-- Finder tools -->
                 <a href="#" class="nav_link"> 
@@ -802,18 +889,14 @@
                 </a>
 
                 <!-- Subscription -->
-                <a href="{{ route('payment.details') }}" class="nav_link {{ request()->routeIs('payment.details') ? 'active' : '' }}"> 
+                <a href="<?php echo e(route('payment.details')); ?>" class="nav_link <?php echo e(request()->routeIs('payment.details') ? 'active' : ''); ?>"> 
                     <i class='bx bx-bar-chart-alt-2 nav_icon'>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-credit-card" viewBox="0 0 16 16">
                             <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1z"/>
                             <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1zm5 0a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1z"/>
                         </svg>
                     </i> 
-<<<<<<< HEAD
-                    <span class="nav_name">Payment Details</span>
-=======
                     <span class="nav_name" data-en="Subscription" data-fr="Abonnement">Subscription</span>
->>>>>>> eb22763ea73e2c7b7880bfe1dd7af32597f9a7da
                 </a>
 
                 <!-- Refer a Friend -->
@@ -828,19 +911,19 @@
                 </a>
 
                 <!-- Profile Details -->
-                <a href="{{ route('profile.edit') }}" class="nav_link {{ request()->routeIs('profile.edit') ? 'active' : '' }}"> 
+                <a href="<?php echo e(route('profile.edit')); ?>" class="nav_link <?php echo e(request()->routeIs('profile.edit') ? 'active' : ''); ?>"> 
                     <i class='bx bx-user nav_icon'>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
                             <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
                             <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
                         </svg>
                     </i> 
-                    <span class="nav_name">Profile Details</span>
+                    <span class="nav_name" data-en="Profile Details" data-fr="Détails du profil">Profile Details</span>
                 </a> 
 
             </div>
 
-            <a href="{{ route('logout') }}" 
+            <a href="<?php echo e(route('logout')); ?>" 
                class="nav_link" 
                id="logout-link" 
                onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> 
@@ -850,21 +933,21 @@
                         <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708z"/>
                     </svg>
                 </i> 
-                <span class="nav_name">Sign Out</span>
+                <span class="nav_name" data-en="Sign Out" data-fr="Se déconnecter">Sign Out</span>
             </a>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                @csrf
+            <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" class="d-none">
+                <?php echo csrf_field(); ?>
             </form>
         </nav>
     </div>
 
     <div class="main-content">
-        @yield('content')
+        <?php echo $__env->yieldContent('content'); ?>
     </div>
 
     <footer class="gap_footer footer">
         <div class="row container">
-            <p>&copy;<a target="_blank" href="https://immifocus.ca">immigopro</a> {{ date("Y") }} - All Rights Reserved</p>
+            <p>&copy;<a target="_blank" href="https://immifocus.ca">immigopro</a> <?php echo e(date("Y")); ?> - All Rights Reserved</p>
         </div>
     </footer>
 
@@ -877,31 +960,176 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Custom Scripts -->
-    <script src="{{ asset('user_assets/js/template-manager.js') }}"></script>
-    <script src="{{ asset('user_assets/js/config.js') }}"></script>
-    <script src="{{ asset('user_assets/js/script.js') }}"></script>
-    <script src="{{ asset('user_assets/js/side_bar.js') }}"></script>
-    <script src="{{ asset('user_assets/js/navigation.js') }}"></script>
+    <script src="<?php echo e(asset('user_assets/js/template-manager.js')); ?>"></script>
+    <script src="<?php echo e(asset('user_assets/js/config.js')); ?>"></script>
+    <script src="<?php echo e(asset('user_assets/js/script.js')); ?>"></script>
+    <script src="<?php echo e(asset('user_assets/js/side_bar.js')); ?>"></script>
+    <script src="<?php echo e(asset('user_assets/js/navigation.js')); ?>"></script>
     
     <script>
-    // Theme functionality
+    // Language and Theme functionality
     document.addEventListener('DOMContentLoaded', function() {
+        // Language switcher functionality
+        const languageToggle = document.getElementById('language-toggle');
+        const languagePanel = document.getElementById('language-panel');
+        const langBtns = document.querySelectorAll('.lang-btn');
+        const currentLangSpan = document.getElementById('current-lang');
+        
         // Theme elements
         const themeToggle = document.getElementById('theme-toggle');
         const themePanel = document.getElementById('theme-panel');
         const themeBtns = document.querySelectorAll('.theme-btn');
         
+        // Language switcher toggle
+        languageToggle.addEventListener('click', function(e) {
+            e.stopPropagation();
+            languagePanel.classList.toggle('hidden');
+            // Close theme panel if open
+            themePanel.classList.add('hidden');
+        });
+        
         // Theme switcher toggle
         themeToggle.addEventListener('click', function(e) {
             e.stopPropagation();
             themePanel.classList.toggle('hidden');
+            // Close language panel if open
+            languagePanel.classList.add('hidden');
         });
         
         // Close panels when clicking outside
         document.addEventListener('click', function(e) {
+            if (!languagePanel.contains(e.target) && !languageToggle.contains(e.target)) {
+                languagePanel.classList.add('hidden');
+            }
             if (!themePanel.contains(e.target) && !themeToggle.contains(e.target)) {
                 themePanel.classList.add('hidden');
             }
+        });
+        
+        // Translation function
+        function translateNavigation(language) {
+            const navItems = document.querySelectorAll('.nav_name[data-en][data-fr]');
+            navItems.forEach(item => {
+                const translation = item.getAttribute('data-' + language);
+                if (translation) {
+                    item.textContent = translation;
+                }
+            });
+        }
+
+        // Global translation function for page content
+        function translatePageContent(language) {
+            // Translate all elements with data attributes
+            const elements = document.querySelectorAll('[data-en][data-fr]');
+            elements.forEach(element => {
+                const translation = element.getAttribute('data-' + language);
+                if (translation) {
+                    element.textContent = translation;
+                }
+            });
+
+            // Translate placeholder texts
+            const placeholderElements = document.querySelectorAll('[data-placeholder-en][data-placeholder-fr]');
+            placeholderElements.forEach(element => {
+                const placeholder = element.getAttribute('data-placeholder-' + language);
+                if (placeholder) {
+                    element.placeholder = placeholder;
+                }
+            });
+
+            // Translate select options
+            const options = document.querySelectorAll('option[data-en][data-fr]');
+            options.forEach(option => {
+                const translation = option.getAttribute('data-' + language);
+                if (translation) {
+                    option.textContent = translation;
+                }
+            });
+
+            // Translate optgroup labels
+            const optgroups = document.querySelectorAll('optgroup[data-label-en][data-label-fr]');
+            optgroups.forEach(optgroup => {
+                const label = optgroup.getAttribute('data-label-' + language);
+                if (label) {
+                    optgroup.label = label;
+                }
+            });
+
+            // Translate button text
+            const buttons = document.querySelectorAll('button[data-en][data-fr]');
+            buttons.forEach(button => {
+                const translation = button.getAttribute('data-' + language);
+                if (translation) {
+                    button.textContent = translation;
+                }
+            });
+
+            // Translate input values for buttons
+            const inputButtons = document.querySelectorAll('input[type="submit"][data-en][data-fr], input[type="button"][data-en][data-fr]');
+            inputButtons.forEach(input => {
+                const translation = input.getAttribute('data-' + language);
+                if (translation) {
+                    input.value = translation;
+                }
+            });
+        }
+        
+        // Update active language button
+        function updateActiveLanguage(selectedLang) {
+            langBtns.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.getAttribute('data-lang') === selectedLang) {
+                    btn.classList.add('active');
+                    const flag = btn.getAttribute('data-flag');
+                    currentLangSpan.textContent = selectedLang.toUpperCase();
+                }
+            });
+        }
+        
+        // Language selection
+        langBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const lang = this.getAttribute('data-lang');
+                const flag = this.getAttribute('data-flag');
+                
+                // Update current language display
+                currentLangSpan.textContent = lang.toUpperCase();
+                
+                // Update active button
+                updateActiveLanguage(lang);
+                
+                // Translate navigation
+                translateNavigation(lang);
+                
+                // Translate page content
+                translatePageContent(lang);
+                
+                // Save language preference
+                localStorage.setItem('selectedLanguage', lang);
+                
+                // Dispatch custom event for other components to listen
+                window.dispatchEvent(new CustomEvent('languageChanged', { 
+                    detail: { language: lang } 
+                }));
+                
+                // Close panel
+                languagePanel.classList.add('hidden');
+                
+                // Show success message
+                if (typeof Swal !== 'undefined') {
+                    const message = lang === 'fr' 
+                        ? 'Langue changée en Français!' 
+                        : 'Language changed to English!';
+                    
+                    Swal.fire({
+                        icon: 'success',
+                        title: lang === 'fr' ? 'Langue changée' : 'Language Changed',
+                        text: message,
+                        timer: 1500,
+                        showConfirmButton: false
+                    });
+                }
+            });
         });
         
         // Function to update active theme button
@@ -948,6 +1176,7 @@
         });
         
         // Load saved preferences
+        const savedLanguage = localStorage.getItem('selectedLanguage') || 'en';
         const savedTheme = localStorage.getItem('selectedTheme') || 'default';
         
         // Initialize inline pinned timezones functionality
@@ -1001,7 +1230,62 @@
         });
         
         // Initial load
-        updateHeaderWorldClock();        
+        updateHeaderWorldClock();
+        
+        // Global translation dictionary for JavaScript messages
+        window.translations = {
+            en: {
+                // Popup control messages
+                'save_popups_success': 'Successfully saved {count} popup(s)',
+                'save_popups_failed': 'Failed to save popups',
+                'fetch_popups_success': 'Successfully fetched {count} popup(s)',
+                'fetch_popups_failed': 'Failed to fetch popups',
+                'clear_popups_success': 'Successfully cleared all popups',
+                'clear_popups_failed': 'Failed to clear popups',
+                'no_popups_to_save': 'No popups to save',
+                'no_popups_found': 'No saved popups found',
+                // General messages
+                'error': 'Error',
+                'success': 'Success',
+                'warning': 'Warning',
+                'info': 'Information'
+            },
+            fr: {
+                // Popup control messages
+                'save_popups_success': '{count} popup(s) sauvegardé(s) avec succès',
+                'save_popups_failed': 'Échec de la sauvegarde des popups',
+                'fetch_popups_success': '{count} popup(s) récupéré(s) avec succès',
+                'fetch_popups_failed': 'Échec de la récupération des popups',
+                'clear_popups_success': 'Tous les popups ont été effacés avec succès',
+                'clear_popups_failed': 'Échec de l\'effacement des popups',
+                'no_popups_to_save': 'Aucun popup à sauvegarder',
+                'no_popups_found': 'Aucun popup sauvegardé trouvé',
+                // General messages
+                'error': 'Erreur',
+                'success': 'Succès',
+                'warning': 'Avertissement',
+                'info': 'Information'
+            }
+        };
+
+        // Global function to get translated text
+        window.getTranslation = function(key, params = {}) {
+            const currentLang = localStorage.getItem('selectedLanguage') || 'en';
+            let text = window.translations[currentLang][key] || window.translations['en'][key] || key;
+            
+            // Replace parameters like {count}
+            Object.keys(params).forEach(param => {
+                text = text.replace(new RegExp(`{${param}}`, 'g'), params[param]);
+            });
+            
+            return text;
+        };
+
+        // Apply saved language
+        updateActiveLanguage(savedLanguage);
+        translateNavigation(savedLanguage);
+        translatePageContent(savedLanguage);
+        
         // Apply saved theme
         document.body.classList.add('theme-' + savedTheme);
         updateActiveTheme(savedTheme);
@@ -1010,19 +1294,39 @@
         const notificationBtn = document.getElementById('notification-toggle');
         if (notificationBtn) {
             notificationBtn.addEventListener('click', function() {
-                if (typeof Swal !== 'undefined') {
-                    Swal.fire({
-                        icon: 'info',
+                const currentLang = localStorage.getItem('selectedLanguage') || 'en';
+                const notifications = {
+                    en: {
                         title: 'Notifications',
-                        html: `
+                        content: `
                             <div style="text-align: left;">
                                 <p><strong>• New deadline reminder</strong><br><small>RCIC deadline in 3 days</small></p>
                                 <p><strong>• Template updated</strong><br><small>Legal template has been modified</small></p>
                                 <p><strong>• System maintenance</strong><br><small>Scheduled for tonight at 2 AM</small></p>
                             </div>
                         `,
+                        button: 'Mark as Read'
+                    },
+                    fr: {
+                        title: 'Notifications',
+                        content: `
+                            <div style="text-align: left;">
+                                <p><strong>• Nouveau rappel d'échéance</strong><br><small>Échéance RCIC dans 3 jours</small></p>
+                                <p><strong>• Modèle mis à jour</strong><br><small>Le modèle juridique a été modifié</small></p>
+                                <p><strong>• Maintenance du système</strong><br><small>Prévue ce soir à 2h du matin</small></p>
+                            </div>
+                        `,
+                        button: 'Marquer comme lu'
+                    }
+                };
+                
+                if (typeof Swal !== 'undefined') {
+                    Swal.fire({
+                        icon: 'info',
+                        title: notifications[currentLang].title,
+                        html: notifications[currentLang].content,
                         showConfirmButton: true,
-                        confirmButtonText: 'Mark as Read'
+                        confirmButtonText: notifications[currentLang].button
                     });
                 }
             });
@@ -1030,6 +1334,7 @@
     });
     </script>
     
-    @stack('scripts')
+    <?php echo $__env->yieldPushContent('scripts'); ?>
 </body>
 </html>
+<?php /**PATH C:\Users\User\Desktop\13\jurislocator_laravel\resources\views/layouts/user-layout.blade.php ENDPATH**/ ?>
