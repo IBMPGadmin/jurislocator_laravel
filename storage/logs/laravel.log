@@ -7212,3 +7212,579 @@ Content-Transfer-Encoding: quoted-printable
 [2025-07-07 11:43:49] local.INFO: CheckSubscription: Active subscription found, proceeding  
 [2025-07-07 11:44:41] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-07 11:44:41"}} 
 [2025-07-07 11:44:41] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 04:07:10] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 04:07:09"}} 
+[2025-07-08 04:07:10] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 04:07:13] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 04:07:13"}} 
+[2025-07-08 04:07:13] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 04:07:13] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 04:07:13"}} 
+[2025-07-08 04:07:13] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 04:08:18] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 04:08:18"}} 
+[2025-07-08 04:08:18] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 04:08:18] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 04:08:18"}} 
+[2025-07-08 04:08:18] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 04:09:42] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 04:09:42"}} 
+[2025-07-08 04:09:42] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 04:12:49] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 04:12:49"}} 
+[2025-07-08 04:12:49] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 04:12:56] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 04:12:56"}} 
+[2025-07-08 04:12:56] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 04:13:49] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 04:13:49"}} 
+[2025-07-08 04:13:49] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 04:18:41] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 04:18:41"}} 
+[2025-07-08 04:18:41] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 04:29:03] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 04:29:03"}} 
+[2025-07-08 04:29:03] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 04:29:04] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 04:29:04"}} 
+[2025-07-08 04:29:04] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 04:40:55] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 04:40:55"}} 
+[2025-07-08 04:40:55] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 04:46:16] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 04:46:16"}} 
+[2025-07-08 04:46:16] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 04:46:20] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 04:46:20"}} 
+[2025-07-08 04:46:20] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 05:06:38] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 05:06:38"}} 
+[2025-07-08 05:06:38] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 05:06:40] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 05:06:40"}} 
+[2025-07-08 05:06:40] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 05:07:05] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 05:07:05"}} 
+[2025-07-08 05:07:05] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 05:07:39] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 05:07:39"}} 
+[2025-07-08 05:07:39] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 05:07:41] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 05:07:41"}} 
+[2025-07-08 05:07:41] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 05:07:44] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 05:07:44"}} 
+[2025-07-08 05:07:44] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 05:07:46] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 05:07:46"}} 
+[2025-07-08 05:07:46] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 05:07:59] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 05:07:59"}} 
+[2025-07-08 05:07:59] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 05:08:01] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 05:08:01"}} 
+[2025-07-08 05:08:01] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 05:08:01] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 05:08:01"}} 
+[2025-07-08 05:08:01] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 05:08:06] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 05:08:06"}} 
+[2025-07-08 05:08:06] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 05:08:08] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 05:08:08"}} 
+[2025-07-08 05:08:08] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 05:08:24] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 05:08:24"}} 
+[2025-07-08 05:08:24] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 05:08:27] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 05:08:27"}} 
+[2025-07-08 05:08:27] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 05:08:36] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 05:08:36"}} 
+[2025-07-08 05:08:36] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 05:17:04] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 05:17:04"}} 
+[2025-07-08 05:17:04] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 05:17:05] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 05:17:05"}} 
+[2025-07-08 05:17:05] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 05:17:05] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 05:17:05"}} 
+[2025-07-08 05:17:05] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 05:17:05] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 05:17:05"}} 
+[2025-07-08 05:17:05] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 05:17:38] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 05:17:38"}} 
+[2025-07-08 05:17:38] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 05:17:38] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 05:17:38"}} 
+[2025-07-08 05:17:38] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 05:17:38] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 05:17:38"}} 
+[2025-07-08 05:17:38] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 05:17:40] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 05:17:40"}} 
+[2025-07-08 05:17:40] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 05:17:41] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 05:17:41"}} 
+[2025-07-08 05:17:41] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 05:17:51] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 05:17:51"}} 
+[2025-07-08 05:17:51] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 05:25:41] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 05:25:41"}} 
+[2025-07-08 05:25:41] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 05:26:13] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 05:26:13"}} 
+[2025-07-08 05:26:13] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 05:26:20] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 05:26:20"}} 
+[2025-07-08 05:26:20] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 05:26:27] local.INFO: CheckSubscription: Checking subscription {"user_id":105,"subscription":{"id":52,"status":"trial","trial_ends_at":"2025-07-11 04:57:20","now":"2025-07-08 05:26:27"}} 
+[2025-07-08 05:26:27] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 05:26:29] local.INFO: CheckSubscription: Checking subscription {"user_id":105,"subscription":{"id":52,"status":"trial","trial_ends_at":"2025-07-11 04:57:20","now":"2025-07-08 05:26:29"}} 
+[2025-07-08 05:26:29] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 05:26:30] local.INFO: CheckSubscription: Checking subscription {"user_id":105,"subscription":{"id":52,"status":"trial","trial_ends_at":"2025-07-11 04:57:20","now":"2025-07-08 05:26:30"}} 
+[2025-07-08 05:26:30] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 05:26:34] local.INFO: CheckSubscription: Checking subscription {"user_id":105,"subscription":{"id":52,"status":"trial","trial_ends_at":"2025-07-11 04:57:20","now":"2025-07-08 05:26:34"}} 
+[2025-07-08 05:26:34] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 05:26:39] local.INFO: Section content request for tableId=1, sectionRef=46  
+[2025-07-08 05:26:39] local.INFO: Found table: legaldocument1  
+[2025-07-08 05:26:39] local.INFO: Received current document context: table=legaldocument1, categoryId=1  
+[2025-07-08 05:26:39] local.INFO: Building search query for section_id: 46 in table: legaldocument1  
+[2025-07-08 05:26:39] local.INFO: Built query: select * from `legaldocument1` where `category_id` = ? and (`section_id` = ? or `section_id` like ? or `section_id` like ?) order by CASE 
+                    WHEN section_id = ? THEN 1
+                    WHEN section_id LIKE ? THEN 2
+                    ELSE 3
+                END limit 10 with bindings: ["1","46","46.%","46%","46","46.%"]  
+[2025-07-08 05:26:39] local.INFO: Executing query: select * from `legaldocument1` where `category_id` = ? and (`section_id` = ? or `section_id` like ? or `section_id` like ?) order by CASE 
+                    WHEN section_id = ? THEN 1
+                    WHEN section_id LIKE ? THEN 2
+                    ELSE 3
+                END limit 10 with bindings: ["1","46","46.%","46%","46","46.%"]  
+[2025-07-08 05:26:39] local.INFO: Raw SQL equivalent: select * from `legaldocument1` where `category_id` = 1 and (`section_id` = 1 or `section_id` like 1 or `section_id` like 1) order by CASE 
+                    WHEN section_id = 1 THEN 1
+                    WHEN section_id LIKE 1 THEN 2
+                    ELSE 3
+                END limit 10  
+[2025-07-08 05:26:39] local.INFO: Found 10 rows  
+[2025-07-08 05:26:39] local.INFO: Section content request for tableId=1, sectionRef=46  
+[2025-07-08 05:26:39] local.INFO: Found table: legaldocument1  
+[2025-07-08 05:26:39] local.INFO: Building search query for section_id: 46 in table: legaldocument1  
+[2025-07-08 05:26:39] local.INFO: Built query: select * from `legaldocument1` where `category_id` = ? and (`section_id` = ? or `section_id` like ? or `section_id` like ?) order by CASE 
+                    WHEN section_id = ? THEN 1
+                    WHEN section_id LIKE ? THEN 2
+                    ELSE 3
+                END limit 10 with bindings: ["1","46","46.%","46%","46","46.%"]  
+[2025-07-08 05:26:39] local.INFO: Executing query: select * from `legaldocument1` where `category_id` = ? and (`section_id` = ? or `section_id` like ? or `section_id` like ?) order by CASE 
+                    WHEN section_id = ? THEN 1
+                    WHEN section_id LIKE ? THEN 2
+                    ELSE 3
+                END limit 10 with bindings: ["1","46","46.%","46%","46","46.%"]  
+[2025-07-08 05:26:39] local.INFO: Raw SQL equivalent: select * from `legaldocument1` where `category_id` = 1 and (`section_id` = 1 or `section_id` like 1 or `section_id` like 1) order by CASE 
+                    WHEN section_id = 1 THEN 1
+                    WHEN section_id LIKE 1 THEN 2
+                    ELSE 3
+                END limit 10  
+[2025-07-08 05:26:39] local.INFO: Found 10 rows  
+[2025-07-08 05:29:01] local.INFO: CheckSubscription: Checking subscription {"user_id":105,"subscription":{"id":52,"status":"trial","trial_ends_at":"2025-07-11 04:57:20","now":"2025-07-08 05:29:01"}} 
+[2025-07-08 05:29:01] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 05:29:11] local.INFO: Section content request for tableId=1, sectionRef=46  
+[2025-07-08 05:29:11] local.INFO: Found table: legaldocument1  
+[2025-07-08 05:29:11] local.INFO: Received current document context: table=legaldocument1, categoryId=1  
+[2025-07-08 05:29:11] local.INFO: Building search query for section_id: 46 in table: legaldocument1  
+[2025-07-08 05:29:11] local.INFO: Built query: select * from `legaldocument1` where `category_id` = ? and (`section_id` = ? or `section_id` like ? or `section_id` like ?) order by CASE 
+                    WHEN section_id = ? THEN 1
+                    WHEN section_id LIKE ? THEN 2
+                    ELSE 3
+                END limit 10 with bindings: ["1","46","46.%","46%","46","46.%"]  
+[2025-07-08 05:29:11] local.INFO: Executing query: select * from `legaldocument1` where `category_id` = ? and (`section_id` = ? or `section_id` like ? or `section_id` like ?) order by CASE 
+                    WHEN section_id = ? THEN 1
+                    WHEN section_id LIKE ? THEN 2
+                    ELSE 3
+                END limit 10 with bindings: ["1","46","46.%","46%","46","46.%"]  
+[2025-07-08 05:29:11] local.INFO: Raw SQL equivalent: select * from `legaldocument1` where `category_id` = 1 and (`section_id` = 1 or `section_id` like 1 or `section_id` like 1) order by CASE 
+                    WHEN section_id = 1 THEN 1
+                    WHEN section_id LIKE 1 THEN 2
+                    ELSE 3
+                END limit 10  
+[2025-07-08 05:29:11] local.INFO: Found 10 rows  
+[2025-07-08 05:29:11] local.INFO: Section content request for tableId=1, sectionRef=46  
+[2025-07-08 05:29:11] local.INFO: Found table: legaldocument1  
+[2025-07-08 05:29:11] local.INFO: Building search query for section_id: 46 in table: legaldocument1  
+[2025-07-08 05:29:11] local.INFO: Built query: select * from `legaldocument1` where `category_id` = ? and (`section_id` = ? or `section_id` like ? or `section_id` like ?) order by CASE 
+                    WHEN section_id = ? THEN 1
+                    WHEN section_id LIKE ? THEN 2
+                    ELSE 3
+                END limit 10 with bindings: ["1","46","46.%","46%","46","46.%"]  
+[2025-07-08 05:29:11] local.INFO: Executing query: select * from `legaldocument1` where `category_id` = ? and (`section_id` = ? or `section_id` like ? or `section_id` like ?) order by CASE 
+                    WHEN section_id = ? THEN 1
+                    WHEN section_id LIKE ? THEN 2
+                    ELSE 3
+                END limit 10 with bindings: ["1","46","46.%","46%","46","46.%"]  
+[2025-07-08 05:29:11] local.INFO: Raw SQL equivalent: select * from `legaldocument1` where `category_id` = 1 and (`section_id` = 1 or `section_id` like 1 or `section_id` like 1) order by CASE 
+                    WHEN section_id = 1 THEN 1
+                    WHEN section_id LIKE 1 THEN 2
+                    ELSE 3
+                END limit 10  
+[2025-07-08 05:29:11] local.INFO: Found 10 rows  
+[2025-07-08 05:29:25] local.INFO: Section content request for tableId=1, sectionRef=46  
+[2025-07-08 05:29:25] local.INFO: Found table: legaldocument1  
+[2025-07-08 05:29:25] local.INFO: Received current document context: table=legaldocument1, categoryId=1  
+[2025-07-08 05:29:25] local.INFO: Building search query for section_id: 46 in table: legaldocument1  
+[2025-07-08 05:29:25] local.INFO: Built query: select * from `legaldocument1` where `category_id` = ? and (`section_id` = ? or `section_id` like ? or `section_id` like ?) order by CASE 
+                    WHEN section_id = ? THEN 1
+                    WHEN section_id LIKE ? THEN 2
+                    ELSE 3
+                END limit 10 with bindings: ["1","46","46.%","46%","46","46.%"]  
+[2025-07-08 05:29:25] local.INFO: Executing query: select * from `legaldocument1` where `category_id` = ? and (`section_id` = ? or `section_id` like ? or `section_id` like ?) order by CASE 
+                    WHEN section_id = ? THEN 1
+                    WHEN section_id LIKE ? THEN 2
+                    ELSE 3
+                END limit 10 with bindings: ["1","46","46.%","46%","46","46.%"]  
+[2025-07-08 05:29:25] local.INFO: Raw SQL equivalent: select * from `legaldocument1` where `category_id` = 1 and (`section_id` = 1 or `section_id` like 1 or `section_id` like 1) order by CASE 
+                    WHEN section_id = 1 THEN 1
+                    WHEN section_id LIKE 1 THEN 2
+                    ELSE 3
+                END limit 10  
+[2025-07-08 05:29:25] local.INFO: Found 10 rows  
+[2025-07-08 05:29:43] local.INFO: CheckSubscription: Checking subscription {"user_id":105,"subscription":{"id":52,"status":"trial","trial_ends_at":"2025-07-11 04:57:20","now":"2025-07-08 05:29:43"}} 
+[2025-07-08 05:29:43] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 05:29:59] local.INFO: Section content request for tableId=1, sectionRef=46  
+[2025-07-08 05:29:59] local.INFO: Found table: legaldocument1  
+[2025-07-08 05:29:59] local.INFO: Received current document context: table=legaldocument1, categoryId=1  
+[2025-07-08 05:29:59] local.INFO: Building search query for section_id: 46 in table: legaldocument1  
+[2025-07-08 05:29:59] local.INFO: Built query: select * from `legaldocument1` where `category_id` = ? and (`section_id` = ? or `section_id` like ? or `section_id` like ?) order by CASE 
+                    WHEN section_id = ? THEN 1
+                    WHEN section_id LIKE ? THEN 2
+                    ELSE 3
+                END limit 10 with bindings: ["1","46","46.%","46%","46","46.%"]  
+[2025-07-08 05:29:59] local.INFO: Executing query: select * from `legaldocument1` where `category_id` = ? and (`section_id` = ? or `section_id` like ? or `section_id` like ?) order by CASE 
+                    WHEN section_id = ? THEN 1
+                    WHEN section_id LIKE ? THEN 2
+                    ELSE 3
+                END limit 10 with bindings: ["1","46","46.%","46%","46","46.%"]  
+[2025-07-08 05:29:59] local.INFO: Raw SQL equivalent: select * from `legaldocument1` where `category_id` = 1 and (`section_id` = 1 or `section_id` like 1 or `section_id` like 1) order by CASE 
+                    WHEN section_id = 1 THEN 1
+                    WHEN section_id LIKE 1 THEN 2
+                    ELSE 3
+                END limit 10  
+[2025-07-08 05:29:59] local.INFO: Found 10 rows  
+[2025-07-08 05:29:59] local.INFO: Section content request for tableId=1, sectionRef=46  
+[2025-07-08 05:29:59] local.INFO: Found table: legaldocument1  
+[2025-07-08 05:29:59] local.INFO: Building search query for section_id: 46 in table: legaldocument1  
+[2025-07-08 05:29:59] local.INFO: Built query: select * from `legaldocument1` where `category_id` = ? and (`section_id` = ? or `section_id` like ? or `section_id` like ?) order by CASE 
+                    WHEN section_id = ? THEN 1
+                    WHEN section_id LIKE ? THEN 2
+                    ELSE 3
+                END limit 10 with bindings: ["1","46","46.%","46%","46","46.%"]  
+[2025-07-08 05:29:59] local.INFO: Executing query: select * from `legaldocument1` where `category_id` = ? and (`section_id` = ? or `section_id` like ? or `section_id` like ?) order by CASE 
+                    WHEN section_id = ? THEN 1
+                    WHEN section_id LIKE ? THEN 2
+                    ELSE 3
+                END limit 10 with bindings: ["1","46","46.%","46%","46","46.%"]  
+[2025-07-08 05:29:59] local.INFO: Raw SQL equivalent: select * from `legaldocument1` where `category_id` = 1 and (`section_id` = 1 or `section_id` like 1 or `section_id` like 1) order by CASE 
+                    WHEN section_id = 1 THEN 1
+                    WHEN section_id LIKE 1 THEN 2
+                    ELSE 3
+                END limit 10  
+[2025-07-08 05:29:59] local.INFO: Found 10 rows  
+[2025-07-08 05:35:11] local.INFO: CheckSubscription: Checking subscription {"user_id":105,"subscription":{"id":52,"status":"trial","trial_ends_at":"2025-07-11 04:57:20","now":"2025-07-08 05:35:11"}} 
+[2025-07-08 05:35:11] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 05:35:20] local.INFO: Section content request for tableId=1, sectionRef=46  
+[2025-07-08 05:35:20] local.INFO: Found table: legaldocument1  
+[2025-07-08 05:35:20] local.INFO: Received current document context: table=legaldocument1, categoryId=1  
+[2025-07-08 05:35:20] local.INFO: Building search query for section_id: 46 in table: legaldocument1  
+[2025-07-08 05:35:20] local.INFO: Built query: select * from `legaldocument1` where `category_id` = ? and (`section_id` = ? or `section_id` like ? or `section_id` like ?) order by CASE 
+                    WHEN section_id = ? THEN 1
+                    WHEN section_id LIKE ? THEN 2
+                    ELSE 3
+                END limit 10 with bindings: ["1","46","46.%","46%","46","46.%"]  
+[2025-07-08 05:35:20] local.INFO: Executing query: select * from `legaldocument1` where `category_id` = ? and (`section_id` = ? or `section_id` like ? or `section_id` like ?) order by CASE 
+                    WHEN section_id = ? THEN 1
+                    WHEN section_id LIKE ? THEN 2
+                    ELSE 3
+                END limit 10 with bindings: ["1","46","46.%","46%","46","46.%"]  
+[2025-07-08 05:35:20] local.INFO: Raw SQL equivalent: select * from `legaldocument1` where `category_id` = 1 and (`section_id` = 1 or `section_id` like 1 or `section_id` like 1) order by CASE 
+                    WHEN section_id = 1 THEN 1
+                    WHEN section_id LIKE 1 THEN 2
+                    ELSE 3
+                END limit 10  
+[2025-07-08 05:35:20] local.INFO: Found 10 rows  
+[2025-07-08 05:35:20] local.INFO: Section content request for tableId=1, sectionRef=46  
+[2025-07-08 05:35:20] local.INFO: Found table: legaldocument1  
+[2025-07-08 05:35:20] local.INFO: Building search query for section_id: 46 in table: legaldocument1  
+[2025-07-08 05:35:20] local.INFO: Built query: select * from `legaldocument1` where `category_id` = ? and (`section_id` = ? or `section_id` like ? or `section_id` like ?) order by CASE 
+                    WHEN section_id = ? THEN 1
+                    WHEN section_id LIKE ? THEN 2
+                    ELSE 3
+                END limit 10 with bindings: ["1","46","46.%","46%","46","46.%"]  
+[2025-07-08 05:35:20] local.INFO: Executing query: select * from `legaldocument1` where `category_id` = ? and (`section_id` = ? or `section_id` like ? or `section_id` like ?) order by CASE 
+                    WHEN section_id = ? THEN 1
+                    WHEN section_id LIKE ? THEN 2
+                    ELSE 3
+                END limit 10 with bindings: ["1","46","46.%","46%","46","46.%"]  
+[2025-07-08 05:35:20] local.INFO: Raw SQL equivalent: select * from `legaldocument1` where `category_id` = 1 and (`section_id` = 1 or `section_id` like 1 or `section_id` like 1) order by CASE 
+                    WHEN section_id = 1 THEN 1
+                    WHEN section_id LIKE 1 THEN 2
+                    ELSE 3
+                END limit 10  
+[2025-07-08 05:35:20] local.INFO: Found 10 rows  
+[2025-07-08 05:35:25] local.INFO: CheckSubscription: Checking subscription {"user_id":105,"subscription":{"id":52,"status":"trial","trial_ends_at":"2025-07-11 04:57:20","now":"2025-07-08 05:35:25"}} 
+[2025-07-08 05:35:25] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 05:37:26] local.INFO: CheckSubscription: Checking subscription {"user_id":105,"subscription":{"id":52,"status":"trial","trial_ends_at":"2025-07-11 04:57:20","now":"2025-07-08 05:37:26"}} 
+[2025-07-08 05:37:26] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 05:37:27] local.INFO: CheckSubscription: Checking subscription {"user_id":105,"subscription":{"id":52,"status":"trial","trial_ends_at":"2025-07-11 04:57:20","now":"2025-07-08 05:37:27"}} 
+[2025-07-08 05:37:27] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 05:37:27] local.INFO: CheckSubscription: Checking subscription {"user_id":105,"subscription":{"id":52,"status":"trial","trial_ends_at":"2025-07-11 04:57:20","now":"2025-07-08 05:37:27"}} 
+[2025-07-08 05:37:27] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 05:37:29] local.INFO: CheckSubscription: Checking subscription {"user_id":105,"subscription":{"id":52,"status":"trial","trial_ends_at":"2025-07-11 04:57:20","now":"2025-07-08 05:37:29"}} 
+[2025-07-08 05:37:29] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 05:37:29] local.INFO: CheckSubscription: Checking subscription {"user_id":105,"subscription":{"id":52,"status":"trial","trial_ends_at":"2025-07-11 04:57:20","now":"2025-07-08 05:37:29"}} 
+[2025-07-08 05:37:29] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 05:37:34] local.INFO: CheckSubscription: Checking subscription {"user_id":105,"subscription":{"id":52,"status":"trial","trial_ends_at":"2025-07-11 04:57:20","now":"2025-07-08 05:37:34"}} 
+[2025-07-08 05:37:34] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 05:37:48] local.INFO: Section content request for tableId=1, sectionRef=42.1  
+[2025-07-08 05:37:48] local.INFO: Found table: legaldocument1  
+[2025-07-08 05:37:48] local.INFO: Received current document context: table=legaldocument1, categoryId=1  
+[2025-07-08 05:37:48] local.INFO: Building search query for section_id: 42.1 in table: legaldocument1  
+[2025-07-08 05:37:48] local.INFO: Built query: select * from `legaldocument1` where `category_id` = ? and (`section_id` = ? or `section_id` like ? or `section_id` like ?) order by CASE 
+                    WHEN section_id = ? THEN 1
+                    WHEN section_id LIKE ? THEN 2
+                    ELSE 3
+                END limit 10 with bindings: ["1","42.1","42.1.%","42.1%","42.1","42.1.%"]  
+[2025-07-08 05:37:48] local.INFO: Executing query: select * from `legaldocument1` where `category_id` = ? and (`section_id` = ? or `section_id` like ? or `section_id` like ?) order by CASE 
+                    WHEN section_id = ? THEN 1
+                    WHEN section_id LIKE ? THEN 2
+                    ELSE 3
+                END limit 10 with bindings: ["1","42.1","42.1.%","42.1%","42.1","42.1.%"]  
+[2025-07-08 05:37:48] local.INFO: Raw SQL equivalent: select * from `legaldocument1` where `category_id` = 1 and (`section_id` = 1 or `section_id` like 1 or `section_id` like 1) order by CASE 
+                    WHEN section_id = 1 THEN 1
+                    WHEN section_id LIKE 1 THEN 2
+                    ELSE 3
+                END limit 10  
+[2025-07-08 05:37:48] local.INFO: Found 4 rows  
+[2025-07-08 05:37:48] local.INFO: Section content request for tableId=1, sectionRef=42.1  
+[2025-07-08 05:37:48] local.INFO: Found table: legaldocument1  
+[2025-07-08 05:37:48] local.INFO: Building search query for section_id: 42.1 in table: legaldocument1  
+[2025-07-08 05:37:48] local.INFO: Built query: select * from `legaldocument1` where `category_id` = ? and (`section_id` = ? or `section_id` like ? or `section_id` like ?) order by CASE 
+                    WHEN section_id = ? THEN 1
+                    WHEN section_id LIKE ? THEN 2
+                    ELSE 3
+                END limit 10 with bindings: ["1","42.1","42.1.%","42.1%","42.1","42.1.%"]  
+[2025-07-08 05:37:48] local.INFO: Executing query: select * from `legaldocument1` where `category_id` = ? and (`section_id` = ? or `section_id` like ? or `section_id` like ?) order by CASE 
+                    WHEN section_id = ? THEN 1
+                    WHEN section_id LIKE ? THEN 2
+                    ELSE 3
+                END limit 10 with bindings: ["1","42.1","42.1.%","42.1%","42.1","42.1.%"]  
+[2025-07-08 05:37:48] local.INFO: Raw SQL equivalent: select * from `legaldocument1` where `category_id` = 1 and (`section_id` = 1 or `section_id` like 1 or `section_id` like 1) order by CASE 
+                    WHEN section_id = 1 THEN 1
+                    WHEN section_id LIKE 1 THEN 2
+                    ELSE 3
+                END limit 10  
+[2025-07-08 05:37:48] local.INFO: Found 4 rows  
+[2025-07-08 05:37:55] local.INFO: Section content request for tableId=1, sectionRef=4((3))(1)  
+[2025-07-08 05:37:55] local.INFO: Found table: legaldocument1  
+[2025-07-08 05:37:55] local.INFO: Received current document context: table=legaldocument1, categoryId=1  
+[2025-07-08 05:37:55] local.INFO: Building search query for section_id: 4((3))(1) in table: legaldocument1  
+[2025-07-08 05:37:55] local.INFO: Built query: select * from `legaldocument1` where `category_id` = ? and (`section_id` = ? or `section_id` like ? or `section_id` like ?) order by CASE 
+                    WHEN section_id = ? THEN 1
+                    WHEN section_id LIKE ? THEN 2
+                    ELSE 3
+                END limit 10 with bindings: ["1","4((3))(1)","4((3))(1).%","4((3))(1)%","4((3))(1)","4((3))(1).%"]  
+[2025-07-08 05:37:55] local.INFO: Executing query: select * from `legaldocument1` where `category_id` = ? and (`section_id` = ? or `section_id` like ? or `section_id` like ?) order by CASE 
+                    WHEN section_id = ? THEN 1
+                    WHEN section_id LIKE ? THEN 2
+                    ELSE 3
+                END limit 10 with bindings: ["1","4((3))(1)","4((3))(1).%","4((3))(1)%","4((3))(1)","4((3))(1).%"]  
+[2025-07-08 05:37:55] local.INFO: Raw SQL equivalent: select * from `legaldocument1` where `category_id` = 1 and (`section_id` = 1 or `section_id` like 1 or `section_id` like 1) order by CASE 
+                    WHEN section_id = 1 THEN 1
+                    WHEN section_id LIKE 1 THEN 2
+                    ELSE 3
+                END limit 10  
+[2025-07-08 05:37:55] local.INFO: Found 0 rows  
+[2025-07-08 05:37:55] local.WARNING: No rows found for section reference: 4((3))(1)  
+[2025-07-08 05:37:55] local.INFO: Section content request for tableId=1, sectionRef=4((3))(1)  
+[2025-07-08 05:37:55] local.INFO: Found table: legaldocument1  
+[2025-07-08 05:37:55] local.INFO: Building search query for section_id: 4((3))(1) in table: legaldocument1  
+[2025-07-08 05:37:55] local.INFO: Built query: select * from `legaldocument1` where `category_id` = ? and (`section_id` = ? or `section_id` like ? or `section_id` like ?) order by CASE 
+                    WHEN section_id = ? THEN 1
+                    WHEN section_id LIKE ? THEN 2
+                    ELSE 3
+                END limit 10 with bindings: ["1","4((3))(1)","4((3))(1).%","4((3))(1)%","4((3))(1)","4((3))(1).%"]  
+[2025-07-08 05:37:55] local.INFO: Executing query: select * from `legaldocument1` where `category_id` = ? and (`section_id` = ? or `section_id` like ? or `section_id` like ?) order by CASE 
+                    WHEN section_id = ? THEN 1
+                    WHEN section_id LIKE ? THEN 2
+                    ELSE 3
+                END limit 10 with bindings: ["1","4((3))(1)","4((3))(1).%","4((3))(1)%","4((3))(1)","4((3))(1).%"]  
+[2025-07-08 05:37:55] local.INFO: Raw SQL equivalent: select * from `legaldocument1` where `category_id` = 1 and (`section_id` = 1 or `section_id` like 1 or `section_id` like 1) order by CASE 
+                    WHEN section_id = 1 THEN 1
+                    WHEN section_id LIKE 1 THEN 2
+                    ELSE 3
+                END limit 10  
+[2025-07-08 05:37:55] local.INFO: Found 0 rows  
+[2025-07-08 05:37:55] local.WARNING: No rows found for section reference: 4((3))(1)  
+[2025-07-08 05:39:00] local.INFO: CheckSubscription: Checking subscription {"user_id":105,"subscription":{"id":52,"status":"trial","trial_ends_at":"2025-07-11 04:57:20","now":"2025-07-08 05:39:00"}} 
+[2025-07-08 05:39:00] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 05:39:09] local.INFO: CheckSubscription: Checking subscription {"user_id":105,"subscription":{"id":52,"status":"trial","trial_ends_at":"2025-07-11 04:57:20","now":"2025-07-08 05:39:09"}} 
+[2025-07-08 05:39:09] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 05:39:12] local.INFO: CheckSubscription: Checking subscription {"user_id":105,"subscription":{"id":52,"status":"trial","trial_ends_at":"2025-07-11 04:57:20","now":"2025-07-08 05:39:12"}} 
+[2025-07-08 05:39:12] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 05:39:12] local.INFO: CheckSubscription: Checking subscription {"user_id":105,"subscription":{"id":52,"status":"trial","trial_ends_at":"2025-07-11 04:57:20","now":"2025-07-08 05:39:12"}} 
+[2025-07-08 05:39:12] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 05:39:20] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 05:39:20"}} 
+[2025-07-08 05:39:20] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 05:39:21] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 05:39:21"}} 
+[2025-07-08 05:39:21] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 05:39:22] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 05:39:22"}} 
+[2025-07-08 05:39:22] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 05:39:27] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 05:39:27"}} 
+[2025-07-08 05:39:27] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 05:39:55] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 05:39:55"}} 
+[2025-07-08 05:39:55] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 05:42:34] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 05:42:34"}} 
+[2025-07-08 05:42:34] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 05:54:33] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 05:54:33"}} 
+[2025-07-08 05:54:33] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 05:55:34] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 05:55:34"}} 
+[2025-07-08 05:55:34] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 05:55:35] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 05:55:35"}} 
+[2025-07-08 05:55:35] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 05:55:35] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 05:55:35"}} 
+[2025-07-08 05:55:35] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 05:56:03] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 05:56:03"}} 
+[2025-07-08 05:56:03] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 05:56:06] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 05:56:06"}} 
+[2025-07-08 05:56:06] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 05:57:11] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 05:57:11"}} 
+[2025-07-08 05:57:11] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 06:00:32] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 06:00:32"}} 
+[2025-07-08 06:00:32] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 06:00:42] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 06:00:42"}} 
+[2025-07-08 06:00:42] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 06:00:43] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 06:00:43"}} 
+[2025-07-08 06:00:43] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 06:00:49] local.INFO: Getting clients for user ID: 2  
+[2025-07-08 06:00:49] local.INFO: Found 2 clients for user 2  
+[2025-07-08 06:00:49] local.INFO: Clients data: [{"id":2,"user_id":2,"client_name":"client 1","client_email":"client1@gmail.com","client_status":"Active","last_accessed":"2025-07-08T05:07:44.000000Z","created_at":"2025-06-24T09:30:50.000000Z","updated_at":"2025-07-08T05:07:44.000000Z"},{"id":3,"user_id":2,"client_name":"Client Name 02","client_email":"Email2@gmail.com","client_status":"Active","last_accessed":"2025-07-02T05:21:41.000000Z","created_at":"2025-06-26T05:37:58.000000Z","updated_at":"2025-07-02T05:21:41.000000Z"}]  
+[2025-07-08 06:00:50] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 06:00:50"}} 
+[2025-07-08 06:00:50] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 06:01:00] local.INFO: Section content request for tableId=1, sectionRef=46  
+[2025-07-08 06:01:00] local.INFO: Found table: legaldocument1  
+[2025-07-08 06:01:00] local.INFO: Received current document context: table=legaldocument1, categoryId=1  
+[2025-07-08 06:01:00] local.INFO: Building search query for section_id: 46 in table: legaldocument1  
+[2025-07-08 06:01:00] local.INFO: Built query: select * from `legaldocument1` where `category_id` = ? and (`section_id` = ? or `section_id` like ? or `section_id` like ?) order by CASE 
+                    WHEN section_id = ? THEN 1
+                    WHEN section_id LIKE ? THEN 2
+                    ELSE 3
+                END limit 10 with bindings: ["1","46","46.%","46%","46","46.%"]  
+[2025-07-08 06:01:00] local.INFO: Executing query: select * from `legaldocument1` where `category_id` = ? and (`section_id` = ? or `section_id` like ? or `section_id` like ?) order by CASE 
+                    WHEN section_id = ? THEN 1
+                    WHEN section_id LIKE ? THEN 2
+                    ELSE 3
+                END limit 10 with bindings: ["1","46","46.%","46%","46","46.%"]  
+[2025-07-08 06:01:00] local.INFO: Raw SQL equivalent: select * from `legaldocument1` where `category_id` = 1 and (`section_id` = 1 or `section_id` like 1 or `section_id` like 1) order by CASE 
+                    WHEN section_id = 1 THEN 1
+                    WHEN section_id LIKE 1 THEN 2
+                    ELSE 3
+                END limit 10  
+[2025-07-08 06:01:00] local.INFO: Found 10 rows  
+[2025-07-08 06:01:00] local.INFO: Section content request for tableId=1, sectionRef=46  
+[2025-07-08 06:01:00] local.INFO: Found table: legaldocument1  
+[2025-07-08 06:01:00] local.INFO: Building search query for section_id: 46 in table: legaldocument1  
+[2025-07-08 06:01:00] local.INFO: Built query: select * from `legaldocument1` where `category_id` = ? and (`section_id` = ? or `section_id` like ? or `section_id` like ?) order by CASE 
+                    WHEN section_id = ? THEN 1
+                    WHEN section_id LIKE ? THEN 2
+                    ELSE 3
+                END limit 10 with bindings: ["1","46","46.%","46%","46","46.%"]  
+[2025-07-08 06:01:00] local.INFO: Executing query: select * from `legaldocument1` where `category_id` = ? and (`section_id` = ? or `section_id` like ? or `section_id` like ?) order by CASE 
+                    WHEN section_id = ? THEN 1
+                    WHEN section_id LIKE ? THEN 2
+                    ELSE 3
+                END limit 10 with bindings: ["1","46","46.%","46%","46","46.%"]  
+[2025-07-08 06:01:00] local.INFO: Raw SQL equivalent: select * from `legaldocument1` where `category_id` = 1 and (`section_id` = 1 or `section_id` like 1 or `section_id` like 1) order by CASE 
+                    WHEN section_id = 1 THEN 1
+                    WHEN section_id LIKE 1 THEN 2
+                    ELSE 3
+                END limit 10  
+[2025-07-08 06:01:00] local.INFO: Found 10 rows  
+[2025-07-08 06:01:05] local.INFO: Getting clients for user ID: 2  
+[2025-07-08 06:01:05] local.INFO: Found 2 clients for user 2  
+[2025-07-08 06:01:05] local.INFO: Clients data: [{"id":2,"user_id":2,"client_name":"client 1","client_email":"client1@gmail.com","client_status":"Active","last_accessed":"2025-07-08T05:07:44.000000Z","created_at":"2025-06-24T09:30:50.000000Z","updated_at":"2025-07-08T05:07:44.000000Z"},{"id":3,"user_id":2,"client_name":"Client Name 02","client_email":"Email2@gmail.com","client_status":"Active","last_accessed":"2025-07-02T05:21:41.000000Z","created_at":"2025-06-26T05:37:58.000000Z","updated_at":"2025-07-02T05:21:41.000000Z"}]  
+[2025-07-08 06:05:14] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 06:05:14"}} 
+[2025-07-08 06:05:14] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 06:05:19] local.INFO: Getting clients for user ID: 2  
+[2025-07-08 06:05:19] local.INFO: Found 2 clients for user 2  
+[2025-07-08 06:05:19] local.INFO: Clients data: [{"id":2,"user_id":2,"client_name":"client 1","client_email":"client1@gmail.com","client_status":"Active","last_accessed":"2025-07-08T05:07:44.000000Z","created_at":"2025-06-24T09:30:50.000000Z","updated_at":"2025-07-08T05:07:44.000000Z"},{"id":3,"user_id":2,"client_name":"Client Name 02","client_email":"Email2@gmail.com","client_status":"Active","last_accessed":"2025-07-02T05:21:41.000000Z","created_at":"2025-06-26T05:37:58.000000Z","updated_at":"2025-07-02T05:21:41.000000Z"}]  
+[2025-07-08 06:05:20] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 06:05:20"}} 
+[2025-07-08 06:05:20] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 06:05:27] local.INFO: Getting clients for user ID: 2  
+[2025-07-08 06:05:27] local.INFO: Found 2 clients for user 2  
+[2025-07-08 06:05:27] local.INFO: Clients data: [{"id":2,"user_id":2,"client_name":"client 1","client_email":"client1@gmail.com","client_status":"Active","last_accessed":"2025-07-08T05:07:44.000000Z","created_at":"2025-06-24T09:30:50.000000Z","updated_at":"2025-07-08T05:07:44.000000Z"},{"id":3,"user_id":2,"client_name":"Client Name 02","client_email":"Email2@gmail.com","client_status":"Active","last_accessed":"2025-07-02T05:21:41.000000Z","created_at":"2025-06-26T05:37:58.000000Z","updated_at":"2025-07-02T05:21:41.000000Z"}]  
+[2025-07-08 06:05:56] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 06:05:56"}} 
+[2025-07-08 06:05:56] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 06:06:06] local.INFO: Getting clients for user ID: 2  
+[2025-07-08 06:06:06] local.INFO: Found 2 clients for user 2  
+[2025-07-08 06:06:06] local.INFO: Clients data: [{"id":2,"user_id":2,"client_name":"client 1","client_email":"client1@gmail.com","client_status":"Active","last_accessed":"2025-07-08T05:07:44.000000Z","created_at":"2025-06-24T09:30:50.000000Z","updated_at":"2025-07-08T05:07:44.000000Z"},{"id":3,"user_id":2,"client_name":"Client Name 02","client_email":"Email2@gmail.com","client_status":"Active","last_accessed":"2025-07-02T05:21:41.000000Z","created_at":"2025-06-26T05:37:58.000000Z","updated_at":"2025-07-02T05:21:41.000000Z"}]  
+[2025-07-08 06:06:07] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 06:06:07"}} 
+[2025-07-08 06:06:07] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 06:13:46] local.INFO: Getting clients for user ID: 2  
+[2025-07-08 06:13:46] local.INFO: Found 2 clients for user 2  
+[2025-07-08 06:13:46] local.INFO: Clients data: [{"id":2,"user_id":2,"client_name":"client 1","client_email":"client1@gmail.com","client_status":"Active","last_accessed":"2025-07-08T05:07:44.000000Z","created_at":"2025-06-24T09:30:50.000000Z","updated_at":"2025-07-08T05:07:44.000000Z"},{"id":3,"user_id":2,"client_name":"Client Name 02","client_email":"Email2@gmail.com","client_status":"Active","last_accessed":"2025-07-02T05:21:41.000000Z","created_at":"2025-06-26T05:37:58.000000Z","updated_at":"2025-07-02T05:21:41.000000Z"}]  
+[2025-07-08 06:13:47] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 06:13:47"}} 
+[2025-07-08 06:13:47] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 06:14:02] local.INFO: Section content request for tableId=1, sectionRef=42.1  
+[2025-07-08 06:14:02] local.INFO: Found table: legaldocument1  
+[2025-07-08 06:14:02] local.INFO: Received current document context: table=legaldocument1, categoryId=1  
+[2025-07-08 06:14:02] local.INFO: Building search query for section_id: 42.1 in table: legaldocument1  
+[2025-07-08 06:14:02] local.INFO: Built query: select * from `legaldocument1` where `category_id` = ? and (`section_id` = ? or `section_id` like ? or `section_id` like ?) order by CASE 
+                    WHEN section_id = ? THEN 1
+                    WHEN section_id LIKE ? THEN 2
+                    ELSE 3
+                END limit 10 with bindings: ["1","42.1","42.1.%","42.1%","42.1","42.1.%"]  
+[2025-07-08 06:14:02] local.INFO: Executing query: select * from `legaldocument1` where `category_id` = ? and (`section_id` = ? or `section_id` like ? or `section_id` like ?) order by CASE 
+                    WHEN section_id = ? THEN 1
+                    WHEN section_id LIKE ? THEN 2
+                    ELSE 3
+                END limit 10 with bindings: ["1","42.1","42.1.%","42.1%","42.1","42.1.%"]  
+[2025-07-08 06:14:02] local.INFO: Raw SQL equivalent: select * from `legaldocument1` where `category_id` = 1 and (`section_id` = 1 or `section_id` like 1 or `section_id` like 1) order by CASE 
+                    WHEN section_id = 1 THEN 1
+                    WHEN section_id LIKE 1 THEN 2
+                    ELSE 3
+                END limit 10  
+[2025-07-08 06:14:02] local.INFO: Found 4 rows  
+[2025-07-08 06:14:02] local.INFO: Section content request for tableId=1, sectionRef=42.1  
+[2025-07-08 06:14:02] local.INFO: Found table: legaldocument1  
+[2025-07-08 06:14:02] local.INFO: Building search query for section_id: 42.1 in table: legaldocument1  
+[2025-07-08 06:14:02] local.INFO: Built query: select * from `legaldocument1` where `category_id` = ? and (`section_id` = ? or `section_id` like ? or `section_id` like ?) order by CASE 
+                    WHEN section_id = ? THEN 1
+                    WHEN section_id LIKE ? THEN 2
+                    ELSE 3
+                END limit 10 with bindings: ["1","42.1","42.1.%","42.1%","42.1","42.1.%"]  
+[2025-07-08 06:14:02] local.INFO: Executing query: select * from `legaldocument1` where `category_id` = ? and (`section_id` = ? or `section_id` like ? or `section_id` like ?) order by CASE 
+                    WHEN section_id = ? THEN 1
+                    WHEN section_id LIKE ? THEN 2
+                    ELSE 3
+                END limit 10 with bindings: ["1","42.1","42.1.%","42.1%","42.1","42.1.%"]  
+[2025-07-08 06:14:02] local.INFO: Raw SQL equivalent: select * from `legaldocument1` where `category_id` = 1 and (`section_id` = 1 or `section_id` like 1 or `section_id` like 1) order by CASE 
+                    WHEN section_id = 1 THEN 1
+                    WHEN section_id LIKE 1 THEN 2
+                    ELSE 3
+                END limit 10  
+[2025-07-08 06:14:02] local.INFO: Found 4 rows  
+[2025-07-08 06:14:11] local.INFO: Getting clients for user ID: 2  
+[2025-07-08 06:14:11] local.INFO: Found 2 clients for user 2  
+[2025-07-08 06:14:11] local.INFO: Clients data: [{"id":2,"user_id":2,"client_name":"client 1","client_email":"client1@gmail.com","client_status":"Active","last_accessed":"2025-07-08T05:07:44.000000Z","created_at":"2025-06-24T09:30:50.000000Z","updated_at":"2025-07-08T05:07:44.000000Z"},{"id":3,"user_id":2,"client_name":"Client Name 02","client_email":"Email2@gmail.com","client_status":"Active","last_accessed":"2025-07-02T05:21:41.000000Z","created_at":"2025-06-26T05:37:58.000000Z","updated_at":"2025-07-02T05:21:41.000000Z"}]  
+[2025-07-08 06:14:47] local.INFO: Getting clients for user ID: 2  
+[2025-07-08 06:14:47] local.INFO: Found 2 clients for user 2  
+[2025-07-08 06:14:47] local.INFO: Clients data: [{"id":2,"user_id":2,"client_name":"client 1","client_email":"client1@gmail.com","client_status":"Active","last_accessed":"2025-07-08T05:07:44.000000Z","created_at":"2025-06-24T09:30:50.000000Z","updated_at":"2025-07-08T05:07:44.000000Z"},{"id":3,"user_id":2,"client_name":"Client Name 02","client_email":"Email2@gmail.com","client_status":"Active","last_accessed":"2025-07-02T05:21:41.000000Z","created_at":"2025-06-26T05:37:58.000000Z","updated_at":"2025-07-02T05:21:41.000000Z"}]  
+[2025-07-08 06:14:48] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 06:14:48"}} 
+[2025-07-08 06:14:48] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 06:14:55] local.INFO: Getting clients for user ID: 2  
+[2025-07-08 06:14:55] local.INFO: Found 2 clients for user 2  
+[2025-07-08 06:14:55] local.INFO: Clients data: [{"id":2,"user_id":2,"client_name":"client 1","client_email":"client1@gmail.com","client_status":"Active","last_accessed":"2025-07-08T05:07:44.000000Z","created_at":"2025-06-24T09:30:50.000000Z","updated_at":"2025-07-08T05:07:44.000000Z"},{"id":3,"user_id":2,"client_name":"Client Name 02","client_email":"Email2@gmail.com","client_status":"Active","last_accessed":"2025-07-02T05:21:41.000000Z","created_at":"2025-06-26T05:37:58.000000Z","updated_at":"2025-07-02T05:21:41.000000Z"}]  
+[2025-07-08 06:23:18] local.INFO: Getting clients for user ID: 2  
+[2025-07-08 06:23:18] local.INFO: Found 2 clients for user 2  
+[2025-07-08 06:23:18] local.INFO: Clients data: [{"id":2,"user_id":2,"client_name":"client 1","client_email":"client1@gmail.com","client_status":"Active","last_accessed":"2025-07-08T05:07:44.000000Z","created_at":"2025-06-24T09:30:50.000000Z","updated_at":"2025-07-08T05:07:44.000000Z"},{"id":3,"user_id":2,"client_name":"Client Name 02","client_email":"Email2@gmail.com","client_status":"Active","last_accessed":"2025-07-02T05:21:41.000000Z","created_at":"2025-06-26T05:37:58.000000Z","updated_at":"2025-07-02T05:21:41.000000Z"}]  
+[2025-07-08 06:23:18] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-08 06:23:18"}} 
+[2025-07-08 06:23:18] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-08 06:23:27] local.INFO: Section content request for tableId=1, sectionRef=42.1  
+[2025-07-08 06:23:27] local.INFO: Found table: legaldocument1  
+[2025-07-08 06:23:27] local.INFO: Received current document context: table=legaldocument1, categoryId=1  
+[2025-07-08 06:23:27] local.INFO: Building search query for section_id: 42.1 in table: legaldocument1  
+[2025-07-08 06:23:27] local.INFO: Built query: select * from `legaldocument1` where `category_id` = ? and (`section_id` = ? or `section_id` like ? or `section_id` like ?) order by CASE 
+                    WHEN section_id = ? THEN 1
+                    WHEN section_id LIKE ? THEN 2
+                    ELSE 3
+                END limit 10 with bindings: ["1","42.1","42.1.%","42.1%","42.1","42.1.%"]  
+[2025-07-08 06:23:27] local.INFO: Executing query: select * from `legaldocument1` where `category_id` = ? and (`section_id` = ? or `section_id` like ? or `section_id` like ?) order by CASE 
+                    WHEN section_id = ? THEN 1
+                    WHEN section_id LIKE ? THEN 2
+                    ELSE 3
+                END limit 10 with bindings: ["1","42.1","42.1.%","42.1%","42.1","42.1.%"]  
+[2025-07-08 06:23:27] local.INFO: Raw SQL equivalent: select * from `legaldocument1` where `category_id` = 1 and (`section_id` = 1 or `section_id` like 1 or `section_id` like 1) order by CASE 
+                    WHEN section_id = 1 THEN 1
+                    WHEN section_id LIKE 1 THEN 2
+                    ELSE 3
+                END limit 10  
+[2025-07-08 06:23:27] local.INFO: Found 4 rows  
+[2025-07-08 06:23:28] local.INFO: Section content request for tableId=1, sectionRef=42.1  
+[2025-07-08 06:23:28] local.INFO: Found table: legaldocument1  
+[2025-07-08 06:23:28] local.INFO: Building search query for section_id: 42.1 in table: legaldocument1  
+[2025-07-08 06:23:28] local.INFO: Built query: select * from `legaldocument1` where `category_id` = ? and (`section_id` = ? or `section_id` like ? or `section_id` like ?) order by CASE 
+                    WHEN section_id = ? THEN 1
+                    WHEN section_id LIKE ? THEN 2
+                    ELSE 3
+                END limit 10 with bindings: ["1","42.1","42.1.%","42.1%","42.1","42.1.%"]  
+[2025-07-08 06:23:28] local.INFO: Executing query: select * from `legaldocument1` where `category_id` = ? and (`section_id` = ? or `section_id` like ? or `section_id` like ?) order by CASE 
+                    WHEN section_id = ? THEN 1
+                    WHEN section_id LIKE ? THEN 2
+                    ELSE 3
+                END limit 10 with bindings: ["1","42.1","42.1.%","42.1%","42.1","42.1.%"]  
+[2025-07-08 06:23:28] local.INFO: Raw SQL equivalent: select * from `legaldocument1` where `category_id` = 1 and (`section_id` = 1 or `section_id` like 1 or `section_id` like 1) order by CASE 
+                    WHEN section_id = 1 THEN 1
+                    WHEN section_id LIKE 1 THEN 2
+                    ELSE 3
+                END limit 10  
+[2025-07-08 06:23:28] local.INFO: Found 4 rows  
+[2025-07-08 06:23:32] local.INFO: Getting clients for user ID: 2  
+[2025-07-08 06:23:32] local.INFO: Found 2 clients for user 2  
+[2025-07-08 06:23:32] local.INFO: Clients data: [{"id":2,"user_id":2,"client_name":"client 1","client_email":"client1@gmail.com","client_status":"Active","last_accessed":"2025-07-08T05:07:44.000000Z","created_at":"2025-06-24T09:30:50.000000Z","updated_at":"2025-07-08T05:07:44.000000Z"},{"id":3,"user_id":2,"client_name":"Client Name 02","client_email":"Email2@gmail.com","client_status":"Active","last_accessed":"2025-07-02T05:21:41.000000Z","created_at":"2025-06-26T05:37:58.000000Z","updated_at":"2025-07-02T05:21:41.000000Z"}]  

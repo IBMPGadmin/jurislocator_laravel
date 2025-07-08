@@ -9,8 +9,8 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-// User popup data routes - require authentication
-Route::middleware(['auth'])->group(function () {
+// User popup data routes - require web authentication (session-based)
+Route::middleware(['web', 'auth'])->group(function () {
     Route::post('/user/popup-data/save', [UserPopupController::class, 'savePopupData']);
     Route::get('/user/popup-data/get', [UserPopupController::class, 'getPopupData']);
     Route::get('/user/popup-data/all', [UserPopupController::class, 'getAllUserPopupData']);
