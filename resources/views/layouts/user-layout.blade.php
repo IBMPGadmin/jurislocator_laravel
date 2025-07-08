@@ -60,92 +60,7 @@
         gap: 15px;
     }
 
-    .language-switcher {
-        position: relative;
-    }
 
-    .language-toggle {
-        background: none;
-        border: none;
-        color: var(--header-text-color);
-        font-size: 1rem;
-        cursor: pointer;
-        padding: 6px 10px;
-        border-radius: 20px;
-        transition: all 0.3s ease;
-        display: flex;
-        align-items: center;
-        gap: 5px;
-        border: 1px solid rgba(255, 255, 255, 0.3);
-    }
-
-    .language-toggle:hover {
-        background-color: rgba(255, 255, 255, 0.1);
-        transform: scale(1.05);
-    }
-
-    .current-lang {
-        font-size: 0.8rem;
-        font-weight: 600;
-    }
-
-    .language-panel {
-        position: absolute;
-        top: 100%;
-        right: 0;
-        background: white;
-        border-radius: 8px;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-        padding: 15px;
-        min-width: 150px;
-        z-index: 1000;
-        margin-top: 10px;
-    }
-
-    .language-panel.hidden {
-        display: none;
-    }
-
-    .language-panel h4 {
-        margin: 0 0 10px 0;
-        color: #333;
-        font-size: 0.9rem;
-        font-weight: 600;
-    }
-
-    .language-options {
-        display: flex;
-        flex-direction: column;
-        gap: 5px;
-    }
-
-    .lang-btn {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        padding: 8px 10px;
-        border: none;
-        background: #f8f9fa;
-        border-radius: 6px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        font-size: 0.85rem;
-        text-align: left;
-    }
-
-    .lang-btn:hover {
-        background: #e9ecef;
-        transform: translateX(2px);
-    }
-
-    .lang-btn.active {
-        background: var(--color-button-bg-hover-2);
-        color: white;
-    }
-
-    .flag {
-        font-size: 1.2rem;
-    }
 
     .notification-icon {
         position: relative;
@@ -611,27 +526,6 @@
             <!-- Pinned Timezones - Inline with header controls -->
             <div id="pinned-timezones-inline" class="pinned-timezones-inline"></div>
 
-            <!-- Language Switcher -->
-            <div class="language-switcher">
-                <button class="language-toggle" id="language-toggle" title="Change Language">
-                    <i class="bi bi-translate"></i>
-                    <span class="current-lang" id="current-lang">EN</span>
-                </button>
-                <div id="language-panel" class="language-panel hidden">
-                    <h4>Select Language</h4>
-                    <div class="language-options">
-                        <button class="lang-btn active" data-lang="en" data-flag="🇺🇸">
-                            <span class="flag">🇺🇸</span>
-                            English
-                        </button>
-                        <button class="lang-btn" data-lang="fr" data-flag="🇫🇷">
-                            <span class="flag">🇫🇷</span>
-                            Français
-                        </button>
-                    </div>
-                </div>
-            </div>
-
             <!-- Notification Icon -->
             <div class="notification-icon">
                 <button class="notification-btn" id="notification-toggle" title="Notifications">
@@ -691,7 +585,7 @@
                             <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z"/>
                         </svg>
                     </i> 
-                    <span class="nav_name" data-en="Dashboard" data-fr="Tableau de bord">Dashboard</span> 
+                    <span class="nav_name">Dashboard</span> 
                 </a> 
 
                 <a href="{{ route('client.management') }}" class="nav_link {{ request()->routeIs('client.management') ? 'active' : '' }}"> 
@@ -700,7 +594,7 @@
                             <path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1zm-7.978-1L7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002-.014.002zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4m3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0M6.936 9.28a6 6 0 0 0-1.23-.247A7 7 0 0 0 5 9c-4 0-5 3-5 4q0 1 1 1h4.216A2.24 2.24 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816M4.92 10A5.5 5.5 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0m3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4"/>
                         </svg>
                     </i> 
-                    <span class="nav_name" data-en="Client Management" data-fr="Gestion des clients">Client Management</span> 
+                    <span class="nav_name">Client Management</span> 
                 </a> 
 
                 <a href="{{ route('templates.select-client') }}" class="nav_link {{ request()->routeIs('templates.select-client') || request()->routeIs('templates.index') || request()->routeIs('templates.edit') ? 'active' : '' }}"> 
@@ -709,7 +603,7 @@
                             <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z"/>
                         </svg>
                     </i> 
-                    <span class="nav_name" data-en="Templates" data-fr="Modèles">Templates</span> 
+                    <span class="nav_name">Templates</span> 
                 </a> 
 
                 <a href="{{ route('user.government-links') }}" class="nav_link {{ request()->routeIs('user.government-links*') ? 'active' : '' }}"> 
@@ -718,7 +612,7 @@
                             <path fill-rule="evenodd" d="M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5m8.854-9.646a.5.5 0 0 0-.708-.708L7.5 7.793 6.354 6.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0z"/>
                         </svg>
                     </i> 
-                    <span class="nav_name" data-en="Government Links" data-fr="Liens gouvernementaux">Government Links</span>
+                    <span class="nav_name">Government Links</span>
                 </a> 
 
                 <a href="{{ route('user.rcic-deadlines.index') }}" class="nav_link"> 
@@ -728,7 +622,7 @@
                             <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5 0M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"/>
                         </svg>
                     </i>
-                    <span class="nav_name" data-en="RCIC Deadlines" data-fr="Délais RCIC">RCIC Deadlines</span>
+                    <span class="nav_name">RCIC Deadlines</span>
                 </a>
 
                 <a href="{{ route('user.legal-key-terms.index') }}" class="nav_link"> 
@@ -739,7 +633,7 @@
                             <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1z"/>
                         </svg>
                     </i>
-                    <span class="nav_name" data-en="Legal Key Terms" data-fr="Termes juridiques clés">Legal Key Terms</span>
+                    <span class="nav_name">Legal Key Terms</span>
                 </a> 
 
                 <a href="{{ route('payment.details') }}" class="nav_link {{ request()->routeIs('payment.details') ? 'active' : '' }}"> 
@@ -749,7 +643,7 @@
                             <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1zm5 0a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1z"/>
                         </svg>
                     </i> 
-                    <span class="nav_name" data-en="Payment Details" data-fr="Détails de paiement">Payment Details</span>
+                    <span class="nav_name">Payment Details</span>
                 </a>
 
           
@@ -760,7 +654,7 @@
                             <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
                         </svg>
                     </i> 
-                    <span class="nav_name" data-en="Profile Details" data-fr="Détails du profil">Profile Details</span>
+                    <span class="nav_name">Profile Details</span>
                 </a> 
 
             </div>
@@ -775,7 +669,7 @@
                         <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708z"/>
                     </svg>
                 </i> 
-                <span class="nav_name" data-en="Sign Out" data-fr="Se déconnecter">Sign Out</span>
+                <span class="nav_name">Sign Out</span>
             </a>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                 @csrf
@@ -809,169 +703,24 @@
     <script src="{{ asset('user_assets/js/navigation.js') }}"></script>
     
     <script>
-    // Language and Theme functionality
+    // Theme functionality
     document.addEventListener('DOMContentLoaded', function() {
-        // Language switcher functionality
-        const languageToggle = document.getElementById('language-toggle');
-        const languagePanel = document.getElementById('language-panel');
-        const langBtns = document.querySelectorAll('.lang-btn');
-        const currentLangSpan = document.getElementById('current-lang');
-        
         // Theme elements
         const themeToggle = document.getElementById('theme-toggle');
         const themePanel = document.getElementById('theme-panel');
         const themeBtns = document.querySelectorAll('.theme-btn');
         
-        // Language switcher toggle
-        languageToggle.addEventListener('click', function(e) {
-            e.stopPropagation();
-            languagePanel.classList.toggle('hidden');
-            // Close theme panel if open
-            themePanel.classList.add('hidden');
-        });
-        
         // Theme switcher toggle
         themeToggle.addEventListener('click', function(e) {
             e.stopPropagation();
             themePanel.classList.toggle('hidden');
-            // Close language panel if open
-            languagePanel.classList.add('hidden');
         });
         
         // Close panels when clicking outside
         document.addEventListener('click', function(e) {
-            if (!languagePanel.contains(e.target) && !languageToggle.contains(e.target)) {
-                languagePanel.classList.add('hidden');
-            }
             if (!themePanel.contains(e.target) && !themeToggle.contains(e.target)) {
                 themePanel.classList.add('hidden');
             }
-        });
-        
-        // Translation function
-        function translateNavigation(language) {
-            const navItems = document.querySelectorAll('.nav_name[data-en][data-fr]');
-            navItems.forEach(item => {
-                const translation = item.getAttribute('data-' + language);
-                if (translation) {
-                    item.textContent = translation;
-                }
-            });
-        }
-
-        // Global translation function for page content
-        function translatePageContent(language) {
-            // Translate all elements with data attributes
-            const elements = document.querySelectorAll('[data-en][data-fr]');
-            elements.forEach(element => {
-                const translation = element.getAttribute('data-' + language);
-                if (translation) {
-                    element.textContent = translation;
-                }
-            });
-
-            // Translate placeholder texts
-            const placeholderElements = document.querySelectorAll('[data-placeholder-en][data-placeholder-fr]');
-            placeholderElements.forEach(element => {
-                const placeholder = element.getAttribute('data-placeholder-' + language);
-                if (placeholder) {
-                    element.placeholder = placeholder;
-                }
-            });
-
-            // Translate select options
-            const options = document.querySelectorAll('option[data-en][data-fr]');
-            options.forEach(option => {
-                const translation = option.getAttribute('data-' + language);
-                if (translation) {
-                    option.textContent = translation;
-                }
-            });
-
-            // Translate optgroup labels
-            const optgroups = document.querySelectorAll('optgroup[data-label-en][data-label-fr]');
-            optgroups.forEach(optgroup => {
-                const label = optgroup.getAttribute('data-label-' + language);
-                if (label) {
-                    optgroup.label = label;
-                }
-            });
-
-            // Translate button text
-            const buttons = document.querySelectorAll('button[data-en][data-fr]');
-            buttons.forEach(button => {
-                const translation = button.getAttribute('data-' + language);
-                if (translation) {
-                    button.textContent = translation;
-                }
-            });
-
-            // Translate input values for buttons
-            const inputButtons = document.querySelectorAll('input[type="submit"][data-en][data-fr], input[type="button"][data-en][data-fr]');
-            inputButtons.forEach(input => {
-                const translation = input.getAttribute('data-' + language);
-                if (translation) {
-                    input.value = translation;
-                }
-            });
-        }
-        
-        // Update active language button
-        function updateActiveLanguage(selectedLang) {
-            langBtns.forEach(btn => {
-                btn.classList.remove('active');
-                if (btn.getAttribute('data-lang') === selectedLang) {
-                    btn.classList.add('active');
-                    const flag = btn.getAttribute('data-flag');
-                    currentLangSpan.textContent = selectedLang.toUpperCase();
-                }
-            });
-        }
-        
-        // Language selection
-        langBtns.forEach(btn => {
-            btn.addEventListener('click', function() {
-                const lang = this.getAttribute('data-lang');
-                const flag = this.getAttribute('data-flag');
-                
-                // Update current language display
-                currentLangSpan.textContent = lang.toUpperCase();
-                
-                // Update active button
-                updateActiveLanguage(lang);
-                
-                // Translate navigation
-                translateNavigation(lang);
-                
-                // Translate page content
-                translatePageContent(lang);
-                
-                // Save language preference
-                localStorage.setItem('selectedLanguage', lang);
-                
-                // Dispatch custom event for other components to listen
-                window.dispatchEvent(new CustomEvent('languageChanged', { 
-                    detail: { language: lang } 
-                }));
-                
-                // Close panel
-                languagePanel.classList.add('hidden');
-                
-                // Show success message
-                if (typeof Swal !== 'undefined') {
-                    const message = lang === 'fr' 
-                        ? 'Langue changée en Français!' 
-                        : 'Language changed to English!';
-                    
-                    Swal.fire({
-                        icon: 'success',
-                        title: lang === 'fr' ? 'Langue changée' : 'Language Changed',
-                        text: message,
-                        timer: 1500,
-                        showConfirmButton: false
-                    });
-                }
-            });
         });
         
         // Function to update active theme button
@@ -1018,7 +767,6 @@
         });
         
         // Load saved preferences
-        const savedLanguage = localStorage.getItem('selectedLanguage') || 'en';
         const savedTheme = localStorage.getItem('selectedTheme') || 'default';
         
         // Initialize inline pinned timezones functionality
@@ -1072,62 +820,7 @@
         });
         
         // Initial load
-        updateHeaderWorldClock();
-        
-        // Global translation dictionary for JavaScript messages
-        window.translations = {
-            en: {
-                // Popup control messages
-                'save_popups_success': 'Successfully saved {count} popup(s)',
-                'save_popups_failed': 'Failed to save popups',
-                'fetch_popups_success': 'Successfully fetched {count} popup(s)',
-                'fetch_popups_failed': 'Failed to fetch popups',
-                'clear_popups_success': 'Successfully cleared all popups',
-                'clear_popups_failed': 'Failed to clear popups',
-                'no_popups_to_save': 'No popups to save',
-                'no_popups_found': 'No saved popups found',
-                // General messages
-                'error': 'Error',
-                'success': 'Success',
-                'warning': 'Warning',
-                'info': 'Information'
-            },
-            fr: {
-                // Popup control messages
-                'save_popups_success': '{count} popup(s) sauvegardé(s) avec succès',
-                'save_popups_failed': 'Échec de la sauvegarde des popups',
-                'fetch_popups_success': '{count} popup(s) récupéré(s) avec succès',
-                'fetch_popups_failed': 'Échec de la récupération des popups',
-                'clear_popups_success': 'Tous les popups ont été effacés avec succès',
-                'clear_popups_failed': 'Échec de l\'effacement des popups',
-                'no_popups_to_save': 'Aucun popup à sauvegarder',
-                'no_popups_found': 'Aucun popup sauvegardé trouvé',
-                // General messages
-                'error': 'Erreur',
-                'success': 'Succès',
-                'warning': 'Avertissement',
-                'info': 'Information'
-            }
-        };
-
-        // Global function to get translated text
-        window.getTranslation = function(key, params = {}) {
-            const currentLang = localStorage.getItem('selectedLanguage') || 'en';
-            let text = window.translations[currentLang][key] || window.translations['en'][key] || key;
-            
-            // Replace parameters like {count}
-            Object.keys(params).forEach(param => {
-                text = text.replace(new RegExp(`{${param}}`, 'g'), params[param]);
-            });
-            
-            return text;
-        };
-
-        // Apply saved language
-        updateActiveLanguage(savedLanguage);
-        translateNavigation(savedLanguage);
-        translatePageContent(savedLanguage);
-        
+        updateHeaderWorldClock();        
         // Apply saved theme
         document.body.classList.add('theme-' + savedTheme);
         updateActiveTheme(savedTheme);
@@ -1136,39 +829,19 @@
         const notificationBtn = document.getElementById('notification-toggle');
         if (notificationBtn) {
             notificationBtn.addEventListener('click', function() {
-                const currentLang = localStorage.getItem('selectedLanguage') || 'en';
-                const notifications = {
-                    en: {
+                if (typeof Swal !== 'undefined') {
+                    Swal.fire({
+                        icon: 'info',
                         title: 'Notifications',
-                        content: `
+                        html: `
                             <div style="text-align: left;">
                                 <p><strong>• New deadline reminder</strong><br><small>RCIC deadline in 3 days</small></p>
                                 <p><strong>• Template updated</strong><br><small>Legal template has been modified</small></p>
                                 <p><strong>• System maintenance</strong><br><small>Scheduled for tonight at 2 AM</small></p>
                             </div>
                         `,
-                        button: 'Mark as Read'
-                    },
-                    fr: {
-                        title: 'Notifications',
-                        content: `
-                            <div style="text-align: left;">
-                                <p><strong>• Nouveau rappel d'échéance</strong><br><small>Échéance RCIC dans 3 jours</small></p>
-                                <p><strong>• Modèle mis à jour</strong><br><small>Le modèle juridique a été modifié</small></p>
-                                <p><strong>• Maintenance du système</strong><br><small>Prévue ce soir à 2h du matin</small></p>
-                            </div>
-                        `,
-                        button: 'Marquer comme lu'
-                    }
-                };
-                
-                if (typeof Swal !== 'undefined') {
-                    Swal.fire({
-                        icon: 'info',
-                        title: notifications[currentLang].title,
-                        html: notifications[currentLang].content,
                         showConfirmButton: true,
-                        confirmButtonText: notifications[currentLang].button
+                        confirmButtonText: 'Mark as Read'
                     });
                 }
             });
