@@ -405,7 +405,7 @@
 <div class="main-content container-fluid">
     <div class="row sec-title title-default px-4">
         <div class="col-12">
-            <h2 data-en="Legal Documents Browser" data-fr="Navigateur de documents juridiques">Legal Documents Browser</h2>
+            <h2>Legal Documents Browser</h2>
         </div>
     </div>
     
@@ -415,9 +415,9 @@
         <div class="col-12 mb-4">
             <div class="client-selector">
                 <form method="GET" id="clientSelectForm">
-                    <label for="client_selector" data-en="Select Client" data-fr="Sélectionner un client">Select Client</label>
+                    <label for="client_selector">Select Client</label>
                     <select name="client_id" id="client_selector" class="form-control form-select">
-                        <option value="" data-en="-- Select a client --" data-fr="-- Sélectionner un client --">-- Select a client --</option>
+                        <option value="">-- Select a client --</option>
                         <?php $__currentLoopData = $allClients; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $clientOption): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <option value="<?php echo e($clientOption->id); ?>"><?php echo e($clientOption->client_name); ?> (<?php echo e($clientOption->client_email); ?>)</option>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -436,18 +436,18 @@
                         <i class="fas fa-user-circle"></i>
                     </div>
                     <div class="client-info flex-grow-1">
-                        <h4 class="mb-2" data-en="Client Details" data-fr="Détails du client">Client Details</h4>
+                        <h4 class="mb-2">Client Details</h4>
                         <div class="d-flex flex-wrap">
                             <div class="me-4 mb-2">
                                 <span class="d-flex align-items-center">
-                                    <strong data-en="Name:" data-fr="Nom :">Name:</strong>&nbsp;<?php echo e($client->client_name ?? '-'); ?>
+                                    <strong>Name:</strong>&nbsp;<?php echo e($client->client_name ?? '-'); ?>
 
                                 </span>
                             </div>
                             <div class="mb-2">
                                 <span class="d-flex align-items-center">
                                     <i class="fas fa-envelope me-2 text-secondary"></i>
-                                    <strong data-en="Email:" data-fr="Courriel :">Email:</strong>&nbsp;<?php echo e($client->client_email ?? '-'); ?>
+                                    <strong>Email:</strong>&nbsp;<?php echo e($client->client_email ?? '-'); ?>
 
                                 </span>
                             </div>
@@ -463,7 +463,7 @@
         <div class="col-12">
             <div class="widget sp-top widget-blank widget-form widget-vertical shadow-sm">
                 <div class="widget-title">
-                    <h5 data-en="Search Legislations" data-fr="Rechercher des législations">Search Legislations</h5>
+                    <h5>Search Legislations</h5>
                 </div>
                 <div class="widget-body sp-top-dbl">
                     <form method="GET" action="<?php echo e(isset($client) && $client ? route('user.client.legal-tables', $client->id) : route('client.management')); ?>" id="filterForm" class="row form vertical-form">
@@ -473,12 +473,10 @@
                         <div class="row m-0">
                             <!-- Always visible (Simple Search) -->
                             <div class="col-lg-4 form-group mb-3">
-                                <label for="keyword" class="form-label" data-en="Search by Keyword" data-fr="Rechercher par mot-clé">Search by Keyword</label>
+                                <label for="keyword" class="form-label">Search by Keyword</label>
                                 <div class="input-group">
                                     <input type="text" name="search" id="keyword" class="form-control" 
                                            placeholder="Legal Act, Regulation.." 
-                                           data-placeholder-en="Legal Act, Regulation.."
-                                           data-placeholder-fr="Loi juridique, Règlement.."
                                            value="<?php echo e(request('search')); ?>">
                                     <button class="btn btn-neutral" type="button" id="quickSearchBtn">
                                         <i class="fas fa-search"></i>
@@ -486,34 +484,34 @@
                                 </div>
                             </div>
                             <div class="col-lg-4 form-group mb-3">
-                                <label for="language_id" class="form-label" data-en="Select Language" data-fr="Sélectionner la langue">Select Language</label>
-                                <select name="language_id" id="language_id" class="form-control form-select">
-                                    <option value="" data-en="Language" data-fr="Langue">Language</option>
-                                    <option value="1" <?php echo e(request('language_id') == '1' ? 'selected' : ''); ?> data-en="English" data-fr="Anglais">English</option>
-                                    <option value="2" <?php echo e(request('language_id') == '2' ? 'selected' : ''); ?> data-en="French" data-fr="Français">French</option>
-                                    <option value="3" <?php echo e(request('language_id') == '3' ? 'selected' : ''); ?> data-en="Bilingual" data-fr="Bilingue">Bilingual</option>
+                                <label for="law_id" class="form-label">Select Law Subject</label>
+                                <select name="law_id" id="law_id" class="form-control form-select">
+                                    <option value="">Subject</option>
+                                    <option value="1" <?php echo e(request('law_id') == '1' ? 'selected' : ''); ?>>Immigration</option>
+                                    <option value="2" <?php echo e(request('law_id') == '2' ? 'selected' : ''); ?>>Citizenship</option>
+                                    <option value="3" <?php echo e(request('law_id') == '3' ? 'selected' : ''); ?>>Criminal</option>
                                 </select>
                             </div>
                             <div class="col-lg-4 form-group mb-3">
                                 <div class="form-group">
-                                    <label for="jurisdiction_id" class="form-label" data-en="Select Jurisdiction" data-fr="Sélectionner la juridiction">Select Jurisdiction</label>
+                                    <label for="jurisdiction_id" class="form-label">Select Jurisdiction</label>
                                     <select name="jurisdiction_id" id="jurisdiction_id" class="form-control form-select">
-                                        <option value="" data-en="Select Jurisdiction" data-fr="Sélectionner la juridiction">Select Jurisdiction</option>
-                                        <option value="1" <?php echo e(request('jurisdiction_id') == '1' ? 'selected' : ''); ?> data-en="Federal" data-fr="Fédéral">Federal</option>
-                                        <optgroup label="Provincial" data-label-en="Provincial" data-label-fr="Provincial">
+                                        <option value="">Select Jurisdiction</option>
+                                        <option value="1" <?php echo e(request('jurisdiction_id') == '1' ? 'selected' : ''); ?>>Federal</option>
+                                        <optgroup label="Provincial">
                                             <option value="2" <?php echo e(request('jurisdiction_id') == '2' ? 'selected' : ''); ?>>Alberta</option>
-                                            <option value="3" <?php echo e(request('jurisdiction_id') == '3' ? 'selected' : ''); ?> data-en="British Columbia" data-fr="Colombie-Britannique">British Columbia</option>
+                                            <option value="3" <?php echo e(request('jurisdiction_id') == '3' ? 'selected' : ''); ?>>British Columbia</option>
                                             <option value="4" <?php echo e(request('jurisdiction_id') == '4' ? 'selected' : ''); ?>>Manitoba</option>
-                                            <option value="5" <?php echo e(request('jurisdiction_id') == '5' ? 'selected' : ''); ?> data-en="New Brunswick" data-fr="Nouveau-Brunswick">New Brunswick</option>
-                                            <option value="6" <?php echo e(request('jurisdiction_id') == '6' ? 'selected' : ''); ?> data-en="Newfoundland & Labarador" data-fr="Terre-Neuve-et-Labrador">Newfoundland & Labarador</option>
-                                            <option value="7" <?php echo e(request('jurisdiction_id') == '7' ? 'selected' : ''); ?> data-en="Nova Scotia" data-fr="Nouvelle-Écosse">Nova Scotia</option>
+                                            <option value="5" <?php echo e(request('jurisdiction_id') == '5' ? 'selected' : ''); ?>>New Brunswick</option>
+                                            <option value="6" <?php echo e(request('jurisdiction_id') == '6' ? 'selected' : ''); ?>>Newfoundland & Labarador</option>
+                                            <option value="7" <?php echo e(request('jurisdiction_id') == '7' ? 'selected' : ''); ?>>Nova Scotia</option>
                                             <option value="8" <?php echo e(request('jurisdiction_id') == '8' ? 'selected' : ''); ?>>Ontario</option>
-                                            <option value="9" <?php echo e(request('jurisdiction_id') == '9' ? 'selected' : ''); ?> data-en="Price Edward Island" data-fr="Île-du-Prince-Édouard">Price Edward Island</option>
-                                            <option value="10" <?php echo e(request('jurisdiction_id') == '10' ? 'selected' : ''); ?> data-en="Quebec" data-fr="Québec">Quebec</option>
+                                            <option value="9" <?php echo e(request('jurisdiction_id') == '9' ? 'selected' : ''); ?>>Price Edward Island</option>
+                                            <option value="10" <?php echo e(request('jurisdiction_id') == '10' ? 'selected' : ''); ?>>Quebec</option>
                                             <option value="11" <?php echo e(request('jurisdiction_id') == '11' ? 'selected' : ''); ?>>Saskatchewan</option>
                                         </optgroup>
-                                        <optgroup label="Territorial" data-label-en="Territorial" data-label-fr="Territorial">
-                                            <option value="12" <?php echo e(request('jurisdiction_id') == '12' ? 'selected' : ''); ?> data-en="Nortwest Territories" data-fr="Territoires du Nord-Ouest">Nortwest Territories</option>
+                                        <optgroup label="Territorial">
+                                            <option value="12" <?php echo e(request('jurisdiction_id') == '12' ? 'selected' : ''); ?>>Nortwest Territories</option>
                                             <option value="13" <?php echo e(request('jurisdiction_id') == '13' ? 'selected' : ''); ?>>Nunavut</option>
                                             <option value="14" <?php echo e(request('jurisdiction_id') == '14' ? 'selected' : ''); ?>>Yukon</option>
                                         </optgroup>
@@ -521,40 +519,40 @@
                                 </div>
                             </div>
                             <div class="col-lg-4 form-group mb-3">
-                                <label for="law_id" class="form-label" data-en="Select Law Subject" data-fr="Sélectionner le sujet de droit">Select Law Subject</label>
-                                <select name="law_id" id="law_id" class="form-control form-select">
-                                    <option value="" data-en="Subject" data-fr="Sujet">Subject</option>
-                                    <option value="1" <?php echo e(request('law_id') == '1' ? 'selected' : ''); ?> data-en="Immigration" data-fr="Immigration">Immigration</option>
-                                    <option value="2" <?php echo e(request('law_id') == '2' ? 'selected' : ''); ?> data-en="Citizenship" data-fr="Citoyenneté">Citizenship</option>
-                                    <option value="3" <?php echo e(request('law_id') == '3' ? 'selected' : ''); ?> data-en="Criminal" data-fr="Criminel">Criminal</option>
+                                <label for="act_id" class="form-label">Select Docs Category</label>
+                                <select name="act_id" id="act_id" class="form-control form-select">
+                                    <option value="">Category</option>
+                                    <option value="1" <?php echo e(request('act_id') == '1' ? 'selected' : ''); ?>>Acts</option>
+                                    <option value="2" <?php echo e(request('act_id') == '2' ? 'selected' : ''); ?>>Appeal & Review Processes</option>
+                                    <option value="3" <?php echo e(request('act_id') == '3' ? 'selected' : ''); ?>>CaseLaw</option>
+                                    <option value="4" <?php echo e(request('act_id') == '4' ? 'selected' : ''); ?>>Codes</option>
+                                    <option value="5" <?php echo e(request('act_id') == '5' ? 'selected' : ''); ?>>Enforcement</option>
+                                    <option value="6" <?php echo e(request('act_id') == '6' ? 'selected' : ''); ?>>Forms</option>
+                                    <option value="7" <?php echo e(request('act_id') == '7' ? 'selected' : ''); ?>>Guidelines</option>
+                                    <option value="8" <?php echo e(request('act_id') == '8' ? 'selected' : ''); ?>>Agreements</option>
+                                    <option value="9" <?php echo e(request('act_id') == '9' ? 'selected' : ''); ?>>Ministerial Instructions</option>
+                                    <option value="10" <?php echo e(request('act_id') == '10' ? 'selected' : ''); ?>>Operational Bulletins</option>
+                                    <option value="11" <?php echo e(request('act_id') == '11' ? 'selected' : ''); ?>>Policies</option>
+                                    <option value="12" <?php echo e(request('act_id') == '12' ? 'selected' : ''); ?>>Procedures</option>
+                                    <option value="13" <?php echo e(request('act_id') == '13' ? 'selected' : ''); ?>>Regulations</option>
                                 </select>
                             </div>
                             <div class="col-lg-4 form-group mb-3">
-                                <label for="act_id" class="form-label" data-en="Select Docs Category" data-fr="Sélectionner la catégorie de documents">Select Docs Category</label>
-                                <select name="act_id" id="act_id" class="form-control form-select">
-                                    <option value="" data-en="Category" data-fr="Catégorie">Category</option>
-                                    <option value="1" <?php echo e(request('act_id') == '1' ? 'selected' : ''); ?> data-en="Acts" data-fr="Lois">Acts</option>
-                                    <option value="2" <?php echo e(request('act_id') == '2' ? 'selected' : ''); ?> data-en="Appeal & Review Processes" data-fr="Processus d'appel et de révision">Appeal & Review Processes</option>
-                                    <option value="3" <?php echo e(request('act_id') == '3' ? 'selected' : ''); ?> data-en="CaseLaw" data-fr="Jurisprudence">CaseLaw</option>
-                                    <option value="4" <?php echo e(request('act_id') == '4' ? 'selected' : ''); ?> data-en="Codes" data-fr="Codes">Codes</option>
-                                    <option value="5" <?php echo e(request('act_id') == '5' ? 'selected' : ''); ?> data-en="Enforcement" data-fr="Application">Enforcement</option>
-                                    <option value="6" <?php echo e(request('act_id') == '6' ? 'selected' : ''); ?> data-en="Forms" data-fr="Formulaires">Forms</option>
-                                    <option value="7" <?php echo e(request('act_id') == '7' ? 'selected' : ''); ?> data-en="Guidelines" data-fr="Directives">Guidelines</option>
-                                    <option value="8" <?php echo e(request('act_id') == '8' ? 'selected' : ''); ?> data-en="Agreements" data-fr="Accords">Agreements</option>
-                                    <option value="9" <?php echo e(request('act_id') == '9' ? 'selected' : ''); ?> data-en="Ministerial Instructions" data-fr="Instructions ministérielles">Ministerial Instructions</option>
-                                    <option value="10" <?php echo e(request('act_id') == '10' ? 'selected' : ''); ?> data-en="Operational Bulletins" data-fr="Bulletins opérationnels">Operational Bulletins</option>
-                                    <option value="11" <?php echo e(request('act_id') == '11' ? 'selected' : ''); ?> data-en="Policies" data-fr="Politiques">Policies</option>
-                                    <option value="12" <?php echo e(request('act_id') == '12' ? 'selected' : ''); ?> data-en="Procedures" data-fr="Procédures">Procedures</option>
-                                    <option value="13" <?php echo e(request('act_id') == '13' ? 'selected' : ''); ?> data-en="Regulations" data-fr="Règlements">Regulations</option>
+                                <label for="language_id" class="form-label">Select Language</label>
+                                <select name="language_id" id="language_id" class="form-control form-select">
+                                    <option value="">Language</option>
+                                    <option value="1" <?php echo e(request('language_id') == '1' ? 'selected' : ''); ?>>English</option>
+                                    <option value="2" <?php echo e(request('language_id') == '2' ? 'selected' : ''); ?>>French</option>
+                                    <option value="3" <?php echo e(request('language_id') == '3' ? 'selected' : ''); ?>>Bilingual</option>
                                 </select>
                             </div>
                             <div class="col-lg-4 form-group mb-3 d-flex justify-content-start align-items-start flex-column text-end">
                                 <div class="mt-auto">
                                     <button type="button" class="btn btn-neutral me-2" id="reset" onclick="resetForm()">
-                                        <span data-en="Reset" data-fr="Réinitialiser">Reset</span>
+                                        <span>Reset</span>
                                     </button>
                                     <button type="submit" class="btn btn-action" id="search">
-                                        <span data-en="Search" data-fr="Rechercher">Search</span>
+                                        <span>Search</span>
                                     </button>
                                 </div>
                             </div>
@@ -565,14 +563,14 @@
             
             <div class="widget sp-top widget-blank widget-form widget-vertical shadow-sm">
                 <div class="widget-title with-filters">
-                    <h5 data-en="Available Legislations" data-fr="Législations disponibles">Available Legislations</h5>
+                    <h5>Available Legislations</h5>
                     <div class="widget-filters">
                         <div class="single-filter">
-                            <span class="toggle-label" data-en="Select from " data-fr="Sélectionner de ">Select from </span>
+                            <span class="toggle-label">Select from </span>
                             <span id="act-pagination-toggle" class="letter-toggle"> A to Z</span>
                         </div>
                         <div class="single-filter">
-                            <span class="toggle-label" data-en="Language " data-fr="Langue ">Language </span>
+                            <span class="toggle-label">Language </span>
                             <div class="ln-toggle">
                                 <input type="radio" id="lang-en" name="toggle" value="1">
                                 <label for="lang-en" class="toggle">EN</label>
@@ -584,7 +582,7 @@
                             </div>
                         </div>
                         <div class="single-filter">
-                            <span class="toggle-label" data-en="View " data-fr="Vue ">View </span>
+                            <span class="toggle-label">View </span>
                             <div class="view-toggle">
                                 <input type="radio" id="view-grid" name="view-toggle" value="grid">
                                 <label for="view-grid" class="toggle">Grid</label>
@@ -632,8 +630,6 @@
                             <?php $__currentLoopData = $results; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <div class="toggle-tile-body col-12 list" data-card-index="<?php echo e($index); ?>">
                                 <div class="toggle-tile-content shadow-sm sp-top" 
-                                     data-en="<?php echo e($row->act_name ?? 'Unknown'); ?>" 
-                                     data-fr="<?php echo e($row->act_name ?? 'Unknown'); ?>"
                                      data-table-name="<?php echo e($row->table_name ?? 'unknown'); ?>"
                                      data-act-id="<?php echo e($row->act_id ?? '1'); ?>"
                                      data-client-id="<?php echo e(isset($client) && $client ? $client->id : ''); ?>"
@@ -659,7 +655,7 @@
                         <?php else: ?>
                             <div class="col-12 no-results">
                                 <i class="fas fa-search" style="font-size: 2rem; margin-bottom: 1rem; color: #999;"></i>
-                                <p data-en="No legal acts found matching your search criteria." data-fr="Aucune loi juridique trouvée correspondant à vos critères de recherche.">No legal acts found matching your search criteria.</p>
+                                <p>No legal acts found matching your search criteria.</p>
                             </div>
                         <?php endif; ?>
                     </div>
@@ -669,17 +665,17 @@
             <!-- Content Editor and Droppable Area - Always available -->
             <div class="widget sp-top widget-blank widget-vertical shadow-sm">
                 <div class="widget-title d-flex align-items-center">
-                    <h5 data-en="Notes and Content" data-fr="Notes et contenu">Notes and Content</h5>
+                    <h5>Notes and Content</h5>
                     
                     <!-- Context selector for saving -->
                     <div class="save-context-selector">
-                        <label data-en="Save under:" data-fr="Enregistrer sous:">Save under:</label>
+                        <label>Save under:</label>
                         <select id="saveContext" class="form-select form-select-sm">
-                            <option value="user" <?php echo e(!isset($client) || !$client ? 'selected' : ''); ?> data-en="User Only" data-fr="Utilisateur seulement">User Only</option>
+                            <option value="user" <?php echo e(!isset($client) || !$client ? 'selected' : ''); ?>>User Only</option>
                             <?php if(isset($client) && $client): ?>
-                            <option value="client" selected data-en="Client Specific" data-fr="Spécifique au client">Client Specific</option>
+                            <option value="client" selected>Client Specific</option>
                             <?php else: ?>
-                            <option value="client" disabled data-en="Client Specific (Select a client first)" data-fr="Spécifique au client (Sélectionnez d'abord un client)">Client Specific (Select a client first)</option>
+                            <option value="client" disabled>Client Specific (Select a client first)</option>
                             <?php endif; ?>
                         </select>
                     </div>
@@ -693,7 +689,7 @@
                         <?php else: ?>
                             <div class="text-center p-5 drop-placeholder">
                                 <i class="fas fa-arrow-down mb-2"></i>
-                                <p data-en="Drop content here" data-fr="Déposer le contenu ici">Drop content here</p>
+                                <p>Drop content here</p>
                             </div>
                         <?php endif; ?>
                     </div>
@@ -702,19 +698,19 @@
                     <div class="text-end mb-3">
                         <button id="savePopups" class="btn btn-outline-primary btn-sm">
                             <i class="fas fa-save me-1"></i>
-                            <span data-en="Save Popups" data-fr="Enregistrer les popups">Save Popups</span>
+                            <span>Save Popups</span>
                         </button>
                     </div>
                     
                     <!-- Text editor -->
                     <div id="textEditorContainer">
-                        <textarea id="contentEditor" class="form-control" placeholder="Enter your notes and content here..." data-placeholder-en="Enter your notes and content here..." data-placeholder-fr="Entrez vos notes et contenu ici..."><?php echo e(isset($savedContent) && $savedContent ? $savedContent->editor_content : ''); ?></textarea>
+                        <textarea id="contentEditor" class="form-control" placeholder="Enter your notes and content here..."><?php echo e(isset($savedContent) && $savedContent ? $savedContent->editor_content : ''); ?></textarea>
                     </div>
                     
                     <!-- Save button -->
                     <div class="text-end mt-3">
                         <button id="saveContent" class="btn btn-action">
-                            <span data-en="Save Content" data-fr="Enregistrer le contenu">Save Content</span>
+                            <span>Save Content</span>
                         </button>
                     </div>
                     
@@ -722,18 +718,12 @@
                     <?php if(isset($client) && $client): ?>
                         <div class="text-muted small mt-2">
                             <i class="fas fa-info-circle me-1"></i>
-                            <span data-en="Content can be saved for your personal use or specifically for this client." 
-                                  data-fr="Le contenu peut être enregistré pour votre usage personnel ou spécifiquement pour ce client.">
-                                Content can be saved for your personal use or specifically for this client.
-                            </span>
+                            <span>Content can be saved for your personal use or specifically for this client.</span>
                         </div>
                     <?php else: ?>
                         <div class="text-muted small mt-2">
                             <i class="fas fa-info-circle me-1"></i>
-                            <span data-en="Content will be saved for your personal use. Select a client above to enable client-specific saving." 
-                                  data-fr="Le contenu sera enregistré pour votre usage personnel. Sélectionnez un client ci-dessus pour activer l'enregistrement spécifique au client.">
-                                Content will be saved for your personal use. Select a client above to enable client-specific saving.
-                            </span>
+                            <span>Content will be saved for your personal use. Select a client above to enable client-specific saving.</span>
                         </div>
                     <?php endif; ?>
                 </div>
@@ -749,21 +739,19 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="popupSaveModalLabel">
                     <i class="fas fa-save me-2"></i>
-                    <span data-en="Save Popups" data-fr="Enregistrer les popups">Save Popups</span>
+                    <span>Save Popups</span>
                 </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p class="mb-3" data-en="Where would you like to save these popups?" data-fr="Où souhaitez-vous enregistrer ces popups ?">
-                    Where would you like to save these popups?
-                </p>
+                <p class="mb-3">Where would you like to save these popups?</p>
                 <div class="d-grid gap-3">
                     <button type="button" class="btn btn-outline-primary btn-lg" id="saveToUserRecords">
                         <div class="d-flex align-items-center">
                             <i class="fas fa-user me-3" style="font-size: 1.5rem;"></i>
                             <div class="text-start">
-                                <div class="fw-bold" data-en="Save to Your Records" data-fr="Enregistrer dans vos dossiers">Save to Your Records</div>
-                                <small class="text-muted" data-en="Personal use only - accessible across all clients" data-fr="Usage personnel uniquement - accessible pour tous les clients">Personal use only - accessible across all clients</small>
+                                <div class="fw-bold">Save to Your Records</div>
+                                <small class="text-muted">Personal use only - accessible across all clients</small>
                             </div>
                         </div>
                     </button>
@@ -773,8 +761,8 @@
                         <div class="d-flex align-items-center">
                             <i class="fas fa-user-tie me-3" style="font-size: 1.5rem;"></i>
                             <div class="text-start">
-                                <div class="fw-bold" data-en="Save to Client Records" data-fr="Enregistrer dans les dossiers client">Save to Client Records</div>
-                                <small class="text-muted" data-en="Specific to <?php echo e($client->client_name); ?> - only visible when this client is selected" data-fr="Spécifique à <?php echo e($client->client_name); ?> - visible uniquement quand ce client est sélectionné">Specific to <?php echo e($client->client_name); ?> - only visible when this client is selected</small>
+                                <div class="fw-bold">Save to Client Records</div>
+                                <small class="text-muted">Specific to <?php echo e($client->client_name); ?> - only visible when this client is selected</small>
                             </div>
                         </div>
                     </button>
@@ -783,8 +771,8 @@
                         <div class="d-flex align-items-center">
                             <i class="fas fa-user-tie me-3" style="font-size: 1.5rem;"></i>
                             <div class="text-start">
-                                <div class="fw-bold" data-en="Save to Client Records" data-fr="Enregistrer dans les dossiers client">Save to Client Records</div>
-                                <small class="text-muted" data-en="Select a client first to enable this option" data-fr="Sélectionnez d'abord un client pour activer cette option">Select a client first to enable this option</small>
+                                <div class="fw-bold">Save to Client Records</div>
+                                <small class="text-muted">Select a client first to enable this option</small>
                             </div>
                         </div>
                     </button>
@@ -793,7 +781,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                    <span data-en="Cancel" data-fr="Annuler">Cancel</span>
+                    <span>Cancel</span>
                 </button>
             </div>
         </div>
@@ -806,23 +794,23 @@
             <div class="col-lg-6 text-center">
                 <!--Error reporting-->
                 <div class="errorWrapper">
-                    <a href="#0" id="info" class="error-toggle shadow-sm" data-en="Report a problem or mistake on this page" data-fr="Signaler un problème ou une erreur sur cette page">Report a problem or mistake on this page<i class="fas fa-arrow-right"></i></a>
+                    <a href="#0" id="info" class="error-toggle shadow-sm">Report a problem or mistake on this page<i class="fas fa-arrow-right"></i></a>
                     <div class="popup2" role="alert" id="errorPopup">
                         <div class="popup-container shadow-sm">
                             <a href="#0" class="popup-close" id="popupCloseBtn" title="Close popup">&times;</a>
-                            <h4 class="popup-title m-0" data-en="Report a Problem or Mistake" data-fr="Signaler un problème ou une erreur">Report a Problem or Mistake</h4>
+                            <h4 class="popup-title m-0">Report a Problem or Mistake</h4>
                             <form class="errorForm" id="errorReportForm">
                                 <div class="form-group mb-3 text-start">
-                                    <label for="errorPage" class="form-label" data-en="Page/Section" data-fr="Page/Section">Page/Section</label>
+                                    <label for="errorPage" class="form-label">Page/Section</label>
                                     <input type="text" class="form-control" id="errorPage" name="errorPage" placeholder="E.g., Dashboard > Client List">
                                 </div>
                                 <div class="form-group mb-3 text-start">
-                                    <label for="errorMessage" class="form-label" data-en="Describe the Issue" data-fr="Décrire le problème">Describe the Issue</label>
+                                    <label for="errorMessage" class="form-label">Describe the Issue</label>
                                     <textarea class="form-control" id="errorMessage" name="errorMessage" rows="4" placeholder="Please describe what went wrong..."></textarea>
                                 </div>
                                 <div class="d-flex justify-content-end gap-2">
-                                    <button type="button" class="btn btn-neutral" id="popupCancelBtn" data-en="Cancel" data-fr="Annuler">Cancel</button>
-                                    <button type="submit" class="btn btn-action" data-en="Submit" data-fr="Soumettre">Submit</button>
+                                    <button type="button" class="btn btn-neutral" id="popupCancelBtn">Cancel</button>
+                                    <button type="submit" class="btn btn-action">Submit</button>
                                 </div>
                             </form>
                         </div>

@@ -638,7 +638,7 @@
                             <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z"/>
                         </svg>
                     </i> 
-                    <span class="nav_name">Dashboard</span> 
+                    <span class="nav_name" data-en="Dashboard" data-fr="Tableau de bord">Dashboard</span> 
                 </a> 
 
                 <!-- Calendar -->
@@ -658,11 +658,7 @@
                             <path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1zm-7.978-1L7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002-.014.002zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4m3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0M6.936 9.28a6 6 0 0 0-1.23-.247A7 7 0 0 0 5 9c-4 0-5 3-5 4q0 1 1 1h4.216A2.24 2.24 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816M4.92 10A5.5 5.5 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0m3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4"/>
                         </svg>
                     </i> 
-<<<<<<< HEAD
-                    <span class="nav_name">Client Management</span> 
-=======
                     <span class="nav_name" data-en="Contacts" data-fr="Contacts">Contacts</span> 
->>>>>>> eb22763ea73e2c7b7880bfe1dd7af32597f9a7da
                 </a> 
 
                 <!-- Legislation -->
@@ -706,7 +702,7 @@
                             <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z"/>
                         </svg>
                     </i> 
-                    <span class="nav_name">Templates</span> 
+                    <span class="nav_name" data-en="Templates" data-fr="Modèles">Templates</span> 
                 </a> 
 
                 <!-- Resources -->
@@ -716,11 +712,7 @@
                             <path fill-rule="evenodd" d="M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5m8.854-9.646a.5.5 0 0 0-.708-.708L7.5 7.793 6.354 6.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0z"/>
                         </svg>
                     </i> 
-<<<<<<< HEAD
-                    <span class="nav_name">Government Links</span>
-=======
                     <span class="nav_name" data-en="Resources" data-fr="Ressources">Resources</span>
->>>>>>> eb22763ea73e2c7b7880bfe1dd7af32597f9a7da
                 </a> 
 
                 <!-- Immigration Programs -->
@@ -729,13 +721,8 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-globe" viewBox="0 0 16 16">
                             <path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m7.5-6.923c-.67.204-1.335.82-1.887 1.855A8 8 0 0 0 5.145 4H7.5zM4.09 4a9.3 9.3 0 0 1 .64-1.539 7 7 0 0 1 .597-.933A7.03 7.03 0 0 0 2.255 4zm-.582 3.5c.03-.877.138-1.718.312-2.5H1.674a7 7 0 0 0-.656 2.5zM4.847 5a12.5 12.5 0 0 0-.338 2.5H7.5V5zM8.5 5v2.5h2.99a12.5 12.5 0 0 0-.337-2.5zM4.51 8.5a12.5 12.5 0 0 0 .337 2.5H7.5V8.5zm3.99 0V11h2.653c.187-.765.306-1.608.338-2.5zM5.145 12q.208.58.468 1.068c.552 1.035 1.218 1.65 1.887 1.855V12zm.182 2.472a7 7 0 0 1-.597-.933A9.3 9.3 0 0 1 4.09 12H2.255a7 7 0 0 0 3.072 2.472M3.82 11a13.7 13.7 0 0 1-.312-2.5h-2.49c.062.89.291 1.733.656 2.5zm6.853 3.472A7 7 0 0 0 13.745 12H11.91a9.3 9.3 0 0 1-.64 1.539 7 7 0 0 1-.597.933M8.5 12v2.923c.67-.204 1.335-.82 1.887-1.855q.26-.487.468-1.068zm3.68-1h2.146c.365-.767.594-1.61.656-2.5h-2.49a13.7 13.7 0 0 1-.312 2.5m2.802-3.5a7 7 0 0 0-.656-2.5H12.18c.174.782.282 1.623.312 2.5zM11.27 2.461c.247.464.462.98.64 1.539h1.835a7 7 0 0 0-3.072-2.472c.218.284.418.598.597.933M10.855 4a8 8 0 0 0-.468-1.068C9.835 1.897 9.17 1.282 8.5 1.077V4z"/>
                         </svg>
-<<<<<<< HEAD
-                    </i>
-                    <span class="nav_name">RCIC Deadlines</span>
-=======
                     </i> 
                     <span class="nav_name" data-en="Immigration Programs" data-fr="Programmes d'immigration">Immigration Programs</span> 
->>>>>>> eb22763ea73e2c7b7880bfe1dd7af32597f9a7da
                 </a>
 
                 <!-- Immigration Calculators -->
@@ -747,16 +734,9 @@
                             <path d="M7.5 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5z"/>
                             <path d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5z"/>
                         </svg>
-<<<<<<< HEAD
-                    </i>
-                    <span class="nav_name">Legal Key Terms</span>
-                </a> 
-=======
                     </i> 
                     <span class="nav_name" data-en="Immigration Calculators" data-fr="Calculateurs d'immigration">Immigration Calculators</span> 
                 </a>
->>>>>>> eb22763ea73e2c7b7880bfe1dd7af32597f9a7da
-
                 <!-- Finder tools -->
                 <a href="#" class="nav_link"> 
                     <i class='bx bx-search nav_icon'>
@@ -809,11 +789,7 @@
                             <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1zm5 0a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1z"/>
                         </svg>
                     </i> 
-<<<<<<< HEAD
-                    <span class="nav_name">Payment Details</span>
-=======
                     <span class="nav_name" data-en="Subscription" data-fr="Abonnement">Subscription</span>
->>>>>>> eb22763ea73e2c7b7880bfe1dd7af32597f9a7da
                 </a>
 
                 <!-- Refer a Friend -->
@@ -835,7 +811,7 @@
                             <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
                         </svg>
                     </i> 
-                    <span class="nav_name">Profile Details</span>
+                    <span class="nav_name" data-en="Profile Details" data-fr="Détails du profil">Profile Details</span>
                 </a> 
 
             </div>
@@ -850,7 +826,7 @@
                         <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708z"/>
                     </svg>
                 </i> 
-                <span class="nav_name">Sign Out</span>
+                <span class="nav_name" data-en="Sign Out" data-fr="Se déconnecter">Sign Out</span>
             </a>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                 @csrf
