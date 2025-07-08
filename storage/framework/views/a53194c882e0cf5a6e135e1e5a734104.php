@@ -1,16 +1,8 @@
-{{-- 
-    Required Controller Variables for Pending Approvals:
-    - $pendingApprovals: Number of users awaiting approval (default: 0)
-    - $approvedUsers: Number of users that have been approved (default: 0)
-    - $rejectedUsers: Number of users that have been rejected (default: 0)
-    
-    Note: These should be counts from an approval/status system, not total user counts.
-    Example: Users table with 'approval_status' column ('pending', 'approved', 'rejected')
---}}
 
-@extends('layouts.admin')
 
-@push('styles')
+
+
+<?php $__env->startPush('styles'); ?>
 <style>
     /* Custom color schemes for dashboard cards */
     .bg-light-purple { background-color: rgba(123, 97, 255, 0.1); }
@@ -38,19 +30,19 @@
         border-left: 5px solid #fff;
     }
 </style>
-@endpush
+<?php $__env->stopPush(); ?>
 
-@section('admin-content')
+<?php $__env->startSection('admin-content'); ?>
 <div class="container-fluid py-4">
     <!-- PRIORITY SECTION: Pending Approvals Alert -->
-    @php
+    <?php
         $pendingCount = \App\Models\User::where('approval_status', 'pending')->count();
         $approvedCount = \App\Models\User::where('approval_status', 'approved')->count();
         $rejectedCount = \App\Models\User::where('approval_status', 'rejected')->count();
         $totalRequests = $pendingCount + $approvedCount + $rejectedCount;
-    @endphp
+    ?>
     
-    @if($pendingCount > 0)
+    <?php if($pendingCount > 0): ?>
     <div class="alert alert-danger border-0 shadow-lg mb-4" style="background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);">
         <div class="row align-items-center">
             <div class="col-md-8">
@@ -60,25 +52,25 @@
                     </div>
                     <div class="text-white">
                         <h4 class="mb-1 fw-bold text-white">
-                            <i class="ti ti-clock me-2"></i>{{ $pendingCount }} User{{ $pendingCount > 1 ? 's' : '' }} Awaiting Approval
+                            <i class="ti ti-clock me-2"></i><?php echo e($pendingCount); ?> User<?php echo e($pendingCount > 1 ? 's' : ''); ?> Awaiting Approval
                         </h4>
                         <p class="mb-0 opacity-75">
-                            {{ $pendingCount }} pending • {{ $approvedCount }} approved • {{ $rejectedCount }} rejected
-                            @if($totalRequests > 0)
-                                • {{ number_format(($pendingCount / $totalRequests) * 100, 1) }}% pending
-                            @endif
+                            <?php echo e($pendingCount); ?> pending • <?php echo e($approvedCount); ?> approved • <?php echo e($rejectedCount); ?> rejected
+                            <?php if($totalRequests > 0): ?>
+                                • <?php echo e(number_format(($pendingCount / $totalRequests) * 100, 1)); ?>% pending
+                            <?php endif; ?>
                         </p>
                     </div>
                 </div>
             </div>
             <div class="col-md-4 text-end">
-                <a href="{{ route('admin.user-approvals.index') }}" class="btn btn-light btn-lg fw-bold">
+                <a href="<?php echo e(route('admin.user-approvals.index')); ?>" class="btn btn-light btn-lg fw-bold">
                     <i class="ti ti-user-check me-2"></i>Review Now
                 </a>
             </div>
         </div>
     </div>
-    @else
+    <?php else: ?>
     <div class="alert alert-success border-0 shadow-sm mb-4" style="background: linear-gradient(135deg, #28a745 0%, #20c997 100%);">
         <div class="row align-items-center">
             <div class="col-md-8">
@@ -91,19 +83,19 @@
                             <i class="ti ti-check me-2"></i>All User Approvals Complete
                         </h4>
                         <p class="mb-0 opacity-75">
-                            {{ $approvedCount }} approved • {{ $rejectedCount }} rejected • No pending approvals
+                            <?php echo e($approvedCount); ?> approved • <?php echo e($rejectedCount); ?> rejected • No pending approvals
                         </p>
                     </div>
                 </div>
             </div>
             <div class="col-md-4 text-end">
-                <a href="{{ route('admin.user-approvals.index') }}" class="btn btn-light btn-lg fw-bold">
+                <a href="<?php echo e(route('admin.user-approvals.index')); ?>" class="btn btn-light btn-lg fw-bold">
                     <i class="ti ti-list me-2"></i>View All
                 </a>
             </div>
         </div>
     </div>
-    @endif
+    <?php endif; ?>
 
     <!-- Dashboard Stats Row --> 
     <div class="row">        <div class="col-sm-6 col-md-3">
@@ -116,19 +108,19 @@
                             </div>
                         </div>
                         <div class="ms-3">
-                            <h5 class="mb-0 fw-bold">{{ $totalUsers }}</h5>
+                            <h5 class="mb-0 fw-bold"><?php echo e($totalUsers); ?></h5>
                             <p class="text-muted mb-0">Total Users</p>
                         </div>
                     </div>
                     <div class="progress mt-3 mb-2" style="height: 6px;">
-                        <div class="progress-bar bg-primary" role="progressbar" style="width: {{ min(100, ($activeUsers / max(1, $totalUsers)) * 100) }}%"></div>
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: <?php echo e(min(100, ($activeUsers / max(1, $totalUsers)) * 100)); ?>%"></div>
                     </div>
                     <div class="d-flex justify-content-between mb-2">
-                        <small class="text-success"><i class="ti ti-user-check me-1"></i>{{ $activeUsers }} Active</small>
-                        <small class="text-danger"><i class="ti ti-user-x me-1"></i>{{ $inactiveUsers }} Inactive</small>
+                        <small class="text-success"><i class="ti ti-user-check me-1"></i><?php echo e($activeUsers); ?> Active</small>
+                        <small class="text-danger"><i class="ti ti-user-x me-1"></i><?php echo e($inactiveUsers); ?> Inactive</small>
                     </div>
                     <div class="mt-2">
-                        <a href="{{ route('admin.users.index') }}" class="btn btn-sm btn-primary w-100">View All Users</a>
+                        <a href="<?php echo e(route('admin.users.index')); ?>" class="btn btn-sm btn-primary w-100">View All Users</a>
                     </div>
                 </div>
             </div>
@@ -143,19 +135,19 @@
                             </div>
                         </div>
                         <div class="ms-3">
-                            <h5 class="mb-0 fw-bold">{{ $totalSubscriptions }}</h5>
+                            <h5 class="mb-0 fw-bold"><?php echo e($totalSubscriptions); ?></h5>
                             <p class="text-muted mb-0">Total Subscriptions</p>
                         </div>
                     </div>
                     <div class="progress mt-3 mb-2" style="height: 6px;">
-                        <div class="progress-bar bg-success" role="progressbar" style="width: {{ min(100, ($activeSubscriptions / max(1, $totalSubscriptions)) * 100) }}%"></div>
+                        <div class="progress-bar bg-success" role="progressbar" style="width: <?php echo e(min(100, ($activeSubscriptions / max(1, $totalSubscriptions)) * 100)); ?>%"></div>
                     </div>
                     <div class="d-flex justify-content-between mb-2">
-                        <small class="text-success"><i class="ti ti-check me-1"></i>{{ $activeSubscriptions }} Active</small>
-                        <small class="text-warning"><i class="ti ti-alert-circle me-1"></i>{{ $expiredSubscriptions }} Expired</small>
+                        <small class="text-success"><i class="ti ti-check me-1"></i><?php echo e($activeSubscriptions); ?> Active</small>
+                        <small class="text-warning"><i class="ti ti-alert-circle me-1"></i><?php echo e($expiredSubscriptions); ?> Expired</small>
                     </div>
                     <div class="mt-2">
-                        <a href="{{ route('admin.payments.index') }}" class="btn btn-sm btn-success w-100">Payment Dashboard</a>
+                        <a href="<?php echo e(route('admin.payments.index')); ?>" class="btn btn-sm btn-success w-100">Payment Dashboard</a>
                     </div>
                 </div>
             </div>
@@ -170,7 +162,7 @@
                             </div>
                         </div>
                         <div class="ms-3">
-                            <h5 class="mb-0 fw-bold">${{ number_format($totalRevenue, 2) }}</h5>
+                            <h5 class="mb-0 fw-bold">$<?php echo e(number_format($totalRevenue, 2)); ?></h5>
                             <p class="text-muted mb-0">Total Revenue</p>
                         </div>
                     </div>
@@ -178,11 +170,11 @@
                         <div class="progress-bar bg-warning" role="progressbar" style="width: 85%"></div>
                     </div>
                     <div class="d-flex justify-content-between mb-2">
-                        <small class="text-success"><i class="ti ti-chart-bar me-1"></i>${{ number_format($revenueThisMonth, 2) }} This Month</small>
-                        <small class="text-muted"><i class="ti ti-chart-line me-1"></i>${{ number_format($revenueLastMonth, 2) }} Last Month</small>
+                        <small class="text-success"><i class="ti ti-chart-bar me-1"></i>$<?php echo e(number_format($revenueThisMonth, 2)); ?> This Month</small>
+                        <small class="text-muted"><i class="ti ti-chart-line me-1"></i>$<?php echo e(number_format($revenueLastMonth, 2)); ?> Last Month</small>
                     </div>
                     <div class="mt-2">
-                        <a href="{{ route('admin.reports.users') }}" class="btn btn-sm btn-warning w-100">User Reports</a>
+                        <a href="<?php echo e(route('admin.reports.users')); ?>" class="btn btn-sm btn-warning w-100">User Reports</a>
                     </div>
                 </div>
             </div>
@@ -196,19 +188,19 @@
                             </div>
                         </div>
                         <div class="ms-3">
-                            <h5 class="mb-0 fw-bold">{{ $activeSubscriptions }}</h5>
+                            <h5 class="mb-0 fw-bold"><?php echo e($activeSubscriptions); ?></h5>
                             <p class="text-muted mb-0">Active Subscriptions</p>
                         </div>
                     </div>
                     <div class="progress mt-3 mb-2" style="height: 6px;">
-                        <div class="progress-bar bg-info" role="progressbar" style="width: {{ min(100, ($activeSubscriptions / max(1, $totalSubscriptions)) * 100) }}%"></div>
+                        <div class="progress-bar bg-info" role="progressbar" style="width: <?php echo e(min(100, ($activeSubscriptions / max(1, $totalSubscriptions)) * 100)); ?>%"></div>
                     </div>
                     <div class="d-flex justify-content-between mb-2">
-                        <small class="text-info"><i class="ti ti-hourglass me-1"></i>{{ $trialSubscriptions }} Trial</small>
-                        <small class="text-secondary"><i class="ti ti-x me-1"></i>{{ $canceledSubscriptions }} Canceled</small>
+                        <small class="text-info"><i class="ti ti-hourglass me-1"></i><?php echo e($trialSubscriptions); ?> Trial</small>
+                        <small class="text-secondary"><i class="ti ti-x me-1"></i><?php echo e($canceledSubscriptions); ?> Canceled</small>
                     </div>
                     <div class="mt-2">
-                        <a href="{{ route('admin.payments.index', ['status' => 'active']) }}" class="btn btn-sm btn-info w-100">View Active</a>
+                        <a href="<?php echo e(route('admin.payments.index', ['status' => 'active'])); ?>" class="btn btn-sm btn-info w-100">View Active</a>
                     </div>
                 </div>
             </div>
@@ -227,16 +219,16 @@
                             </div>
                         </div>
                         <div class="ms-3">
-                            <h5 class="mb-0 fw-bold">{{ $systemHealth ?? '99.9' }}%</h5>
+                            <h5 class="mb-0 fw-bold"><?php echo e($systemHealth ?? '99.9'); ?>%</h5>
                             <p class="text-muted mb-0">System Health</p>
                         </div>
                     </div>
                     <div class="progress mt-3 mb-2" style="height: 6px;">
-                        <div class="progress-bar bg-purple" role="progressbar" style="width: {{ $systemHealth ?? 99 }}%"></div>
+                        <div class="progress-bar bg-purple" role="progressbar" style="width: <?php echo e($systemHealth ?? 99); ?>%"></div>
                     </div>
                     <div class="d-flex justify-content-between mb-2">
                         <small class="text-success"><i class="ti ti-check me-1"></i>Online</small>
-                        <small class="text-info"><i class="ti ti-clock me-1"></i>{{ $uptime ?? '30' }} days</small>
+                        <small class="text-info"><i class="ti ti-clock me-1"></i><?php echo e($uptime ?? '30'); ?> days</small>
                     </div>
                     <div class="mt-2">
                         <a href="#" class="btn btn-sm btn-purple w-100">System Status</a>
@@ -256,7 +248,7 @@
                             </div>
                         </div>
                         <div class="ms-3">
-                            <h5 class="mb-0 fw-bold">{{ $recentActivity ?? $activeUsers ?? 0 }}</h5>
+                            <h5 class="mb-0 fw-bold"><?php echo e($recentActivity ?? $activeUsers ?? 0); ?></h5>
                             <p class="text-muted mb-0">Recent Activity</p>
                         </div>
                     </div>
@@ -264,11 +256,11 @@
                         <div class="progress-bar bg-secondary" role="progressbar" style="width: 45%"></div>
                     </div>
                     <div class="d-flex justify-content-between mb-2">
-                        <small class="text-info"><i class="ti ti-eye me-1"></i>{{ $todayLogins ?? 0 }} Today</small>
-                        <small class="text-muted"><i class="ti ti-clock me-1"></i>{{ $weeklyActivity ?? 0 }} This Week</small>
+                        <small class="text-info"><i class="ti ti-eye me-1"></i><?php echo e($todayLogins ?? 0); ?> Today</small>
+                        <small class="text-muted"><i class="ti ti-clock me-1"></i><?php echo e($weeklyActivity ?? 0); ?> This Week</small>
                     </div>
                     <div class="mt-2">
-                        <a href="{{ route('admin.users.index') }}" class="btn btn-sm btn-secondary w-100">View Activity</a>
+                        <a href="<?php echo e(route('admin.users.index')); ?>" class="btn btn-sm btn-secondary w-100">View Activity</a>
                     </div>
                 </div>
             </div>
@@ -285,7 +277,7 @@
                             </div>
                         </div>
                         <div class="ms-3">
-                            <h5 class="mb-0 fw-bold">{{ $totalDocuments ?? 0 }}</h5>
+                            <h5 class="mb-0 fw-bold"><?php echo e($totalDocuments ?? 0); ?></h5>
                             <p class="text-muted mb-0">Legal Documents</p>
                         </div>
                     </div>
@@ -293,11 +285,11 @@
                         <div class="progress-bar bg-teal" role="progressbar" style="width: 75%"></div>
                     </div>
                     <div class="d-flex justify-content-between mb-2">
-                        <small class="text-success"><i class="ti ti-file-check me-1"></i>{{ $publishedDocs ?? 0 }} Published</small>
-                        <small class="text-warning"><i class="ti ti-file-plus me-1"></i>{{ $draftDocs ?? 0 }} Drafts</small>
+                        <small class="text-success"><i class="ti ti-file-check me-1"></i><?php echo e($publishedDocs ?? 0); ?> Published</small>
+                        <small class="text-warning"><i class="ti ti-file-plus me-1"></i><?php echo e($draftDocs ?? 0); ?> Drafts</small>
                     </div>
                     <div class="mt-2">
-                        <a href="{{ route('admin.legal-documents.index') }}" class="btn btn-sm btn-teal w-100">Manage Docs</a>
+                        <a href="<?php echo e(route('admin.legal-documents.index')); ?>" class="btn btn-sm btn-teal w-100">Manage Docs</a>
                     </div>
                 </div>
             </div>
@@ -314,7 +306,7 @@
                             </div>
                         </div>
                         <div class="ms-3">
-                            <h5 class="mb-0 fw-bold">{{ $totalGovLinks ?? 0 }}</h5>
+                            <h5 class="mb-0 fw-bold"><?php echo e($totalGovLinks ?? 0); ?></h5>
                             <p class="text-muted mb-0">Gov Links</p>
                         </div>
                     </div>
@@ -322,11 +314,11 @@
                         <div class="progress-bar bg-indigo" role="progressbar" style="width: 90%"></div>
                     </div>
                     <div class="d-flex justify-content-between mb-2">
-                        <small class="text-success"><i class="ti ti-check me-1"></i>{{ $activeGovLinks ?? 0 }} Active</small>
-                        <small class="text-muted"><i class="ti ti-calendar me-1"></i>{{ $rcicDeadlines ?? 0 }} Deadlines</small>
+                        <small class="text-success"><i class="ti ti-check me-1"></i><?php echo e($activeGovLinks ?? 0); ?> Active</small>
+                        <small class="text-muted"><i class="ti ti-calendar me-1"></i><?php echo e($rcicDeadlines ?? 0); ?> Deadlines</small>
                     </div>
                     <div class="mt-2">
-                        <a href="{{ route('admin.government-links.index') }}" class="btn btn-sm btn-indigo w-100">Manage Links</a>
+                        <a href="<?php echo e(route('admin.government-links.index')); ?>" class="btn btn-sm btn-indigo w-100">Manage Links</a>
                     </div>
                 </div>
             </div>
@@ -338,7 +330,7 @@
             <div class="card mb-4 overflow-hidden">
                 <div class="card-header bg-light d-flex justify-content-between align-items-center">
                     <h5 class="m-0"><i class="ti ti-chart-bar me-2 text-primary"></i>User Registrations This Year</h5>
-                    <span class="badge bg-primary">{{ array_sum($userMonthlyData) }} Users</span>
+                    <span class="badge bg-primary"><?php echo e(array_sum($userMonthlyData)); ?> Users</span>
                 </div>
                 <div class="card-body">
                     <div id="userRegistrationChart" style="height: 300px;"></div>
@@ -351,7 +343,7 @@
             <div class="card mb-4 overflow-hidden">
                 <div class="card-header bg-light d-flex justify-content-between align-items-center">
                     <h5 class="m-0"><i class="ti ti-chart-line me-2 text-success"></i>Monthly Revenue This Year</h5>
-                    <span class="badge bg-success">${{ number_format(array_sum($revenueMonthlyData), 2) }}</span>
+                    <span class="badge bg-success">$<?php echo e(number_format(array_sum($revenueMonthlyData), 2)); ?></span>
                 </div>
                 <div class="card-body">
                     <div id="revenueChart" style="height: 300px;"></div>
@@ -373,34 +365,34 @@
                         <div class="col-6">
                             <div class="border-bottom pb-2 mb-2">
                                 <h6 class="fw-light">Total Users</h6>
-                                <h4>{{ $totalUsers }}</h4>
+                                <h4><?php echo e($totalUsers); ?></h4>
                             </div>
                             <div class="border-bottom pb-2 mb-2">
                                 <h6 class="fw-light">Active Users</h6>
-                                <h4>{{ $activeUsers }}</h4>
+                                <h4><?php echo e($activeUsers); ?></h4>
                             </div>
                             <div class="border-bottom pb-2 mb-2">
                                 <h6 class="fw-light">Inactive Users</h6>
-                                <h4>{{ $inactiveUsers }}</h4>
+                                <h4><?php echo e($inactiveUsers); ?></h4>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="border-bottom pb-2 mb-2">
                                 <h6 class="fw-light">Admin Users</h6>
-                                <h4>{{ $adminUsers }}</h4>
+                                <h4><?php echo e($adminUsers); ?></h4>
                             </div>
                             <div class="border-bottom pb-2 mb-2">
                                 <h6 class="fw-light">Regular Users</h6>
-                                <h4>{{ $regularUsers }}</h4>
+                                <h4><?php echo e($regularUsers); ?></h4>
                             </div>
                             <div class="border-bottom pb-2 mb-2">
                                 <h6 class="fw-light">New This Month</h6>
-                                <h4>{{ $userMonthlyData[date('n')] }}</h4>
+                                <h4><?php echo e($userMonthlyData[date('n')]); ?></h4>
                             </div>
                         </div>
                     </div>
                     <div class="mt-3 text-center">
-                        <a href="{{ route('admin.users.index') }}" class="btn btn-primary">View All Users</a>
+                        <a href="<?php echo e(route('admin.users.index')); ?>" class="btn btn-primary">View All Users</a>
                     </div>
                 </div>
             </div>
@@ -417,34 +409,34 @@
                         <div class="col-6">
                             <div class="border-bottom pb-2 mb-2">
                                 <h6 class="fw-light">Total Subscriptions</h6>
-                                <h4>{{ $totalSubscriptions }}</h4>
+                                <h4><?php echo e($totalSubscriptions); ?></h4>
                             </div>
                             <div class="border-bottom pb-2 mb-2">
                                 <h6 class="fw-light">Active Subscriptions</h6>
-                                <h4>{{ $activeSubscriptions }}</h4>
+                                <h4><?php echo e($activeSubscriptions); ?></h4>
                             </div>
                             <div class="border-bottom pb-2 mb-2">
                                 <h6 class="fw-light">Trial Subscriptions</h6>
-                                <h4>{{ $trialSubscriptions }}</h4>
+                                <h4><?php echo e($trialSubscriptions); ?></h4>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="border-bottom pb-2 mb-2">
                                 <h6 class="fw-light">Expired Subscriptions</h6>
-                                <h4>{{ $expiredSubscriptions }}</h4>
+                                <h4><?php echo e($expiredSubscriptions); ?></h4>
                             </div>
                             <div class="border-bottom pb-2 mb-2">
                                 <h6 class="fw-light">Canceled Subscriptions</h6>
-                                <h4>{{ $canceledSubscriptions }}</h4>
+                                <h4><?php echo e($canceledSubscriptions); ?></h4>
                             </div>
                             <div class="border-bottom pb-2 mb-2">
                                 <h6 class="fw-light">This Month Revenue</h6>
-                                <h4>${{ number_format($revenueThisMonth, 2) }}</h4>
+                                <h4>$<?php echo e(number_format($revenueThisMonth, 2)); ?></h4>
                             </div>
                         </div>
                     </div>
                     <div class="mt-3 text-center">
-                        <a href="{{ route('admin.payments.index') }}" class="btn btn-success">View Payments</a>
+                        <a href="<?php echo e(route('admin.payments.index')); ?>" class="btn btn-success">View Payments</a>
                     </div>
                 </div>
             </div>
@@ -455,45 +447,45 @@
             <div class="card mb-4">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h5 class="m-0"><i class="ti ti-user-check me-2 text-warning"></i>User Approvals Management</h5>
-                    @if($pendingCount > 0)
-                        <span class="badge bg-danger fs-6 px-3 py-2">{{ $pendingCount }} Pending</span>
-                    @else
+                    <?php if($pendingCount > 0): ?>
+                        <span class="badge bg-danger fs-6 px-3 py-2"><?php echo e($pendingCount); ?> Pending</span>
+                    <?php else: ?>
                         <span class="badge bg-success fs-6 px-3 py-2">All Clear</span>
-                    @endif
+                    <?php endif; ?>
                 </div>
                 <div class="card-body">
                     <div class="row g-4">
                         <div class="col-md-3">
                             <div class="text-center p-3 bg-danger bg-opacity-10 rounded border border-danger border-opacity-25">
-                                <div class="h1 fw-bold text-danger mb-2">{{ $pendingCount }}</div>
+                                <div class="h1 fw-bold text-danger mb-2"><?php echo e($pendingCount); ?></div>
                                 <h6 class="fw-light text-danger mb-0">Pending Approvals</h6>
                                 <small class="text-muted">Awaiting Review</small>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="text-center p-3 bg-success bg-opacity-10 rounded border border-success border-opacity-25">
-                                <div class="h1 fw-bold text-success mb-2">{{ $approvedCount }}</div>
+                                <div class="h1 fw-bold text-success mb-2"><?php echo e($approvedCount); ?></div>
                                 <h6 class="fw-light text-success mb-0">Approved Users</h6>
                                 <small class="text-muted">Successfully Approved</small>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="text-center p-3 bg-warning bg-opacity-10 rounded border border-warning border-opacity-25">
-                                <div class="h1 fw-bold text-warning mb-2">{{ $rejectedCount }}</div>
+                                <div class="h1 fw-bold text-warning mb-2"><?php echo e($rejectedCount); ?></div>
                                 <h6 class="fw-light text-warning mb-0">Rejected Users</h6>
                                 <small class="text-muted">Application Rejected</small>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="text-center p-3 bg-info bg-opacity-10 rounded border border-info border-opacity-25">
-                                <div class="h1 fw-bold text-info mb-2">{{ $totalRequests }}</div>
+                                <div class="h1 fw-bold text-info mb-2"><?php echo e($totalRequests); ?></div>
                                 <h6 class="fw-light text-info mb-0">Total Requests</h6>
                                 <small class="text-muted">All Time</small>
-                                @if($totalRequests > 0)
+                                <?php if($totalRequests > 0): ?>
                                     <div class="mt-2">
-                                        <small class="badge bg-primary">{{ number_format(($pendingCount / $totalRequests) * 100, 1) }}% Pending</small>
+                                        <small class="badge bg-primary"><?php echo e(number_format(($pendingCount / $totalRequests) * 100, 1)); ?>% Pending</small>
                                     </div>
-                                @endif
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
@@ -503,46 +495,46 @@
                     <div class="row g-3">
                         <div class="col-md-6">
                             <div class="d-grid">
-                                <a href="{{ route('admin.user-approvals.index') }}" class="btn btn-warning btn-lg">
-                                    <i class="ti ti-clock me-2"></i>Review Pending Approvals ({{ $pendingCount }})
+                                <a href="<?php echo e(route('admin.user-approvals.index')); ?>" class="btn btn-warning btn-lg">
+                                    <i class="ti ti-clock me-2"></i>Review Pending Approvals (<?php echo e($pendingCount); ?>)
                                 </a>
                             </div>
                         </div>
                         <div class="col-md-3">
-                            @if($pendingCount > 0)
+                            <?php if($pendingCount > 0): ?>
                                 <div class="d-grid">
-                                    <a href="{{ route('admin.user-approvals.index', ['status' => 'pending']) }}" class="btn btn-danger btn-lg">
+                                    <a href="<?php echo e(route('admin.user-approvals.index', ['status' => 'pending'])); ?>" class="btn btn-danger btn-lg">
                                         <i class="ti ti-alert-triangle me-2"></i>Urgent Review
                                     </a>
                                 </div>
-                            @else
+                            <?php else: ?>
                                 <div class="d-grid">
-                                    <a href="{{ route('admin.user-approvals.index') }}" class="btn btn-success btn-lg">
+                                    <a href="<?php echo e(route('admin.user-approvals.index')); ?>" class="btn btn-success btn-lg">
                                         <i class="ti ti-check-circle me-2"></i>View All Users
                                     </a>
                                 </div>
-                            @endif
+                            <?php endif; ?>
                         </div>
                         <div class="col-md-3">
                             <div class="d-grid">
-                                <a href="{{ route('admin.users.index') }}" class="btn btn-secondary btn-lg">
+                                <a href="<?php echo e(route('admin.users.index')); ?>" class="btn btn-secondary btn-lg">
                                     <i class="ti ti-users me-2"></i>All Users
                                 </a>
                             </div>
                         </div>
                     </div>
                     
-                    @if($pendingCount > 0)
+                    <?php if($pendingCount > 0): ?>
                         <div class="alert alert-warning mt-4 border-0" style="background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);">
                             <div class="d-flex align-items-center">
                                 <i class="ti ti-info-circle me-2" style="font-size: 1.5rem;"></i>
                                 <div>
-                                    <strong>Action Required:</strong> There are {{ $pendingCount }} user{{ $pendingCount > 1 ? 's' : '' }} waiting for approval. 
+                                    <strong>Action Required:</strong> There are <?php echo e($pendingCount); ?> user<?php echo e($pendingCount > 1 ? 's' : ''); ?> waiting for approval. 
                                     Please review and approve or reject their applications to maintain a smooth onboarding process.
                                 </div>
                             </div>
                         </div>
-                    @endif
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
@@ -567,41 +559,42 @@
             <div class="card mb-4">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h5 class="m-0">Recent Users</h5>
-                    <a href="{{ route('admin.users.index') }}" class="btn btn-sm btn-primary">View All</a>
+                    <a href="<?php echo e(route('admin.users.index')); ?>" class="btn btn-sm btn-primary">View All</a>
                 </div>                <div class="card-body p-0">
                     <ul class="list-group list-group-flush">
-                        @forelse($recentUsers as $user)
+                        <?php $__empty_1 = true; $__currentLoopData = $recentUsers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                             <li class="list-group-item">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="d-flex align-items-center">
-                                        <div class="avatar avatar-sm bg-light-{{ $user->status ?? 1 ? 'success' : 'danger' }} me-3">
+                                        <div class="avatar avatar-sm bg-light-<?php echo e($user->status ?? 1 ? 'success' : 'danger'); ?> me-3">
                                             <div class="avatar-texts">
-                                                <span>{{ strtoupper(substr($user->name, 0, 1)) }}</span>
+                                                <span><?php echo e(strtoupper(substr($user->name, 0, 1))); ?></span>
                                             </div>
                                         </div>
                                         <div>
-                                            <h6 class="mb-0">{{ $user->name }}</h6>
-                                            <small class="text-muted"><i class="ti ti-mail me-1"></i>{{ $user->email }}</small>
+                                            <h6 class="mb-0"><?php echo e($user->name); ?></h6>
+                                            <small class="text-muted"><i class="ti ti-mail me-1"></i><?php echo e($user->email); ?></small>
                                         </div>
                                     </div>
                                     <div>
-                                        <span class="badge {{ $user->status ?? 1 ? 'bg-success' : 'bg-danger' }}">
-                                            <i class="ti ti-{{ $user->status ?? 1 ? 'circle-check' : 'circle-x' }} me-1"></i>
-                                            {{ $user->status ?? 1 ? 'Active' : 'Inactive' }}
+                                        <span class="badge <?php echo e($user->status ?? 1 ? 'bg-success' : 'bg-danger'); ?>">
+                                            <i class="ti ti-<?php echo e($user->status ?? 1 ? 'circle-check' : 'circle-x'); ?> me-1"></i>
+                                            <?php echo e($user->status ?? 1 ? 'Active' : 'Inactive'); ?>
+
                                         </span>
-                                        <small class="text-muted ms-2"><i class="ti ti-calendar me-1"></i>{{ $user->created_at->diffForHumans() }}</small>
-                                        <a href="{{ route('admin.users.show', $user->id) }}" class="btn btn-sm btn-info ms-2">
+                                        <small class="text-muted ms-2"><i class="ti ti-calendar me-1"></i><?php echo e($user->created_at->diffForHumans()); ?></small>
+                                        <a href="<?php echo e(route('admin.users.show', $user->id)); ?>" class="btn btn-sm btn-info ms-2">
                                             <i class="ti ti-eye"></i>
                                         </a>
                                     </div>
                                 </div>
                             </li>
-                        @empty
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                             <li class="list-group-item text-center py-4">
                                 <i class="ti ti-users text-muted" style="font-size: 2rem;"></i>
                                 <p class="mt-2 mb-0">No recent users found.</p>
                             </li>
-                        @endforelse
+                        <?php endif; ?>
                     </ul>
                 </div>
             </div>
@@ -614,7 +607,7 @@
             <div class="card mb-4">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h5 class="m-0">Recent Subscriptions</h5>
-                    <a href="{{ route('admin.payments.index') }}" class="btn btn-sm btn-primary">View All</a>
+                    <a href="<?php echo e(route('admin.payments.index')); ?>" class="btn btn-sm btn-primary">View All</a>
                 </div>                <div class="card-body p-0">
                     <div class="table-responsive">
                         <table class="table table-hover table-striped mb-0">
@@ -630,60 +623,63 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse($recentSubscriptions as $subscription)
+                                <?php $__empty_1 = true; $__currentLoopData = $recentSubscriptions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subscription): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                                     <tr>
                                         <td>
                                             <div class="d-flex align-items-center">
                                                 <div class="avatar avatar-xs bg-light-primary me-2">
-                                                    <span>{{ strtoupper(substr($subscription->user->name ?? 'U', 0, 1)) }}</span>
+                                                    <span><?php echo e(strtoupper(substr($subscription->user->name ?? 'U', 0, 1))); ?></span>
                                                 </div>
-                                                <a href="{{ route('admin.users.show', $subscription->user->id ?? 0) }}" class="fw-medium">
-                                                    {{ $subscription->user->name ?? 'N/A' }}
+                                                <a href="<?php echo e(route('admin.users.show', $subscription->user->id ?? 0)); ?>" class="fw-medium">
+                                                    <?php echo e($subscription->user->name ?? 'N/A'); ?>
+
                                                 </a>
                                             </div>
                                         </td>
                                         <td>
-                                            <span class="fw-medium">{{ $subscription->package->name ?? 'N/A' }}</span>
+                                            <span class="fw-medium"><?php echo e($subscription->package->name ?? 'N/A'); ?></span>
                                         </td>
                                         <td>
-                                            <span class="text-success fw-medium">${{ number_format($subscription->package->price ?? 0, 2) }}</span>
+                                            <span class="text-success fw-medium">$<?php echo e(number_format($subscription->package->price ?? 0, 2)); ?></span>
                                         </td>
                                         <td>
-                                            @if($subscription->isActiveSubscription())
+                                            <?php if($subscription->isActiveSubscription()): ?>
                                                 <span class="badge bg-success"><i class="ti ti-check me-1"></i>Active</span>
-                                            @elseif($subscription->isTrialSubscription())
+                                            <?php elseif($subscription->isTrialSubscription()): ?>
                                                 <span class="badge bg-info"><i class="ti ti-clock me-1"></i>Trial</span>
-                                            @elseif($subscription->isCanceled())
+                                            <?php elseif($subscription->isCanceled()): ?>
                                                 <span class="badge bg-secondary"><i class="ti ti-x me-1"></i>Canceled</span>
-                                            @elseif($subscription->isExpired())
+                                            <?php elseif($subscription->isExpired()): ?>
                                                 <span class="badge bg-warning"><i class="ti ti-alert-triangle me-1"></i>Expired</span>
-                                            @else
-                                                <span class="badge bg-secondary">{{ $subscription->status }}</span>
-                                            @endif
+                                            <?php else: ?>
+                                                <span class="badge bg-secondary"><?php echo e($subscription->status); ?></span>
+                                            <?php endif; ?>
                                         </td>
                                         <td>
-                                            <span class="badge {{ $subscription->payment_status == 'completed' ? 'bg-success' : 'bg-warning' }}">
-                                                <i class="ti ti-{{ $subscription->payment_status == 'completed' ? 'credit-card-check' : 'credit-card' }} me-1"></i>
-                                                {{ ucfirst($subscription->payment_status) }}
+                                            <span class="badge <?php echo e($subscription->payment_status == 'completed' ? 'bg-success' : 'bg-warning'); ?>">
+                                                <i class="ti ti-<?php echo e($subscription->payment_status == 'completed' ? 'credit-card-check' : 'credit-card'); ?> me-1"></i>
+                                                <?php echo e(ucfirst($subscription->payment_status)); ?>
+
                                             </span>
                                         </td>
                                         <td>
                                             <i class="ti ti-calendar text-muted me-1"></i>
-                                            {{ $subscription->created_at->format('M d, Y') }}
+                                            <?php echo e($subscription->created_at->format('M d, Y')); ?>
+
                                         </td>
                                         <td>
-                                            <a href="{{ route('admin.payments.view', $subscription->id) }}" class="btn btn-sm btn-info">
+                                            <a href="<?php echo e(route('admin.payments.view', $subscription->id)); ?>" class="btn btn-sm btn-info">
                                                 <i class="ti ti-eye"></i> View
                                             </a>
                                         </td>                                    </tr>
-                                @empty
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                                     <tr>
                                         <td colspan="7" class="text-center py-5">
                                             <i class="ti ti-credit-card text-muted" style="font-size: 2.5rem;"></i>
                                             <p class="mt-2 mb-0">No recent subscriptions found.</p>
                                         </td>
                                     </tr>
-                                @endforelse
+                                <?php endif; ?>
                             </tbody>
                         </table>
                     </div>
@@ -693,11 +689,11 @@
     </div>
 </div>
 
-@endsection
+<?php $__env->stopSection(); ?>
 
-@push('scripts')
+<?php $__env->startPush('scripts'); ?>
 <!-- ApexCharts -->
-<script src="{{ asset('admin_assets/js/plugins/apexcharts.min.js') }}"></script>
+<script src="<?php echo e(asset('admin_assets/js/plugins/apexcharts.min.js')); ?>"></script>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -735,7 +731,7 @@
             },
             series: [{
                 name: 'New Users',
-                data: @json($userMonthlyData)
+                data: <?php echo json_encode($userMonthlyData, 15, 512) ?>
             }],
             xaxis: {
                 categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
@@ -782,7 +778,7 @@
             },
             series: [{
                 name: 'Revenue',
-                data: @json($revenueMonthlyData)
+                data: <?php echo json_encode($revenueMonthlyData, 15, 512) ?>
             }],
             xaxis: {
                 categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
@@ -822,8 +818,8 @@
                 height: 300,
                 type: 'pie',
             },
-            labels: @json($packageLabels),
-            series: @json($packageValues),
+            labels: <?php echo json_encode($packageLabels, 15, 512) ?>,
+            series: <?php echo json_encode($packageValues, 15, 512) ?>,
             legend: {
                 position: 'bottom',
                 horizontalAlign: 'center'
@@ -864,4 +860,6 @@
         packageChart.render();
     });
 </script>
-@endpush
+<?php $__env->stopPush(); ?>
+
+<?php echo $__env->make('layouts.admin', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\Users\User\Desktop\13\jurislocator_laravel\resources\views/admin/dashboard.blade.php ENDPATH**/ ?>

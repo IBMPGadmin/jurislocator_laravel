@@ -14,15 +14,17 @@ use Carbon\Carbon;
 class UserApprovalController extends Controller
 {
     /**
-     * Display pending user approvals
+     * Display pending user approvals only
      */
     public function index()
     {
-        $pendingUsers = User::where('approval_status', 'pending')
-            ->orderBy('created_at', 'desc')
-            ->paginate(10);
+        // Get only pending users
+        $users = User::where('approval_status', 'pending')
+                    ->where('role', '!=', 'admin')
+                    ->orderBy('created_at', 'desc')
+                    ->paginate(15);
 
-        return view('admin.user-approvals.index', compact('pendingUsers'));
+        return view('admin.user-approvals.index', compact('users'));
     }
 
     /**
