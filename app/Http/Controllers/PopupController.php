@@ -194,7 +194,93 @@ class PopupController extends Controller
             
             return response()->json([
                 'success' => false,
-                'message' => 'Failed to load saved popups.'
+            ], 500);
+        }
+    }
+
+    /**
+     * Delete popups permanently from database
+     */
+    public function deletePopups(Request $request): JsonResponse
+    {
+        try {
+            $user = Auth::user();
+            if (!$user) {
+                return response()->json(['success' => false, 'message' => 'User not authenticated'], 401);
+            }
+
+            $validator = Validator::make($request->all(), [
+                'delete_all_current' => 'boolean',
+                'client_id' => 'nullable|integer|exists:client_table,id',
+                'popups' => 'nullable|array',
+                'popups.*.section_id' => 'nullable|string',
+                'popups.*.category_id' => 'nullable|integer',
+                'popups.*.popup_title' => 'nullable|string'
+            ]);
+
+            if ($validator->fails()) {
+                return response()->json([
+                    'success' => false, 
+                    'message' => 'Validation failed',
+                    'errors' => $validator->errors()
+                ], 422);
+            }
+
+            $deleteAllCurrent = $request->input('delete_all_current', false);
+            $clientId = $request->input('client_id');
+            $popups = $request->input('popups', []);
+
+            $deletedCount = 0;
+
+            if ($deleteAllCurrent) {
+                // Delete all current user or client popups
+                if ($clientId) {
+                    // Delete all client-specific popups
+                    $deletedCount = ClientSidebarData::where('user_id', $user->id)
+                        ->where('client_id', $clientId)
+                        ->delete();
+                } else {
+                    // Delete all user personal popups
+                    $deletedCount = UserPersonalPopup::where('user_id', $user->id)
+                        ->delete();
+                }
+            } else {
+                // Delete specific popups based on provided data
+                foreach ($popups as $popupData) {
+                    if ($clientId) {
+                        // Delete from client-specific popups
+                        $deleted = ClientSidebarData::where('user_id', $user->id)
+                            ->where('client_id', $clientId)
+                            ->where('section_id', $popupData['section_id'] ?? '')
+                            ->where('category_id', $popupData['category_id'] ?? 0)
+                            ->delete();
+                        $deletedCount += $deleted;
+                    } else {
+                        // Delete from user personal popups
+                        $deleted = UserPersonalPopup::where('user_id', $user->id)
+                            ->where('section_id', $popupData['section_id'] ?? '')
+                            ->where('category_id', $popupData['category_id'] ?? 0)
+                            ->delete();
+                        $deletedCount += $deleted;
+                    }
+                }
+            }
+
+            Log::info("User {$user->id} deleted {$deletedCount} popup(s)" . ($clientId ? " for client {$clientId}" : " from personal records"));
+
+            return response()->json([
+                'success' => true,
+                'message' => "Successfully deleted {$deletedCount} popup" . ($deletedCount !== 1 ? 's' : '') . " permanently.",
+                'deleted_count' => $deletedCount,
+                'type' => $clientId ? 'client' : 'user'
+            ]);
+
+        } catch (\Exception $e) {
+            Log::error('Error deleting popups: ' . $e->getMessage());
+            
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to delete popups permanently. Please try again.'
             ], 500);
         }
     }

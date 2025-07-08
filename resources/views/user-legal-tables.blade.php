@@ -620,8 +620,8 @@
                                 <li><a href="#G">G</a></li>
                                 <li><a href="#H">H</a></li>
                                 <li><a href="#I">I</a></li>
-                                <li><a class="disabled" href="#J">J</a></li>
-                                <li><a class="disabled" href="#K">K</a></li>
+                                <li><a  href="#J">J</a></li>
+                                <li><a  href="#K">K</a></li>
                                 <li><a href="#L">L</a></li>
                                 <li><a href="#M">M</a></li>
                                 <li><a href="#N">N</a></li>
@@ -634,9 +634,9 @@
                                 <li><a href="#U">U</a></li>
                                 <li><a href="#V">V</a></li>
                                 <li><a href="#W">W</a></li>
-                                <li><a class="disabled" href="#X">X</a></li>
+                                <li><a  href="#X">X</a></li>
                                 <li><a href="#Y">Y</a></li>
-                                <li><a class="disabled" href="#Z">Z</a></li>
+                                <li><a  href="#Z">Z</a></li>
                             </ul>
                         </div>
                     </div>
@@ -1038,7 +1038,7 @@
         // Set up drag and drop functionality for legal tables
         const droppableArea = document.getElementById('droppableArea');
         if (droppableArea) {
-            // Make legal table tiles draggable - Global function
+            // Make legal table tiles draggable
             window.setupDragAndDrop = () => {
                 const tableTiles = document.querySelectorAll('.toggle-tile-content');
                 tableTiles.forEach(tile => {
@@ -1141,8 +1141,7 @@
                 window.setupDragAndDrop();
             });
             
-            const containerToObserve = document.getElementById('toggleTileContainer') || document.body;
-            observer.observe(containerToObserve, {
+            observer.observe(document.querySelector('.act-content'), {
                 childList: true,
                 subtree: true
             });
@@ -1441,36 +1440,6 @@
     
     // --- FILTER LOGIC FOR AVAILABLE LEGISLATIONS ---
     document.addEventListener('DOMContentLoaded', function() {
-        // View toggle functionality (Grid/List)
-        document.querySelectorAll('input[name="view-toggle"]').forEach(function(radio) {
-            radio.addEventListener('change', function() {
-                const container = document.getElementById('toggleTileContainer');
-                const cards = container.querySelectorAll('.toggle-tile-body');
-                
-                if (this.value === 'grid') {
-                    // Switch to grid view
-                    cards.forEach(card => {
-                        card.className = 'toggle-tile-body col-12 col-md-6 col-lg-4 grid';
-                    });
-                    container.className = 'row toggle-tile-warpper sp-top';
-                } else if (this.value === 'list') {
-                    // Switch to list view
-                    cards.forEach(card => {
-                        card.className = 'toggle-tile-body col-12 list';
-                    });
-                    container.className = 'row toggle-tile-warpper sp-top';
-                }
-                
-                // Re-initialize drag and drop after view change
-                setTimeout(() => {
-                    const setupFunction = window.setupDragAndDrop;
-                    if (typeof setupFunction === 'function') {
-                        setupFunction();
-                    }
-                }, 100);
-            });
-        });
-        
         // Language filter (client-side)
         let selectedLang = '';
         document.querySelectorAll('input[name="toggle"]').forEach(function(radio) {
@@ -1509,6 +1478,43 @@
                     applyFilters();
                 });
             });
+        }
+
+        // View toggle (Grid/List) functionality
+        const viewToggleInputs = document.querySelectorAll('input[name="view-toggle"]');
+        viewToggleInputs.forEach(function(input) {
+            input.addEventListener('change', function() {
+                if (this.checked) {
+                    const viewType = this.value; // 'grid' or 'list'
+                    switchView(viewType);
+                }
+            });
+        });
+
+        function switchView(viewType) {
+            if (!tileContainer) return;
+            
+            const cards = tileContainer.querySelectorAll('.toggle-tile-body');
+            cards.forEach(card => {
+                // Remove both classes first
+                card.classList.remove('list', 'grid');
+                // Add the new view class
+                card.classList.add(viewType);
+                
+                // Update column classes for grid/list layout
+                if (viewType === 'grid') {
+                    card.classList.remove('col-12');
+                    card.classList.add('col-lg-4', 'col-md-6', 'col-12');
+                } else {
+                    card.classList.remove('col-lg-4', 'col-md-6');
+                    card.classList.add('col-12');
+                }
+            });
+            
+            // Re-initialize drag and drop after view change
+            if (typeof window.setupDragAndDrop === 'function') {
+                window.setupDragAndDrop();
+            }
         }
 
         function applyFilters() {
@@ -1554,32 +1560,5 @@
         
         window.location = url;
     }
-    
-    // View toggle functionality (Grid/List)
-    document.querySelectorAll('input[name="view-toggle"]').forEach(function(radio) {
-        radio.addEventListener('change', function() {
-            const container = document.getElementById('toggleTileContainer');
-            const cards = container.querySelectorAll('.toggle-tile-body');
-            
-            if (this.value === 'grid') {
-                // Switch to grid view
-                cards.forEach(card => {
-                    card.className = 'toggle-tile-body col-12 col-md-6 col-lg-4 grid';
-                });
-                container.className = 'row toggle-tile-warpper sp-top';
-            } else if (this.value === 'list') {
-                // Switch to list view
-                cards.forEach(card => {
-                    card.className = 'toggle-tile-body col-12 list';
-                });
-                container.className = 'row toggle-tile-warpper sp-top';
-            }
-            
-            // Re-initialize drag and drop after view change
-            if (typeof setupDragAndDrop === 'function') {
-                setupDragAndDrop();
-            }
-        });
-    });
 </script>
 @endpush

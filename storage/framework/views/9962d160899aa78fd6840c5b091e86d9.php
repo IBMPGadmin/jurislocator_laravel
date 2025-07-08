@@ -307,6 +307,8 @@
 
     #popupSaveModal .modal-content {
         transition: all 0.3s ease;
+        background: var(--modal-bg, rgba(255,255,255,0.95));
+        color: var(--color-text, #222);
     }
 
     #popupSaveModal.expanded .modal-content {
@@ -314,123 +316,62 @@
         overflow-y: auto;
     }
 
-    /* Smaller client cards for modal */
-    #popupSaveModal .client-selection-card {
-        background: white;
-        border: 2px solid #e9ecef;
-        border-radius: 8px;
-        padding: 1rem;
-        margin-bottom: 0.75rem;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-    }
-    
-    #popupSaveModal .client-selection-card:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        border-color: #007bff;
-        background: #f8f9fa;
-    }
-    
-    #popupSaveModal .client-avatar-large {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        background: linear-gradient(135deg, #007bff, #0056b3);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        font-size: 1rem;
-        flex-shrink: 0;
-    }
-    
-    #popupSaveModal .client-info-large h6 {
-        margin: 0 0 0.25rem 0;
-        color: #2c3e50;
-        font-size: 1rem;
-        font-weight: 600;
-    }
-    
-    #popupSaveModal .client-email-large {
-        color: #7f8c8d;
-        margin: 0 0 0.25rem 0;
-        font-size: 0.85rem;
-    }
-    
-    #popupSaveModal .btn-select-client {
-        background: linear-gradient(135deg, #28a745, #20c997);
-        border: none;
-        color: white;
-        padding: 0.375rem 1rem;
-        border-radius: 20px;
-        font-weight: 600;
-        font-size: 0.8rem;
-        transition: all 0.3s ease;
-    }
-    
     #popupSaveModal .modal-header {
-        background: linear-gradient(135deg, #007bff, #0056b3);
-        color: white;
+        background: var(--color-theme-3,rgb(255, 255, 255));
+        color: var(--color-text-light, #fff);
         border-bottom: none;
         padding: 1.5rem 2rem 1rem 2rem;
         border-radius: 20px 20px 0 0;
     }
-    
+
+    #popupSaveModal .modal-title i {
+        color: var(--color-theme-3, #667eea);
+    }
+
     #popupSaveModal .modal-body {
         padding: 2rem;
-        background: rgba(255, 255, 255, 0.9);
+        background: var(--modal-bg, rgba(255,255,255,0.9));
     }
-    
+
     #popupSaveModal .modal-footer {
-        background: rgba(248, 249, 250, 0.9);
-        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        background: var(--modal-footer-bg, rgba(248,249,250,0.9));
+        border-top: 1px solid rgba(0,0,0,0.1);
         padding: 1rem 2rem 1.5rem 2rem;
         border-radius: 0 0 20px 20px;
     }
-    
-    /* Client selection modal specific styles */
-    #clientSelectionModal.modal-centered .modal-dialog {
-        max-width: 1200px;
-        width: 95vw;
-        max-height: 90vh;
+
+    #popupSaveModal .btn-outline-primary {
+        border: 2px solid var(--color-theme-1);
+        color: var(--color-theme-1);
+        background: var(--color-bg, #fff);
     }
-    
-    #clientSelectionModal .modal-content {
-        height: 85vh;
-        display: flex;
-        flex-direction: column;
-    }
-    
-    #clientSelectionModal .modal-header {
-        background: linear-gradient(135deg, #28a745, #20c997);
-        color: white;
-        border-bottom: none;
-        padding: 1.5rem 2rem 1rem 2rem;
-        border-radius: 20px 20px 0 0;
-        flex-shrink: 0;
-    }
-    
-    #clientSelectionModal .modal-body {
-        flex: 1;
-        overflow-y: auto;
-        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-        padding: 2rem;
-    }
-    
-    #clientSelectionModal .modal-footer {
-        background: rgba(248, 249, 250, 0.9);
-        border-top: 1px solid rgba(0, 0, 0, 0.1);
-        padding: 1rem 2rem 1.5rem 2rem;
-        border-radius: 0 0 20px 20px;
-        flex-shrink: 0;
-    }
-    
-    /* Enhanced button styles for the modals */
-    .modal-centered .btn {
+#popupSaveModal .btn-outline-primary:hover {
+    background: var(--color-theme-2);
+    color: var(--color-text-light, #fff);
+}
+
+#popupSaveModal .btn-outline-success {
+    border: 2px solid var(--color-theme-3, #28a745);
+    color: var(--color-theme-3, #28a745);
+    background: var(--color-bg, #fff);
+}
+#popupSaveModal .btn-outline-success:hover {
+    background: var(--color-theme-3, #28a745);
+    color: var(--color-text-light, #fff);
+}
+
+#popupSaveModal .btn-outline-secondary {
+    border: 2px solid var(--color-theme-2, #6c757d);
+    color: var(--color-theme-2, #6c757d);
+    background: var(--color-bg, #fff);
+}
+#popupSaveModal .btn-outline-secondary:hover {
+    background: var(--color-theme-2, #6c757d);
+    color: var(--color-text-light, #fff);
+}
+
+/* Enhanced button styles for the modals */
+.modal-centered .btn {
         border-radius: 25px;
         padding: 12px 24px;
         font-weight: 600;
@@ -1696,6 +1637,162 @@
                 </div>
             </div>
             <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-en="Cancel" data-fr="Annuler">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Popup Fetch Modal -->
+<div class="modal fade modal-centered" id="popupFetchModal" tabindex="-1" aria-labelledby="popupFetchModalLabel" aria-hidden="true" data-bs-backdrop="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="popupFetchModalLabel">
+                    <i class="fas fa-download me-2"></i>
+                    <span data-en="Fetch Client Popups" data-fr="Récupérer les popups du client">Fetch Client Popups</span>
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p class="text-center mb-4" data-en="Select a client to fetch their saved popups" data-fr="Sélectionnez un client pour récupérer ses popups sauvegardés">
+                    <strong>Select a client to fetch their saved popups</strong>
+                </p>
+                
+                <!-- Client Selection Section -->
+                <div class="card shadow-sm">
+                    <div class="card-header bg-light">
+                        <h6 class="mb-1" data-en="Available Clients" data-fr="Clients disponibles">
+                            <i class="fas fa-users me-2"></i>Available Clients
+                        </h6>
+                        <p class="mb-0 text-muted small" data-en="Choose a client to load their saved popups" data-fr="Choisissez un client pour charger ses popups sauvegardés">Choose a client to load their saved popups</p>
+                    </div>
+                    <div class="card-body bg-white bg-opacity-90" style="max-height: 400px; overflow-y: auto;">
+                        <div id="fetchModalClientsList" class="row">
+                            <!-- Clients will be loaded here dynamically -->
+                            <div class="col-12 text-center py-4">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                                <p class="mt-2 text-muted" data-en="Loading clients..." data-fr="Chargement des clients...">
+                                        <i class="fas fa-users me-2"></i>Select Existing Client
+                                    </h5>
+                                    <p class="mb-0 text-muted small" data-en="Choose a client to save popups to their records" data-fr="Choisissez un client pour enregistrer les popups dans ses dossiers">Choose a client to save popups to their records</p>
+                                </div>
+                                <div class="card-body bg-white bg-opacity-90" style="max-height: 400px; overflow-y: auto;">
+                                    <div id="clientsList" class="row">
+                                        <!-- Clients will be loaded here dynamically -->
+                                        <div class="col-12 text-center py-5">
+                                            <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
+                                                <span class="visually-hidden">Loading...</span>
+                                            </div>
+                                            <p class="mt-3 text-muted" data-en="Loading clients..." data-fr="Chargement des clients...">Loading clients...</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-en="Cancel" data-fr="Annuler">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Popup Fetch Modal -->
+<div class="modal fade modal-centered" id="popupFetchModal" tabindex="-1" aria-labelledby="popupFetchModalLabel" aria-hidden="true" data-bs-backdrop="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="popupFetchModalLabel">
+                    <i class="fas fa-download me-2"></i>
+                    <span data-en="Fetch Client Popups" data-fr="Récupérer les popups du client">Fetch Client Popups</span>
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p class="text-center mb-4" data-en="Select a client to fetch their saved popups" data-fr="Sélectionnez un client pour récupérer ses popups sauvegardés">
+                    <strong>Select a client to fetch their saved popups</strong>
+                </p>
+                
+                <!-- Client Selection Section -->
+                <div class="card shadow-sm">
+                    <div class="card-header bg-light">
+                        <h6 class="mb-1" data-en="Available Clients" data-fr="Clients disponibles">
+                            <i class="fas fa-users me-2"></i>Available Clients
+                        </h6>
+                        <p class="mb-0 text-muted small" data-en="Choose a client to load their saved popups" data-fr="Choisissez un client pour charger ses popups sauvegardés">Choose a client to load their saved popups</p>
+                    </div>
+                    <div class="card-body bg-white bg-opacity-90" style="max-height: 400px; overflow-y: auto;">
+                        <div id="fetchModalClientsList" class="row">
+                            <!-- Clients will be loaded here dynamically -->
+                            <div class="col-12 text-center py-4">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                                <p class="mt-2 text-muted" data-en="Loading clients..." data-fr="Chargement des clients...">Loading clients...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-en="Cancel" data-fr="Annuler">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Popup Clear Modal -->
+<div class="modal fade modal-centered" id="popupClearModal" tabindex="-1" aria-labelledby="popupClearModalLabel" aria-hidden="true" data-bs-backdrop="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title" id="popupClearModalLabel">
+                    <i class="fas fa-trash me-2"></i>
+                    <span data-en="Clear Popups" data-fr="Effacer les popups">Clear Popups</span>
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-warning" role="alert">
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    <strong data-en="Warning!" data-fr="Attention !">Warning!</strong>
+                    <span data-en="You are about to clear popups from the droppable area." data-fr="Vous êtes sur le point d'effacer les popups de la zone déposable.">
+                        You are about to clear popups from the droppable area.
+                    </span>
+                </div>
+                
+                <p class="text-center mb-4" data-en="Choose how you want to clear the popups:" data-fr="Choisissez comment vous voulez effacer les popups :">
+                    <strong>Choose how you want to clear the popups:</strong>
+                </p>
+                
+                <div class="d-grid gap-3">
+                    <button type="button" class="btn btn-outline-warning btn-lg" id="clearPopupsTemporary">
+                        <i class="fas fa-eye-slash me-2"></i>
+                        <span data-en="Clear from View Only" data-fr="Effacer de la vue seulement">Clear from View Only</span>
+                        <br><small class="text-muted" data-en="(Removes popups from droppable area but keeps them saved)" data-fr="(Supprime les popups de la zone déposable mais les garde sauvegardés)">(Removes popups from droppable area but keeps them saved)</small>
+                    </button>
+                    <button type="button" class="btn btn-outline-danger btn-lg" id="clearPopupsPermanently">
+                        <i class="fas fa-trash-alt me-2"></i>
+                        <span data-en="Clear Permanently" data-fr="Effacer définitivement">Clear Permanently</span>
+                        <br><small class="text-muted" data-en="(Removes popups from view AND deletes from database)" data-fr="(Supprime les popups de la vue ET les supprime de la base de données)">(Removes popups from view AND deletes from database)</small>
+                    </button>
+                </div>
+                
+                <div class="mt-4 p-3 bg-light rounded">
+                    <h6 class="mb-2" data-en="Current Popups in Area:" data-fr="Popups actuels dans la zone :">
+                        <i class="fas fa-info-circle me-2"></i>Current Popups in Area:
+                    </h6>
+                    <div id="clearModalPopupsList" class="small text-muted">
+                        <!-- Popup list will be populated here -->
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-center">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-en="Cancel" data-fr="Annuler">Cancel</button>
             </div>
         </div>
@@ -3290,6 +3387,63 @@ $(function() {
     background-repeat: no-repeat;
     background-position: right 12px center;
 }
+
+/* Clear Popups Modal Styles */
+#popupClearModal .modal-header.bg-danger {
+    border-bottom: 2px solid #dc3545;
+}
+
+#popupClearModal .btn-outline-warning:hover {
+    background-color: #ffc107;
+    border-color: #ffc107;
+    color: #000;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(255, 193, 7, 0.3);
+}
+
+#popupClearModal .btn-outline-danger:hover {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    color: #fff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
+}
+
+#popupClearModal .alert-warning {
+    border-left: 4px solid #ffc107;
+    background-color: #fff3cd;
+}
+
+#clearModalPopupsList ul {
+    max-height: 150px;
+    overflow-y: auto;
+    padding-left: 1.5rem;
+}
+
+#clearModalPopupsList li {
+    padding: 0.25rem 0;
+    border-bottom: 1px solid #e9ecef;
+}
+
+#clearModalPopupsList li:last-child {
+    border-bottom: none;
+}
+
+/* Animation for popup clearing */
+@keyframes popupClearFadeOut {
+    0% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+}
+
+.popup-clear-animation {
+    animation: popupClearFadeOut 0.3s ease-out forwards;
+}
 </style>
 
 <!-- Popup Saving Functionality for Document View Page -->
@@ -3348,7 +3502,31 @@ window.selectClientForSaving = function(clientId, clientName) {
     }
 };
 
+window.selectClientForFetch = function(clientId, clientName) {
+    // Close the fetch modal
+    const fetchModal = bootstrap.Modal.getInstance(document.getElementById('popupFetchModal'));
+    fetchModal.hide();
+    
+    // Show confirmation and fetch
+    if (confirm(`Load ${clientName}'s saved popups into the droppable area? This will replace any current popups.`)) {
+        fetchPopupsForClient(clientId, clientName);
+    } else {
+        // Re-show the fetch modal if user cancels
+        setTimeout(() => {
+            const popupFetchModal = new bootstrap.Modal(document.getElementById('popupFetchModal'));
+            popupFetchModal.show();
+        }, 500);
+    }
+};
+
 document.addEventListener('DOMContentLoaded', function() {
+    // Global variable to track current popup context
+    window.currentPopupContext = {
+        type: 'user', // 'user' or 'client'
+        clientId: null,
+        clientName: null
+    };
+
     // Define the savePopupsDataFromSidebar function first
     window.savePopupsDataFromSidebar = function(saveType, clientId = null) {
         const droppableArea = document.querySelector('.nested-droppable');
@@ -3431,6 +3609,23 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     };
 
+    // Function to get current client ID from context
+    function getCurrentClientId() {
+        // First check the global popup context
+        if (window.currentPopupContext && window.currentPopupContext.type === 'client') {
+            return window.currentPopupContext.clientId;
+        }
+        
+        // Fallback: try to get from meta tag
+        const clientIdMeta = document.querySelector('meta[name="current-client-id"]');
+        if (clientIdMeta && clientIdMeta.content && clientIdMeta.content !== '') {
+            return parseInt(clientIdMeta.content);
+        }
+        
+        // If no client context, this means we're working with user personal popups
+        return null;
+    }
+
     // Test API connection on page load
     console.log('Testing API connection...');
     testAPIConnection();
@@ -3452,6 +3647,69 @@ document.addEventListener('DOMContentLoaded', function() {
             const modal = new bootstrap.Modal(document.getElementById('popupSaveModal'));
             modal.show();
         });
+    }
+    
+    // Handle the fetch popups button in sidebar
+    const fetchPopupsSidebarBtn = document.getElementById('fetch-pinned-popups');
+    if (fetchPopupsSidebarBtn) {
+        fetchPopupsSidebarBtn.addEventListener('click', function() {
+            // Show client selection modal for fetching popups
+            const modal = new bootstrap.Modal(document.getElementById('popupFetchModal'));
+            modal.show();
+            
+            // Load clients for selection
+            loadClientsForFetchSelection();
+        });
+    }
+    
+    // Handle the clear popups button in sidebar
+    const clearPopupsSidebarBtn = document.getElementById('clear-pinned-popups');
+    if (clearPopupsSidebarBtn) {
+        clearPopupsSidebarBtn.addEventListener('click', function() {
+            // Check if there are any popups to clear
+            const droppableArea = document.querySelector('.nested-droppable');
+            const pinnedPopups = droppableArea.querySelectorAll('.pinned-popup');
+            
+            if (pinnedPopups.length === 0) {
+                alert('No popups to clear. The droppable area is already empty.');
+                return;
+            }
+            
+            // Populate the popup list in the modal
+            populateClearModalPopupsList(pinnedPopups);
+            
+            // Show the clear options modal
+            const modal = new bootstrap.Modal(document.getElementById('popupClearModal'));
+            modal.show();
+        });
+    }
+
+    // Function to populate the popup list in the clear modal
+    function populateClearModalPopupsList(pinnedPopups) {
+        const popupsList = document.getElementById('clearModalPopupsList');
+        
+        if (pinnedPopups.length === 0) {
+            popupsList.innerHTML = '<span class="text-muted">No popups found</span>';
+            return;
+        }
+        
+        let html = `<strong>${pinnedPopups.length} popup${pinnedPopups.length !== 1 ? 's' : ''} will be affected:</strong><ul class="mt-2 mb-0">`;
+        
+        pinnedPopups.forEach((popup, index) => {
+            const titleElement = popup.querySelector('.popup-header h6, .popup-header .modal-title, h5, h6');
+            const title = titleElement ? titleElement.textContent.trim() : `Popup ${index + 1}`;
+            
+            // Truncate long titles
+            const truncatedTitle = title.length > 50 ? title.substring(0, 50) + '...' : title;
+            
+            html += `<li class="mb-1">
+                <i class="fas fa-file-alt me-2"></i>
+                <span title="${title}">${truncatedTitle}</span>
+            </li>`;
+        });
+        
+        html += '</ul>';
+        popupsList.innerHTML = html;
     }
     
     // Handle save to user records
@@ -3482,6 +3740,203 @@ document.addEventListener('DOMContentLoaded', function() {
     if (backToSaveOptionsBtn) {
         backToSaveOptionsBtn.addEventListener('click', function() {
             collapseModalToSaveOptions();
+        });
+    }
+
+    // Handle clear popups temporarily button
+    const clearPopupsTemporaryBtn = document.getElementById('clearPopupsTemporary');
+    if (clearPopupsTemporaryBtn) {
+        clearPopupsTemporaryBtn.addEventListener('click', function() {
+            clearPopupsFromView();
+        });
+    }
+
+    // Handle clear popups permanently button
+    const clearPopupsPermanentlyBtn = document.getElementById('clearPopupsPermanently');
+    if (clearPopupsPermanentlyBtn) {
+        clearPopupsPermanentlyBtn.addEventListener('click', function() {
+            clearPopupsPermanently();
+        });
+    }
+
+    // Function to clear popups from view only
+    function clearPopupsFromView() {
+        const droppableArea = document.querySelector('.nested-droppable');
+        const pinnedPopups = droppableArea.querySelectorAll('.pinned-popup');
+        
+        if (pinnedPopups.length === 0) {
+            alert('No popups to clear.');
+            return;
+        }
+        
+        // Add fade out animation before removing
+        pinnedPopups.forEach((popup, index) => {
+            setTimeout(() => {
+                popup.style.transition = 'all 0.3s ease-out';
+                popup.style.opacity = '0';
+                popup.style.transform = 'translateX(-20px)';
+                
+                setTimeout(() => {
+                    popup.remove();
+                }, 300);
+            }, index * 100);
+        });
+        
+        // Close modal
+        const modal = bootstrap.Modal.getInstance(document.getElementById('popupClearModal'));
+        modal.hide();
+        
+        // Show success message
+        setTimeout(() => {
+            const successDiv = document.createElement('div');
+            successDiv.className = 'alert alert-success alert-dismissible fade show mb-3';
+            successDiv.innerHTML = `
+                <i class="fas fa-check-circle me-2"></i>
+                Successfully cleared ${pinnedPopups.length} popup${pinnedPopups.length !== 1 ? 's' : ''} from the droppable area.
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            droppableArea.insertBefore(successDiv, droppableArea.firstChild);
+            
+            // Auto-dismiss success message after 4 seconds
+            setTimeout(() => {
+                if (successDiv.parentNode) {
+                    successDiv.remove();
+                }
+            }, 4000);
+        }, (pinnedPopups.length * 100) + 300);
+        
+        // Reset context to user after clearing
+        window.currentPopupContext = {
+            type: 'user',
+            clientId: null,
+            clientName: null
+        };
+    }
+
+    // Function to clear popups permanently (from view and database)
+    function clearPopupsPermanently() {
+        const droppableArea = document.querySelector('.nested-droppable');
+        const pinnedPopups = droppableArea.querySelectorAll('.pinned-popup');
+        
+        if (pinnedPopups.length === 0) {
+            alert('No popups to clear.');
+            return;
+        }
+        
+        // Final confirmation for permanent deletion
+        if (!confirm(`Are you absolutely sure you want to permanently delete all ${pinnedPopups.length} popup${pinnedPopups.length !== 1 ? 's' : ''}? This action cannot be undone and will remove them from the database.`)) {
+            return;
+        }
+        
+        // Show loading state
+        const modal = document.getElementById('popupClearModal');
+        const buttons = modal.querySelectorAll('button');
+        buttons.forEach(btn => btn.disabled = true);
+        
+        // Add loading indicator
+        const loadingDiv = document.createElement('div');
+        loadingDiv.className = 'text-center py-3';
+        loadingDiv.id = 'clear-loading-indicator';
+        loadingDiv.innerHTML = `
+            <div class="spinner-border text-danger" role="status">
+                <span class="visually-hidden">Deleting...</span>
+            </div>
+            <p class="mt-2 text-muted">Permanently deleting popups...</p>
+        `;
+        modal.querySelector('.modal-body').appendChild(loadingDiv);
+        
+        // Extract popup IDs for deletion (we'll need to implement a way to track popup IDs)
+        const popupData = [];
+        pinnedPopups.forEach(popup => {
+            const titleElement = popup.querySelector('.popup-header h6, .popup-header .modal-title, h5, h6');
+            if (titleElement) {
+                const sectionMatch = titleElement.textContent.match(/(\d+(?:\([^)]+\))*)/);
+                const sectionId = sectionMatch ? sectionMatch[1] : 'unknown';
+                const categoryId = document.querySelector('meta[name="current-document-category-id"]')?.content || '1';
+                
+                popupData.push({
+                    section_id: sectionId,
+                    category_id: parseInt(categoryId) || 1,
+                    popup_title: titleElement.textContent.trim()
+                });
+            }
+        });
+        
+        // Delete popups from database
+        fetch('/delete-popups', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            },
+            body: JSON.stringify({
+                popups: popupData,
+                delete_all_current: true, // Flag to indicate we want to delete all current user/client popups
+                client_id: getCurrentClientId() // Get current client context
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Clear from view with animation
+                pinnedPopups.forEach((popup, index) => {
+                    setTimeout(() => {
+                        popup.style.transition = 'all 0.3s ease-out';
+                        popup.style.opacity = '0';
+                        popup.style.transform = 'translateX(-20px)';
+                        
+                        setTimeout(() => {
+                            popup.remove();
+                        }, 300);
+                    }, index * 50);
+                });
+                
+                // Close modal
+                setTimeout(() => {
+                    const modalInstance = bootstrap.Modal.getInstance(modal);
+                    modalInstance.hide();
+                }, (pinnedPopups.length * 50) + 300);
+                
+                // Show success message
+                setTimeout(() => {
+                    const successDiv = document.createElement('div');
+                    successDiv.className = 'alert alert-success alert-dismissible fade show mb-3';
+                    successDiv.innerHTML = `
+                        <i class="fas fa-check-circle me-2"></i>
+                        Successfully deleted ${pinnedPopups.length} popup${pinnedPopups.length !== 1 ? 's' : ''} permanently from database and view.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    `;
+                    droppableArea.insertBefore(successDiv, droppableArea.firstChild);
+                    
+                    // Auto-dismiss success message after 5 seconds
+                    setTimeout(() => {
+                        if (successDiv.parentNode) {
+                            successDiv.remove();
+                        }
+                    }, 5000);
+                }, (pinnedPopups.length * 50) + 500);
+                
+                // Reset context to user after permanent deletion
+                window.currentPopupContext = {
+                    type: 'user',
+                    clientId: null,
+                    clientName: null
+                };
+            } else {
+                alert('Error deleting popups: ' + (data.message || 'Unknown error'));
+            }
+        })
+        .catch(error => {
+            console.error('Error deleting popups:', error);
+            alert('Error deleting popups permanently. Please try again.');
+        })
+        .finally(() => {
+            // Reset button states and remove loading indicator
+            buttons.forEach(btn => btn.disabled = false);
+            const loadingIndicator = document.getElementById('clear-loading-indicator');
+            if (loadingIndicator) {
+                loadingIndicator.remove();
+            }
         });
     }
 
@@ -4116,16 +4571,12 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Function to load saved popups into the sidebar
     function loadSavedPopupsIntoSidebar() {
-        const clientId = <?php echo e(isset($client) && $client ? $client->id : 'null'); ?>;
+        // Always auto-load user personal popups on page load
+        // Client popups are only loaded when user explicitly fetches them
+        const context = 'user';
         
-        // Determine context: if we have a client, load client-specific popups, otherwise load user personal popups
-        const context = clientId ? 'client' : 'user';
-        
-        // Build the URL with appropriate parameters
-        let url = '/get-saved-popups?context=' + context;
-        if (clientId) {
-            url += '&client_id=' + clientId;
-        }
+        // Build the URL for user personal popups
+        const url = '/get-saved-popups?context=' + context;
         
         fetch(url, {
             method: 'GET',
@@ -4137,10 +4588,24 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(response => response.json())
         .then(data => {
             if (data.success && data.popups && data.popups.length > 0) {
-                console.log(`Loading ${data.popups.length} saved popups for ${context} context into sidebar`);
+                console.log(`Loading ${data.popups.length} saved personal popups into sidebar`);
                 loadPopupsIntoSidebarDroppableArea(data.popups);
+                
+                // Set global context to user
+                window.currentPopupContext = {
+                    type: 'user',
+                    clientId: null,
+                    clientName: null
+                };
             } else {
-                console.log(`No saved popups found for ${context} context`);
+                console.log('No saved personal popups found');
+                
+                // Still set context to user even if no popups
+                window.currentPopupContext = {
+                    type: 'user',
+                    clientId: null,
+                    clientName: null
+                };
             }
         })
         .catch(error => {
@@ -4176,6 +4641,331 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         console.log(`Loaded ${popups.length} popups into sidebar droppable area`);
+    }
+    
+    // Function to load clients for fetch selection
+    function loadClientsForFetchSelection() {
+        const clientsList = document.getElementById('fetchModalClientsList');
+        
+        console.log('Loading clients for fetch selection...');
+        
+        // Try API route first
+        fetch('/api/clients', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '<?php echo e(csrf_token()); ?>',
+                'Accept': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest'
+            },
+            credentials: 'same-origin'
+        })
+        .then(response => {
+            // If API route returns 401, try web route instead
+            if (response.status === 401) {
+                console.log('API route returned 401, trying web route...');
+                return fetch('/web-api/clients', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '<?php echo e(csrf_token()); ?>',
+                        'Accept': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest'
+                    },
+                    credentials: 'same-origin'
+                });
+            }
+            return response;
+        })
+        .then(response => {
+            return response.text().then(text => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}, body: ${text}`);
+                }
+                
+                try {
+                    return JSON.parse(text);
+                } catch (e) {
+                    console.error('Failed to parse JSON:', e);
+                    throw new Error('Invalid JSON response: ' + text);
+                }
+            });
+        })
+        .then(data => {
+            if (data.success && data.clients) {
+                renderFetchModalClientsList(data.clients);
+            } else {
+                renderFetchModalNoClients();
+            }
+        })
+        .catch(error => {
+            console.error('Error loading clients for fetch:', error);
+            renderFetchModalNoClients();
+        });
+    }
+
+    // Function to render clients list in fetch modal
+    function renderFetchModalClientsList(clients) {
+        const clientsList = document.getElementById('fetchModalClientsList');
+        
+        if (clients.length === 0) {
+            renderFetchModalNoClients();
+            return;
+        }
+        
+        // Create a searchable dropdown for clients (similar to save modal)
+        let html = `
+            <div class="col-12">
+                <div class="client-dropdown-container">
+                    <label for="fetchClientSearchInput" class="form-label">
+                        <i class="fas fa-search me-2"></i>Search and Select Client to Fetch Popups
+                    </label>
+                    <div class="position-relative">
+                        <input type="text" 
+                               id="fetchClientSearchInput" 
+                               class="form-control client-search-input" 
+                               placeholder="Type to search clients by name or email..."
+                               autocomplete="off">
+                        <div id="fetchClientDropdownList" class="client-dropdown-list">
+        `;
+        
+        // Add each client as a dropdown option
+        clients.forEach(client => {
+            const lastAccessed = client.last_accessed ? new Date(client.last_accessed).toLocaleDateString() : 'Never';
+            const escapedClientName = client.client_name.replace(/'/g, "\\'").replace(/"/g, '\\"');
+            
+            html += `
+                <div class="client-dropdown-item" 
+                     data-client-id="${client.id}" 
+                     data-client-name="${escapedClientName}"
+                     data-client-email="${client.client_email}"
+                     onclick="selectClientForFetch(${client.id}, '${escapedClientName}')">
+                    <div class="client-dropdown-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="client-dropdown-info">
+                        <div class="client-dropdown-name">${client.client_name}</div>
+                        <div class="client-dropdown-email">${client.client_email}</div>
+                        <div class="client-dropdown-status">
+                            <span class="badge status-${client.client_status.toLowerCase()}">${client.client_status}</span>
+                            <span class="client-dropdown-last-accessed">Last accessed: ${lastAccessed}</span>
+                        </div>
+                    </div>
+                    <div class="client-dropdown-action">
+                        <i class="fas fa-download text-primary"></i>
+                    </div>
+                </div>
+            `;
+        });
+        
+        html += `
+                        </div>
+                    </div>
+                    <div class="client-dropdown-footer mt-3">
+                        <small class="text-muted">
+                            <i class="fas fa-info-circle me-1"></i>
+                            ${clients.length} client${clients.length !== 1 ? 's' : ''} available. Click on a client to fetch their saved popups.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        clientsList.innerHTML = html;
+        
+        // Initialize search functionality for fetch modal
+        initializeFetchClientSearch(clients);
+    }
+
+    // Function to render no clients message in fetch modal
+    function renderFetchModalNoClients() {
+        const clientsList = document.getElementById('fetchModalClientsList');
+        clientsList.innerHTML = `
+            <div class="col-12 text-center py-4">
+                <div class="no-clients-found">
+                    <i class="fas fa-users no-clients-icon"></i>
+                    <h6>No clients found</h6>
+                    <p class="text-muted">
+                        Create clients first to fetch their saved popups
+                    </p>
+                </div>
+            </div>
+        `;
+    }
+
+    // Function to initialize client search functionality for fetch modal
+    function initializeFetchClientSearch(clients) {
+        const searchInput = document.getElementById('fetchClientSearchInput');
+        const dropdownList = document.getElementById('fetchClientDropdownList');
+        
+        if (!searchInput || !dropdownList) return;
+        
+        // Show dropdown when input is focused
+        searchInput.addEventListener('focus', function() {
+            dropdownList.style.display = 'block';
+            searchInput.classList.add('dropdown-active');
+        });
+        
+        // Hide dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.client-dropdown-container') || e.target.closest('#fetchModalClientsList')) {
+                return; // Don't hide if clicking within the fetch modal
+            }
+            dropdownList.style.display = 'none';
+            searchInput.classList.remove('dropdown-active');
+        });
+        
+        // Search functionality
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase().trim();
+            const dropdownItems = dropdownList.querySelectorAll('.client-dropdown-item');
+            
+            let visibleCount = 0;
+            dropdownItems.forEach(item => {
+                const clientName = item.getAttribute('data-client-name').toLowerCase();
+                const clientEmail = item.getAttribute('data-client-email').toLowerCase();
+                
+                if (clientName.includes(searchTerm) || clientEmail.includes(searchTerm)) {
+                    item.style.display = 'flex';
+                    visibleCount++;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+            
+            // Show "no results" message if no clients match
+            let noResultsDiv = dropdownList.querySelector('.no-search-results');
+            if (visibleCount === 0 && searchTerm) {
+                if (!noResultsDiv) {
+                    noResultsDiv = document.createElement('div');
+                    noResultsDiv.className = 'no-search-results text-center py-3 text-muted';
+                    noResultsDiv.innerHTML = `
+                        <i class="fas fa-search me-2"></i>
+                        No clients found matching "${searchTerm}"
+                    `;
+                    dropdownList.appendChild(noResultsDiv);
+                }
+                noResultsDiv.style.display = 'block';
+            } else if (noResultsDiv) {
+                noResultsDiv.style.display = 'none';
+            }
+            
+            // Show dropdown if there's input
+            if (searchTerm) {
+                dropdownList.style.display = 'block';
+                searchInput.classList.add('dropdown-active');
+            }
+        });
+    }
+
+    // Function to fetch popups for a specific client
+    function fetchPopupsForClient(clientId, clientName) {
+        console.log(`Fetching popups for client: ${clientName} (ID: ${clientId})`);
+        
+        // Show loading state
+        const droppableArea = document.querySelector('.nested-droppable');
+        
+        // Add loading indicator
+        const loadingDiv = document.createElement('div');
+        loadingDiv.className = 'text-center py-4';
+        loadingDiv.id = 'fetch-loading-indicator';
+        loadingDiv.innerHTML = `
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <p class="mt-2 text-muted">Fetching popups for ${clientName}...</p>
+        `;
+        
+        // Clear existing popups first
+        const existingPopups = droppableArea.querySelectorAll('.pinned-popup');
+        existingPopups.forEach(popup => popup.remove());
+        
+        // Add loading indicator
+        droppableArea.appendChild(loadingDiv);
+        
+        // Fetch client-specific popups
+        fetch(`/get-saved-popups?context=client&client_id=${clientId}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '<?php echo e(csrf_token()); ?>'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Remove loading indicator
+            const loadingIndicator = document.getElementById('fetch-loading-indicator');
+            if (loadingIndicator) {
+                loadingIndicator.remove();
+            }
+            
+            if (data.success && data.popups && data.popups.length > 0) {
+                console.log(`Loading ${data.popups.length} saved popups for client: ${clientName}`);
+                loadPopupsIntoSidebarDroppableArea(data.popups);
+                
+                // Set global context to client
+                window.currentPopupContext = {
+                    type: 'client',
+                    clientId: clientId,
+                    clientName: clientName
+                };
+                
+                // Show success message
+                const successDiv = document.createElement('div');
+                successDiv.className = 'alert alert-success alert-dismissible fade show mb-3';
+                successDiv.innerHTML = `
+                    <i class="fas fa-check-circle me-2"></i>
+                    Successfully loaded ${data.popups.length} popup${data.popups.length !== 1 ? 's' : ''} from ${clientName}'s records.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                `;
+                droppableArea.insertBefore(successDiv, droppableArea.firstChild);
+                
+                // Auto-dismiss success message after 5 seconds
+                setTimeout(() => {
+                    if (successDiv.parentNode) {
+                        successDiv.remove();
+                    }
+                }, 5000);
+            } else {
+                console.log(`No saved popups found for client: ${clientName}`);
+                
+                // Show no popups message
+                const noPopupsDiv = document.createElement('div');
+                noPopupsDiv.className = 'alert alert-info alert-dismissible fade show mb-3';
+                noPopupsDiv.innerHTML = `
+                    <i class="fas fa-info-circle me-2"></i>
+                    No saved popups found for ${clientName}. They haven't saved any popups yet.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                `;
+                droppableArea.appendChild(noPopupsDiv);
+                
+                // Auto-dismiss info message after 5 seconds
+                setTimeout(() => {
+                    if (noPopupsDiv.parentNode) {
+                        noPopupsDiv.remove();
+                    }
+                }, 5000);
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching popups:', error);
+            
+            // Remove loading indicator
+            const loadingIndicator = document.getElementById('fetch-loading-indicator');
+            if (loadingIndicator) {
+                loadingIndicator.remove();
+            }
+            
+            // Show error message
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'alert alert-danger alert-dismissible fade show mb-3';
+            errorDiv.innerHTML = `
+                <i class="fas fa-exclamation-triangle me-2"></i>
+                Error fetching popups for ${clientName}. Please try again.
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            droppableArea.appendChild(errorDiv);
+        });
     }
     
     // Auto-load saved popups on page load

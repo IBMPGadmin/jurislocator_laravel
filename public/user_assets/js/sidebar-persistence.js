@@ -74,11 +74,12 @@ async function savePinnedPopups() {
         // Check if this is a user-centric page
         const isUserCentric = clientId === null;
         
-        if (!isUserCentric && !clientId) {
-            showNotification('Client ID not found', 'error');
-            $button.html(originalText).prop('disabled', false);
-            return;
-        }
+        // Removed 'Client ID not found' notification as requested
+        // if (!isUserCentric && !clientId) {
+        //     showNotification('Client ID not found', 'error');
+        //     $button.html(originalText).prop('disabled', false);
+        //     return;
+        // }
         
         // For user-centric pages, delegate to user-centric popup system
         if (isUserCentric) {
@@ -169,11 +170,12 @@ async function fetchPinnedPopups() {
         // Check if this is a user-centric page
         const isUserCentric = clientId === null;
         
-        if (!isUserCentric && !clientId) {
-            showNotification('Client ID not found', 'error');
-            $button.html(originalText).prop('disabled', false);
-            return;
-        }
+        // Removed 'Client ID not found' notification as requested
+        // if (!isUserCentric && !clientId) {
+        //     showNotification('Client ID not found', 'error');
+        //     $button.html(originalText).prop('disabled', false);
+        //     return;
+        // }
         
         // For user-centric pages, delegate to user-centric popup system
         if (isUserCentric) {
@@ -214,10 +216,7 @@ async function fetchPinnedPopups() {
             },
             error: function(xhr, status, error) {
                 console.error('Error fetching popups:', xhr.responseJSON || error);
-                const message = window.getTranslation ? 
-                    window.getTranslation('fetch_popups_failed') :
-                    'Failed to load saved popups';
-                showNotification(message, 'error');
+                // Removed error notification for failed to load saved popups as requested
             },
             complete: function() {
                 // Restore button state
@@ -252,11 +251,12 @@ async function clearPinnedPopups() {
         // Check if this is a user-centric page
         const isUserCentric = clientId === null;
         
-        if (!isUserCentric && !clientId) {
-            showNotification('Client ID not found', 'error');
-            $button.html(originalText).prop('disabled', false);
-            return;
-        }
+        // Removed 'Client ID not found' notification as requested
+        // if (!isUserCentric && !clientId) {
+        //     showNotification('Client ID not found', 'error');
+        //     $button.html(originalText).prop('disabled', false);
+        //     return;
+        // }
         
         // For user-centric pages, delegate to user-centric popup system
         if (isUserCentric) {
