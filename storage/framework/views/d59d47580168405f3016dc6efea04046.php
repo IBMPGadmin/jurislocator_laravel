@@ -184,6 +184,7 @@
                 </div>
                 
                 <div class="widget-content" id="world-clock-content">
+                    <!-- Add New Timezone Section -->
                     <div class="timezone-selector sp-top">
                         <div class="form-group sp-top">
                             <label for="timezone-select">Select Timezone:</label>
@@ -200,15 +201,30 @@
                                 <option value="America/Toronto" data-country="Canada" data-flag="🇨🇦">Toronto (EST)</option>
                                 <option value="Asia/Singapore" data-country="Singapore" data-flag="🇸🇬">Singapore (SGT)</option>
                                 <option value="Europe/Rome" data-country="Italy" data-flag="🇮🇹">Rome (CET)</option>
+                                <option value="Asia/Kolkata" data-country="India" data-flag="🇮🇳">Mumbai (IST)</option>
+                                <option value="America/Montreal" data-country="Canada" data-flag="🇨🇦">Montreal (EST)</option>
+                                <option value="Asia/Colombo" data-country="Sri Lanka" data-flag="🇱🇰">Colombo (IST)</option>
+                                <option value="Europe/Zurich" data-country="Switzerland" data-flag="🇨🇭">Zurich (CET)</option>
+                                <option value="Asia/Hong_Kong" data-country="Hong Kong" data-flag="🇭🇰">Hong Kong (HKT)</option>
+                                <option value="America/Chicago" data-country="United States" data-flag="🇺🇸">Chicago (CST)</option>
+                                <option value="Australia/Melbourne" data-country="Australia" data-flag="🇦🇺">Melbourne (AEDT)</option>
+                                <option value="Europe/Moscow" data-country="Russia" data-flag="🇷🇺">Moscow (MSK)</option>
+                                <option value="Asia/Seoul" data-country="South Korea" data-flag="🇰🇷">Seoul (KST)</option>
+                                <option value="America/Sao_Paulo" data-country="Brazil" data-flag="🇧🇷">São Paulo (BRT)</option>
+                                <option value="Africa/Cairo" data-country="Egypt" data-flag="🇪🇬">Cairo (EET)</option>
+                                <option value="Europe/Amsterdam" data-country="Netherlands" data-flag="🇳🇱">Amsterdam (CET)</option>
+                                <option value="America/Mexico_City" data-country="Mexico" data-flag="🇲🇽">Mexico City (CST)</option>
                             </select>
                         </div>
                         <button id="add-timezone" class="btn btn-action sp-top">Add Timezone</button>
                     </div>
+
+                    <!-- Current Time Display -->
                     <div id="world-clock-display" class="timezone-display sp-top"></div>
                 </div>
 
                 <div class="widget-footer" id="world-clock-footer">
-                    <p>This is the widget footer</p>
+                    <p><i class="fas fa-info-circle"></i> Pin your favorite timezones for easy access. Pinned timezones will also appear in the header bar.</p>
                 </div>
             </div>
         </div>
@@ -403,7 +419,22 @@
 }
 
 .pin-btn.pinned {
-    background-color: var(--color-04);
+    background-color: var(--color-01);
+    color: var(--color-03);
+    border: 1px solid var(--color-01);
+}
+
+.pin-btn.pinned:hover {
+    background-color: var(--color-03);
+    border: 1px solid var(--color-01);
+    color: var(--color-01);
+}
+
+.empty-pinned-message {
+    text-align: center;
+    color: var(--color-06);
+    padding: 24px;
+    font-style: italic;
 }
 
 /* Adjust main content when pinned bar is visible */
@@ -561,8 +592,52 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // World Clock
     let timezonesDisplay = [];
-    let pinnedTimezones = JSON.parse(localStorage.getItem('pinnedTimezones') || '[]');
+    let pinnedTimezones = [];
     
+    // Load user's pinned timezones from server
+    async function loadUserPinnedTimezones() {
+        try {
+            console.log('Loading pinned timezones from server...');
+            
+            const response = await fetch('/user/timezones/pinned', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                }
+            });
+            
+            console.log('Server response status:', response.status);
+            
+            if (response.ok) {
+                const data = await response.json();
+                console.log('Server response data:', data);
+                
+                if (data.success && data.data) {
+                    pinnedTimezones = data.data;
+                    console.log('Loaded pinned timezones from server:', pinnedTimezones);
+                    
+                    // Sync with localStorage for header compatibility
+                    localStorage.setItem('pinnedTimezones', JSON.stringify(pinnedTimezones));
+                } else {
+                    console.log('No pinned timezones found on server, using localStorage');
+                    // Fallback to localStorage
+                    pinnedTimezones = JSON.parse(localStorage.getItem('pinnedTimezones') || '[]');
+                }
+            } else {
+                console.log('Failed to load from server, using localStorage');
+                // Fallback to localStorage
+                pinnedTimezones = JSON.parse(localStorage.getItem('pinnedTimezones') || '[]');
+            }
+        } catch (error) {
+            console.log('Error loading from server, using localStorage:', error);
+            pinnedTimezones = JSON.parse(localStorage.getItem('pinnedTimezones') || '[]');
+        }
+        
+        updateWorldClock();
+    }
+    
+    // Add timezone to display (and optionally pin)
     document.getElementById('add-timezone').addEventListener('click', function() {
         const timezone = document.getElementById('timezone-select').value;
         const selectedOption = document.getElementById('timezone-select').options[document.getElementById('timezone-select').selectedIndex];
@@ -570,23 +645,108 @@ document.addEventListener('DOMContentLoaded', function() {
         const country = selectedOption.getAttribute('data-country');
         const flag = selectedOption.getAttribute('data-flag');
         
+        const newTimezone = {
+            timezone: timezone,
+            name: timezoneName,
+            country: country,
+            flag: flag
+        };
+        
+        // Add to display if not already there
         if (!timezonesDisplay.find(tz => tz.timezone === timezone)) {
-            timezonesDisplay.push({
-                timezone: timezone,
-                name: timezoneName,
-                country: country,
-                flag: flag
-            });
+            timezonesDisplay.push(newTimezone);
             updateWorldClock();
         }
     });
+    
+    // Pin/Unpin timezone function
+    async function togglePin(timezone) {
+        const timezoneData = timezonesDisplay.find(tz => tz.timezone === timezone) || 
+                           pinnedTimezones.find(tz => tz.timezone === timezone);
+        
+        if (!timezoneData) return;
+        
+        const isPinned = pinnedTimezones.find(pt => pt.timezone === timezone);
+        
+        try {
+            if (isPinned) {
+                // Unpin timezone
+                const response = await fetch('/user/timezones/unpin', {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    },
+                    body: JSON.stringify({ timezone: timezone })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok && data.success) {
+                    // Remove from pinned array
+                    pinnedTimezones = pinnedTimezones.filter(tz => tz.timezone !== timezone);
+                    updatePinnedTimezones();
+                    updateWorldClock();
+                    console.log('Timezone unpinned successfully');
+                } else {
+                    console.error('Failed to unpin timezone:', data.message);
+                    alert(data.message || 'Failed to unpin timezone');
+                }
+            } else {
+                // Pin timezone
+                const response = await fetch('/user/timezones/pin', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    },
+                    body: JSON.stringify(timezoneData)
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok && data.success) {
+                    // Add to pinned array
+                    pinnedTimezones.push(timezoneData);
+                    updatePinnedTimezones();
+                    updateWorldClock();
+                    console.log('Timezone pinned successfully');
+                } else {
+                    console.error('Failed to pin timezone:', data.message);
+                    alert(data.message || 'Failed to pin timezone');
+                }
+            }
+        } catch (error) {
+            console.error('Error toggling pin:', error);
+            alert('Error updating timezone. Please try again.');
+        }
+    }
     
     function updateWorldClock() {
         const display = document.getElementById('world-clock-display');
         display.innerHTML = '';
         
-        timezonesDisplay.forEach((timezoneData, index) => {
+        // Combine pinned and display timezones, avoiding duplicates
+        const allTimezones = [...pinnedTimezones];
+        timezonesDisplay.forEach(tz => {
+            if (!pinnedTimezones.find(ptz => ptz.timezone === tz.timezone)) {
+                allTimezones.push(tz);
+            }
+        });
+        
+        if (allTimezones.length === 0) {
+            display.innerHTML = `
+                <div class="empty-pinned-message">
+                    <p>No timezones to display. Select a timezone above and click "Add Timezone" to get started.</p>
+                </div>
+            `;
+            return;
+        }
+        
+        allTimezones.forEach((timezoneData, index) => {
             const now = new Date();
+            
+            // Get time in timezone
             const timeString = now.toLocaleString('en-US', { 
                 timeZone: timezoneData.timezone,
                 hour12: true,
@@ -594,123 +754,70 @@ document.addEventListener('DOMContentLoaded', function() {
                 minute: '2-digit'
             });
             
+            // Get day and date in timezone
+            const dayString = now.toLocaleDateString('en-US', { 
+                timeZone: timezoneData.timezone,
+                weekday: 'short'
+            }).toUpperCase();
+            
+            const dateString = now.toLocaleDateString('en-US', { 
+                timeZone: timezoneData.timezone,
+                day: '2-digit',
+                month: 'short',
+                year: 'numeric'
+            }).replace(/,/g, '');
+            
+            // Get timezone abbreviation
+            const timezoneName = timezoneData.name.match(/\(([^)]+)\)/);
+            const timezoneAbbr = timezoneName ? timezoneName[1] : '';
+            
             const isPinned = pinnedTimezones.find(pt => pt.timezone === timezoneData.timezone);
            
             const timezoneItem = document.createElement('div');
             timezoneItem.className = 'timezone-item';
             timezoneItem.innerHTML = `
-
                 <div>
-
                     <span><strong>${timezoneData.flag} ${timezoneData.name}</strong></span>
-
                     <br>
-
-                    <span>${timeString}</span>
-
+                    <span style="font-size: 1.1em; font-weight: 500;">${timeString} ${timezoneAbbr}</span>
+                    <br>
+                    <span style="font-size: 0.9em; color: #666;">${dayString} ${dateString}</span>
                 </div>
-
                 <div class="timezone-actions">
-
                     <button onclick="togglePin('${timezoneData.timezone}')" class="btn pin-btn ${isPinned ? 'pinned' : ''}">
-
                         <i class="fas fa-thumbtack"></i> ${isPinned ? 'Unpin' : 'Pin'}
-
                     </button>
-
                     <button onclick="removeTimezone('${timezoneData.timezone}')" class="btn btn-danger">Remove</button>
-
                 </div>
-
             `;
-
             display.appendChild(timezoneItem);
-
         });
-
     }
 
     function updatePinnedTimezones() {
-
-        // Save to localStorage
-
+        // Save to localStorage for header compatibility
         localStorage.setItem('pinnedTimezones', JSON.stringify(pinnedTimezones));
-
         
-
         // Trigger header update
-
         window.dispatchEvent(new CustomEvent('pinnedTimezonesUpdated'));
-
+    }
+    
+    function removeTimezone(timezone) {
+        timezonesDisplay = timezonesDisplay.filter(tz => tz.timezone !== timezone);
+        updateWorldClock();
     }
 
-    
-
-    window.togglePin = function(timezone) {
-
-        const timezoneData = timezonesDisplay.find(tz => tz.timezone === timezone);
-
-        if (!timezoneData) return;
-
-        
-
-        const pinnedIndex = pinnedTimezones.findIndex(pt => pt.timezone === timezone);
-
-        
-
-        if (pinnedIndex > -1) {
-
-            // Unpin
-
-            pinnedTimezones.splice(pinnedIndex, 1);
-
-        } else {
-
-            // Pin
-
-            pinnedTimezones.push(timezoneData);
-
-        }
-
-        
-
-        updateWorldClock();
-
-        updatePinnedTimezones();
-
-    };
-    
-     window.removeTimezone = function(timezone) {
-
-        timezonesDisplay = timezonesDisplay.filter(tz => tz.timezone !== timezone);
-
-        pinnedTimezones = pinnedTimezones.filter(pt => pt.timezone !== timezone);
-
-        updateWorldClock();
-
-        updatePinnedTimezones();
-
-    };
-    
-     // Toggle pinned bar collapse - removed since no pinned bar
-
-    
+    // Make functions globally available
+    window.togglePin = togglePin;
+    window.removeTimezone = removeTimezone;
 
     // Update world clock every minute
-
-    setInterval(() => {
-
+    setInterval(function() {
         updateWorldClock();
-
-        updatePinnedTimezones();
-
-    }, 60000);
-
+    }, 60000);    
     
-
-    // Load existing pinned timezones on page load
-
-    updatePinnedTimezones();
+    // Load existing pinned timezones from server on page load
+    loadUserPinnedTimezones();
 
 });
 
