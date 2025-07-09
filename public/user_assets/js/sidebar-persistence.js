@@ -75,7 +75,7 @@ async function savePinnedPopups() {
         const isUserCentric = clientId === null;
         
         if (!isUserCentric && !clientId) {
-            showNotification('Client ID not found', 'error');
+            console.log('Client ID not found for non-user-centric page');
             $button.html(originalText).prop('disabled', false);
             return;
         }
@@ -170,7 +170,7 @@ async function fetchPinnedPopups() {
         const isUserCentric = clientId === null;
         
         if (!isUserCentric && !clientId) {
-            showNotification('Client ID not found', 'error');
+            console.log('Client ID not found for non-user-centric page');
             $button.html(originalText).prop('disabled', false);
             return;
         }
@@ -253,7 +253,7 @@ async function clearPinnedPopups() {
         const isUserCentric = clientId === null;
         
         if (!isUserCentric && !clientId) {
-            showNotification('Client ID not found', 'error');
+            console.log('Client ID not found for non-user-centric page');
             $button.html(originalText).prop('disabled', false);
             return;
         }

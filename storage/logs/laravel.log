@@ -10599,3 +10599,569 @@ The objectives of...","note_content_length":1552}
 [2025-07-09 05:11:36] local.INFO: Clients data: [{"id":2,"user_id":2,"client_name":"client 1","client_email":"client1@gmail.com","client_status":"Active","last_accessed":"2025-07-08T05:07:44.000000Z","created_at":"2025-06-24T09:30:50.000000Z","updated_at":"2025-07-08T05:07:44.000000Z"},{"id":3,"user_id":2,"client_name":"Client Name 02","client_email":"Email2@gmail.com","client_status":"Active","last_accessed":"2025-07-02T05:21:41.000000Z","created_at":"2025-06-26T05:37:58.000000Z","updated_at":"2025-07-02T05:21:41.000000Z"}]  
 [2025-07-09 05:11:37] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-09 05:11:37"}} 
 [2025-07-09 05:11:37] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-09 10:09:27] local.INFO: Getting clients for user ID: 2  
+[2025-07-09 10:09:27] local.INFO: Found 2 clients for user 2  
+[2025-07-09 10:09:27] local.INFO: Clients data: [{"id":2,"user_id":2,"client_name":"client 1","client_email":"client1@gmail.com","client_status":"Active","last_accessed":"2025-07-08T05:07:44.000000Z","created_at":"2025-06-24T09:30:50.000000Z","updated_at":"2025-07-08T05:07:44.000000Z"},{"id":3,"user_id":2,"client_name":"Client Name 02","client_email":"Email2@gmail.com","client_status":"Active","last_accessed":"2025-07-02T05:21:41.000000Z","created_at":"2025-06-26T05:37:58.000000Z","updated_at":"2025-07-02T05:21:41.000000Z"}]  
+[2025-07-09 10:09:27] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-09 10:09:27"}} 
+[2025-07-09 10:09:27] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-09 10:09:44] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-09 10:09:44"}} 
+[2025-07-09 10:09:44] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-09 10:10:00] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-09 10:10:00"}} 
+[2025-07-09 10:10:00] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-09 10:10:15] local.INFO: Getting clients for user ID: 2  
+[2025-07-09 10:10:15] local.INFO: Found 2 clients for user 2  
+[2025-07-09 10:10:15] local.INFO: Clients data: [{"id":2,"user_id":2,"client_name":"client 1","client_email":"client1@gmail.com","client_status":"Active","last_accessed":"2025-07-08T05:07:44.000000Z","created_at":"2025-06-24T09:30:50.000000Z","updated_at":"2025-07-08T05:07:44.000000Z"},{"id":3,"user_id":2,"client_name":"Client Name 02","client_email":"Email2@gmail.com","client_status":"Active","last_accessed":"2025-07-02T05:21:41.000000Z","created_at":"2025-06-26T05:37:58.000000Z","updated_at":"2025-07-02T05:21:41.000000Z"}]  
+[2025-07-09 10:10:16] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-09 10:10:16"}} 
+[2025-07-09 10:10:16] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-09 10:10:24] local.INFO: Getting clients for user ID: 2  
+[2025-07-09 10:10:24] local.INFO: Found 2 clients for user 2  
+[2025-07-09 10:10:24] local.INFO: Clients data: [{"id":2,"user_id":2,"client_name":"client 1","client_email":"client1@gmail.com","client_status":"Active","last_accessed":"2025-07-08T05:07:44.000000Z","created_at":"2025-06-24T09:30:50.000000Z","updated_at":"2025-07-08T05:07:44.000000Z"},{"id":3,"user_id":2,"client_name":"Client Name 02","client_email":"Email2@gmail.com","client_status":"Active","last_accessed":"2025-07-02T05:21:41.000000Z","created_at":"2025-06-26T05:37:58.000000Z","updated_at":"2025-07-02T05:21:41.000000Z"}]  
+[2025-07-09 10:10:25] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-09 10:10:25"}} 
+[2025-07-09 10:10:25] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-09 10:11:14] local.INFO: Getting clients for user ID: 2  
+[2025-07-09 10:11:14] local.INFO: Found 2 clients for user 2  
+[2025-07-09 10:11:14] local.INFO: Clients data: [{"id":2,"user_id":2,"client_name":"client 1","client_email":"client1@gmail.com","client_status":"Active","last_accessed":"2025-07-08T05:07:44.000000Z","created_at":"2025-06-24T09:30:50.000000Z","updated_at":"2025-07-08T05:07:44.000000Z"},{"id":3,"user_id":2,"client_name":"Client Name 02","client_email":"Email2@gmail.com","client_status":"Active","last_accessed":"2025-07-02T05:21:41.000000Z","created_at":"2025-06-26T05:37:58.000000Z","updated_at":"2025-07-02T05:21:41.000000Z"}]  
+[2025-07-09 10:11:15] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-09 10:11:15"}} 
+[2025-07-09 10:11:15] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-09 10:11:20] local.INFO: Getting clients for user ID: 2  
+[2025-07-09 10:11:20] local.INFO: Found 2 clients for user 2  
+[2025-07-09 10:11:20] local.INFO: Clients data: [{"id":2,"user_id":2,"client_name":"client 1","client_email":"client1@gmail.com","client_status":"Active","last_accessed":"2025-07-08T05:07:44.000000Z","created_at":"2025-06-24T09:30:50.000000Z","updated_at":"2025-07-08T05:07:44.000000Z"},{"id":3,"user_id":2,"client_name":"Client Name 02","client_email":"Email2@gmail.com","client_status":"Active","last_accessed":"2025-07-02T05:21:41.000000Z","created_at":"2025-06-26T05:37:58.000000Z","updated_at":"2025-07-02T05:21:41.000000Z"}]  
+[2025-07-09 10:11:21] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-09 10:11:21"}} 
+[2025-07-09 10:11:21] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-09 10:12:47] local.INFO: Section content request for tableId=1, sectionRef=46  
+[2025-07-09 10:12:47] local.INFO: Found table: legaldocument1  
+[2025-07-09 10:12:47] local.INFO: Received current document context: table=legaldocument1, categoryId=1  
+[2025-07-09 10:12:47] local.INFO: Building search query for section_id: 46 in table: legaldocument1  
+[2025-07-09 10:12:47] local.INFO: Built query: select * from `legaldocument1` where `category_id` = ? and (`section_id` = ? or `section_id` like ? or `section_id` like ?) order by CASE 
+                    WHEN section_id = ? THEN 1
+                    WHEN section_id LIKE ? THEN 2
+                    ELSE 3
+                END limit 10 with bindings: ["1","46","46.%","46%","46","46.%"]  
+[2025-07-09 10:12:47] local.INFO: Executing query: select * from `legaldocument1` where `category_id` = ? and (`section_id` = ? or `section_id` like ? or `section_id` like ?) order by CASE 
+                    WHEN section_id = ? THEN 1
+                    WHEN section_id LIKE ? THEN 2
+                    ELSE 3
+                END limit 10 with bindings: ["1","46","46.%","46%","46","46.%"]  
+[2025-07-09 10:12:47] local.INFO: Raw SQL equivalent: select * from `legaldocument1` where `category_id` = 1 and (`section_id` = 1 or `section_id` like 1 or `section_id` like 1) order by CASE 
+                    WHEN section_id = 1 THEN 1
+                    WHEN section_id LIKE 1 THEN 2
+                    ELSE 3
+                END limit 10  
+[2025-07-09 10:12:47] local.INFO: Found 10 rows  
+[2025-07-09 10:12:48] local.INFO: Section content request for tableId=1, sectionRef=46  
+[2025-07-09 10:12:48] local.INFO: Found table: legaldocument1  
+[2025-07-09 10:12:48] local.INFO: Building search query for section_id: 46 in table: legaldocument1  
+[2025-07-09 10:12:48] local.INFO: Built query: select * from `legaldocument1` where `category_id` = ? and (`section_id` = ? or `section_id` like ? or `section_id` like ?) order by CASE 
+                    WHEN section_id = ? THEN 1
+                    WHEN section_id LIKE ? THEN 2
+                    ELSE 3
+                END limit 10 with bindings: ["1","46","46.%","46%","46","46.%"]  
+[2025-07-09 10:12:48] local.INFO: Executing query: select * from `legaldocument1` where `category_id` = ? and (`section_id` = ? or `section_id` like ? or `section_id` like ?) order by CASE 
+                    WHEN section_id = ? THEN 1
+                    WHEN section_id LIKE ? THEN 2
+                    ELSE 3
+                END limit 10 with bindings: ["1","46","46.%","46%","46","46.%"]  
+[2025-07-09 10:12:48] local.INFO: Raw SQL equivalent: select * from `legaldocument1` where `category_id` = 1 and (`section_id` = 1 or `section_id` like 1 or `section_id` like 1) order by CASE 
+                    WHEN section_id = 1 THEN 1
+                    WHEN section_id LIKE 1 THEN 2
+                    ELSE 3
+                END limit 10  
+[2025-07-09 10:12:48] local.INFO: Found 10 rows  
+[2025-07-09 10:13:01] local.INFO: Section content request for tableId=1, sectionRef=42.1  
+[2025-07-09 10:13:01] local.INFO: Found table: legaldocument1  
+[2025-07-09 10:13:01] local.INFO: Received current document context: table=legaldocument1, categoryId=1  
+[2025-07-09 10:13:01] local.INFO: Building search query for section_id: 42.1 in table: legaldocument1  
+[2025-07-09 10:13:01] local.INFO: Built query: select * from `legaldocument1` where `category_id` = ? and (`section_id` = ? or `section_id` like ? or `section_id` like ?) order by CASE 
+                    WHEN section_id = ? THEN 1
+                    WHEN section_id LIKE ? THEN 2
+                    ELSE 3
+                END limit 10 with bindings: ["1","42.1","42.1.%","42.1%","42.1","42.1.%"]  
+[2025-07-09 10:13:01] local.INFO: Executing query: select * from `legaldocument1` where `category_id` = ? and (`section_id` = ? or `section_id` like ? or `section_id` like ?) order by CASE 
+                    WHEN section_id = ? THEN 1
+                    WHEN section_id LIKE ? THEN 2
+                    ELSE 3
+                END limit 10 with bindings: ["1","42.1","42.1.%","42.1%","42.1","42.1.%"]  
+[2025-07-09 10:13:01] local.INFO: Raw SQL equivalent: select * from `legaldocument1` where `category_id` = 1 and (`section_id` = 1 or `section_id` like 1 or `section_id` like 1) order by CASE 
+                    WHEN section_id = 1 THEN 1
+                    WHEN section_id LIKE 1 THEN 2
+                    ELSE 3
+                END limit 10  
+[2025-07-09 10:13:01] local.INFO: Found 4 rows  
+[2025-07-09 10:13:02] local.INFO: Section content request for tableId=1, sectionRef=42.1  
+[2025-07-09 10:13:02] local.INFO: Found table: legaldocument1  
+[2025-07-09 10:13:02] local.INFO: Building search query for section_id: 42.1 in table: legaldocument1  
+[2025-07-09 10:13:02] local.INFO: Built query: select * from `legaldocument1` where `category_id` = ? and (`section_id` = ? or `section_id` like ? or `section_id` like ?) order by CASE 
+                    WHEN section_id = ? THEN 1
+                    WHEN section_id LIKE ? THEN 2
+                    ELSE 3
+                END limit 10 with bindings: ["1","42.1","42.1.%","42.1%","42.1","42.1.%"]  
+[2025-07-09 10:13:02] local.INFO: Executing query: select * from `legaldocument1` where `category_id` = ? and (`section_id` = ? or `section_id` like ? or `section_id` like ?) order by CASE 
+                    WHEN section_id = ? THEN 1
+                    WHEN section_id LIKE ? THEN 2
+                    ELSE 3
+                END limit 10 with bindings: ["1","42.1","42.1.%","42.1%","42.1","42.1.%"]  
+[2025-07-09 10:13:02] local.INFO: Raw SQL equivalent: select * from `legaldocument1` where `category_id` = 1 and (`section_id` = 1 or `section_id` like 1 or `section_id` like 1) order by CASE 
+                    WHEN section_id = 1 THEN 1
+                    WHEN section_id LIKE 1 THEN 2
+                    ELSE 3
+                END limit 10  
+[2025-07-09 10:13:02] local.INFO: Found 4 rows  
+[2025-07-09 10:14:47] local.INFO: Section content request for tableId=1, sectionRef=4((3))(1)  
+[2025-07-09 10:14:47] local.INFO: Found table: legaldocument1  
+[2025-07-09 10:14:47] local.INFO: Received current document context: table=legaldocument1, categoryId=1  
+[2025-07-09 10:14:47] local.INFO: Building search query for section_id: 4((3))(1) in table: legaldocument1  
+[2025-07-09 10:14:47] local.INFO: Built query: select * from `legaldocument1` where `category_id` = ? and (`section_id` = ? or `section_id` like ? or `section_id` like ?) order by CASE 
+                    WHEN section_id = ? THEN 1
+                    WHEN section_id LIKE ? THEN 2
+                    ELSE 3
+                END limit 10 with bindings: ["1","4((3))(1)","4((3))(1).%","4((3))(1)%","4((3))(1)","4((3))(1).%"]  
+[2025-07-09 10:14:47] local.INFO: Executing query: select * from `legaldocument1` where `category_id` = ? and (`section_id` = ? or `section_id` like ? or `section_id` like ?) order by CASE 
+                    WHEN section_id = ? THEN 1
+                    WHEN section_id LIKE ? THEN 2
+                    ELSE 3
+                END limit 10 with bindings: ["1","4((3))(1)","4((3))(1).%","4((3))(1)%","4((3))(1)","4((3))(1).%"]  
+[2025-07-09 10:14:47] local.INFO: Raw SQL equivalent: select * from `legaldocument1` where `category_id` = 1 and (`section_id` = 1 or `section_id` like 1 or `section_id` like 1) order by CASE 
+                    WHEN section_id = 1 THEN 1
+                    WHEN section_id LIKE 1 THEN 2
+                    ELSE 3
+                END limit 10  
+[2025-07-09 10:14:47] local.INFO: Found 0 rows  
+[2025-07-09 10:14:47] local.WARNING: No rows found for section reference: 4((3))(1)  
+[2025-07-09 10:14:47] local.INFO: Section content request for tableId=1, sectionRef=4((3))(1)  
+[2025-07-09 10:14:47] local.INFO: Found table: legaldocument1  
+[2025-07-09 10:14:47] local.INFO: Building search query for section_id: 4((3))(1) in table: legaldocument1  
+[2025-07-09 10:14:47] local.INFO: Built query: select * from `legaldocument1` where `category_id` = ? and (`section_id` = ? or `section_id` like ? or `section_id` like ?) order by CASE 
+                    WHEN section_id = ? THEN 1
+                    WHEN section_id LIKE ? THEN 2
+                    ELSE 3
+                END limit 10 with bindings: ["1","4((3))(1)","4((3))(1).%","4((3))(1)%","4((3))(1)","4((3))(1).%"]  
+[2025-07-09 10:14:47] local.INFO: Executing query: select * from `legaldocument1` where `category_id` = ? and (`section_id` = ? or `section_id` like ? or `section_id` like ?) order by CASE 
+                    WHEN section_id = ? THEN 1
+                    WHEN section_id LIKE ? THEN 2
+                    ELSE 3
+                END limit 10 with bindings: ["1","4((3))(1)","4((3))(1).%","4((3))(1)%","4((3))(1)","4((3))(1).%"]  
+[2025-07-09 10:14:47] local.INFO: Raw SQL equivalent: select * from `legaldocument1` where `category_id` = 1 and (`section_id` = 1 or `section_id` like 1 or `section_id` like 1) order by CASE 
+                    WHEN section_id = 1 THEN 1
+                    WHEN section_id LIKE 1 THEN 2
+                    ELSE 3
+                END limit 10  
+[2025-07-09 10:14:47] local.INFO: Found 0 rows  
+[2025-07-09 10:14:47] local.WARNING: No rows found for section reference: 4((3))(1)  
+[2025-07-09 10:14:51] local.INFO: Section content request for tableId=1, sectionRef=42.1  
+[2025-07-09 10:14:51] local.INFO: Found table: legaldocument1  
+[2025-07-09 10:14:51] local.INFO: Received current document context: table=legaldocument1, categoryId=1  
+[2025-07-09 10:14:51] local.INFO: Building search query for section_id: 42.1 in table: legaldocument1  
+[2025-07-09 10:14:51] local.INFO: Built query: select * from `legaldocument1` where `category_id` = ? and (`section_id` = ? or `section_id` like ? or `section_id` like ?) order by CASE 
+                    WHEN section_id = ? THEN 1
+                    WHEN section_id LIKE ? THEN 2
+                    ELSE 3
+                END limit 10 with bindings: ["1","42.1","42.1.%","42.1%","42.1","42.1.%"]  
+[2025-07-09 10:14:51] local.INFO: Executing query: select * from `legaldocument1` where `category_id` = ? and (`section_id` = ? or `section_id` like ? or `section_id` like ?) order by CASE 
+                    WHEN section_id = ? THEN 1
+                    WHEN section_id LIKE ? THEN 2
+                    ELSE 3
+                END limit 10 with bindings: ["1","42.1","42.1.%","42.1%","42.1","42.1.%"]  
+[2025-07-09 10:14:51] local.INFO: Raw SQL equivalent: select * from `legaldocument1` where `category_id` = 1 and (`section_id` = 1 or `section_id` like 1 or `section_id` like 1) order by CASE 
+                    WHEN section_id = 1 THEN 1
+                    WHEN section_id LIKE 1 THEN 2
+                    ELSE 3
+                END limit 10  
+[2025-07-09 10:14:51] local.INFO: Found 4 rows  
+[2025-07-09 10:16:03] local.INFO: Getting clients for user ID: 2  
+[2025-07-09 10:16:03] local.INFO: Found 2 clients for user 2  
+[2025-07-09 10:16:03] local.INFO: Clients data: [{"id":2,"user_id":2,"client_name":"client 1","client_email":"client1@gmail.com","client_status":"Active","last_accessed":"2025-07-08T05:07:44.000000Z","created_at":"2025-06-24T09:30:50.000000Z","updated_at":"2025-07-08T05:07:44.000000Z"},{"id":3,"user_id":2,"client_name":"Client Name 02","client_email":"Email2@gmail.com","client_status":"Active","last_accessed":"2025-07-02T05:21:41.000000Z","created_at":"2025-06-26T05:37:58.000000Z","updated_at":"2025-07-02T05:21:41.000000Z"}]  
+[2025-07-09 10:16:03] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-09 10:16:03"}} 
+[2025-07-09 10:16:03] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-09 10:17:48] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-09 10:17:48"}} 
+[2025-07-09 10:17:48] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-09 10:17:50] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-09 10:17:50"}} 
+[2025-07-09 10:17:50] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-09 10:19:39] local.ERROR: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`j2`.`client_table`, CONSTRAINT `client_table_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE) (Connection: mysql, SQL: insert into `client_table` (`client_email`, `client_name`, `client_status`, `created_at`, `last_accessed`, `updated_at`, `user_id`) values (client1@example.com, Test Client 1, Active, 2025-07-09 10:19:39, 2025-07-09 10:19:39, 2025-07-09 10:19:39, 1), (client2@example.com, Test Client 2, Active, 2025-07-09 10:19:39, 2025-07-09 10:19:39, 2025-07-09 10:19:39, 1), (client3@example.com, Test Client 3, Inactive, 2025-07-09 10:19:39, 2025-07-09 10:19:39, 2025-07-09 10:19:39, 1)) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 23000): SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`j2`.`client_table`, CONSTRAINT `client_table_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE) (Connection: mysql, SQL: insert into `client_table` (`client_email`, `client_name`, `client_status`, `created_at`, `last_accessed`, `updated_at`, `user_id`) values (client1@example.com, Test Client 1, Active, 2025-07-09 10:19:39, 2025-07-09 10:19:39, 2025-07-09 10:19:39, 1), (client2@example.com, Test Client 2, Active, 2025-07-09 10:19:39, 2025-07-09 10:19:39, 2025-07-09 10:19:39, 1), (client3@example.com, Test Client 3, Inactive, 2025-07-09 10:19:39, 2025-07-09 10:19:39, 2025-07-09 10:19:39, 1)) at C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:822)
+[stacktrace]
+#0 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(776): Illuminate\\Database\\Connection->runQueryCallback('insert into `cl...', Array, Object(Closure))
+#1 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\MySqlConnection.php(42): Illuminate\\Database\\Connection->run('insert into `cl...', Array, Object(Closure))
+#2 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php(3747): Illuminate\\Database\\MySqlConnection->insert('insert into `cl...', Array)
+#3 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\database\\migrations\\2024_01_01_000001_add_test_clients.php(15): Illuminate\\Database\\Query\\Builder->insert(Array)
+#4 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(514): AddTestClients->up()
+#5 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(439): Illuminate\\Database\\Migrations\\Migrator->runMethod(Object(Illuminate\\Database\\MySqlConnection), Object(AddTestClients), 'up')
+#6 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(448): Illuminate\\Database\\Migrations\\Migrator->Illuminate\\Database\\Migrations\\{closure}()
+#7 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(250): Illuminate\\Database\\Migrations\\Migrator->runMigration(Object(AddTestClients), 'up')
+#8 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\View\\Components\\Task.php(41): Illuminate\\Database\\Migrations\\Migrator->Illuminate\\Database\\Migrations\\{closure}()
+#9 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(805): Illuminate\\Console\\View\\Components\\Task->render('2024_01_01_0000...', Object(Closure))
+#10 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(250): Illuminate\\Database\\Migrations\\Migrator->write('Illuminate\\\\Cons...', '2024_01_01_0000...', Object(Closure))
+#11 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(210): Illuminate\\Database\\Migrations\\Migrator->runUp('C:\\\\Users\\\\Dilees...', 19, false)
+#12 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(137): Illuminate\\Database\\Migrations\\Migrator->runPending(Array, Array)
+#13 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Migrations\\MigrateCommand.php(116): Illuminate\\Database\\Migrations\\Migrator->run(Array, Array)
+#14 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(665): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->Illuminate\\Database\\Console\\Migrations\\{closure}()
+#15 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Migrations\\MigrateCommand.php(109): Illuminate\\Database\\Migrations\\Migrator->usingConnection(NULL, Object(Closure))
+#16 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Migrations\\MigrateCommand.php(88): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->runMigrations()
+#17 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(36): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->handle()
+#18 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Util.php(43): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#19 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(96): Illuminate\\Container\\Util::unwrapIfClosure(Object(Closure))
+#20 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#21 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(754): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#22 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(209): Illuminate\\Container\\Container->call(Array)
+#23 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\symfony\\console\\Command\\Command.php(318): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#24 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(178): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#25 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\symfony\\console\\Application.php(1092): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#26 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\symfony\\console\\Application.php(341): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Database\\Console\\Migrations\\MigrateCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#27 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\symfony\\console\\Application.php(192): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#28 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(197): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#29 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(1234): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#30 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\artisan(16): Illuminate\\Foundation\\Application->handleCommand(Object(Symfony\\Component\\Console\\Input\\ArgvInput))
+#31 {main}
+
+[previous exception] [object] (PDOException(code: 23000): SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`j2`.`client_table`, CONSTRAINT `client_table_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE) at C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\MySqlConnection.php:53)
+[stacktrace]
+#0 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\MySqlConnection.php(53): PDOStatement->execute()
+#1 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(809): Illuminate\\Database\\MySqlConnection->Illuminate\\Database\\{closure}('insert into `cl...', Array)
+#2 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(776): Illuminate\\Database\\Connection->runQueryCallback('insert into `cl...', Array, Object(Closure))
+#3 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\MySqlConnection.php(42): Illuminate\\Database\\Connection->run('insert into `cl...', Array, Object(Closure))
+#4 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php(3747): Illuminate\\Database\\MySqlConnection->insert('insert into `cl...', Array)
+#5 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\database\\migrations\\2024_01_01_000001_add_test_clients.php(15): Illuminate\\Database\\Query\\Builder->insert(Array)
+#6 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(514): AddTestClients->up()
+#7 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(439): Illuminate\\Database\\Migrations\\Migrator->runMethod(Object(Illuminate\\Database\\MySqlConnection), Object(AddTestClients), 'up')
+#8 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(448): Illuminate\\Database\\Migrations\\Migrator->Illuminate\\Database\\Migrations\\{closure}()
+#9 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(250): Illuminate\\Database\\Migrations\\Migrator->runMigration(Object(AddTestClients), 'up')
+#10 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\View\\Components\\Task.php(41): Illuminate\\Database\\Migrations\\Migrator->Illuminate\\Database\\Migrations\\{closure}()
+#11 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(805): Illuminate\\Console\\View\\Components\\Task->render('2024_01_01_0000...', Object(Closure))
+#12 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(250): Illuminate\\Database\\Migrations\\Migrator->write('Illuminate\\\\Cons...', '2024_01_01_0000...', Object(Closure))
+#13 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(210): Illuminate\\Database\\Migrations\\Migrator->runUp('C:\\\\Users\\\\Dilees...', 19, false)
+#14 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(137): Illuminate\\Database\\Migrations\\Migrator->runPending(Array, Array)
+#15 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Migrations\\MigrateCommand.php(116): Illuminate\\Database\\Migrations\\Migrator->run(Array, Array)
+#16 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(665): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->Illuminate\\Database\\Console\\Migrations\\{closure}()
+#17 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Migrations\\MigrateCommand.php(109): Illuminate\\Database\\Migrations\\Migrator->usingConnection(NULL, Object(Closure))
+#18 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Migrations\\MigrateCommand.php(88): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->runMigrations()
+#19 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(36): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->handle()
+#20 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Util.php(43): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#21 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(96): Illuminate\\Container\\Util::unwrapIfClosure(Object(Closure))
+#22 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#23 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(754): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#24 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(209): Illuminate\\Container\\Container->call(Array)
+#25 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\symfony\\console\\Command\\Command.php(318): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#26 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(178): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#27 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\symfony\\console\\Application.php(1092): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#28 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\symfony\\console\\Application.php(341): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Database\\Console\\Migrations\\MigrateCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#29 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\symfony\\console\\Application.php(192): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#30 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(197): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#31 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(1234): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#32 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\artisan(16): Illuminate\\Foundation\\Application->handleCommand(Object(Symfony\\Component\\Console\\Input\\ArgvInput))
+#33 {main}
+"} 
+[2025-07-09 10:23:29] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-09 10:23:29"}} 
+[2025-07-09 10:23:29] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-09 10:28:39] local.ERROR: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`j2`.`client_table`, CONSTRAINT `client_table_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE) (Connection: mysql, SQL: insert into `client_table` (`client_email`, `client_name`, `client_status`, `created_at`, `last_accessed`, `updated_at`, `user_id`) values (client1@example.com, Test Client 1, Active, 2025-07-09 10:28:39, 2025-07-09 10:28:39, 2025-07-09 10:28:39, 1), (client2@example.com, Test Client 2, Active, 2025-07-09 10:28:39, 2025-07-09 10:28:39, 2025-07-09 10:28:39, 1), (client3@example.com, Test Client 3, Inactive, 2025-07-09 10:28:39, 2025-07-09 10:28:39, 2025-07-09 10:28:39, 1)) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 23000): SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`j2`.`client_table`, CONSTRAINT `client_table_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE) (Connection: mysql, SQL: insert into `client_table` (`client_email`, `client_name`, `client_status`, `created_at`, `last_accessed`, `updated_at`, `user_id`) values (client1@example.com, Test Client 1, Active, 2025-07-09 10:28:39, 2025-07-09 10:28:39, 2025-07-09 10:28:39, 1), (client2@example.com, Test Client 2, Active, 2025-07-09 10:28:39, 2025-07-09 10:28:39, 2025-07-09 10:28:39, 1), (client3@example.com, Test Client 3, Inactive, 2025-07-09 10:28:39, 2025-07-09 10:28:39, 2025-07-09 10:28:39, 1)) at C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:822)
+[stacktrace]
+#0 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(776): Illuminate\\Database\\Connection->runQueryCallback('insert into `cl...', Array, Object(Closure))
+#1 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\MySqlConnection.php(42): Illuminate\\Database\\Connection->run('insert into `cl...', Array, Object(Closure))
+#2 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php(3747): Illuminate\\Database\\MySqlConnection->insert('insert into `cl...', Array)
+#3 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\database\\migrations\\2024_01_01_000001_add_test_clients.php(15): Illuminate\\Database\\Query\\Builder->insert(Array)
+#4 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(514): AddTestClients->up()
+#5 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(439): Illuminate\\Database\\Migrations\\Migrator->runMethod(Object(Illuminate\\Database\\MySqlConnection), Object(AddTestClients), 'up')
+#6 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(448): Illuminate\\Database\\Migrations\\Migrator->Illuminate\\Database\\Migrations\\{closure}()
+#7 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(250): Illuminate\\Database\\Migrations\\Migrator->runMigration(Object(AddTestClients), 'up')
+#8 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\View\\Components\\Task.php(41): Illuminate\\Database\\Migrations\\Migrator->Illuminate\\Database\\Migrations\\{closure}()
+#9 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(805): Illuminate\\Console\\View\\Components\\Task->render('2024_01_01_0000...', Object(Closure))
+#10 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(250): Illuminate\\Database\\Migrations\\Migrator->write('Illuminate\\\\Cons...', '2024_01_01_0000...', Object(Closure))
+#11 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(210): Illuminate\\Database\\Migrations\\Migrator->runUp('C:\\\\Users\\\\Dilees...', 19, false)
+#12 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(137): Illuminate\\Database\\Migrations\\Migrator->runPending(Array, Array)
+#13 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Migrations\\MigrateCommand.php(116): Illuminate\\Database\\Migrations\\Migrator->run(Array, Array)
+#14 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(665): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->Illuminate\\Database\\Console\\Migrations\\{closure}()
+#15 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Migrations\\MigrateCommand.php(109): Illuminate\\Database\\Migrations\\Migrator->usingConnection(NULL, Object(Closure))
+#16 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Migrations\\MigrateCommand.php(88): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->runMigrations()
+#17 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(36): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->handle()
+#18 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Util.php(43): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#19 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(96): Illuminate\\Container\\Util::unwrapIfClosure(Object(Closure))
+#20 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#21 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(754): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#22 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(209): Illuminate\\Container\\Container->call(Array)
+#23 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\symfony\\console\\Command\\Command.php(318): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#24 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(178): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#25 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\symfony\\console\\Application.php(1092): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#26 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\symfony\\console\\Application.php(341): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Database\\Console\\Migrations\\MigrateCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#27 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\symfony\\console\\Application.php(192): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#28 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(197): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#29 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(1234): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#30 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\artisan(16): Illuminate\\Foundation\\Application->handleCommand(Object(Symfony\\Component\\Console\\Input\\ArgvInput))
+#31 {main}
+
+[previous exception] [object] (PDOException(code: 23000): SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`j2`.`client_table`, CONSTRAINT `client_table_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE) at C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\MySqlConnection.php:53)
+[stacktrace]
+#0 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\MySqlConnection.php(53): PDOStatement->execute()
+#1 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(809): Illuminate\\Database\\MySqlConnection->Illuminate\\Database\\{closure}('insert into `cl...', Array)
+#2 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(776): Illuminate\\Database\\Connection->runQueryCallback('insert into `cl...', Array, Object(Closure))
+#3 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\MySqlConnection.php(42): Illuminate\\Database\\Connection->run('insert into `cl...', Array, Object(Closure))
+#4 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php(3747): Illuminate\\Database\\MySqlConnection->insert('insert into `cl...', Array)
+#5 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\database\\migrations\\2024_01_01_000001_add_test_clients.php(15): Illuminate\\Database\\Query\\Builder->insert(Array)
+#6 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(514): AddTestClients->up()
+#7 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(439): Illuminate\\Database\\Migrations\\Migrator->runMethod(Object(Illuminate\\Database\\MySqlConnection), Object(AddTestClients), 'up')
+#8 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(448): Illuminate\\Database\\Migrations\\Migrator->Illuminate\\Database\\Migrations\\{closure}()
+#9 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(250): Illuminate\\Database\\Migrations\\Migrator->runMigration(Object(AddTestClients), 'up')
+#10 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\View\\Components\\Task.php(41): Illuminate\\Database\\Migrations\\Migrator->Illuminate\\Database\\Migrations\\{closure}()
+#11 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(805): Illuminate\\Console\\View\\Components\\Task->render('2024_01_01_0000...', Object(Closure))
+#12 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(250): Illuminate\\Database\\Migrations\\Migrator->write('Illuminate\\\\Cons...', '2024_01_01_0000...', Object(Closure))
+#13 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(210): Illuminate\\Database\\Migrations\\Migrator->runUp('C:\\\\Users\\\\Dilees...', 19, false)
+#14 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(137): Illuminate\\Database\\Migrations\\Migrator->runPending(Array, Array)
+#15 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Migrations\\MigrateCommand.php(116): Illuminate\\Database\\Migrations\\Migrator->run(Array, Array)
+#16 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(665): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->Illuminate\\Database\\Console\\Migrations\\{closure}()
+#17 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Migrations\\MigrateCommand.php(109): Illuminate\\Database\\Migrations\\Migrator->usingConnection(NULL, Object(Closure))
+#18 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Migrations\\MigrateCommand.php(88): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->runMigrations()
+#19 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(36): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->handle()
+#20 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Util.php(43): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#21 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(96): Illuminate\\Container\\Util::unwrapIfClosure(Object(Closure))
+#22 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#23 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(754): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#24 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(209): Illuminate\\Container\\Container->call(Array)
+#25 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\symfony\\console\\Command\\Command.php(318): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#26 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(178): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#27 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\symfony\\console\\Application.php(1092): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#28 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\symfony\\console\\Application.php(341): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Database\\Console\\Migrations\\MigrateCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#29 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\symfony\\console\\Application.php(192): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#30 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(197): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#31 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(1234): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#32 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\artisan(16): Illuminate\\Foundation\\Application->handleCommand(Object(Symfony\\Component\\Console\\Input\\ArgvInput))
+#33 {main}
+"} 
+[2025-07-09 10:29:10] local.ERROR: The "--step" option does not accept a value. {"exception":"[object] (Symfony\\Component\\Console\\Exception\\RuntimeException(code: 0): The \"--step\" option does not accept a value. at C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\symfony\\console\\Input\\ArgvInput.php:241)
+[stacktrace]
+#0 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\symfony\\console\\Input\\ArgvInput.php(153): Symfony\\Component\\Console\\Input\\ArgvInput->addLongOption('step', '1')
+#1 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\symfony\\console\\Input\\ArgvInput.php(88): Symfony\\Component\\Console\\Input\\ArgvInput->parseLongOption('--step=1')
+#2 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\symfony\\console\\Input\\ArgvInput.php(77): Symfony\\Component\\Console\\Input\\ArgvInput->parseToken('--step=1', true)
+#3 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\symfony\\console\\Input\\Input.php(53): Symfony\\Component\\Console\\Input\\ArgvInput->parse()
+#4 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\symfony\\console\\Command\\Command.php(276): Symfony\\Component\\Console\\Input\\Input->bind(Object(Symfony\\Component\\Console\\Input\\InputDefinition))
+#5 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(178): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#6 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\symfony\\console\\Application.php(1092): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#7 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\symfony\\console\\Application.php(341): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Database\\Console\\Migrations\\MigrateCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\symfony\\console\\Application.php(192): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#9 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(197): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#10 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(1234): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#11 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\artisan(16): Illuminate\\Foundation\\Application->handleCommand(Object(Symfony\\Component\\Console\\Input\\ArgvInput))
+#12 {main}
+"} 
+[2025-07-09 10:29:36] local.ERROR: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`j2`.`client_table`, CONSTRAINT `client_table_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE) (Connection: mysql, SQL: insert into `client_table` (`client_email`, `client_name`, `client_status`, `created_at`, `last_accessed`, `updated_at`, `user_id`) values (client1@example.com, Test Client 1, Active, 2025-07-09 10:29:36, 2025-07-09 10:29:36, 2025-07-09 10:29:36, 1), (client2@example.com, Test Client 2, Active, 2025-07-09 10:29:36, 2025-07-09 10:29:36, 2025-07-09 10:29:36, 1), (client3@example.com, Test Client 3, Inactive, 2025-07-09 10:29:36, 2025-07-09 10:29:36, 2025-07-09 10:29:36, 1)) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 23000): SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`j2`.`client_table`, CONSTRAINT `client_table_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE) (Connection: mysql, SQL: insert into `client_table` (`client_email`, `client_name`, `client_status`, `created_at`, `last_accessed`, `updated_at`, `user_id`) values (client1@example.com, Test Client 1, Active, 2025-07-09 10:29:36, 2025-07-09 10:29:36, 2025-07-09 10:29:36, 1), (client2@example.com, Test Client 2, Active, 2025-07-09 10:29:36, 2025-07-09 10:29:36, 2025-07-09 10:29:36, 1), (client3@example.com, Test Client 3, Inactive, 2025-07-09 10:29:36, 2025-07-09 10:29:36, 2025-07-09 10:29:36, 1)) at C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:822)
+[stacktrace]
+#0 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(776): Illuminate\\Database\\Connection->runQueryCallback('insert into `cl...', Array, Object(Closure))
+#1 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\MySqlConnection.php(42): Illuminate\\Database\\Connection->run('insert into `cl...', Array, Object(Closure))
+#2 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php(3747): Illuminate\\Database\\MySqlConnection->insert('insert into `cl...', Array)
+#3 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\database\\migrations\\2024_01_01_000001_add_test_clients.php(15): Illuminate\\Database\\Query\\Builder->insert(Array)
+#4 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(514): AddTestClients->up()
+#5 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(439): Illuminate\\Database\\Migrations\\Migrator->runMethod(Object(Illuminate\\Database\\MySqlConnection), Object(AddTestClients), 'up')
+#6 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(448): Illuminate\\Database\\Migrations\\Migrator->Illuminate\\Database\\Migrations\\{closure}()
+#7 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(250): Illuminate\\Database\\Migrations\\Migrator->runMigration(Object(AddTestClients), 'up')
+#8 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\View\\Components\\Task.php(41): Illuminate\\Database\\Migrations\\Migrator->Illuminate\\Database\\Migrations\\{closure}()
+#9 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(805): Illuminate\\Console\\View\\Components\\Task->render('2024_01_01_0000...', Object(Closure))
+#10 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(250): Illuminate\\Database\\Migrations\\Migrator->write('Illuminate\\\\Cons...', '2024_01_01_0000...', Object(Closure))
+#11 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(210): Illuminate\\Database\\Migrations\\Migrator->runUp('C:\\\\Users\\\\Dilees...', 19, false)
+#12 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(137): Illuminate\\Database\\Migrations\\Migrator->runPending(Array, Array)
+#13 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Migrations\\MigrateCommand.php(116): Illuminate\\Database\\Migrations\\Migrator->run(Array, Array)
+#14 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(665): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->Illuminate\\Database\\Console\\Migrations\\{closure}()
+#15 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Migrations\\MigrateCommand.php(109): Illuminate\\Database\\Migrations\\Migrator->usingConnection(NULL, Object(Closure))
+#16 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Migrations\\MigrateCommand.php(88): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->runMigrations()
+#17 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(36): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->handle()
+#18 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Util.php(43): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#19 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(96): Illuminate\\Container\\Util::unwrapIfClosure(Object(Closure))
+#20 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#21 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(754): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#22 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(209): Illuminate\\Container\\Container->call(Array)
+#23 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\symfony\\console\\Command\\Command.php(318): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#24 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(178): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#25 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\symfony\\console\\Application.php(1092): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#26 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\symfony\\console\\Application.php(341): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Database\\Console\\Migrations\\MigrateCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#27 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\symfony\\console\\Application.php(192): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#28 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(197): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#29 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(1234): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#30 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\artisan(16): Illuminate\\Foundation\\Application->handleCommand(Object(Symfony\\Component\\Console\\Input\\ArgvInput))
+#31 {main}
+
+[previous exception] [object] (PDOException(code: 23000): SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`j2`.`client_table`, CONSTRAINT `client_table_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE) at C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\MySqlConnection.php:53)
+[stacktrace]
+#0 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\MySqlConnection.php(53): PDOStatement->execute()
+#1 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(809): Illuminate\\Database\\MySqlConnection->Illuminate\\Database\\{closure}('insert into `cl...', Array)
+#2 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(776): Illuminate\\Database\\Connection->runQueryCallback('insert into `cl...', Array, Object(Closure))
+#3 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\MySqlConnection.php(42): Illuminate\\Database\\Connection->run('insert into `cl...', Array, Object(Closure))
+#4 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php(3747): Illuminate\\Database\\MySqlConnection->insert('insert into `cl...', Array)
+#5 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\database\\migrations\\2024_01_01_000001_add_test_clients.php(15): Illuminate\\Database\\Query\\Builder->insert(Array)
+#6 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(514): AddTestClients->up()
+#7 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(439): Illuminate\\Database\\Migrations\\Migrator->runMethod(Object(Illuminate\\Database\\MySqlConnection), Object(AddTestClients), 'up')
+#8 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(448): Illuminate\\Database\\Migrations\\Migrator->Illuminate\\Database\\Migrations\\{closure}()
+#9 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(250): Illuminate\\Database\\Migrations\\Migrator->runMigration(Object(AddTestClients), 'up')
+#10 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\View\\Components\\Task.php(41): Illuminate\\Database\\Migrations\\Migrator->Illuminate\\Database\\Migrations\\{closure}()
+#11 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(805): Illuminate\\Console\\View\\Components\\Task->render('2024_01_01_0000...', Object(Closure))
+#12 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(250): Illuminate\\Database\\Migrations\\Migrator->write('Illuminate\\\\Cons...', '2024_01_01_0000...', Object(Closure))
+#13 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(210): Illuminate\\Database\\Migrations\\Migrator->runUp('C:\\\\Users\\\\Dilees...', 19, false)
+#14 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(137): Illuminate\\Database\\Migrations\\Migrator->runPending(Array, Array)
+#15 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Migrations\\MigrateCommand.php(116): Illuminate\\Database\\Migrations\\Migrator->run(Array, Array)
+#16 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(665): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->Illuminate\\Database\\Console\\Migrations\\{closure}()
+#17 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Migrations\\MigrateCommand.php(109): Illuminate\\Database\\Migrations\\Migrator->usingConnection(NULL, Object(Closure))
+#18 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Migrations\\MigrateCommand.php(88): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->runMigrations()
+#19 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(36): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->handle()
+#20 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Util.php(43): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#21 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(96): Illuminate\\Container\\Util::unwrapIfClosure(Object(Closure))
+#22 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#23 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(754): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#24 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(209): Illuminate\\Container\\Container->call(Array)
+#25 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\symfony\\console\\Command\\Command.php(318): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#26 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(178): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#27 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\symfony\\console\\Application.php(1092): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#28 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\symfony\\console\\Application.php(341): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Database\\Console\\Migrations\\MigrateCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#29 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\symfony\\console\\Application.php(192): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#30 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(197): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#31 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(1234): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#32 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\artisan(16): Illuminate\\Foundation\\Application->handleCommand(Object(Symfony\\Component\\Console\\Input\\ArgvInput))
+#33 {main}
+"} 
+[2025-07-09 10:30:13] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-09 10:30:13"}} 
+[2025-07-09 10:30:13] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-09 10:31:43] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-09 10:31:43"}} 
+[2025-07-09 10:31:43] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-09 10:31:44] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-09 10:31:44"}} 
+[2025-07-09 10:31:44] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-09 10:31:45] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-09 10:31:45"}} 
+[2025-07-09 10:31:45] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-09 10:31:47] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-09 10:31:47"}} 
+[2025-07-09 10:31:47] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-09 10:31:52] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-09 10:31:52"}} 
+[2025-07-09 10:31:52] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-09 10:31:54] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-09 10:31:54"}} 
+[2025-07-09 10:31:54] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-09 10:34:31] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-09 10:34:31"}} 
+[2025-07-09 10:34:31] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-09 10:34:34] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-09 10:34:34"}} 
+[2025-07-09 10:34:34] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-09 10:38:15] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-09 10:38:15"}} 
+[2025-07-09 10:38:15] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-09 10:38:17] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-09 10:38:17"}} 
+[2025-07-09 10:38:17] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-09 10:38:21] local.INFO: Getting clients for user ID: 2  
+[2025-07-09 10:38:21] local.INFO: Found 2 clients for user 2  
+[2025-07-09 10:38:21] local.INFO: Clients data: [{"id":2,"user_id":2,"client_name":"client 1","client_email":"client1@gmail.com","client_status":"Active","last_accessed":"2025-07-08T05:07:44.000000Z","created_at":"2025-06-24T09:30:50.000000Z","updated_at":"2025-07-08T05:07:44.000000Z"},{"id":3,"user_id":2,"client_name":"Client Name 02","client_email":"Email2@gmail.com","client_status":"Active","last_accessed":"2025-07-02T05:21:41.000000Z","created_at":"2025-06-26T05:37:58.000000Z","updated_at":"2025-07-02T05:21:41.000000Z"}]  
+[2025-07-09 10:38:22] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-09 10:38:22"}} 
+[2025-07-09 10:38:22] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-09 10:38:23] local.ERROR: Call to undefined method App\Http\Controllers\NotesController::saveNotes() {"userId":2,"exception":"[object] (Error(code: 0): Call to undefined method App\\Http\\Controllers\\NotesController::saveNotes() at C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\ControllerDispatcher.php:46)
+[stacktrace]
+#0 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php(265): Illuminate\\Routing\\ControllerDispatcher->dispatch(Object(Illuminate\\Routing\\Route), Object(App\\Http\\Controllers\\NotesController), 'saveNotes')
+#1 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php(211): Illuminate\\Routing\\Route->runController()
+#2 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(808): Illuminate\\Routing\\Route->run()
+#3 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(169): Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#4 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\SubstituteBindings.php(50): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#5 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(208): Illuminate\\Routing\\Middleware\\SubstituteBindings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#6 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Auth\\Middleware\\Authenticate.php(63): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#7 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(208): Illuminate\\Auth\\Middleware\\Authenticate->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#8 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken.php(87): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#9 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(208): Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#10 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Middleware\\ShareErrorsFromSession.php(48): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#11 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(208): Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#12 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Session\\Middleware\\StartSession.php(120): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#13 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Session\\Middleware\\StartSession.php(63): Illuminate\\Session\\Middleware\\StartSession->handleStatefulRequest(Object(Illuminate\\Http\\Request), Object(Illuminate\\Session\\Store), Object(Closure))
+#14 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(208): Illuminate\\Session\\Middleware\\StartSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#15 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse.php(36): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#16 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(208): Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#17 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Cookie\\Middleware\\EncryptCookies.php(74): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#18 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(208): Illuminate\\Cookie\\Middleware\\EncryptCookies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#19 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(126): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#20 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(807): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#21 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(786): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#22 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(750): Illuminate\\Routing\\Router->runRoute(Object(Illuminate\\Http\\Request), Object(Illuminate\\Routing\\Route))
+#23 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(739): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#24 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(200): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#25 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(169): Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#26 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#27 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull.php(31): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#28 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(208): Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#29 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#30 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TrimStrings.php(51): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#31 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(208): Illuminate\\Foundation\\Http\\Middleware\\TrimStrings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#32 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\ValidatePostSize.php(27): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#33 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(208): Illuminate\\Http\\Middleware\\ValidatePostSize->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#34 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance.php(109): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#35 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(208): Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#36 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\HandleCors.php(48): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#37 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(208): Illuminate\\Http\\Middleware\\HandleCors->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#38 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\TrustProxies.php(58): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#39 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(208): Illuminate\\Http\\Middleware\\TrustProxies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#40 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\InvokeDeferredCallbacks.php(22): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#41 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(208): Illuminate\\Foundation\\Http\\Middleware\\InvokeDeferredCallbacks->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#42 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\ValidatePathEncoding.php(26): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#43 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(208): Illuminate\\Http\\Middleware\\ValidatePathEncoding->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#44 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(126): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#45 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(175): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#46 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(144): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#47 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(1219): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#48 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\public\\index.php(20): Illuminate\\Foundation\\Application->handleRequest(Object(Illuminate\\Http\\Request))
+#49 C:\\Users\\Dileesha\\Desktop\\jurislocator_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\resources\\server.php(23): require_once('C:\\\\Users\\\\Dilees...')
+#50 {main}
+"} 
+[2025-07-09 10:38:31] local.INFO: Section content request for tableId=1, sectionRef=46  
+[2025-07-09 10:38:31] local.INFO: Found table: legaldocument1  
+[2025-07-09 10:38:31] local.INFO: Received current document context: table=legaldocument1, categoryId=1  
+[2025-07-09 10:38:31] local.INFO: Building search query for section_id: 46 in table: legaldocument1  
+[2025-07-09 10:38:31] local.INFO: Built query: select * from `legaldocument1` where `category_id` = ? and (`section_id` = ? or `section_id` like ? or `section_id` like ?) order by CASE 
+                    WHEN section_id = ? THEN 1
+                    WHEN section_id LIKE ? THEN 2
+                    ELSE 3
+                END limit 10 with bindings: ["1","46","46.%","46%","46","46.%"]  
+[2025-07-09 10:38:31] local.INFO: Executing query: select * from `legaldocument1` where `category_id` = ? and (`section_id` = ? or `section_id` like ? or `section_id` like ?) order by CASE 
+                    WHEN section_id = ? THEN 1
+                    WHEN section_id LIKE ? THEN 2
+                    ELSE 3
+                END limit 10 with bindings: ["1","46","46.%","46%","46","46.%"]  
+[2025-07-09 10:38:31] local.INFO: Raw SQL equivalent: select * from `legaldocument1` where `category_id` = 1 and (`section_id` = 1 or `section_id` like 1 or `section_id` like 1) order by CASE 
+                    WHEN section_id = 1 THEN 1
+                    WHEN section_id LIKE 1 THEN 2
+                    ELSE 3
+                END limit 10  
+[2025-07-09 10:38:31] local.INFO: Found 10 rows  
+[2025-07-09 10:38:31] local.INFO: Section content request for tableId=1, sectionRef=46  
+[2025-07-09 10:38:31] local.INFO: Found table: legaldocument1  
+[2025-07-09 10:38:31] local.INFO: Building search query for section_id: 46 in table: legaldocument1  
+[2025-07-09 10:38:31] local.INFO: Built query: select * from `legaldocument1` where `category_id` = ? and (`section_id` = ? or `section_id` like ? or `section_id` like ?) order by CASE 
+                    WHEN section_id = ? THEN 1
+                    WHEN section_id LIKE ? THEN 2
+                    ELSE 3
+                END limit 10 with bindings: ["1","46","46.%","46%","46","46.%"]  
+[2025-07-09 10:38:31] local.INFO: Executing query: select * from `legaldocument1` where `category_id` = ? and (`section_id` = ? or `section_id` like ? or `section_id` like ?) order by CASE 
+                    WHEN section_id = ? THEN 1
+                    WHEN section_id LIKE ? THEN 2
+                    ELSE 3
+                END limit 10 with bindings: ["1","46","46.%","46%","46","46.%"]  
+[2025-07-09 10:38:31] local.INFO: Raw SQL equivalent: select * from `legaldocument1` where `category_id` = 1 and (`section_id` = 1 or `section_id` like 1 or `section_id` like 1) order by CASE 
+                    WHEN section_id = 1 THEN 1
+                    WHEN section_id LIKE 1 THEN 2
+                    ELSE 3
+                END limit 10  
+[2025-07-09 10:38:31] local.INFO: Found 10 rows  
+[2025-07-09 10:38:35] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-09 10:38:35"}} 
+[2025-07-09 10:38:35] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-09 10:49:02] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-09 10:49:02"}} 
+[2025-07-09 10:49:02] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-09 10:49:02] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-09 10:49:02"}} 
+[2025-07-09 10:49:02] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-09 10:49:02] local.INFO: Getting pinned timezones for user: 2 {"timezones":[]} 
+[2025-07-09 10:49:04] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-09 10:49:04"}} 
+[2025-07-09 10:49:04] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-09 10:49:05] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-09 10:49:04"}} 
+[2025-07-09 10:49:05] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-09 10:49:05] local.INFO: Getting pinned timezones for user: 2 {"timezones":[]} 
+[2025-07-09 10:49:05] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-09 10:49:05"}} 
+[2025-07-09 10:49:05] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-09 10:49:05] local.INFO: Getting pinned timezones for user: 2 {"timezones":[]} 
+[2025-07-09 10:49:08] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-09 10:49:08"}} 
+[2025-07-09 10:49:08] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-09 10:49:08] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-09 10:49:08"}} 
+[2025-07-09 10:49:08] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-09 10:49:08] local.INFO: Updated pinned timezones for user: 2 {"old_timezones":[{"timezone":"America/New_York","name":"New York (EST)","country":"United States","flag":"🇺🇸"}],"new_timezones":[{"timezone":"America/New_York","name":"New York (EST)","country":"United States","flag":"🇺🇸"}],"saved":true} 
+[2025-07-09 10:49:28] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-09 10:49:28"}} 
+[2025-07-09 10:49:28] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-09 10:49:29] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-09 10:49:29"}} 
+[2025-07-09 10:49:29] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-09 10:49:29] local.INFO: Updated pinned timezones for user: 2 {"old_timezones":[{"timezone":"America/New_York","name":"New York (EST)","country":"United States","flag":"🇺🇸"},{"timezone":"Asia/Tokyo","name":"Tokyo (JST)","country":"Japan","flag":"🇯🇵"}],"new_timezones":[{"timezone":"America/New_York","name":"New York (EST)","country":"United States","flag":"🇺🇸"},{"timezone":"Asia/Tokyo","name":"Tokyo (JST)","country":"Japan","flag":"🇯🇵"}],"saved":true} 
+[2025-07-09 10:49:32] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-09 10:49:32"}} 
+[2025-07-09 10:49:32] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-09 10:49:32] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-09 10:49:32"}} 
+[2025-07-09 10:49:32] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-09 10:49:32] local.INFO: Updated pinned timezones for user: 2 {"old_timezones":[{"timezone":"America/New_York","name":"New York (EST)","country":"United States","flag":"🇺🇸"}],"new_timezones":[{"timezone":"America/New_York","name":"New York (EST)","country":"United States","flag":"🇺🇸"}],"saved":true} 
+[2025-07-09 10:49:33] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-09 10:49:33"}} 
+[2025-07-09 10:49:33] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-09 10:49:33] local.INFO: CheckSubscription: Checking subscription {"user_id":2,"subscription":{"id":51,"status":"trial","trial_ends_at":"2025-07-11 04:57:13","now":"2025-07-09 10:49:33"}} 
+[2025-07-09 10:49:33] local.INFO: CheckSubscription: Active subscription found, proceeding  
+[2025-07-09 10:49:33] local.INFO: Updated pinned timezones for user: 2 {"old_timezones":[{"timezone":"America/New_York","name":"New York (EST)","country":"United States","flag":"🇺🇸"},{"timezone":"Asia/Tokyo","name":"Tokyo (JST)","country":"Japan","flag":"🇯🇵"}],"new_timezones":[{"timezone":"America/New_York","name":"New York (EST)","country":"United States","flag":"🇺🇸"},{"timezone":"Asia/Tokyo","name":"Tokyo (JST)","country":"Japan","flag":"🇯🇵"}],"saved":true} 

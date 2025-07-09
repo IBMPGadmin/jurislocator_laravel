@@ -625,7 +625,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     pinnedTimezones = JSON.parse(localStorage.getItem('pinnedTimezones') || '[]');
                 }
             } else {
-                console.log('Failed to load from server, using localStorage');
+                console.log('Failed to load from server (HTTP ' + response.status + '), using localStorage');
+                // Check if it's an authentication error
+                if (response.status === 401 || response.status === 302) {
+                    console.log('Authentication required - user may need to log in');
+                }
                 // Fallback to localStorage
                 pinnedTimezones = JSON.parse(localStorage.getItem('pinnedTimezones') || '[]');
             }
@@ -690,7 +694,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     console.log('Timezone unpinned successfully');
                 } else {
                     console.error('Failed to unpin timezone:', data.message);
-                    alert(data.message || 'Failed to unpin timezone');
+                    // Check if it's an authentication error
+                    if (response.status === 401 || response.status === 302) {
+                        alert('Authentication required. Please refresh the page and log in again.');
+                    } else {
+                        alert(data.message || 'Failed to unpin timezone');
+                    }
                 }
             } else {
                 // Pin timezone
@@ -713,12 +722,22 @@ document.addEventListener('DOMContentLoaded', function() {
                     console.log('Timezone pinned successfully');
                 } else {
                     console.error('Failed to pin timezone:', data.message);
-                    alert(data.message || 'Failed to pin timezone');
+                    // Check if it's an authentication error
+                    if (response.status === 401 || response.status === 302) {
+                        alert('Authentication required. Please refresh the page and log in again.');
+                    } else {
+                        alert(data.message || 'Failed to pin timezone');
+                    }
                 }
             }
         } catch (error) {
             console.error('Error toggling pin:', error);
-            alert('Error updating timezone. Please try again.');
+            // Check if it's a network error that might indicate authentication issues
+            if (error.name === 'TypeError' || error.message.includes('Failed to fetch')) {
+                alert('Network error. Please check your connection and ensure you are logged in.');
+            } else {
+                alert('Error updating timezone. Please try again.');
+            }
         }
     }
     

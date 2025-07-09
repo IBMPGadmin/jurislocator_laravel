@@ -1000,7 +1000,6 @@
     .nested-droppable:hover {
         border-color: var(--color-theme-3);
         background: var(--color-widget-bg);
-        box-shadow: 0 2px 8px var(--color-theme-1-opacity);
     }
 
     .nested-droppable .card-title {
