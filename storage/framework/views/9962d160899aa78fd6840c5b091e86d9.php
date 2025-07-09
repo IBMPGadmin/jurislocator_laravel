@@ -198,6 +198,32 @@
         flex-shrink: 0;
     }
     
+    /* Unified modal client avatar styling */
+    .client-avatar-large {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: linear-gradient(45deg, #007bff, #6c757d);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 1.1rem;
+        flex-shrink: 0;
+    }
+    
+    /* Client selection section styling */
+    .client-selection-section {
+        max-height: 60vh;
+        overflow-y: auto;
+    }
+    
+    .clients-grid {
+        max-height: 40vh;
+        overflow-y: auto;
+    }
+    
     .btn-select-client {
         background: linear-gradient(135deg, #28a745, #20c997);
         border: none;
@@ -803,6 +829,403 @@
     .debug-outline {
         outline: 2px dashed red !important;
     }
+
+    /* Unified Controls Styling - Theme Colors */
+    .unified-controls-container {
+        background: linear-gradient(135deg, var(--color-theme-1) 0%, var(--color-card-bg) 100%);
+        border: 1px solid var(--color-border);
+        box-shadow: 0 2px 8px var(--color-theme-1-opacity);
+    }
+
+    /* Unified Controls Header - Theme Colors */
+    .unified-controls-container .card-header {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+        background: var(--color-theme-3) !important;
+        border-bottom: 1px solid var(--color-button-border);
+        color: var(--color-text-primary) !important;
+    }
+
+    .unified-controls-container .card-body {
+        background: var(--color-widget-bg);
+        border-radius: 8px;
+        padding: 0.75rem;
+    }
+
+    .unified-controls-container .btn {
+        border: 1px solid var(--color-button-border);
+        color: var(--color-text-dark);
+        background: var(--color-button-bg);
+        font-weight: 500;
+        min-width: 100px;
+        padding: 0.5rem 0.8rem;
+        font-size: 0.85rem;
+        margin: 0.1rem;
+        flex: 1;
+        max-width: 120px;
+        transition: all 0.3s ease;
+    }
+
+    .unified-controls-container .btn:hover {
+        background: var(--color-button-bg-hover-1);
+        border-color: var(--color-theme-3);
+        color: var(--color-text-dark);
+        transform: translateY(-1px);
+    }
+
+    .unified-controls-container .btn i {
+        font-size: 0.85rem;
+        margin-right: 0.4rem;
+    }
+
+    /* Explanation text styling */
+    .unified-controls-container .text-white-50 {
+        opacity: 0.9;
+        font-style: italic;
+        line-height: 1.3;
+        color: var(--color-text-primary) !important;
+    }
+
+    /* Responsive adjustments for unified controls */
+    @media (max-width: 1200px) {
+        .unified-controls-container .btn {
+            min-width: 45px;
+            font-size: 0.75rem;
+            padding: 0.35rem 0.5rem;
+            flex: 1;
+            max-width: 60px;
+        }
+        
+        .unified-controls-container .btn span {
+            display: none;
+        }
+        
+        .unified-controls-container .btn i {
+            margin-right: 0;
+            font-size: 0.9rem;
+        }
+        
+        .unified-controls-container .text-white-50 {
+            font-size: 0.7rem;
+            margin-bottom: 0.5rem !important;
+        }
+    }
+
+    /* Sidebar container responsive height management */
+    .sticky-container {
+        max-height: calc(100vh - 100px);
+        overflow-y: auto;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+    }
+
+    .sticky-container::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    .sticky-container::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    .sticky-container::-webkit-scrollbar-thumb {
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 2px;
+    }
+
+    .sticky-container::-webkit-scrollbar-thumb:hover {
+        background: rgba(0, 0, 0, 0.3);
+    }
+
+    /* Sidebar Header Controls Styling - Theme Colors */
+    .header-controls .btn {
+        border: 1px solid var(--color-button-border);
+        background: var(--color-button-bg);
+        color: var(--color-text-dark);
+        width: 32px;
+        height: 32px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+    }
+
+    .header-controls .btn:hover {
+        background: var(--color-button-bg-hover-2);
+        border-color: var(--color-theme-3);
+        color: var(--color-text-dark);
+        transform: scale(1.1);
+        box-shadow: 0 2px 8px var(--color-theme-1-opacity);
+    }
+
+    .header-controls .btn:focus {
+        box-shadow: 0 0 0 2px var(--color-theme-3);
+        outline: none;
+    }
+
+    .header-controls .btn i {
+        font-size: 14px;
+    }
+
+    /* Widget Card Styling - Theme Colors */
+    .widget_custom.bg_custom {
+        background: var(--color-widget-bg) !important;
+        border: 1px solid var(--color-border);
+    }
+
+    .widget_custom .card-header.bg-warning {
+        background: var(--color-theme-3) !important;
+        border-bottom: 1px solid var(--color-button-border);
+        color: var(--color-text-primary) !important;
+    }
+
+    .widget_custom .card-header.bg-primary {
+        background: var(--color-theme-3) !important;
+        border-bottom: 1px solid var(--color-button-border);
+        color: var(--color-text-primary) !important;
+    }
+
+    /* Droppable area theme styling */
+    .nested-droppable {
+        min-height: 80px;
+        border: 2px dashed var(--color-border);
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        padding: 0.5rem;
+        background: var(--color-content-bg);
+    }
+
+    .nested-droppable:hover {
+        border-color: var(--color-theme-3);
+        background: var(--color-widget-bg);
+        box-shadow: 0 2px 8px var(--color-theme-1-opacity);
+    }
+
+    .nested-droppable .card-title {
+        margin: 0;
+        font-weight: 400;
+        font-size: 0.85rem;
+        line-height: 1.3;
+        color: var(--color-text-primary);
+    }
+
+    /* Scrollbar theme styling */
+    .sticky-container::-webkit-scrollbar-thumb {
+        background: var(--color-theme-2);
+        border-radius: 2px;
+    }
+
+    .sticky-container::-webkit-scrollbar-thumb:hover {
+        background: var(--color-theme-1);
+    }
+
+    /* Compact card styling for better space utilization */
+    .card.mb-2 {
+        margin-bottom: 0.5rem !important;
+    }
+
+    .card-header.py-2 {
+        padding-top: 0.5rem !important;
+        padding-bottom: 0.5rem !important;
+    }
+
+    .card-body.py-2 {
+        padding-top: 0.5rem !important;
+        padding-bottom: 0.5rem !important;
+    }
+
+    /* Editor container improvements - Theme Colors */
+    .editor-container textarea {
+        min-height: 200px;
+        max-height: 300px;
+        resize: vertical;
+        background: var(--color-widget-bg);
+        border: 1px solid var(--color-border);
+        color: var(--color-text-primary);
+    }
+
+    .editor-container textarea:focus {
+        border-color: var(--color-theme-3);
+        box-shadow: 0 0 0 2px var(--color-theme-1-opacity);
+        outline: none;
+    }
+
+    /* Better responsive behavior for laptop screens */
+    @media (max-width: 1366px) and (min-width: 1024px) {
+        .sticky-container {
+            max-height: calc(100vh - 120px);
+            top: 90px;
+        }
+        
+        .unified-controls-container .btn {
+            min-width: 50px;
+            font-size: 0.7rem;
+            padding: 0.3rem 0.4rem;
+            flex: 1;
+            max-width: 70px;
+        }
+        
+        .unified-controls-container .btn span {
+            display: none;
+        }
+        
+        .unified-controls-container .btn i {
+            margin-right: 0;
+            font-size: 0.85rem;
+        }
+        
+        .unified-controls-container .text-white-50 {
+            font-size: 0.65rem;
+            margin-bottom: 0.4rem !important;
+        }
+        
+        .card-header h6 {
+            font-size: 0.85rem;
+        }
+        
+        .nested-droppable {
+            min-height: 60px;
+        }
+        
+        .nested-droppable .card-title {
+            font-size: 0.8rem;
+        }
+    }
+
+    /* Mobile responsive adjustments */
+    @media (max-width: 768px) {
+        .sticky-container {
+            position: relative !important;
+            width: 100% !important;
+            right: auto !important;
+            top: auto !important;
+            max-height: none !important;
+        }
+        
+        .unified-controls-container .d-flex {
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+        
+        .unified-controls-container .btn {
+            width: 100%;
+            min-width: auto;
+            justify-content: center;
+        }
+    }
+
+    /* Sidebar Header Controls Styling */
+    .header-controls .btn {
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+        width: 32px;
+        height: 32px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+    }
+
+    .header-controls .btn:hover {
+        background: rgba(255, 255, 255, 0.2);
+        border-color: rgba(255, 255, 255, 0.8);
+        transform: scale(1.1);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .header-controls .btn:focus {
+        box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
+    }
+
+    .header-controls .btn i {
+        font-size: 14px;
+    }
+
+    /* Droppable area styling */
+    .nested-droppable {
+        min-height: 120px;
+        border: 2px dashed #dee2e6;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+    }
+
+    .nested-droppable:hover {
+        border-color: #007bff;
+        background: rgba(0, 123, 255, 0.05);
+    }
+
+    .nested-droppable .card-title {
+        margin: 0;
+        font-weight: 400;
+        font-size: 1rem;
+    }
+
+    /* Content Selection Checkboxes */
+    .content-selection .form-check {
+        cursor: pointer;
+        transition: all 0.3s ease;
+        background: rgba(248, 249, 250, 0.8);
+    }
+
+    .content-selection .form-check:hover {
+        background: rgba(102, 126, 234, 0.1);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .content-selection .form-check-input:checked + .form-check-label {
+        color: var(--color-theme-1);
+    }
+
+    .content-selection .form-check-input {
+        transform: scale(1.2);
+    }
+
+    /* Save/Fetch Option Cards */
+    .save-option-card, .fetch-option-card {
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+    }
+
+    .save-option-card:hover, .fetch-option-card:hover {
+        border-color: var(--color-theme-1);
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .save-option-card.selected, .fetch-option-card.selected {
+        border-color: var(--color-theme-1);
+        background: rgba(102, 126, 234, 0.1);
+    }
+
+    /* Unified Modal Styling */
+    #unifiedSaveModal .modal-content,
+    #unifiedFetchModal .modal-content {
+        border-radius: 20px;
+        border: none;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    #unifiedSaveModal .modal-header,
+    #unifiedFetchModal .modal-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border-bottom: none;
+        border-radius: 20px 20px 0 0;
+    }
+
+    #unifiedSaveModal .modal-body,
+    #unifiedFetchModal .modal-body {
+        padding: 2rem;
+        background: rgba(255, 255, 255, 0.95);
+    }
 </style>
 <?php $__env->stopPush(); ?>
 
@@ -839,12 +1262,14 @@
             <?php if(empty($columns)): ?>
                 <div class="alert alert-warning mt-4" data-en="No data found in this table." data-fr="Aucune donnée trouvée dans cette table.">No data found in this table.</div>
             <?php else: ?>
+            <!-- Keyword Search Card -->
             <div class="card mb-3 shadow-sm">
-                <div class="card-header bg-light">
+                <div class="card-header bg-light border-bottom">
                     <h5 class="mb-0" data-en="Keyword Search" data-fr="Recherche par mots-clés">Keyword Search</h5>
                 </div>
                 <div class="card-body">
-                    <form action="<?php echo e(route('client.legalTables.view', $legalTable->id)); ?>" method="GET" class="mb-3">
+                    <!-- Search Form -->
+                    <form action="<?php echo e(route('client.legalTables.view', $legalTable->id)); ?>" method="GET" class="mb-0">
                         <?php if(isset($client) && $client): ?>
                             <input type="hidden" name="client_id" value="<?php echo e($client->id); ?>">
                         <?php endif; ?>
@@ -1980,6 +2405,247 @@
                 </div>
             </div>
             <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-en="Cancel" data-fr="Annuler">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Unified Save Modal with Checkboxes -->
+<div class="modal fade modal-centered" id="unifiedSaveModal" tabindex="-1" aria-labelledby="unifiedSaveModalLabel" aria-hidden="true" data-bs-backdrop="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="unifiedSaveModalLabel">
+                    <i class="fas fa-save me-2"></i>
+                    <span data-en="Save Content" data-fr="Sauvegarder le contenu">Save Content</span>
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p class="text-center mb-4" data-en="Choose what content to save" data-fr="Choisissez le contenu à sauvegarder">
+                    <strong>Choose what content to save</strong>
+                </p>
+                
+                <!-- Content Selection Checkboxes -->
+                <div class="content-selection mb-4">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-check p-3 border rounded">
+                                <input class="form-check-input" type="checkbox" value="popups" id="save-popups-check" checked>
+                                <label class="form-check-label d-flex align-items-center" for="save-popups-check">
+                                    <i class="fas fa-layer-group text-primary me-2" style="font-size: 1.5rem;"></i>
+                                    <div>
+                                        <strong>Save Pinned Popups</strong>
+                                        <br><small class="text-muted" id="popup-count-display">0 popups</small>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-check p-3 border rounded">
+                                <input class="form-check-input" type="checkbox" value="notes" id="save-notes-check" checked>
+                                <label class="form-check-label d-flex align-items-center" for="save-notes-check">
+                                    <i class="fas fa-sticky-note text-success me-2" style="font-size: 1.5rem;"></i>
+                                    <div>
+                                        <strong>Save Text Content</strong>
+                                        <br><small class="text-muted" id="notes-status-display">Content ready</small>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Save Location Options -->
+                <div class="save-options" id="unifiedSaveOptionsSection">
+                    <h6 class="mb-3">Save to:</h6>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="card save-option-card" data-save-type="user">
+                                <div class="card-body text-center p-4">
+                                    <i class="fas fa-user-circle text-primary mb-3" style="font-size: 3rem;"></i>
+                                    <h5 class="card-title" data-en="Personal Records" data-fr="Dossiers personnels">Personal Records</h5>
+                                    <p class="card-text text-muted" data-en="Save to your personal collection" data-fr="Sauvegarder dans votre collection personnelle">Save to your personal collection</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card save-option-card" data-save-type="client">
+                                <div class="card-body text-center p-4">
+                                    <i class="fas fa-users text-success mb-3" style="font-size: 3rem;"></i>
+                                    <h5 class="card-title" data-en="Client Records" data-fr="Dossiers clients">Client Records</h5>
+                                    <p class="card-text text-muted" data-en="Save to a specific client's records" data-fr="Sauvegarder dans les dossiers d'un client spécifique">Save to a specific client's records</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Client Selection Section (Initially Hidden) -->
+                <div class="client-selection-section" id="unifiedClientSelectionSection" style="display: none;">
+                    <div class="d-flex align-items-center mb-3">
+                        <button type="button" class="btn btn-outline-secondary btn-sm me-3" id="backToUnifiedSaveOptions">
+                            <i class="fas fa-arrow-left me-1"></i> Back
+                        </button>
+                        <h6 class="mb-0">Select a client:</h6>
+                    </div>
+                    
+                    <!-- Client Search -->
+                    <div class="mb-3">
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-search"></i></span>
+                            <input type="text" class="form-control" id="unifiedClientSearch" placeholder="Search clients...">
+                        </div>
+                    </div>
+
+                    <!-- Add New Client Button -->
+                    <div class="mb-3">
+                        <button type="button" class="btn btn-outline-primary btn-sm w-100" id="showUnifiedAddClientForm">
+                            <i class="fas fa-plus me-1"></i> Add New Client
+                        </button>
+                    </div>
+
+                    <!-- New Client Form (Initially Hidden) -->
+                    <div class="card mb-3" id="unifiedNewClientForm" style="display: none;">
+                        <div class="card-header">
+                            <h6 class="mb-0">Add New Client</h6>
+                        </div>
+                        <div class="card-body">
+                            <form id="unifiedCreateClientForm">
+                                <div class="mb-2">
+                                    <input type="text" class="form-control form-control-sm" name="client_name" placeholder="Client Name" required>
+                                </div>
+                                <div class="mb-2">
+                                    <input type="email" class="form-control form-control-sm" name="client_email" placeholder="Email (optional)">
+                                </div>
+                                <div class="mb-2">
+                                    <input type="tel" class="form-control form-control-sm" name="client_phone" placeholder="Phone (optional)">
+                                </div>
+                                <div class="d-flex gap-2">
+                                    <button type="submit" class="btn btn-primary btn-sm">
+                                        <i class="fas fa-plus me-1"></i> Create Client
+                                    </button>
+                                    <button type="button" class="btn btn-secondary btn-sm" id="cancelUnifiedAddClient">Cancel</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Clients List -->
+                    <div class="clients-grid" id="unifiedClientsList">
+                        <div class="text-center py-4">
+                            <i class="fas fa-spinner fa-spin fa-2x text-muted mb-2"></i>
+                            <p class="text-muted">Loading clients...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-en="Cancel" data-fr="Annuler">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Unified Fetch Modal with Checkboxes -->
+<div class="modal fade modal-centered" id="unifiedFetchModal" tabindex="-1" aria-labelledby="unifiedFetchModalLabel" aria-hidden="true" data-bs-backdrop="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="unifiedFetchModalLabel">
+                    <i class="fas fa-download me-2"></i>
+                    <span data-en="Fetch Content" data-fr="Récupérer le contenu">Fetch Content</span>
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p class="text-center mb-4" data-en="Choose what content to fetch" data-fr="Choisissez le contenu à récupérer">
+                    <strong>Choose what content to fetch</strong>
+                </p>
+                
+                <!-- Content Selection Checkboxes -->
+                <div class="content-selection mb-4">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-check p-3 border rounded">
+                                <input class="form-check-input" type="checkbox" value="popups" id="fetch-popups-check" checked>
+                                <label class="form-check-label d-flex align-items-center" for="fetch-popups-check">
+                                    <i class="fas fa-layer-group text-primary me-2" style="font-size: 1.5rem;"></i>
+                                    <div>
+                                        <strong>Fetch Pinned Popups</strong>
+                                        <br><small class="text-muted">Load saved popups</small>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-check p-3 border rounded">
+                                <input class="form-check-input" type="checkbox" value="notes" id="fetch-notes-check" checked>
+                                <label class="form-check-label d-flex align-items-center" for="fetch-notes-check">
+                                    <i class="fas fa-sticky-note text-success me-2" style="font-size: 1.5rem;"></i>
+                                    <div>
+                                        <strong>Fetch Text Content</strong>
+                                        <br><small class="text-muted">Load saved notes</small>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fetch Source Options -->
+                <div class="fetch-options" id="unifiedFetchOptionsSection">
+                    <h6 class="mb-3">Fetch from:</h6>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="card fetch-option-card" data-fetch-type="user">
+                                <div class="card-body text-center p-4">
+                                    <i class="fas fa-user-circle text-primary mb-3" style="font-size: 3rem;"></i>
+                                    <h5 class="card-title" data-en="Personal Records" data-fr="Dossiers personnels">Personal Records</h5>
+                                    <p class="card-text text-muted" data-en="Load from your personal collection" data-fr="Charger depuis votre collection personnelle">Load from your personal collection</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card fetch-option-card" data-fetch-type="client">
+                                <div class="card-body text-center p-4">
+                                    <i class="fas fa-users text-success mb-3" style="font-size: 3rem;"></i>
+                                    <h5 class="card-title" data-en="Client Records" data-fr="Dossiers clients">Client Records</h5>
+                                    <p class="card-text text-muted" data-en="Load from a specific client's records" data-fr="Charger depuis les dossiers d'un client spécifique">Load from a specific client's records</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Client Selection Section for Fetch (Initially Hidden) -->
+                <div class="client-selection-section" id="unifiedFetchClientSelectionSection" style="display: none;">
+                    <div class="d-flex align-items-center mb-3">
+                        <button type="button" class="btn btn-outline-secondary btn-sm me-3" id="backToUnifiedFetchOptions">
+                            <i class="fas fa-arrow-left me-1"></i> Back
+                        </button>
+                        <h6 class="mb-0">Select a client:</h6>
+                    </div>
+                    
+                    <!-- Client Search -->
+                    <div class="mb-3">
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-search"></i></span>
+                            <input type="text" class="form-control" id="unifiedFetchClientSearch" placeholder="Search clients...">
+                        </div>
+                    </div>
+
+                    <!-- Clients List -->
+                    <div class="clients-grid" id="unifiedFetchClientsList">
+                        <div class="text-center py-4">
+                            <i class="fas fa-spinner fa-spin fa-2x text-muted mb-2"></i>
+                            <p class="text-muted">Loading clients...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-en="Cancel" data-fr="Annuler">Cancel</button>
             </div>
         </div>
@@ -4575,7 +5241,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Function to load clients for selection
-    function loadClientsForSelection() {
+    window.loadClientsForSelection = function() {
         const clientsList = document.getElementById('clientsList');
         
         // Try API route first, fall back to web route if 401
@@ -4800,7 +5466,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Function to load clients for fetch selection
-    function loadClientsForFetchSelection() {
+    window.loadClientsForFetchSelection = function() {
         const clientsList = document.getElementById('fetchModalClientsList');
         
         console.log('Loading clients for fetch selection...');
@@ -5687,6 +6353,505 @@ $(document).ready(function() {
     $('#notesFetchModal').on('hidden.bs.modal', function() {
         $('#notesFetchClientSelectionSection').hide();
         $(this).find('.d-grid').show();
+    });
+
+    // Unified Content Management System with Checkboxes
+    let selectedUnifiedSaveType = null;
+    let selectedUnifiedFetchType = null;
+    let currentUnifiedClientId = null;
+
+    // Update content summary when save modal opens
+    $('#unifiedSaveModal').on('show.bs.modal', function() {
+        updateContentSummary();
+    });
+
+    // Save option card click handlers
+    $(document).on('click', '.save-option-card', function() {
+        // Remove selected class from all cards
+        $('.save-option-card').removeClass('selected');
+        
+        // Add selected class to clicked card
+        $(this).addClass('selected');
+        
+        selectedUnifiedSaveType = $(this).data('save-type');
+        
+        // Get selected content types
+        const savePopups = $('#save-popups-check').is(':checked');
+        const saveNotes = $('#save-notes-check').is(':checked');
+        
+        if (!savePopups && !saveNotes) {
+            alert('Please select at least one content type to save.');
+            return;
+        }
+        
+        if (selectedUnifiedSaveType === 'user') {
+            // Save to personal records immediately
+            saveUnifiedContent('user', null, savePopups, saveNotes);
+        } else if (selectedUnifiedSaveType === 'client') {
+            // Show client selection within the unified modal
+            $('#unifiedSaveOptionsSection').hide();
+            $('#unifiedClientSelectionSection').show();
+            
+            // Load clients for the unified modal
+            loadUnifiedClientsForSave();
+        }
+    });
+
+    // Fetch option card click handlers
+    $(document).on('click', '.fetch-option-card', function() {
+        // Remove selected class from all cards
+        $('.fetch-option-card').removeClass('selected');
+        
+        // Add selected class to clicked card
+        $(this).addClass('selected');
+        
+        selectedUnifiedFetchType = $(this).data('fetch-type');
+        
+        // Get selected content types
+        const fetchPopups = $('#fetch-popups-check').is(':checked');
+        const fetchNotes = $('#fetch-notes-check').is(':checked');
+        
+        if (!fetchPopups && !fetchNotes) {
+            alert('Please select at least one content type to fetch.');
+            return;
+        }
+        
+        if (selectedUnifiedFetchType === 'user') {
+            // Fetch from personal records immediately
+            fetchUnifiedContent('user', null, fetchPopups, fetchNotes);
+        } else if (selectedUnifiedFetchType === 'client') {
+            // Show client selection within the unified modal
+            $('#unifiedFetchOptionsSection').hide();
+            $('#unifiedFetchClientSelectionSection').show();
+            
+            // Load clients for the unified fetch modal
+            loadUnifiedClientsForFetch();
+        }
+    });
+
+    // Function to update content summary
+    function updateContentSummary() {
+        // Count popups
+        const popupCount = $('.nested-droppable .pinned-popup').length;
+        $('#popup-count-display').text(`${popupCount} popup${popupCount !== 1 ? 's' : ''}`);
+        
+        // Check notes content
+        let notesContent = '';
+        if (window.tinymce && window.tinymce.get('tiny-editor')) {
+            notesContent = window.tinymce.get('tiny-editor').getContent();
+        }
+        
+        const notesStatus = notesContent.trim() ? 'Content ready' : 'No content';
+        $('#notes-status-display').text(notesStatus);
+        
+        // Disable checkboxes if no content
+        $('#save-popups-check').prop('disabled', popupCount === 0);
+        $('#save-notes-check').prop('disabled', !notesContent.trim());
+        
+        // Update checkbox labels
+        const popupLabel = $('label[for="save-popups-check"] small');
+        const notesLabel = $('label[for="save-notes-check"] small');
+        
+        if (popupCount === 0) {
+            popupLabel.text('No popups to save').addClass('text-danger');
+        } else {
+            popupLabel.removeClass('text-danger');
+        }
+        
+        if (!notesContent.trim()) {
+            notesLabel.text('No content to save').addClass('text-danger');
+        } else {
+            notesLabel.removeClass('text-danger');
+        }
+    }
+
+    // Function to save unified content with checkbox selections
+    function saveUnifiedContent(context, clientId = null, savePopups = true, saveNotes = true) {
+        let savedItems = 0;
+        let totalItems = 0;
+        
+        // Count what we're trying to save
+        if (savePopups) {
+            const popupCount = $('.nested-droppable .pinned-popup').length;
+            if (popupCount > 0) totalItems++;
+        }
+        
+        if (saveNotes) {
+            let notesContent = '';
+            if (window.tinymce && window.tinymce.get('tiny-editor')) {
+                notesContent = window.tinymce.get('tiny-editor').getContent();
+            }
+            if (notesContent.trim()) totalItems++;
+        }
+        
+        if (totalItems === 0) {
+            alert('No content selected or available to save.');
+            return;
+        }
+
+        // Save popups if selected and exist
+        if (savePopups) {
+            const popupCount = $('.nested-droppable .pinned-popup').length;
+            if (popupCount > 0) {
+                // Use existing popup save function
+                if (window.savePopupsDataFromSidebar) {
+                    window.savePopupsDataFromSidebar(context, clientId);
+                    savedItems++;
+                }
+            }
+        }
+
+        // Save notes if selected and content exists
+        if (saveNotes) {
+            let notesContent = '';
+            if (window.tinymce && window.tinymce.get('tiny-editor')) {
+                notesContent = window.tinymce.get('tiny-editor').getContent();
+            }
+            if (notesContent.trim()) {
+                // Use existing notes save function
+                selectedNotesSaveType = context;
+                currentNotesClientId = clientId;
+                saveNotesToDatabase();
+                savedItems++;
+            }
+        }
+
+        // Close modals
+        $('#unifiedSaveModal').modal('hide');
+        $('#popupSaveModal').modal('hide');
+        
+        // Show success message only if we actually saved something
+        if (savedItems > 0) {
+            setTimeout(() => {
+                showUnifiedSuccessMessage(context, clientId, savePopups ? 1 : 0, saveNotes ? 1 : 0);
+            }, 500);
+        }
+    }
+
+    // Function to fetch unified content with checkbox selections
+    function fetchUnifiedContent(context, clientId = null, fetchPopups = true, fetchNotes = true) {
+        let fetchedItems = 0;
+        
+        // Fetch popups if selected
+        if (fetchPopups) {
+            const url = context === 'user' 
+                ? '/get-saved-popups?context=user'
+                : `/get-saved-popups?context=client&client_id=${clientId}`;
+            
+            fetch(url, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success && data.popups && data.popups.length > 0) {
+                    loadPopupsIntoSidebarDroppableArea(data.popups);
+                    fetchedItems++;
+                    console.log(`Loaded ${data.popups.length} popups from ${context} records`);
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching popups:', error);
+            });
+        }
+        
+        // Fetch notes if selected
+        if (fetchNotes) {
+            fetchNotesFromDatabase(context, clientId);
+            fetchedItems++;
+        }
+        
+        // Close modals
+        $('#unifiedFetchModal').modal('hide');
+        $('#popupFetchModal').modal('hide');
+        
+        // Show success message
+        if (fetchedItems > 0) {
+            setTimeout(() => {
+                const contextText = context === 'user' ? 'personal records' : 'client records';
+                alert(`Content fetched from ${contextText} successfully!`);
+            }, 500);
+        }
+    }
+
+    // Function to show unified success message
+    function showUnifiedSuccessMessage(context, clientId, popupCount, noteCount) {
+        const contextText = context === 'user' ? 'personal records' : `client records`;
+        let message = `Successfully saved to ${contextText}:\n`;
+        
+        if (popupCount > 0) {
+            message += `• ${popupCount} popup${popupCount !== 1 ? 's' : ''}\n`;
+        }
+        
+        if (noteCount > 0) {
+            message += `• ${noteCount} note${noteCount !== 1 ? 's' : ''}\n`;
+        }
+        
+        alert(message);
+    }
+
+    // Override existing client selection functions to support unified system
+    window.selectClientForUnifiedSave = function(clientId, clientName) {
+        currentUnifiedClientId = clientId;
+        const savePopups = $('#save-popups-check').is(':checked');
+        const saveNotes = $('#save-notes-check').is(':checked');
+        saveUnifiedContent('client', clientId, savePopups, saveNotes);
+    };
+
+    window.selectClientForUnifiedFetch = function(clientId, clientName) {
+        currentUnifiedClientId = clientId;
+        const fetchPopups = $('#fetch-popups-check').is(':checked');
+        const fetchNotes = $('#fetch-notes-check').is(':checked');
+        fetchUnifiedContent('client', clientId, fetchPopups, fetchNotes);
+    };
+
+    // Store original client selection functions
+    const originalSelectClientForSave = window.selectClientForSave;
+    const originalSelectClientForFetch = window.selectClientForFetch;
+
+    // Modify existing client selection handlers to work with unified system
+    window.selectClientForSave = function(clientId, clientName) {
+        if (selectedUnifiedSaveType) {
+            selectClientForUnifiedSave(clientId, clientName);
+            selectedUnifiedSaveType = null; // Reset after use
+        } else if (originalSelectClientForSave) {
+            originalSelectClientForSave(clientId, clientName);
+        }
+    };
+
+    window.selectClientForFetch = function(clientId, clientName) {
+        if (selectedUnifiedFetchType) {
+            selectClientForUnifiedFetch(clientId, clientName);
+            selectedUnifiedFetchType = null; // Reset after use
+        } else if (originalSelectClientForFetch) {
+            originalSelectClientForFetch(clientId, clientName);
+        }
+    };
+
+    // Unified modal client loading and interaction functions
+    function loadUnifiedClientsForSave() {
+        const clientsList = document.getElementById('unifiedClientsList');
+        loadClientsIntoContainer(clientsList, 'unified-save');
+    }
+
+    function loadUnifiedClientsForFetch() {
+        const clientsList = document.getElementById('unifiedFetchClientsList');
+        loadClientsIntoContainer(clientsList, 'unified-fetch');
+    }
+
+    function loadClientsIntoContainer(container, context) {
+        container.innerHTML = `
+            <div class="text-center py-4">
+                <i class="fas fa-spinner fa-spin fa-2x text-muted mb-2"></i>
+                <p class="text-muted">Loading clients...</p>
+            </div>
+        `;
+
+        // Try API route first, fall back to web route if 401
+        fetch('/api/clients', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '<?php echo e(csrf_token()); ?>'
+            }
+        })
+        .then(response => {
+            if (response.status === 401) {
+                return fetch('/web-api/clients', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '<?php echo e(csrf_token()); ?>'
+                    }
+                });
+            }
+            return response;
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success && data.clients) {
+                displayUnifiedClients(data.clients, container, context);
+            } else {
+                showUnifiedClientsError(container);
+            }
+        })
+        .catch(error => {
+            console.error('Error loading clients:', error);
+            showUnifiedClientsError(container);
+        });
+    }
+
+    function displayUnifiedClients(clients, container, context) {
+        let html = '';
+        
+        if (clients.length === 0) {
+            html = `
+                <div class="text-center py-4">
+                    <i class="fas fa-users text-muted" style="font-size: 2rem;"></i>
+                    <p class="text-muted mt-2">No clients found</p>
+                    <small class="text-muted">Add a new client to get started</small>
+                </div>
+            `;
+        } else {
+            clients.forEach(client => {
+                const isForFetch = context.includes('fetch');
+                const functionName = isForFetch ? 'selectClientForUnifiedFetch' : 'selectClientForUnifiedSave';
+                
+                html += `
+                    <div class="col-md-6 mb-2">
+                        <div class="card client-selection-card h-100" data-client-id="${client.id}" 
+                             onclick="${functionName}(${client.id}, '${client.client_name}')" style="cursor: pointer;">
+                            <div class="card-body d-flex align-items-center">
+                                <div class="client-avatar-large me-3">
+                                    ${client.client_name.charAt(0).toUpperCase()}
+                                </div>
+                                <div class="flex-grow-1">
+                                    <h6 class="card-title mb-1">${client.client_name}</h6>
+                                    <p class="card-text small text-muted mb-1">${client.client_email || 'No email'}</p>
+                                    <span class="badge ${client.client_status === 'Active' ? 'status-active' : 'status-inactive'}">${client.client_status}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+        
+        container.innerHTML = `<div class="row">${html}</div>`;
+    }
+
+    function showUnifiedClientsError(container) {
+        container.innerHTML = `
+            <div class="text-center py-4">
+                <i class="fas fa-exclamation-triangle text-danger" style="font-size: 2rem;"></i>
+                <p class="text-danger mt-2">Failed to load clients</p>
+                <button class="btn btn-outline-primary btn-sm" onclick="location.reload()">
+                    <i class="fas fa-redo me-1"></i> Retry
+                </button>
+            </div>
+        `;
+    }
+
+    // Back button handlers for unified modals
+    $(document).on('click', '#backToUnifiedSaveOptions', function() {
+        $('#unifiedClientSelectionSection').hide();
+        $('#unifiedSaveOptionsSection').show();
+        $('.save-option-card').removeClass('selected');
+        selectedUnifiedSaveType = null;
+    });
+
+    $(document).on('click', '#backToUnifiedFetchOptions', function() {
+        $('#unifiedFetchClientSelectionSection').hide();
+        $('#unifiedFetchOptionsSection').show();
+        $('.fetch-option-card').removeClass('selected');
+        selectedUnifiedFetchType = null;
+    });
+
+    // Add new client form handlers for unified modal
+    $(document).on('click', '#showUnifiedAddClientForm', function() {
+        $('#unifiedNewClientForm').slideDown();
+        $(this).hide();
+    });
+
+    $(document).on('click', '#cancelUnifiedAddClient', function() {
+        $('#unifiedNewClientForm').slideUp();
+        $('#showUnifiedAddClientForm').show();
+        $('#unifiedCreateClientForm')[0].reset();
+    });
+
+    $(document).on('submit', '#unifiedCreateClientForm', function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(this);
+        formData.append('add_client', '1');
+        
+        const submitBtn = this.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i>Creating...';
+        submitBtn.disabled = true;
+        
+        fetch('/api/clients', {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': '<?php echo e(csrf_token()); ?>'
+            },
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Refresh the clients list
+                loadUnifiedClientsForSave();
+                
+                // Reset form and hide it
+                this.reset();
+                $('#unifiedNewClientForm').slideUp();
+                $('#showUnifiedAddClientForm').show();
+                
+                alert(`Client "${data.client.client_name}" created successfully!`);
+            } else {
+                alert('Error creating client: ' + (data.message || 'Unknown error'));
+            }
+        })
+        .catch(error => {
+            console.error('Error creating client:', error);
+            alert('Error creating client. Please try again.');
+        })
+        .finally(() => {
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+        });
+    });
+
+    // Client search functionality for unified modals
+    $(document).on('input', '#unifiedClientSearch, #unifiedFetchClientSearch', function() {
+        const searchTerm = $(this).val().toLowerCase();
+        const clientCards = $(this).closest('.client-selection-section').find('.client-selection-card');
+        
+        clientCards.each(function() {
+            const clientName = $(this).find('.card-title').text().toLowerCase();
+            const clientEmail = $(this).find('.card-text').text().toLowerCase();
+            
+            if (clientName.includes(searchTerm) || clientEmail.includes(searchTerm)) {
+                $(this).closest('.col-md-6').show();
+            } else {
+                $(this).closest('.col-md-6').hide();
+            }
+        });
+    });
+
+    // Unified Clear Buttons Handlers
+    $(document).on('click', '#clear-all-popups', function() {
+        // Trigger the existing clear popups functionality
+        $('#clear-pinned-popups').trigger('click');
+    });
+
+    $(document).on('click', '#clear-all-editor', function() {
+        // Trigger the existing clear notes functionality
+        $('#clear-notes-sidebar').trigger('click');
+    });
+
+    // Reset unified modals when they're hidden
+    $('#unifiedSaveModal').on('hidden.bs.modal', function() {
+        $('#unifiedClientSelectionSection').hide();
+        $('#unifiedSaveOptionsSection').show();
+        $('#unifiedNewClientForm').hide();
+        $('#showUnifiedAddClientForm').show();
+        $('#unifiedCreateClientForm')[0].reset();
+        $('.save-option-card').removeClass('selected');
+        selectedUnifiedSaveType = null;
+        currentUnifiedClientId = null;
+    });
+
+    $('#unifiedFetchModal').on('hidden.bs.modal', function() {
+        $('#unifiedFetchClientSelectionSection').hide();
+        $('#unifiedFetchOptionsSection').show();
+        $('.fetch-option-card').removeClass('selected');
+        selectedUnifiedFetchType = null;
+        currentUnifiedClientId = null;
     });
 });
 </script>
