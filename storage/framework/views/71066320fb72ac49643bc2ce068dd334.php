@@ -24,10 +24,24 @@
     </div>
     <!-- Rich Text Editor Container - Client Notes -->
     <div class="editor-container widget_custom bg_custom gap_top card">
-        <div class="widget_header card-header bg-primary text-white">
+        <!-- <div class="widget_header card-header bg-primary text-white">
             <h5 class="mb-0"><i class="fas fa-sticky-note me-2"></i> Client Notes</h5>
-        </div>
+        </div> -->
         <div class="card-body">
+            <!-- Notes Controls -->
+            <div class="notes-controls d-flex justify-content-between mb-3">
+                <div>
+                    <button id="save-notes-sidebar" class="btn btn-save btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#notesSaveModal">
+                        <i class="fas fa-save"></i> <span data-en="Save Notes" data-fr="Sauvegarder les notes">Save Notes</span>
+                    </button>
+                    <button id="fetch-notes-sidebar" class="btn btn-fetch btn-sm btn-info ms-2" data-bs-toggle="modal" data-bs-target="#notesFetchModal">
+                        <i class="fas fa-download"></i> <span data-en="Fetch Notes" data-fr="Récupérer les notes">Fetch Notes</span>
+                    </button>
+                </div>
+                <button id="clear-notes-sidebar" class="btn btn-clear btn-sm btn-warning">
+                    <i class="fas fa-eraser"></i> <span data-en="Clear Editor" data-fr="Effacer l'éditeur">Clear Editor</span>
+                </button>
+            </div>
             <textarea id="tiny-editor">
             <?php if(isset($client)): ?>
             # Notes for <?php echo e($client->client_name); ?>
@@ -47,7 +61,8 @@
             <?php else: ?>
             # Client Notes
             
-            Please select a client to view notes.
+            Use the Save Notes and Fetch Notes buttons above to manage your notes.
+            Notes can be saved to your personal records or to specific client records.
             <?php endif; ?>
             </textarea>
         </div>
