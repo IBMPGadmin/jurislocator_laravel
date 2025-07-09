@@ -1,6 +1,6 @@
-@extends('layouts.admin')
 
-@section('admin-content')
+
+<?php $__env->startSection('admin-content'); ?>
 <div class="container py-4">
     <div class="row justify-content-center">
         <div class="col-md-10">
@@ -9,63 +9,65 @@
                     <h4 class="mb-0"><i class="fas fa-user-plus me-2"></i>Add New User</h4>
                 </div>
                 <div class="card-body">
-                    @if ($errors->any())
+                    <?php if($errors->any()): ?>
                         <div class="alert alert-danger">
                             <i class="fas fa-exclamation-triangle me-2"></i>
-                            {{ $errors->first() }}
+                            <?php echo e($errors->first()); ?>
+
                         </div>
-                    @endif
-                    @if (session('success'))
+                    <?php endif; ?>
+                    <?php if(session('success')): ?>
                         <div class="alert alert-success">
                             <i class="fas fa-check-circle me-2"></i>
-                            {{ session('success') }}
+                            <?php echo e(session('success')); ?>
+
                         </div>
-                    @endif
+                    <?php endif; ?>
                     
-                    <form method="POST" action="{{ route('admin.users.store') }}" enctype="multipart/form-data">
-                        @csrf
+                    <form method="POST" action="<?php echo e(route('admin.users.store')); ?>" enctype="multipart/form-data">
+                        <?php echo csrf_field(); ?>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="first_name" class="form-label">First Name</label>
-                                    <input type="text" class="form-control" id="first_name" name="first_name" required value="{{ old('first_name') }}">
+                                    <input type="text" class="form-control" id="first_name" name="first_name" required value="<?php echo e(old('first_name')); ?>">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="last_name" class="form-label">Last Name</label>
-                                    <input type="text" class="form-control" id="last_name" name="last_name" required value="{{ old('last_name') }}">
+                                    <input type="text" class="form-control" id="last_name" name="last_name" required value="<?php echo e(old('last_name')); ?>">
                                 </div>
                             </div>
                         </div>
                         
                         <div class="mb-3">
                             <label for="email" class="form-label">Email Address</label>
-                            <input type="email" class="form-control" id="email" name="email" required value="{{ old('email') }}">
+                            <input type="email" class="form-control" id="email" name="email" required value="<?php echo e(old('email')); ?>">
                         </div>
                         
                         <div class="mb-3">
                             <label for="user_type" class="form-label">User Type</label>
                             <select class="form-control" id="user_type" name="user_type" required onchange="toggleConditionalFields()">
                                 <option value="">Select User Type</option>
-                                <option value="licensed_practitioner" {{ old('user_type') == 'licensed_practitioner' ? 'selected' : '' }}>Licensed Canadian Immigration Practitioner</option>
-                                <option value="immigration_lawyer" {{ old('user_type') == 'immigration_lawyer' ? 'selected' : '' }}>Canadian Immigration Lawyer</option>
-                                <option value="notaire_quebec" {{ old('user_type') == 'notaire_quebec' ? 'selected' : '' }}>Member of Chambre des notaires du Québec</option>
-                                <option value="student_queens" {{ old('user_type') == 'student_queens' ? 'selected' : '' }}>Immigration Law student - Queens University</option>
-                                <option value="student_montreal" {{ old('user_type') == 'student_montreal' ? 'selected' : '' }}>Immigration Law student - Université de Montréal</option>
+                                <option value="licensed_practitioner" <?php echo e(old('user_type') == 'licensed_practitioner' ? 'selected' : ''); ?>>Licensed Canadian Immigration Practitioner</option>
+                                <option value="immigration_lawyer" <?php echo e(old('user_type') == 'immigration_lawyer' ? 'selected' : ''); ?>>Canadian Immigration Lawyer</option>
+                                <option value="notaire_quebec" <?php echo e(old('user_type') == 'notaire_quebec' ? 'selected' : ''); ?>>Member of Chambre des notaires du Québec</option>
+                                <option value="student_queens" <?php echo e(old('user_type') == 'student_queens' ? 'selected' : ''); ?>>Immigration Law student - Queens University</option>
+                                <option value="student_montreal" <?php echo e(old('user_type') == 'student_montreal' ? 'selected' : ''); ?>>Immigration Law student - Université de Montréal</option>
                             </select>
                         </div>
                         
                         <!-- License Number Field -->
                         <div class="mb-3" id="license_field" style="display: none;">
                             <label for="license_number" class="form-label">License Number</label>
-                            <input type="text" class="form-control" id="license_number" name="license_number" placeholder="License Number" value="{{ old('license_number') }}">
+                            <input type="text" class="form-control" id="license_number" name="license_number" placeholder="License Number" value="<?php echo e(old('license_number')); ?>">
                         </div>
 
                         <!-- Student ID Number Field -->
                         <div class="mb-3" id="student_id_number_field" style="display: none;">
                             <label for="student_id_number" class="form-label">Student ID Number</label>
-                            <input type="text" class="form-control" id="student_id_number" name="student_id_number" placeholder="Student ID Number" value="{{ old('student_id_number') }}">
+                            <input type="text" class="form-control" id="student_id_number" name="student_id_number" placeholder="Student ID Number" value="<?php echo e(old('student_id_number')); ?>">
                         </div>
 
                         <!-- Student ID Upload Field -->
@@ -125,39 +127,39 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse($users as $user)
+                                <?php $__empty_1 = true; $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                                     <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $user->first_name ?? $user->name }} {{ $user->last_name ?? '' }}</td>
-                                        <td>{{ $user->email }}</td>
+                                        <td><?php echo e($loop->iteration); ?></td>
+                                        <td><?php echo e($user->first_name ?? $user->name); ?> <?php echo e($user->last_name ?? ''); ?></td>
+                                        <td><?php echo e($user->email); ?></td>
                                         <td>
-                                            @if($user->user_type)
-                                                <span class="badge bg-info">{{ ucfirst(str_replace('_', ' ', $user->user_type)) }}</span>
-                                            @else
+                                            <?php if($user->user_type): ?>
+                                                <span class="badge bg-info"><?php echo e(ucfirst(str_replace('_', ' ', $user->user_type))); ?></span>
+                                            <?php else: ?>
                                                 <span class="badge bg-secondary">Not Set</span>
-                                            @endif
+                                            <?php endif; ?>
                                         </td>
                                         <td>
-                                            @if($user->role == 'admin')
+                                            <?php if($user->role == 'admin'): ?>
                                                 <span class="badge bg-danger">Admin</span>
-                                            @else
+                                            <?php else: ?>
                                                 <span class="badge bg-primary">User</span>
-                                            @endif
+                                            <?php endif; ?>
                                         </td>
                                         <td>
-                                            @if($user->approval_status == 'approved')
+                                            <?php if($user->approval_status == 'approved'): ?>
                                                 <span class="badge bg-success">Approved</span>
-                                            @elseif($user->approval_status == 'pending')
+                                            <?php elseif($user->approval_status == 'pending'): ?>
                                                 <span class="badge bg-warning text-dark">Pending</span>
-                                            @else
+                                            <?php else: ?>
                                                 <span class="badge bg-danger">Rejected</span>
-                                            @endif
+                                            <?php endif; ?>
                                         </td>
-                                        <td>{{ $user->created_at->format('M d, Y') }}</td>
+                                        <td><?php echo e($user->created_at->format('M d, Y')); ?></td>
                                     </tr>
-                                @empty
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                                     <tr><td colspan="7" class="text-center">No users found.</td></tr>
-                                @endforelse
+                                <?php endif; ?>
                             </tbody>
                         </table>
                     </div>
@@ -227,4 +229,6 @@
     document.getElementById('first_name').addEventListener('input', updateNameField);
     document.getElementById('last_name').addEventListener('input', updateNameField);
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.admin', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\Users\User\Desktop\15\jurislocator_laravel\resources\views/admin/users/add.blade.php ENDPATH**/ ?>

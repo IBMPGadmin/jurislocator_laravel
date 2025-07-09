@@ -1,10 +1,10 @@
-@php
+<?php
     use Illuminate\Support\Facades\Storage;
-@endphp
+?>
 
-@extends('layouts.admin')
 
-@section('admin-content')
+
+<?php $__env->startSection('admin-content'); ?>
 <div class="container-fluid py-4">
     <!-- Page Header -->
     <div class="row">
@@ -14,27 +14,29 @@
     </div>
 
     <!-- Success/Error Messages -->
-    @if(session('success'))
+    <?php if(session('success')): ?>
     <div class="row">
         <div class="col-12">
             <div class="alert alert-success alert-dismissible fade show" role="alert">
-                {{ session('success') }}
+                <?php echo e(session('success')); ?>
+
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         </div>
     </div>
-    @endif
+    <?php endif; ?>
 
-    @if(session('error'))
+    <?php if(session('error')): ?>
     <div class="row">
         <div class="col-12">
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                {{ session('error') }}
+                <?php echo e(session('error')); ?>
+
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         </div>
     </div>
-    @endif
+    <?php endif; ?>
 
     <!-- User Approvals Table -->
     <div class="row">
@@ -44,14 +46,14 @@
                     <h6 class="m-0 font-weight-bold text-primary">
                         <i class="fas fa-table me-2"></i>Pending User Approvals
                     </h6>
-                    @if($users->count() > 0)
+                    <?php if($users->count() > 0): ?>
                         <span class="badge bg-warning text-dark">
-                            {{ $users->count() }} Pending
+                            <?php echo e($users->count()); ?> Pending
                         </span>
-                    @endif
+                    <?php endif; ?>
                 </div>
                 <div class="card-body">
-                    @if($users->count() > 0)
+                    <?php if($users->count() > 0): ?>
                         <div class="table-responsive">
                             <table class="table table-bordered" width="100%" cellspacing="0">
                                 <thead>
@@ -64,71 +66,72 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($users as $user)
+                                    <?php $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr>
-                                        <td>{{ $user->first_name }} {{ $user->last_name }}</td>
-                                        <td>{{ $user->email }}</td>
+                                        <td><?php echo e($user->first_name); ?> <?php echo e($user->last_name); ?></td>
+                                        <td><?php echo e($user->email); ?></td>
                                         <td>
-                                            @if($user->user_type == 'individual')
+                                            <?php if($user->user_type == 'individual'): ?>
                                                 <span class="badge bg-info">Individual</span>
-                                            @elseif($user->user_type == 'business')
+                                            <?php elseif($user->user_type == 'business'): ?>
                                                 <span class="badge bg-warning text-dark">Business</span>
-                                            @elseif($user->user_type == 'attorney')
+                                            <?php elseif($user->user_type == 'attorney'): ?>
                                                 <span class="badge bg-primary">Attorney</span>
-                                            @else
-                                                <span class="badge bg-secondary">{{ ucfirst($user->user_type) }}</span>
-                                            @endif
+                                            <?php else: ?>
+                                                <span class="badge bg-secondary"><?php echo e(ucfirst($user->user_type)); ?></span>
+                                            <?php endif; ?>
                                         </td>
-                                        <td>{{ $user->created_at->format('M d, Y') }}</td>
+                                        <td><?php echo e($user->created_at->format('M d, Y')); ?></td>
                                         <td>
                                             <button type="button" class="btn btn-sm btn-primary" 
                                                     data-bs-toggle="modal" 
                                                     data-bs-target="#userModal" 
-                                                    onclick="loadUserDetails({{ $user->id }})">
+                                                    onclick="loadUserDetails(<?php echo e($user->id); ?>)">
                                                 <i class="fas fa-eye me-1"></i>View
                                             </button>
                                             
                                             <button type="button" class="btn btn-sm btn-success" 
                                                     data-bs-toggle="modal" 
                                                     data-bs-target="#approveModal" 
-                                                    onclick="setApproveUser({{ $user->id }}, '{{ $user->first_name }} {{ $user->last_name }}', '{{ $user->profile_image ? Storage::url($user->profile_image) : '' }}', '{{ $user->student_id_file ? Storage::url($user->student_id_file) : '' }}')">
+                                                    onclick="setApproveUser(<?php echo e($user->id); ?>, '<?php echo e($user->first_name); ?> <?php echo e($user->last_name); ?>', '<?php echo e($user->profile_image ? Storage::url($user->profile_image) : ''); ?>', '<?php echo e($user->student_id_file ? Storage::url($user->student_id_file) : ''); ?>')">
                                                 <i class="fas fa-check me-1"></i>Approve
                                             </button>
                                             
-                                            @if($user->student_id_file)
+                                            <?php if($user->student_id_file): ?>
                                             <button type="button" class="btn btn-sm btn-info" 
-                                                    onclick="openStudentIdModal('{{ Storage::url($user->student_id_file) }}')"
+                                                    onclick="openStudentIdModal('<?php echo e(Storage::url($user->student_id_file)); ?>')"
                                                     title="View Student ID">
                                                 <i class="fas fa-id-card me-1"></i>View ID
                                             </button>
-                                            @endif
+                                            <?php endif; ?>
                                             
                                             <button type="button" class="btn btn-sm btn-danger" 
                                                     data-bs-toggle="modal" 
                                                     data-bs-target="#rejectModal" 
-                                                    onclick="setRejectUser({{ $user->id }}, '{{ $user->first_name }} {{ $user->last_name }}', '{{ $user->profile_image ? Storage::url($user->profile_image) : '' }}', '{{ $user->student_id_file ? Storage::url($user->student_id_file) : '' }}')">
+                                                    onclick="setRejectUser(<?php echo e($user->id); ?>, '<?php echo e($user->first_name); ?> <?php echo e($user->last_name); ?>', '<?php echo e($user->profile_image ? Storage::url($user->profile_image) : ''); ?>', '<?php echo e($user->student_id_file ? Storage::url($user->student_id_file) : ''); ?>')">
                                                 <i class="fas fa-times me-1"></i>Reject
                                             </button>
                                         </td>
                                     </tr>
-                                    @endforeach
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </tbody>
                             </table>
                         </div>
                         
                         <!-- Pagination -->
-                        @if($users instanceof \Illuminate\Pagination\LengthAwarePaginator)
+                        <?php if($users instanceof \Illuminate\Pagination\LengthAwarePaginator): ?>
                             <div class="d-flex justify-content-center mt-4">
-                                {{ $users->appends(request()->query())->links() }}
+                                <?php echo e($users->appends(request()->query())->links()); ?>
+
                             </div>
-                        @endif
-                    @else
+                        <?php endif; ?>
+                    <?php else: ?>
                         <div class="text-center py-5">
                             <i class="fas fa-user-clock fa-3x text-gray-300 mb-3"></i>
                             <h5 class="text-gray-600">No Pending Users</h5>
                             <p class="text-gray-500">There are no users waiting for approval at this time.</p>
                         </div>
-                    @endif
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
@@ -158,7 +161,7 @@
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                     <i class="fas fa-times me-1"></i>Close
                 </button>
-                <a href="{{ route('admin.user-approvals.index') }}" class="btn btn-primary">
+                <a href="<?php echo e(route('admin.user-approvals.index')); ?>" class="btn btn-primary">
                     <i class="fas fa-list me-1"></i>Back to List
                 </a>
             </div>
@@ -214,8 +217,8 @@
                     <i class="fas fa-times me-1"></i>Cancel
                 </button>
                 <form id="approveForm" method="POST" style="display: inline;">
-                    @csrf
-                    @method('PATCH')
+                    <?php echo csrf_field(); ?>
+                    <?php echo method_field('PATCH'); ?>
                     <button type="submit" class="btn btn-success">
                         <i class="fas fa-check me-1"></i>Yes, Approve User
                     </button>
@@ -273,8 +276,8 @@
                     <i class="fas fa-times me-1"></i>Cancel
                 </button>
                 <form id="rejectForm" method="POST" style="display: inline;">
-                    @csrf
-                    @method('PATCH')
+                    <?php echo csrf_field(); ?>
+                    <?php echo method_field('PATCH'); ?>
                     <button type="submit" class="btn btn-danger">
                         <i class="fas fa-times me-1"></i>Yes, Reject User
                     </button>
@@ -624,4 +627,6 @@ function closeStudentIdModal() {
 //     location.reload();
 // }, 30000);
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.admin', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\Users\User\Desktop\15\jurislocator_laravel\resources\views/admin/user-approvals/index.blade.php ENDPATH**/ ?>

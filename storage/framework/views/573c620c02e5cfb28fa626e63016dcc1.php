@@ -1,29 +1,31 @@
-@extends('layouts.admin')
 
-@section('admin-content')
+
+<?php $__env->startSection('admin-content'); ?>
 <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
         <h5 class="mb-0">
             <i class="fas fa-edit me-2"></i>Edit Legal Document
         </h5>
-        <a href="{{ route('admin.legal-documents.index') }}" class="btn btn-sm btn-secondary">
+        <a href="<?php echo e(route('admin.legal-documents.index')); ?>" class="btn btn-sm btn-secondary">
             <i class="fas fa-arrow-left me-1"></i>Back to All Documents
         </a>
     </div>
     <div class="card-body">
-        @if(session('success'))
+        <?php if(session('success')): ?>
             <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <i class="fas fa-check-circle me-1"></i>{{ session('success') }}
+                <i class="fas fa-check-circle me-1"></i><?php echo e(session('success')); ?>
+
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
-        @endif
+        <?php endif; ?>
         
-        @if(session('error'))
+        <?php if(session('error')): ?>
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <i class="fas fa-exclamation-triangle me-1"></i>{{ session('error') }}
+                <i class="fas fa-exclamation-triangle me-1"></i><?php echo e(session('error')); ?>
+
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
-        @endif
+        <?php endif; ?>
 
         <!-- Document Metadata Form -->
         <div class="card mb-4">
@@ -31,33 +33,61 @@
                 <h6 class="mb-0"><i class="fas fa-info-circle me-2"></i>Document Information</h6>
             </div>
             <div class="card-body">
-                <form action="{{ route('admin.legal-documents.update', $document->id) }}" method="POST">
-                    @csrf
-                    @method('PATCH')
+                <form action="<?php echo e(route('admin.legal-documents.update', $document->id)); ?>" method="POST">
+                    <?php echo csrf_field(); ?>
+                    <?php echo method_field('PATCH'); ?>
                     
                     <div class="row">
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="act_name" class="form-label">Act Name <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control @error('act_name') is-invalid @enderror" id="act_name" name="act_name" value="{{ old('act_name', $document->act_name) }}" required>
-                                @error('act_name')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
+                                <input type="text" class="form-control <?php $__errorArgs = ['act_name'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" id="act_name" name="act_name" value="<?php echo e(old('act_name', $document->act_name)); ?>" required>
+                                <?php $__errorArgs = ['act_name'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <div class="invalid-feedback"><?php echo e($message); ?></div>
+                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                             </div>
                         </div>
                         
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="language" class="form-label">Language <span class="text-danger">*</span></label>
-                                <select class="form-select @error('language') is-invalid @enderror" id="language" name="language" required>
+                                <select class="form-select <?php $__errorArgs = ['language'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" id="language" name="language" required>
                                     <option value="">Select Language</option>
-                                    <option value="en" {{ old('language', $document->language) == 'en' ? 'selected' : '' }}>English</option>
-                                    <option value="fr" {{ old('language', $document->language) == 'fr' ? 'selected' : '' }}>French</option>
-                                    <option value="Both" {{ old('language', $document->language) == 'Both' ? 'selected' : '' }}>Both (English & French)</option>
+                                    <option value="en" <?php echo e(old('language', $document->language) == 'en' ? 'selected' : ''); ?>>English</option>
+                                    <option value="fr" <?php echo e(old('language', $document->language) == 'fr' ? 'selected' : ''); ?>>French</option>
+                                    <option value="Both" <?php echo e(old('language', $document->language) == 'Both' ? 'selected' : ''); ?>>Both (English & French)</option>
                                 </select>
-                                @error('language')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
+                                <?php $__errorArgs = ['language'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <div class="invalid-feedback"><?php echo e($message); ?></div>
+                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                             </div>
                         </div>
                     </div>
@@ -66,30 +96,72 @@
                         <div class="col-md-4">
                             <div class="mb-3">
                                 <label for="law_id" class="form-label">Law ID <span class="text-danger">*</span></label>
-                                <input type="number" class="form-control @error('law_id') is-invalid @enderror" id="law_id" name="law_id" value="{{ old('law_id', $document->law_id) }}" required>
-                                @error('law_id')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
+                                <input type="number" class="form-control <?php $__errorArgs = ['law_id'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" id="law_id" name="law_id" value="<?php echo e(old('law_id', $document->law_id)); ?>" required>
+                                <?php $__errorArgs = ['law_id'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <div class="invalid-feedback"><?php echo e($message); ?></div>
+                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                             </div>
                         </div>
                         
                         <div class="col-md-4">
                             <div class="mb-3">
                                 <label for="act_id" class="form-label">Act ID <span class="text-danger">*</span></label>
-                                <input type="number" class="form-control @error('act_id') is-invalid @enderror" id="act_id" name="act_id" value="{{ old('act_id', $document->act_id) }}" required>
-                                @error('act_id')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
+                                <input type="number" class="form-control <?php $__errorArgs = ['act_id'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" id="act_id" name="act_id" value="<?php echo e(old('act_id', $document->act_id)); ?>" required>
+                                <?php $__errorArgs = ['act_id'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <div class="invalid-feedback"><?php echo e($message); ?></div>
+                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                             </div>
                         </div>
                         
                         <div class="col-md-4">
                             <div class="mb-3">
                                 <label for="jurisdiction_id" class="form-label">Jurisdiction ID <span class="text-danger">*</span></label>
-                                <input type="number" class="form-control @error('jurisdiction_id') is-invalid @enderror" id="jurisdiction_id" name="jurisdiction_id" value="{{ old('jurisdiction_id', $document->jurisdiction_id) }}" required>
-                                @error('jurisdiction_id')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
+                                <input type="number" class="form-control <?php $__errorArgs = ['jurisdiction_id'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" id="jurisdiction_id" name="jurisdiction_id" value="<?php echo e(old('jurisdiction_id', $document->jurisdiction_id)); ?>" required>
+                                <?php $__errorArgs = ['jurisdiction_id'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <div class="invalid-feedback"><?php echo e($message); ?></div>
+                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                             </div>
                         </div>
                     </div>
@@ -99,14 +171,14 @@
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label class="form-label">Table Name</label>
-                                <div class="form-control-plaintext bg-light p-2 rounded">{{ $document->table_name }}</div>
+                                <div class="form-control-plaintext bg-light p-2 rounded"><?php echo e($document->table_name); ?></div>
                             </div>
                         </div>
                         
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label class="form-label">Original Filename</label>
-                                <div class="form-control-plaintext bg-light p-2 rounded">{{ $document->original_filename }}</div>
+                                <div class="form-control-plaintext bg-light p-2 rounded"><?php echo e($document->original_filename); ?></div>
                             </div>
                         </div>
                     </div>
@@ -116,8 +188,9 @@
                             <div class="mb-3">
                                 <label class="form-label">Status</label>
                                 <div class="form-control-plaintext">
-                                    <span class="badge {{ $document->status == 'active' ? 'bg-success' : 'bg-danger' }}">
-                                        {{ ucfirst($document->status ?? 'active') }}
+                                    <span class="badge <?php echo e($document->status == 'active' ? 'bg-success' : 'bg-danger'); ?>">
+                                        <?php echo e(ucfirst($document->status ?? 'active')); ?>
+
                                     </span>
                                 </div>
                             </div>
@@ -126,7 +199,7 @@
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label class="form-label">Upload Date</label>
-                                <div class="form-control-plaintext bg-light p-2 rounded">{{ \Carbon\Carbon::parse($document->created_at)->format('F d, Y H:i:s') }}</div>
+                                <div class="form-control-plaintext bg-light p-2 rounded"><?php echo e(\Carbon\Carbon::parse($document->created_at)->format('F d, Y H:i:s')); ?></div>
                             </div>
                         </div>
                     </div>
@@ -141,7 +214,7 @@
         </div>
         
         <!-- Document Content Section -->
-        @if($documentContent && count($documentContent) > 0)
+        <?php if($documentContent && count($documentContent) > 0): ?>
             <div class="card">
                 <div class="card-header bg-primary text-white">
                     <h6 class="mb-0">
@@ -150,7 +223,7 @@
                     </h6>
                 </div>
                 <div class="card-body" id="legal-content-area">
-                    @php
+                    <?php
                         $data = [];
                         $standaloneData = [];
                         
@@ -255,184 +328,187 @@
                                 }
                             }
                         }
-                    @endphp
+                    ?>
 
-                    {{-- Render Standalone Structure --}}
-                    @foreach($standaloneData as $title => $titleGroup)
+                    
+                    <?php $__currentLoopData = $standaloneData; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $title => $titleGroup): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <div class="legal-document-section mb-4">
-                            <h2 class="section-title mb-3">{{ $title }}</h2>
+                            <h2 class="section-title mb-3"><?php echo e($title); ?></h2>
                             <div class="section-content">
-                                @foreach($titleGroup['sections'] as $sectionNumber => $section)
-                                    <div class="legal-section" id="section-{{ $sectionNumber }}">
+                                <?php $__currentLoopData = $titleGroup['sections']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $sectionNumber => $section): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <div class="legal-section" id="section-<?php echo e($sectionNumber); ?>">
                                         <div class="d-flex align-items-start mb-2">
-                                            @if(!empty($section['title']) && trim($section['title']) !== '')
-                                                <h4 class="clickable-heading mb-0">{{ $section['title'] }}</h4>
-                                            @endif
+                                            <?php if(!empty($section['title']) && trim($section['title']) !== ''): ?>
+                                                <h4 class="clickable-heading mb-0"><?php echo e($section['title']); ?></h4>
+                                            <?php endif; ?>
                                             <a href="#" class="edit-content-btn text-primary ms-2" 
                                                data-bs-toggle="modal" 
                                                data-bs-target="#editContentModal" 
-                                               data-id="{{ $section['id'] }}" 
-                                               data-title="{{ $section['title'] }}" 
-                                               data-content="{{ htmlspecialchars($section['text_content']) }}">
+                                               data-id="<?php echo e($section['id']); ?>" 
+                                               data-title="<?php echo e($section['title']); ?>" 
+                                               data-content="<?php echo e(htmlspecialchars($section['text_content'])); ?>">
                                                 <i class="fas fa-edit"></i>
                                             </a>
                                         </div>
                                         <div class="section-body">
-                                            @if(!empty($section['text_content']))
+                                            <?php if(!empty($section['text_content'])): ?>
                                                 <div class="legal-text">
-                                                    <span class="section-number">{{ $sectionNumber }}</span> 
-                                                    <div class="html-rendered-content">{!! $section['text_content'] !!}</div>
+                                                    <span class="section-number"><?php echo e($sectionNumber); ?></span> 
+                                                    <div class="html-rendered-content"><?php echo $section['text_content']; ?></div>
                                                 </div>
-                                            @endif
+                                            <?php endif; ?>
                                             
-                                            @foreach($section['subsections'] as $subsectionNumber => $subsection)
+                                            <?php $__currentLoopData = $section['subsections']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subsectionNumber => $subsection): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <div class="subsection-item ms-4 mt-3">
                                                     <div class="d-flex justify-content-between align-items-start">
                                                         <div class="legal-text flex-grow-1">
-                                                            <span class="subsection-number">({{ $subsectionNumber }})</span> 
-                                                            <div class="html-rendered-content">{!! $subsection['text_content'] !!}</div>
+                                                            <span class="subsection-number">(<?php echo e($subsectionNumber); ?>)</span> 
+                                                            <div class="html-rendered-content"><?php echo $subsection['text_content']; ?></div>
                                                         </div>
                                                         <a href="#" class="edit-content-btn text-primary ms-2" 
                                                            data-bs-toggle="modal" 
                                                            data-bs-target="#editContentModal" 
-                                                           data-id="{{ $subsection['id'] }}" 
+                                                           data-id="<?php echo e($subsection['id']); ?>" 
                                                            data-title="" 
-                                                           data-content="{{ htmlspecialchars($subsection['text_content']) }}">
+                                                           data-content="<?php echo e(htmlspecialchars($subsection['text_content'])); ?>">
                                                             <i class="fas fa-edit"></i>
                                                         </a>
                                                     </div>
                                                     
-                                                    @foreach($subsection['paragraphs'] as $paragraphNumber => $paragraph)
+                                                    <?php $__currentLoopData = $subsection['paragraphs']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $paragraphNumber => $paragraph): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                         <div class="paragraph-item ms-4 mt-2">
                                                             <div class="d-flex justify-content-between align-items-start">
                                                                 <div class="legal-text flex-grow-1">
-                                                                    <span class="paragraph-letter">({{ $paragraphNumber }})</span> 
-                                                                    <div class="html-rendered-content">{!! $paragraph['text_content'] !!}</div>
+                                                                    <span class="paragraph-letter">(<?php echo e($paragraphNumber); ?>)</span> 
+                                                                    <div class="html-rendered-content"><?php echo $paragraph['text_content']; ?></div>
                                                                 </div>
                                                                 <a href="#" class="edit-content-btn text-primary ms-2" 
                                                                    data-bs-toggle="modal" 
                                                                    data-bs-target="#editContentModal" 
-                                                                   data-id="{{ $paragraph['id'] }}" 
+                                                                   data-id="<?php echo e($paragraph['id']); ?>" 
                                                                    data-title="" 
-                                                                   data-content="{{ htmlspecialchars($paragraph['text_content']) }}">
+                                                                   data-content="<?php echo e(htmlspecialchars($paragraph['text_content'])); ?>">
                                                                     <i class="fas fa-edit"></i>
                                                                 </a>
                                                             </div>
                                                             
-                                                            @foreach($paragraph['sub_paragraphs'] as $subParagraph)
+                                                            <?php $__currentLoopData = $paragraph['sub_paragraphs']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subParagraph): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                                 <div class="sub-paragraph-item ms-4 mt-2">
                                                                     <div class="d-flex justify-content-between align-items-start">
                                                                         <div class="legal-text flex-grow-1">
-                                                                            <span class="sub-paragraph-numeral">({{ $subParagraph['sub_paragraph'] }})</span> 
-                                                                            <div class="html-rendered-content">{!! $subParagraph['text_content'] !!}</div>
+                                                                            <span class="sub-paragraph-numeral">(<?php echo e($subParagraph['sub_paragraph']); ?>)</span> 
+                                                                            <div class="html-rendered-content"><?php echo $subParagraph['text_content']; ?></div>
                                                                         </div>
                                                                         <a href="#" class="edit-content-btn text-primary ms-2" 
                                                                            data-bs-toggle="modal" 
                                                                            data-bs-target="#editContentModal" 
-                                                                           data-id="{{ $subParagraph['id'] }}" 
+                                                                           data-id="<?php echo e($subParagraph['id']); ?>" 
                                                                            data-title="" 
-                                                                           data-content="{{ htmlspecialchars($subParagraph['text_content']) }}">
+                                                                           data-content="<?php echo e(htmlspecialchars($subParagraph['text_content'])); ?>">
                                                                             <i class="fas fa-edit"></i>
                                                                         </a>
                                                                     </div>
                                                                 </div>
-                                                            @endforeach
+                                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                         </div>
-                                                    @endforeach
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                 </div>
-                                            @endforeach
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                             
-                                            @foreach($section['paragraphs'] as $paragraphNumber => $paragraph)
+                                            <?php $__currentLoopData = $section['paragraphs']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $paragraphNumber => $paragraph): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <div class="paragraph-section mt-3">
                                                     <div class="d-flex justify-content-between align-items-center">
                                                         <div class="legal-text">
-                                                            <strong>({{ $paragraphNumber }})</strong> {!! nl2br(e($paragraph['text_content'])) !!}
+                                                            <strong>(<?php echo e($paragraphNumber); ?>)</strong> <?php echo nl2br(e($paragraph['text_content'])); ?>
+
                                                         </div>
                                                         <a href="#" class="edit-content-btn text-primary" 
                                                            data-bs-toggle="modal" 
                                                            data-bs-target="#editContentModal" 
-                                                           data-id="{{ $paragraph['id'] }}" 
+                                                           data-id="<?php echo e($paragraph['id']); ?>" 
                                                            data-title="" 
-                                                           data-content="{{ htmlspecialchars($paragraph['text_content']) }}">
+                                                           data-content="<?php echo e(htmlspecialchars($paragraph['text_content'])); ?>">
                                                             <i class="fas fa-edit"></i>
                                                         </a>
                                                     </div>
                                                     
-                                                    @foreach($paragraph['sub_paragraphs'] as $subParagraph)
+                                                    <?php $__currentLoopData = $paragraph['sub_paragraphs']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subParagraph): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                         <div class="sub-paragraph-section mt-2">
                                                             <div class="d-flex justify-content-between align-items-center">
                                                                 <div class="legal-text">
-                                                                    <strong>({{ $subParagraph['sub_paragraph'] }})</strong> {!! nl2br(e($subParagraph['text_content'])) !!}
+                                                                    <strong>(<?php echo e($subParagraph['sub_paragraph']); ?>)</strong> <?php echo nl2br(e($subParagraph['text_content'])); ?>
+
                                                                 </div>
                                                                 <a href="#" class="edit-content-btn text-primary" 
                                                                    data-bs-toggle="modal" 
                                                                    data-bs-target="#editContentModal" 
-                                                                   data-id="{{ $subParagraph['id'] }}" 
+                                                                   data-id="<?php echo e($subParagraph['id']); ?>" 
                                                                    data-title="" 
-                                                                   data-content="{{ htmlspecialchars($subParagraph['text_content']) }}">
+                                                                   data-content="<?php echo e(htmlspecialchars($subParagraph['text_content'])); ?>">
                                                                     <i class="fas fa-edit"></i>
                                                                 </a>
                                                             </div>
                                                         </div>
-                                                    @endforeach
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                 </div>
-                                            @endforeach
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                             
-                                            @if(!empty($section['footnote']))
+                                            <?php if(!empty($section['footnote'])): ?>
                                                 <div class="footnote mt-2">
-                                                    <div class="html-rendered-content footnote-content">{!! $section['footnote'] !!}</div>
+                                                    <div class="html-rendered-content footnote-content"><?php echo $section['footnote']; ?></div>
                                                 </div>
-                                            @endif
+                                            <?php endif; ?>
                                         </div>
                                     </div>
-                                @endforeach
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </div>
                         </div>
-                    @endforeach
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
-                    {{-- Render Parts Structure --}}
-                    @foreach($data as $partNumber => $part)
+                    
+                    <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $partNumber => $part): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <div class="legal-document-section mb-4">
-                            <h2 class="section-title mb-3">Part {{ $partNumber }}: {{ $part['title'] }}</h2>
+                            <h2 class="section-title mb-3">Part <?php echo e($partNumber); ?>: <?php echo e($part['title']); ?></h2>
                             <div class="section-content">
-                                @if(!empty($part['sections']))
-                                    @foreach($part['sections'] as $sectionNumber => $section)
-                                        <div class="legal-section" id="section-{{ $sectionNumber }}">
+                                <?php if(!empty($part['sections'])): ?>
+                                    <?php $__currentLoopData = $part['sections']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $sectionNumber => $section): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <div class="legal-section" id="section-<?php echo e($sectionNumber); ?>">
                                             <div class="d-flex align-items-start mb-2">
-                                                @if(!empty($section['title']) && trim($section['title']) !== '' && $section['title'] !== $part['title'])
-                                                    <h4 class="clickable-heading mb-0">{{ $section['title'] }}</h4>
-                                                @else
-                                                    <h4 class="clickable-heading mb-0">Section {{ $sectionNumber }}</h4>
-                                                @endif
+                                                <?php if(!empty($section['title']) && trim($section['title']) !== '' && $section['title'] !== $part['title']): ?>
+                                                    <h4 class="clickable-heading mb-0"><?php echo e($section['title']); ?></h4>
+                                                <?php else: ?>
+                                                    <h4 class="clickable-heading mb-0">Section <?php echo e($sectionNumber); ?></h4>
+                                                <?php endif; ?>
                                                 <a href="#" class="edit-content-btn text-primary ms-2" 
                                                    data-bs-toggle="modal" 
                                                    data-bs-target="#editContentModal" 
-                                                   data-id="{{ $section['id'] }}" 
-                                                   data-title="{{ $section['title'] }}" 
-                                                   data-content="{{ htmlspecialchars($section['text_content']) }}">
+                                                   data-id="<?php echo e($section['id']); ?>" 
+                                                   data-title="<?php echo e($section['title']); ?>" 
+                                                   data-content="<?php echo e(htmlspecialchars($section['text_content'])); ?>">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
                                             </div>
                                             <div class="section-body">
-                                                @if(!empty($section['text_content']))
+                                                <?php if(!empty($section['text_content'])): ?>
                                                     <div class="legal-text">
-                                                        <span class="section-number">{{ $sectionNumber }}</span> {!! nl2br(e($section['text_content'])) !!}
+                                                        <span class="section-number"><?php echo e($sectionNumber); ?></span> <?php echo nl2br(e($section['text_content'])); ?>
+
                                                     </div>
-                                                @endif
+                                                <?php endif; ?>
                                                 
-                                                @if(!empty($section['footnote']))
-                                                    <div class="footnote mt-2">{!! nl2br(e($section['footnote'])) !!}</div>
-                                                @endif
+                                                <?php if(!empty($section['footnote'])): ?>
+                                                    <div class="footnote mt-2"><?php echo nl2br(e($section['footnote'])); ?></div>
+                                                <?php endif; ?>
                                             </div>
                                         </div>
-                                    @endforeach
-                                @endif
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                <?php endif; ?>
                             </div>
                         </div>
-                    @endforeach
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </div>
             </div>
-        @else
+        <?php else: ?>
             <div class="card">
                 <div class="card-body text-center py-5">
                     <i class="fas fa-exclamation-triangle text-warning fs-1 mb-3"></i>
@@ -440,7 +516,7 @@
                     <p class="text-muted mb-0">No content found for this document. The document may be empty or the table may no longer exist.</p>
                 </div>
             </div>
-        @endif
+        <?php endif; ?>
     </div>
 </div>
 
@@ -453,9 +529,9 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="editContentForm" action="{{ route('admin.legal-documents.update', $document->id) }}" method="POST">
-                    @csrf
-                    @method('PATCH')
+                <form id="editContentForm" action="<?php echo e(route('admin.legal-documents.update', $document->id)); ?>" method="POST">
+                    <?php echo csrf_field(); ?>
+                    <?php echo method_field('PATCH'); ?>
                     
                     <input type="hidden" id="content_id" name="content_id">
                     
@@ -477,7 +553,7 @@
     </div>
 </div>
 
-@push('styles')
+<?php $__env->startPush('styles'); ?>
 <style>
     /* General Layout Improvements */
     .card {
@@ -742,9 +818,9 @@
         border-left: 4px solid #dc3545;
     }
 </style>
-@endpush
+<?php $__env->stopPush(); ?>
 
-@push('scripts')
+<?php $__env->startPush('scripts'); ?>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Page loaded - Setting up TinyMCE system...');
@@ -1014,5 +1090,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
-@endpush
-@endsection
+<?php $__env->stopPush(); ?>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.admin', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\Users\User\Desktop\15\jurislocator_laravel\resources\views/admin/legal-documents/edit.blade.php ENDPATH**/ ?>

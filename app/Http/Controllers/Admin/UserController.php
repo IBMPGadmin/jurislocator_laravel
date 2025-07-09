@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -18,18 +19,47 @@ class UserController extends Controller
     // Handle add user form submission
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|string|min:8',
-            'role' => 'required|in:user,admin',
-        ]);
+        // Basic validation rules
+        $rules = [
+            'name' => ['required', 'string', 'max:255'], // Hidden field auto-populated by JS
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'email', 'unique:users,email'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'user_type' => ['required', 'in:licensed_practitioner,immigration_lawyer,notaire_quebec,student_queens,student_montreal'],
+        ];
 
+        // Add conditional validation based on user type
+        if (in_array($request->user_type, ['licensed_practitioner', 'immigration_lawyer', 'notaire_quebec'])) {
+            $rules['license_number'] = ['required', 'string', 'max:255'];
+        } elseif (in_array($request->user_type, ['student_queens', 'student_montreal'])) {
+            $rules['student_id_number'] = ['required', 'string', 'max:255'];
+            $rules['student_id_file'] = ['required', 'file', 'mimes:pdf,jpg,jpeg,png', 'max:2048'];
+        }
+
+        $validated = $request->validate($rules);
+
+        // Handle file upload for student ID
+        $studentIdFile = null;
+        if ($request->hasFile('student_id_file')) {
+            $studentIdFile = $request->file('student_id_file')->store('student_ids', 'public');
+        }
+
+        // Create the user with all the fields
         User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'role' => $request->role,
+            'name' => $validated['name'], // Use the validated name field
+            'first_name' => $validated['first_name'],
+            'last_name' => $validated['last_name'],
+            'email' => $validated['email'],
+            'user_type' => $validated['user_type'],
+            'license_number' => $request->license_number ?? null,
+            'student_id_number' => $request->student_id_number ?? null,
+            'student_id_file' => $studentIdFile,
+            'password' => Hash::make($validated['password']),
+            'role' => 'user', // Fixed value from hidden field
+            'approval_status' => 'approved', // Fixed value from hidden field
+            'approved_at' => now(),
+            'approved_by' => Auth::id(),
         ]);
 
         return redirect()->route('admin.users.add')->with('success', 'User added successfully!');
