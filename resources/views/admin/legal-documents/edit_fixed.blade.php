@@ -461,7 +461,7 @@
                     
                     <div class="mb-3">
                         <label for="content_text" class="form-label">Edit Selected Content</label>
-                        <textarea class="form-control" id="content_text" name="content[text_content]" rows="15"></textarea>
+                        <textarea class="form-control" id="content_text" name="content[text_content]" rows="15" placeholder="Content will be loaded here when TinyMCE initializes..."></textarea>
                         <div class="form-text">
                             <i class="fas fa-info-circle me-1"></i>
                             <span id="editor-status">Rich text editor will be loaded when the modal opens. HTML tags and formatting are preserved.</span>
@@ -784,8 +784,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Initialize TinyMCE when modal opens
-    function initTinyMCEForModal() {
-        const contentToSet = currentContentToEdit; // Use the global variable
+    function initTinyMCEForModal(contentToSet) {
         console.log('Initializing TinyMCE with content:', contentToSet ? contentToSet.substring(0, 100) + '...' : 'No content');
         
         if (typeof tinymce === 'undefined') {
@@ -825,45 +824,32 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // Set content immediately in the callback
                 if (contentToSet && contentToSet.trim()) {
-                    console.log('Setting initial content in callback:', contentToSet.substring(0, 50) + '...');
+                    console.log('Setting initial content...');
                     editor.setContent(contentToSet);
                     updateStatus('success', 'Rich text editor loaded with content.');
                 } else {
-                    console.log('No content to set in callback');
                     updateStatus('success', 'Rich text editor loaded.');
                 }
             },
             
             setup: function (editor) {
                 editor.on('init', function () {
-                    console.log('TinyMCE editor initialized - checking content');
+                    console.log('TinyMCE editor initialized');
                     
-                    // Double-check content setting with a more reliable approach
-                    setTimeout(() => {
-                        const currentContent = editor.getContent();
-                        console.log('Current editor content:', currentContent);
-                        
-                        if (contentToSet && contentToSet.trim()) {
-                            if (!currentContent || currentContent.trim() === '' || 
-                                currentContent === '<p><br data-mce-bogus="1"></p>' ||
-                                currentContent === '<p></p>' || currentContent === '<br>') {
-                                console.log('Content not properly set, setting again...');
+                    // Double-check content setting
+                    if (contentToSet && contentToSet.trim()) {
+                        setTimeout(() => {
+                            const currentContent = editor.getContent();
+                            if (!currentContent || currentContent.trim() === '' || currentContent === '<p><br data-mce-bogus="1"></p>') {
+                                console.log('Content not set, trying again...');
                                 editor.setContent(contentToSet);
-                                // Force another check
-                                setTimeout(() => {
-                                    const finalContent = editor.getContent();
-                                    console.log('Final content check:', finalContent);
-                                    updateStatus('success', 'Content loaded successfully.');
-                                }, 200);
+                                updateStatus('success', 'Content loaded successfully.');
                             } else {
                                 console.log('Content already set correctly');
                                 updateStatus('success', 'Content loaded successfully.');
                             }
-                        } else {
-                            console.log('No content to set');
-                            updateStatus('success', 'Rich text editor ready.');
-                        }
-                    }, 250); // Increased timeout for more reliable content setting
+                        }, 100);
+                    }
                 });
             },
             
@@ -898,19 +884,15 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('=== Edit Button Clicked ===');
             console.log('ID:', id);
             console.log('Title:', title);
-            console.log('Raw content length:', content ? content.length : 0);
-            console.log('Raw content preview:', content ? content.substring(0, 100) + '...' : 'No content');
+            console.log('Raw content:', content);
             
             // Decode content
             const decodedContent = decodeHtmlEntities(content);
-            console.log('Decoded content length:', decodedContent ? decodedContent.length : 0);
-            console.log('Decoded content preview:', decodedContent ? decodedContent.substring(0, 100) + '...' : 'No decoded content');
+            console.log('Decoded content:', decodedContent);
             
-            // Store globally - this is what TinyMCE will use
+            // Store globally
             currentContentToEdit = decodedContent || '';
             currentEditId = id;
-            
-            console.log('Stored globally - currentContentToEdit length:', currentContentToEdit.length);
             
             // Set form values immediately (fallback for plain textarea)
             document.getElementById('content_id').value = id;
@@ -920,18 +902,18 @@ document.addEventListener('DOMContentLoaded', function() {
             const modalTitle = document.getElementById('editContentModalLabel');
             modalTitle.textContent = `Edit Content${title ? ' - ' + title : ''} (ID: ${id})`;
             
-            console.log('Content prepared for modal - ready to initialize TinyMCE');
+            console.log('Content prepared for modal');
         });
     });
 
     // Handle modal shown event
     const editContentModal = document.getElementById('editContentModal');
     editContentModal.addEventListener('shown.bs.modal', function() {
-        console.log('Modal opened - initializing TinyMCE with stored content:', currentContentToEdit ? currentContentToEdit.substring(0, 50) + '...' : 'No content');
+        console.log('Modal opened - initializing TinyMCE with content');
         
         // Small delay to ensure modal is fully rendered
         setTimeout(() => {
-            initTinyMCEForModal(); // No parameter needed, uses global variable
+            initTinyMCEForModal(currentContentToEdit);
         }, 100);
     });
 

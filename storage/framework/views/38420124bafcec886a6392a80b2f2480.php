@@ -1,6 +1,6 @@
-@extends('layouts.admin')
 
-@section('admin-content')
+
+<?php $__env->startSection('admin-content'); ?>
 <div class="container-fluid px-4">
     <!-- Modern Header Section -->
     <div class="d-flex justify-content-between align-items-center mb-4">
@@ -12,31 +12,33 @@
             <p class="text-muted mb-0">Manage and organize your legal document library</p>
         </div>
         <div class="btn-group shadow-sm">
-            <a href="{{ route('admin.legal-documents.standard') }}" class="btn btn-primary">
+            <a href="<?php echo e(route('admin.legal-documents.standard')); ?>" class="btn btn-primary">
                 <i class="fas fa-plus me-2"></i>Add Standard Document
             </a>
-            <a href="{{ route('admin.legal-documents.alternative') }}" class="btn btn-outline-primary">
+            <a href="<?php echo e(route('admin.legal-documents.alternative')); ?>" class="btn btn-outline-primary">
                 <i class="fas fa-upload me-2"></i>Alternative Upload
             </a>
         </div>
     </div>
 
     <!-- Success/Error Messages -->
-    @if(session('success'))
+    <?php if(session('success')): ?>
         <div class="alert alert-success alert-dismissible fade show shadow-sm" role="alert">
             <i class="fas fa-check-circle me-2"></i>
-            {{ session('success') }}
+            <?php echo e(session('success')); ?>
+
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         </div>
-    @endif
+    <?php endif; ?>
     
-    @if(session('error'))
+    <?php if(session('error')): ?>
         <div class="alert alert-danger alert-dismissible fade show shadow-sm" role="alert">
             <i class="fas fa-exclamation-triangle me-2"></i>
-            {{ session('error') }}
+            <?php echo e(session('error')); ?>
+
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         </div>
-    @endif
+    <?php endif; ?>
 
     <!-- Statistics Cards -->
     <div class="row mb-4">
@@ -49,7 +51,8 @@
                                 Total Documents
                             </div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                {{ count($documents) }}
+                                <?php echo e(count($documents)); ?>
+
                             </div>
                         </div>
                         <div class="col-auto">
@@ -69,7 +72,8 @@
                                 Active Documents
                             </div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                {{ $documents->where('status', 'active')->count() }}
+                                <?php echo e($documents->where('status', 'active')->count()); ?>
+
                             </div>
                         </div>
                         <div class="col-auto">
@@ -89,7 +93,8 @@
                                 Inactive Documents
                             </div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                {{ $documents->where('status', 'inactive')->count() }}
+                                <?php echo e($documents->where('status', 'inactive')->count()); ?>
+
                             </div>
                         </div>
                         <div class="col-auto">
@@ -109,7 +114,8 @@
                                 Jurisdictions
                             </div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                {{ $documents->pluck('jurisdiction_id')->unique()->count() }}
+                                <?php echo e($documents->pluck('jurisdiction_id')->unique()->count()); ?>
+
                             </div>
                         </div>
                         <div class="col-auto">
@@ -150,18 +156,18 @@
                         <label class="form-label">Jurisdiction</label>
                         <select class="form-select" id="jurisdictionFilter">
                             <option value="">All Jurisdictions</option>
-                            @foreach($jurisdictions as $id => $name)
-                                <option value="{{ $id }}">{{ $name }}</option>
-                            @endforeach
+                            <?php $__currentLoopData = $jurisdictions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $id => $name): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <option value="<?php echo e($id); ?>"><?php echo e($name); ?></option>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </select>
                     </div>
                     <div class="col-md-3">
                         <label class="form-label">Language</label>
                         <select class="form-select" id="languageFilter">
                             <option value="">All Languages</option>
-                            @foreach($languages as $id => $name)
-                                <option value="{{ $id }}">{{ $name }}</option>
-                            @endforeach
+                            <?php $__currentLoopData = $languages; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $id => $name): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <option value="<?php echo e($id); ?>"><?php echo e($name); ?></option>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </select>
                     </div>
                 </div>
@@ -177,7 +183,7 @@
             </h6>
         </div>
         <div class="card-body">
-            @if(count($documents) > 0)
+            <?php if(count($documents) > 0): ?>
                 <div class="table-responsive">
                     <table class="table table-hover" id="documentsTable">
                         <thead class="table-light">
@@ -195,104 +201,112 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($documents as $document)
-                                <tr class="document-row {{ ($document->status ?? 'active') == 'inactive' ? 'table-secondary' : '' }}" 
-                                    data-status="{{ $document->status ?? 'active' }}"
-                                    data-jurisdiction="{{ $document->jurisdiction_id }}"
-                                    data-language="{{ $document->language_id ?? $document->language }}"
-                                    data-name="{{ strtolower($document->act_name ?? '') }}">
-                                    <td class="text-muted">{{ $document->id }}</td>
+                            <?php $__currentLoopData = $documents; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $document): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <tr class="document-row <?php echo e(($document->status ?? 'active') == 'inactive' ? 'table-secondary' : ''); ?>" 
+                                    data-status="<?php echo e($document->status ?? 'active'); ?>"
+                                    data-jurisdiction="<?php echo e($document->jurisdiction_id); ?>"
+                                    data-language="<?php echo e($document->language_id ?? $document->language); ?>"
+                                    data-name="<?php echo e(strtolower($document->act_name ?? '')); ?>">
+                                    <td class="text-muted"><?php echo e($document->id); ?></td>
                                     <td>
-                                        <span class="badge {{ ($document->status ?? 'active') == 'active' ? 'bg-success' : 'bg-secondary' }}">
-                                            <i class="fas {{ ($document->status ?? 'active') == 'active' ? 'fa-check-circle' : 'fa-pause-circle' }} me-1"></i>
-                                            {{ ucfirst($document->status ?? 'active') }}
+                                        <span class="badge <?php echo e(($document->status ?? 'active') == 'active' ? 'bg-success' : 'bg-secondary'); ?>">
+                                            <i class="fas <?php echo e(($document->status ?? 'active') == 'active' ? 'fa-check-circle' : 'fa-pause-circle'); ?> me-1"></i>
+                                            <?php echo e(ucfirst($document->status ?? 'active')); ?>
+
                                         </span>
                                     </td>
                                     <td>
-                                        <div class="fw-bold text-primary">{{ $document->act_name }}</div>
+                                        <div class="fw-bold text-primary"><?php echo e($document->act_name); ?></div>
                                     </td>
                                     <td>
-                                        <span class="text-muted">{{ $document->table_name }}</span>
+                                        <span class="text-muted"><?php echo e($document->table_name); ?></span>
                                     </td>
                                     <td>
                                         <span class="badge bg-info">
-                                            {{ $lawSubjects[$document->law_id] ?? 'Law ID: ' . $document->law_id }}
+                                            <?php echo e($lawSubjects[$document->law_id] ?? 'Law ID: ' . $document->law_id); ?>
+
                                         </span>
                                     </td>
                                     <td>
                                         <span class="badge bg-primary">
-                                            {{ $acts[$document->act_id] ?? 'Act ID: ' . $document->act_id }}
+                                            <?php echo e($acts[$document->act_id] ?? 'Act ID: ' . $document->act_id); ?>
+
                                         </span>
                                     </td>
                                     <td>
                                         <span class="badge bg-secondary">
-                                            {{ $jurisdictions[$document->jurisdiction_id] ?? 'Jurisdiction ID: ' . $document->jurisdiction_id }}
+                                            <?php echo e($jurisdictions[$document->jurisdiction_id] ?? 'Jurisdiction ID: ' . $document->jurisdiction_id); ?>
+
                                         </span>
                                     </td>
                                     <td>
                                         <span class="text-info fw-bold">
-                                            @if($document->language_id)
-                                                {{ $languages[$document->language_id] ?? $document->language_id }}
-                                            @elseif($document->language == 'en')
+                                            <?php if($document->language_id): ?>
+                                                <?php echo e($languages[$document->language_id] ?? $document->language_id); ?>
+
+                                            <?php elseif($document->language == 'en'): ?>
                                                 English
-                                            @elseif($document->language == 'fr')
+                                            <?php elseif($document->language == 'fr'): ?>
                                                 French
-                                            @elseif($document->language == 'Both')
+                                            <?php elseif($document->language == 'Both'): ?>
                                                 Bilingual
-                                            @else
-                                                {{ $document->language ?? 'N/A' }}
-                                            @endif
+                                            <?php else: ?>
+                                                <?php echo e($document->language ?? 'N/A'); ?>
+
+                                            <?php endif; ?>
                                         </span>
                                     </td>
                                     <td>
                                         <small class="text-muted">
-                                            {{ \Carbon\Carbon::parse($document->created_at)->format('M d, Y') }}
+                                            <?php echo e(\Carbon\Carbon::parse($document->created_at)->format('M d, Y')); ?>
+
                                             <br>
-                                            {{ \Carbon\Carbon::parse($document->created_at)->format('H:i') }}
+                                            <?php echo e(\Carbon\Carbon::parse($document->created_at)->format('H:i')); ?>
+
                                         </small>
                                     </td>
                                     <td>
                                         <div class="btn-group" role="group">
-                                            <a href="{{ route('admin.legal-documents.edit', $document->id) }}" 
+                                            <a href="<?php echo e(route('admin.legal-documents.edit', $document->id)); ?>" 
                                                class="btn btn-sm btn-outline-primary" title="Edit">
                                                 <i class="fas fa-edit"></i>
                                             </a>
                                             <button class="btn btn-sm btn-outline-warning toggle-status-btn" 
-                                                    data-id="{{ $document->id }}"
-                                                    data-status="{{ $document->status ?? 'active' }}"
-                                                    title="{{ ($document->status ?? 'active') == 'active' ? 'Deactivate' : 'Activate' }}">
-                                                <i class="fas {{ ($document->status ?? 'active') == 'active' ? 'fa-pause' : 'fa-play' }}"></i>
+                                                    data-id="<?php echo e($document->id); ?>"
+                                                    data-status="<?php echo e($document->status ?? 'active'); ?>"
+                                                    title="<?php echo e(($document->status ?? 'active') == 'active' ? 'Deactivate' : 'Activate'); ?>">
+                                                <i class="fas <?php echo e(($document->status ?? 'active') == 'active' ? 'fa-pause' : 'fa-play'); ?>"></i>
                                             </button>
                                             <button class="btn btn-sm btn-outline-danger delete-doc-btn"
-                                                    data-id="{{ $document->id }}"
-                                                    data-name="{{ $document->act_name }}"
+                                                    data-id="<?php echo e($document->id); ?>"
+                                                    data-name="<?php echo e($document->act_name); ?>"
                                                     title="Delete">
                                                 <i class="fas fa-trash"></i>
                                             </button>
                                         </div>
                                     </td>
                                 </tr>
-                            @endforeach
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </tbody>
                     </table>
                 </div>
-            @else
+            <?php else: ?>
                 <div class="text-center py-5">
                     <div class="mb-4">
                         <i class="fas fa-file-alt fa-5x text-gray-300"></i>
                     </div>
                     <h4 class="text-muted">No Legal Documents Found</h4>
                     <p class="text-muted mb-4">Get started by uploading your first legal document.</p>
-                    <a href="{{ route('admin.legal-documents.standard') }}" class="btn btn-primary">
+                    <a href="<?php echo e(route('admin.legal-documents.standard')); ?>" class="btn btn-primary">
                         <i class="fas fa-plus me-2"></i>Upload First Document
                     </a>
                 </div>
-            @endif
+            <?php endif; ?>
         </div>
     </div>
 </div>
 
-@push('styles')
+<?php $__env->startPush('styles'); ?>
 <style>
     /* Modern card styling */
     .document-card {
@@ -392,9 +406,9 @@
         border: 2px dashed #e3e6f0;
     }
 </style>
-@endpush
+<?php $__env->stopPush(); ?>
 
-@push('scripts')
+<?php $__env->startPush('scripts'); ?>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     // Search and filter functionality
@@ -585,7 +599,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 </script>
-@endpush
+<?php $__env->stopPush(); ?>
 
 <!-- Delete Confirmation Modal -->
 <div class="modal fade" id="deleteDocumentModal" tabindex="-1" aria-labelledby="deleteDocumentModalLabel" aria-hidden="true">
@@ -610,8 +624,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     <i class="fas fa-times me-2"></i>Cancel
                 </button>
                 <form id="deleteDocForm" method="POST" class="d-inline">
-                    @csrf
-                    @method('DELETE')
+                    <?php echo csrf_field(); ?>
+                    <?php echo method_field('DELETE'); ?>
                     <button type="submit" class="btn btn-danger">
                         <i class="fas fa-trash me-2"></i>Delete Document
                     </button>
@@ -620,4 +634,6 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
     </div>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.admin', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\Users\User\Desktop\15\jurislocator_laravel\resources\views/admin/legal-documents/index.blade.php ENDPATH**/ ?>
