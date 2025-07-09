@@ -664,7 +664,7 @@
                                         <li class="act-law"><strong>Law Subject: </strong><span><?php echo e($lawSubjects[$row->law_id ?? 1] ?? 'N/A'); ?></span></li>
                                         <li class="act-jurisdiction"><strong>Jurisdiction: </strong><span><?php echo e($jurisdictions[$row->jurisdiction_id ?? 1] ?? 'Federal'); ?></span></li>
                                         <li class="act-language"><strong>Language: </strong><span><?php echo e($languages[$row->language_id ?? 1] ?? 'English'); ?></span></li>
-                                        <li class="act-description"><strong>Current to: </strong><span><?php echo e($row->created_at ? date('Y - m - d', strtotime($row->created_at)) : date('Y-m-d')); ?></span></li>
+                                        <li class="act-description"><strong>Current to: </strong><span><?php echo e($row->created_at ? date('Y-m-d', strtotime($row->created_at)) : date('Y-m-d')); ?></span></li>
                                         <li class="view-button"><a href="javascript:void(0)" onclick="event.stopPropagation(); redirectToDocument('<?php echo e($row->table_name); ?>', '<?php echo e($row->act_id); ?>', '<?php echo e(isset($client) && $client ? $client->id : ""); ?>', '<?php echo e($row->language_id); ?>')"><strong>View Document</strong> <i class="fas fa-arrow-right"></i></a></li>
                                     </ul>
                                 </div>
