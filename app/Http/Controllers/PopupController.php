@@ -194,6 +194,7 @@ class PopupController extends Controller
             
             return response()->json([
                 'success' => false,
+                'message' => 'Failed to load saved popups.'
             ], 500);
         }
     }
