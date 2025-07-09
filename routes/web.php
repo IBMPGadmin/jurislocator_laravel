@@ -371,6 +371,13 @@ Route::middleware([\App\Http\Middleware\Authenticate::class, 'verified', \App\Ht
     Route::get('/payment/subscription/activate/{packageId}', [App\Http\Controllers\PaymentDetailsController::class, 'activateNewPackage'])->name('payment.subscription.activate');
 });
 
+// Notes routes with minimal middleware for AJAX requests
+Route::middleware(['auth'])->group(function () {
+    Route::post('/save-notes', [App\Http\Controllers\NotesController::class, 'saveNotes'])->name('save.notes');
+    Route::get('/get-saved-notes', [App\Http\Controllers\NotesController::class, 'getSavedNotes'])->name('get.saved.notes');
+    Route::delete('/delete-notes', [App\Http\Controllers\NotesController::class, 'deleteNotes'])->name('delete.notes');
+});
+
 Route::middleware(\App\Http\Middleware\Authenticate::class)->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

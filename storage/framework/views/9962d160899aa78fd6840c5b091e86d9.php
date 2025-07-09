@@ -1694,9 +1694,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-en="Cancel" data-fr="Annuler">Cancel</button>
             </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-en="Cancel" data-fr="Annuler">Cancel</button>
             </div>
         </div>
     </div>
@@ -1799,6 +1799,193 @@
     </div>
 </div>
 
+<!-- Notes Save Choice Modal -->
+<div class="modal fade modal-centered" id="notesSaveModal" tabindex="-1" aria-labelledby="notesSaveModalLabel" aria-hidden="true" data-bs-backdrop="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="notesSaveModalLabel">
+                    <i class="fas fa-sticky-note me-2"></i>
+                    <span data-en="Choose Save Context for Notes" data-fr="Choisir le contexte de sauvegarde pour les notes">Choose Save Context for Notes</span>
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p class="text-center mb-4" data-en="How would you like to save your notes?" data-fr="Comment souhaitez-vous sauvegarder vos notes ?">
+                    <strong>How would you like to save your notes?</strong>
+                </p>
+                <div class="d-grid gap-3" id="notesSaveOptionsSection">
+                    <button type="button" class="btn btn-outline-primary btn-lg" id="saveNotesToUserRecords">
+                        <i class="fas fa-user me-2"></i>
+                        <span data-en="Save to Personal Records" data-fr="Sauvegarder dans les dossiers personnels">Save to Personal Records</span>
+                        <br><small class="text-muted" data-en="(Available in all contexts)" data-fr="(Disponible dans tous les contextes)">(Available in all contexts)</small>
+                    </button>
+                    <button type="button" class="btn btn-outline-success btn-lg" id="saveNotesToClientRecordsExpand">
+                        <i class="fas fa-briefcase me-2"></i>
+                        <span data-en="Save to Client Records" data-fr="Sauvegarder dans les dossiers clients">Save to Client Records</span>
+                        <?php if(isset($client) && $client): ?>
+                        <br><small class="text-muted" data-en="(For client: <?php echo e($client->client_name); ?>)" data-fr="(Pour le client : <?php echo e($client->client_name); ?>)">(For client: <?php echo e($client->client_name); ?>)</small>
+                        <?php else: ?>
+                        <br><small class="text-muted" data-en="(Select or create a client)" data-fr="(Sélectionner ou créer un client)">(Select or create a client)</small>
+                        <?php endif; ?>
+                    </button>
+                </div>
+
+                <!-- Client Selection Section for Notes (Initially Hidden) -->
+                <div id="notesClientSelectionSection" style="display: none;">
+                    <hr class="my-4">
+                    <h6 class="text-center mb-4" data-en="Client Management" data-fr="Gestion des clients">
+                        <i class="fas fa-briefcase me-2"></i>Client Management
+                    </h6>
+                    
+                    <!-- Add New Client Section -->
+                    <div class="card border-primary shadow-sm mb-4">
+                        <div class="card-header bg-primary text-white">
+                            <h6 class="mb-0" data-en="Create New Client" data-fr="Créer un nouveau client">
+                                <i class="fas fa-plus me-2"></i>Create New Client
+                            </h6>
+                        </div>
+                        <div class="card-body bg-white bg-opacity-90">
+                            <form id="newClientFormInNotesModal">
+                                <?php echo csrf_field(); ?>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <label for="notes_modal_client_name" class="form-label fw-bold" data-en="Client Name" data-fr="Nom du client">Client Name</label>
+                                            <input type="text" class="form-control" id="notes_modal_client_name" name="client_name" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <label for="notes_modal_client_email" class="form-label fw-bold" data-en="Email" data-fr="Courriel">Email</label>
+                                            <input type="email" class="form-control" id="notes_modal_client_email" name="client_email" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <label for="notes_modal_client_status" class="form-label fw-bold" data-en="Status" data-fr="Statut">Status</label>
+                                            <select class="form-control" id="notes_modal_client_status" name="client_status" required>
+                                                <option value="Active" data-en="Active" data-fr="Actif">Active</option>
+                                                <option value="Inactive" data-en="Inactive" data-fr="Inactif">Inactive</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary btn-sm">
+                                        <i class="fas fa-plus me-2"></i>
+                                        <span data-en="Create and Select Client" data-fr="Créer et sélectionner le client">Create and Select Client</span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Existing Clients Section -->
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-light">
+                            <h6 class="mb-1" data-en="Select Existing Client" data-fr="Sélectionner un client existant">
+                                <i class="fas fa-users me-2"></i>Select Existing Client
+                            </h6>
+                            <p class="mb-0 text-muted small" data-en="Choose a client to save notes to their records" data-fr="Choisissez un client pour enregistrer les notes dans ses dossiers">Choose a client to save notes to their records</p>
+                        </div>
+                        <div class="card-body bg-white bg-opacity-90" style="max-height: 300px; overflow-y: auto;">
+                            <div id="notesModalClientsList" class="row">
+                                <!-- Clients will be loaded here dynamically -->
+                                <div class="col-12 text-center py-3">
+                                    <div class="spinner-border text-primary" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                    <p class="mt-2 text-muted" data-en="Loading clients..." data-fr="Chargement des clients...">Loading clients...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Back Button -->
+                    <div class="text-center mt-3">
+                        <button type="button" class="btn btn-outline-secondary" id="backToNotesSaveOptions">
+                            <i class="fas fa-arrow-left me-2"></i>
+                            <span data-en="Back to Save Options" data-fr="Retour aux options de sauvegarde">Back to Save Options</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-en="Cancel" data-fr="Annuler">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Notes Fetch Modal -->
+<div class="modal fade modal-centered" id="notesFetchModal" tabindex="-1" aria-labelledby="notesFetchModalLabel" aria-hidden="true" data-bs-backdrop="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="notesFetchModalLabel">
+                    <i class="fas fa-download me-2"></i>
+                    <span data-en="Fetch Saved Notes" data-fr="Récupérer les notes sauvegardées">Fetch Saved Notes</span>
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p class="text-center mb-4" data-en="Choose the context to fetch notes from:" data-fr="Choisissez le contexte pour récupérer les notes :">
+                    <strong>Choose the context to fetch notes from:</strong>
+                </p>
+                
+                <div class="d-grid gap-3 mb-4">
+                    <button type="button" class="btn btn-outline-primary btn-lg" id="fetchNotesFromUserRecords">
+                        <i class="fas fa-user me-2"></i>
+                        <span data-en="Fetch from Personal Records" data-fr="Récupérer des dossiers personnels">Fetch from Personal Records</span>
+                        <br><small class="text-muted" data-en="(Your personal saved notes)" data-fr="(Vos notes personnelles sauvegardées)">(Your personal saved notes)</small>
+                    </button>
+                    <button type="button" class="btn btn-outline-success btn-lg" id="fetchNotesFromClientRecords">
+                        <i class="fas fa-briefcase me-2"></i>
+                        <span data-en="Fetch from Client Records" data-fr="Récupérer des dossiers clients">Fetch from Client Records</span>
+                        <br><small class="text-muted" data-en="(Select a client to fetch their notes)" data-fr="(Sélectionnez un client pour récupérer ses notes)">(Select a client to fetch their notes)</small>
+                    </button>
+                </div>
+
+                <!-- Client Selection Section for Fetch (Initially Hidden) -->
+                <div id="notesFetchClientSelectionSection" style="display: none;">
+                    <hr class="my-4">
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-light">
+                            <h6 class="mb-1" data-en="Available Clients" data-fr="Clients disponibles">
+                                <i class="fas fa-users me-2"></i>Available Clients
+                            </h6>
+                            <p class="mb-0 text-muted small" data-en="Choose a client to load their saved notes" data-fr="Choisissez un client pour charger ses notes sauvegardées">Choose a client to load their saved notes</p>
+                        </div>
+                        <div class="card-body bg-white bg-opacity-90" style="max-height: 400px; overflow-y: auto;">
+                            <div id="notesFetchModalClientsList" class="row">
+                                <!-- Clients will be loaded here dynamically -->
+                                <div class="col-12 text-center py-4">
+                                    <div class="spinner-border text-primary" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                    <p class="mt-2 text-muted" data-en="Loading clients..." data-fr="Chargement des clients...">Loading clients...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Back Button -->
+                    <div class="text-center mt-3">
+                        <button type="button" class="btn btn-outline-secondary" id="backToNotesFetchOptions">
+                            <i class="fas fa-arrow-left me-2"></i>
+                            <span data-en="Back to Fetch Options" data-fr="Retour aux options de récupération">Back to Fetch Options</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-en="Cancel" data-fr="Annuler">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Debug info and script for testing -->
 <div id="debug-output" class="card mt-3 mb-3" style="display: none;">
     <div class="card-header bg-secondary text-white d-flex justify-content-between align-items-center">
@@ -1871,39 +2058,8 @@ $(document).ready(function() {
                     localStorage.setItem('tinyMCEContent', editor.getContent());
                 });
 
-                // Add save button handler
-                editor.on('SaveContent', function() {
-                    const content = editor.getContent();
-                    // Save to database using Laravel route
-                    fetch('<?php echo e(route('editor.save')); ?>', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                        },
-                        body: JSON.stringify({ content: content })
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            editor.notificationManager.open({
-                                text: 'Content saved successfully',
-                                type: 'success',
-                                timeout: 3000
-                            });
-                        } else {
-                            throw new Error(data.message || 'Error saving content');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        editor.notificationManager.open({
-                            text: error.message || 'Error saving content',
-                            type: 'error',
-                            timeout: 3000
-                        });
-                    });
-                });
+                // Remove the old save button handler since we now have dedicated save/fetch buttons
+                // The content will be saved when user clicks "Save Notes" button
             }
         }).then(function(editors) {
             console.log('TinyMCE editors loaded:', editors);
@@ -5185,6 +5341,354 @@ console.log('Client API test functions available:');
 console.log('- Run testClientAPI() to test fetching clients');
 console.log('- Run testCreateClient() to test creating a client');
 console.log('- Both functions provide detailed debugging output');
+</script>
+
+<!-- Notes Save/Fetch Functionality -->
+<script>
+$(document).ready(function() {
+    // Global variables for notes functionality
+    let currentNotesClientId = null;
+    let selectedNotesSaveType = 'user';
+
+    // Save Notes Modal - Show/Hide sections
+    $('#saveNotesToUserRecords').on('click', function() {
+        selectedNotesSaveType = 'user';
+        saveNotesToDatabase();
+    });
+
+    $('#saveNotesToClientRecordsExpand').on('click', function() {
+        selectedNotesSaveType = 'client';
+        
+        // Check if we have a current client
+        const currentClientId = $('meta[name="current-client-id"]').attr('content');
+        if (currentClientId && currentClientId !== '') {
+            // If we have a current client, save directly to that client
+            currentNotesClientId = currentClientId;
+            saveNotesToDatabase();
+        } else {
+            // Show client selection section
+            $('#notesSaveOptionsSection').hide();
+            $('#notesClientSelectionSection').show();
+            $('#notesSaveModal').addClass('expanded');
+            loadClientsForNotesModal('#notesModalClientsList');
+        }
+    });
+
+    $('#backToNotesSaveOptions').on('click', function() {
+        $('#notesClientSelectionSection').hide();
+        $('#notesSaveOptionsSection').show();
+        $('#notesSaveModal').removeClass('expanded');
+    });
+
+    // Fetch Notes Modal - Show/Hide sections
+    $('#fetchNotesFromUserRecords').on('click', function() {
+        fetchNotesFromDatabase('user', null);
+    });
+
+    $('#fetchNotesFromClientRecords').on('click', function() {
+        // Show client selection for fetch
+        $('#notesFetchModal .d-grid').hide();
+        $('#notesFetchClientSelectionSection').show();
+        loadClientsForNotesModal('#notesFetchModalClientsList');
+    });
+
+    $('#backToNotesFetchOptions').on('click', function() {
+        $('#notesFetchClientSelectionSection').hide();
+        $('#notesFetchModal .d-grid').show();
+    });
+
+    // Clear Notes Editor
+    $('#clear-notes-sidebar').on('click', function() {
+        if (confirm('Are you sure you want to clear the notes editor? This will not delete saved notes.')) {
+            if (typeof tinymce !== 'undefined' && tinymce.get('tiny-editor')) {
+                tinymce.get('tiny-editor').setContent('');
+            }
+        }
+    });
+
+    // Client selection for notes save
+    $(document).on('click', '.notes-client-card', function() {
+        const clientId = $(this).data('client-id');
+        currentNotesClientId = clientId;
+        
+        // Remove selection from other cards
+        $('.notes-client-card').removeClass('selected');
+        $(this).addClass('selected');
+        
+        // Save notes to selected client
+        setTimeout(() => {
+            saveNotesToDatabase();
+        }, 300);
+    });
+
+    // Client selection for notes fetch
+    $(document).on('click', '.notes-fetch-client-card', function() {
+        const clientId = $(this).data('client-id');
+        
+        // Remove selection from other cards
+        $('.notes-fetch-client-card').removeClass('selected');
+        $(this).addClass('selected');
+        
+        // Fetch notes from selected client
+        setTimeout(() => {
+            fetchNotesFromDatabase('client', clientId);
+        }, 300);
+    });
+
+    // Function to save notes to database
+    function saveNotesToDatabase() {
+        // Get notes content from TinyMCE
+        let noteContent = '';
+        if (typeof tinymce !== 'undefined' && tinymce.get('tiny-editor')) {
+            noteContent = tinymce.get('tiny-editor').getContent();
+        } else {
+            noteContent = $('#tiny-editor').val();
+        }
+
+        if (!noteContent || noteContent.trim() === '') {
+            alert('Please enter some notes before saving.');
+            return;
+        }
+
+        // Generate note title from content (first 50 characters)
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = noteContent;
+        const plainText = tempDiv.textContent || tempDiv.innerText || '';
+        const noteTitle = plainText.substring(0, 50).trim() + (plainText.length > 50 ? '...' : '');
+
+        const requestData = {
+            save_type: selectedNotesSaveType,
+            note_title: noteTitle,
+            note_content: noteContent,
+            _token: $('meta[name="csrf-token"]').attr('content')
+        };
+
+        if (selectedNotesSaveType === 'client' && currentNotesClientId) {
+            requestData.client_id = currentNotesClientId;
+        }
+
+        // Show loading state
+        const saveButton = selectedNotesSaveType === 'user' ? '#saveNotesToUserRecords' : '#saveNotesToClientRecordsExpand';
+        const originalText = $(saveButton).html();
+        $(saveButton).html('<i class="fas fa-spinner fa-spin me-2"></i>Saving...');
+        $(saveButton).prop('disabled', true);
+
+        // Make API request
+        fetch('<?php echo e(route("save.notes")); ?>', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            body: JSON.stringify(requestData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert(data.message);
+                $('#notesSaveModal').modal('hide');
+                
+                // Reset modal state
+                $('#notesClientSelectionSection').hide();
+                $('#notesSaveOptionsSection').show();
+                $('#notesSaveModal').removeClass('expanded');
+            } else {
+                alert('Error: ' + (data.message || 'Failed to save notes'));
+            }
+        })
+        .catch(error => {
+            console.error('Error saving notes:', error);
+            alert('Failed to save notes. Please try again.');
+        })
+        .finally(() => {
+            // Restore button state
+            $(saveButton).html(originalText);
+            $(saveButton).prop('disabled', false);
+        });
+    }
+
+    // Function to fetch notes from database
+    function fetchNotesFromDatabase(fetchType, clientId = null) {
+        const requestData = {
+            fetch_type: fetchType
+        };
+
+        if (clientId) {
+            requestData.client_id = clientId;
+        }
+
+        // Show loading state
+        const loadingHtml = '<div class="text-center"><i class="fas fa-spinner fa-spin"></i> Loading notes...</div>';
+        
+        // Make API request
+        fetch('<?php echo e(route("get.saved.notes")); ?>?' + new URLSearchParams(requestData))
+        .then(response => response.json())
+        .then(data => {
+            if (data.success && data.notes && data.notes.length > 0) {
+                // Show notes selection modal or load the most recent note
+                if (data.notes.length === 1) {
+                    // If only one note, load it directly
+                    loadNoteIntoEditor(data.notes[0]);
+                    $('#notesFetchModal').modal('hide');
+                } else {
+                    // If multiple notes, show selection modal
+                    showNotesSelectionModal(data.notes, fetchType);
+                }
+            } else {
+                const contextName = fetchType === 'user' ? 'personal records' : 'client records';
+                alert(`No saved notes found in ${contextName}.`);
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching notes:', error);
+            alert('Failed to fetch notes. Please try again.');
+        });
+    }
+
+    // Function to load note into TinyMCE editor
+    function loadNoteIntoEditor(note) {
+        if (typeof tinymce !== 'undefined' && tinymce.get('tiny-editor')) {
+            tinymce.get('tiny-editor').setContent(note.note_content || '');
+        } else {
+            $('#tiny-editor').val(note.note_content || '');
+        }
+        
+        alert(`Note "${note.note_title || 'Untitled'}" loaded into editor.`);
+    }
+
+    // Function to show notes selection modal (when multiple notes exist)
+    function showNotesSelectionModal(notes, fetchType) {
+        // Create and show a simple selection modal
+        let modalHtml = '<div class="modal fade" id="notesSelectionModal" tabindex="-1">';
+        modalHtml += '<div class="modal-dialog"><div class="modal-content">';
+        modalHtml += '<div class="modal-header"><h5 class="modal-title">Select Note to Load</h5>';
+        modalHtml += '<button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>';
+        modalHtml += '<div class="modal-body">';
+        
+        notes.forEach((note, index) => {
+            const truncatedContent = note.note_content ? note.note_content.substring(0, 100) + '...' : 'No content';
+            modalHtml += `<div class="card mb-2 note-selection-card" data-note-index="${index}" style="cursor: pointer;">`;
+            modalHtml += '<div class="card-body">';
+            modalHtml += `<h6 class="card-title">${note.note_title || 'Untitled Note'}</h6>`;
+            modalHtml += `<p class="card-text small text-muted">${truncatedContent}</p>`;
+            modalHtml += `<small class="text-muted">Saved: ${new Date(note.saved_at).toLocaleDateString()}</small>`;
+            modalHtml += '</div></div>';
+        });
+        
+        modalHtml += '</div><div class="modal-footer">';
+        modalHtml += '<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>';
+        modalHtml += '</div></div></div></div>';
+        
+        // Remove existing modal if any
+        $('#notesSelectionModal').remove();
+        
+        // Add modal to body
+        $('body').append(modalHtml);
+        
+        // Handle note selection
+        $('.note-selection-card').on('click', function() {
+            const noteIndex = $(this).data('note-index');
+            loadNoteIntoEditor(notes[noteIndex]);
+            $('#notesSelectionModal').modal('hide');
+            $('#notesFetchModal').modal('hide');
+        });
+        
+        // Show modal
+        $('#notesSelectionModal').modal('show');
+        
+        // Clean up when modal is hidden
+        $('#notesSelectionModal').on('hidden.bs.modal', function() {
+            $(this).remove();
+        });
+    }
+
+    // Function to load clients for notes modal (reuse existing client loading logic)
+    function loadClientsForNotesModal(containerSelector) {
+        const container = $(containerSelector);
+        
+        // Show loading state
+        container.html(`
+            <div class="col-12 text-center py-3">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <p class="mt-2 text-muted">Loading clients...</p>
+            </div>
+        `);
+
+        // Use the existing client API endpoint
+        fetch('/web-api/clients')
+        .then(response => response.json())
+        .then(data => {
+            if (data.success && data.clients) {
+                let clientsHtml = '';
+                
+                if (data.clients.length === 0) {
+                    clientsHtml = `
+                        <div class="col-12 text-center py-4">
+                            <i class="fas fa-users text-muted" style="font-size: 3rem;"></i>
+                            <p class="mt-3 text-muted">No clients found. Create a new client to get started.</p>
+                        </div>
+                    `;
+                } else {
+                    data.clients.forEach(client => {
+                        const isForFetch = containerSelector.includes('Fetch');
+                        const cardClass = isForFetch ? 'notes-fetch-client-card' : 'notes-client-card';
+                        
+                        clientsHtml += `
+                            <div class="col-md-6 mb-2">
+                                <div class="card ${cardClass} client-selection-card h-100" data-client-id="${client.id}" style="cursor: pointer;">
+                                    <div class="card-body d-flex align-items-center">
+                                        <div class="client-avatar-large me-3">
+                                            ${client.client_name.charAt(0).toUpperCase()}
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <h6 class="card-title mb-1">${client.client_name}</h6>
+                                            <p class="card-text small text-muted mb-1">${client.client_email}</p>
+                                            <span class="badge ${client.client_status === 'Active' ? 'status-active' : 'status-inactive'}">${client.client_status}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                }
+                
+                container.html(clientsHtml);
+            } else {
+                container.html(`
+                    <div class="col-12 text-center py-4">
+                        <i class="fas fa-exclamation-triangle text-warning" style="font-size: 2rem;"></i>
+                        <p class="mt-2 text-muted">Failed to load clients. Please try again.</p>
+                    </div>
+                `);
+            }
+        })
+        .catch(error => {
+            console.error('Error loading clients:', error);
+            container.html(`
+                <div class="col-12 text-center py-4">
+                    <i class="fas fa-exclamation-triangle text-danger" style="font-size: 2rem;"></i>
+                    <p class="mt-2 text-muted">Error loading clients. Please try again.</p>
+                </div>
+            `);
+        });
+    }
+
+    // Reset modals when they are hidden
+    $('#notesSaveModal').on('hidden.bs.modal', function() {
+        $('#notesClientSelectionSection').hide();
+        $('#notesSaveOptionsSection').show();
+        $(this).removeClass('expanded');
+        currentNotesClientId = null;
+        selectedNotesSaveType = 'user';
+    });
+
+    $('#notesFetchModal').on('hidden.bs.modal', function() {
+        $('#notesFetchClientSelectionSection').hide();
+        $(this).find('.d-grid').show();
+    });
+});
 </script>
 <?php $__env->stopPush(); ?>
 
