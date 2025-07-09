@@ -399,13 +399,13 @@
 
         border-radius: 20px;
 
-        padding: 6px 14px;
+        padding: 8px 16px;
 
         display: flex;
 
         align-items: center;
 
-        gap: 8px;
+        gap: 10px;
 
         backdrop-filter: blur(10px);
 
@@ -415,11 +415,11 @@
 
         color: white;
 
-        font-size: 0.85rem;
+        font-size: 0.8rem;
 
         font-weight: 500;
 
-        min-width: 100px;
+        min-width: 120px;
 
         justify-content: center;
 
@@ -463,11 +463,13 @@
 
     .pinned-timezone-inline-info .city {
 
-        font-size: 0.75rem;
+        font-size: 0.7rem;
 
         margin: 0;
 
         opacity: 0.9;
+
+        line-height: 1.1;
 
     }
 
@@ -475,11 +477,29 @@
 
     .pinned-timezone-inline-info .time {
 
-        font-size: 0.8rem;
+        font-size: 0.75rem;
 
         font-weight: 600;
 
         margin: 0;
+
+        line-height: 1.1;
+
+    }
+
+    
+
+    .pinned-timezone-inline-info .date {
+
+        font-size: 0.65rem;
+
+        font-weight: 400;
+
+        margin: 0;
+
+        opacity: 0.8;
+
+        line-height: 1.1;
 
     }
 
@@ -922,6 +942,41 @@
         const savedTheme = localStorage.getItem('selectedTheme') || 'default';
         
         // Initialize inline pinned timezones functionality
+        async function loadUserTimezones() {
+            try {
+                console.log('Loading user timezones for header...');
+                
+                const response = await fetch('/user/timezones/pinned', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    }
+                });
+                
+                console.log('Header timezone response status:', response.status);
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log('Header timezone response data:', data);
+                    
+                    if (data.success && data.data) {
+                        // Update localStorage with server data
+                        localStorage.setItem('pinnedTimezones', JSON.stringify(data.data));
+                        updateHeaderWorldClock();
+                    }
+                } else {
+                    console.log('Failed to load timezones for header, using localStorage');
+                    // Fallback to localStorage if server request fails
+                    updateHeaderWorldClock();
+                }
+            } catch (error) {
+                console.log('Error loading header timezones, using localStorage:', error);
+                // Fallback to localStorage
+                updateHeaderWorldClock();
+            }
+        }
+        
         function updateHeaderWorldClock() {
             const pinnedTimezones = JSON.parse(localStorage.getItem('pinnedTimezones') || '[]');
             const inlineContainer = document.getElementById('pinned-timezones-inline');
@@ -940,6 +995,8 @@
             
             pinnedTimezones.forEach(timezoneData => {
                 const now = new Date();
+                
+                // Get time in timezone
                 const timeString = now.toLocaleString('en-US', { 
                     timeZone: timezoneData.timezone,
                     hour12: true,
@@ -947,16 +1004,34 @@
                     minute: '2-digit'
                 });
                 
+                // Get day and date in timezone
+                const dayString = now.toLocaleDateString('en-US', { 
+                    timeZone: timezoneData.timezone,
+                    weekday: 'short'
+                }).toUpperCase();
+                
+                const dateString = now.toLocaleDateString('en-US', { 
+                    timeZone: timezoneData.timezone,
+                    day: '2-digit',
+                    month: 'short',
+                    year: 'numeric'
+                }).replace(/,/g, '');
+                
+                // Get timezone abbreviation
+                const timezoneName = timezoneData.name.match(/\(([^)]+)\)/);
+                const timezoneAbbr = timezoneName ? timezoneName[1] : '';
+                
                 const cityName = timezoneData.name.split('(')[0].trim();
                 
-                // Create inline header item
+                // Create inline header item with enhanced display
                 const inlineItem = document.createElement('div');
                 inlineItem.className = 'pinned-timezone-inline-item';
                 inlineItem.innerHTML = `
                     <div class="pinned-timezone-inline-flag">${timezoneData.flag}</div>
                     <div class="pinned-timezone-inline-info">
                         <p class="city">${cityName}</p>
-                        <p class="time">${timeString}</p>
+                        <p class="time">${timeString} ${timezoneAbbr}</p>
+                        <p class="date">${dayString} ${dateString}</p>
                     </div>
                 `;
                 inlineContainer.appendChild(inlineItem);
@@ -969,10 +1044,42 @@
         // Listen for pinned timezone updates from tools page
         window.addEventListener('pinnedTimezonesUpdated', function(e) {
             updateHeaderWorldClock();
+            // Sync with server
+            syncTimezonesWithServer();
         });
         
-        // Initial load
-        updateHeaderWorldClock();        
+        // Sync timezone changes with server
+        async function syncTimezonesWithServer() {
+            try {
+                const pinnedTimezones = JSON.parse(localStorage.getItem('pinnedTimezones') || '[]');
+                console.log('Syncing header timezones to server:', pinnedTimezones);
+                
+                const response = await fetch('/user/timezones/update', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    },
+                    body: JSON.stringify({
+                        pinned_timezones: pinnedTimezones
+                    })
+                });
+                
+                const data = await response.json();
+                console.log('Header sync response:', data);
+                
+                if (!response.ok) {
+                    console.log('Failed to sync header timezones with server:', data);
+                } else {
+                    console.log('Successfully synced header timezones with server');
+                }
+            } catch (error) {
+                console.log('Error syncing header timezones:', error);
+            }
+        }
+        
+        // Initial load from server
+        loadUserTimezones();        
         // Apply saved theme
         document.body.classList.add('theme-' + savedTheme);
         updateActiveTheme(savedTheme);

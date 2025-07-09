@@ -33,6 +33,7 @@ class User extends Authenticatable
         'approved_by',
         'role', // Add role to fillable
         'profile_image', // Add profile_image to fillable
+        'pinned_timezones', // Add pinned_timezones to fillable
     ];
 
     /**
@@ -55,6 +56,7 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'pinned_timezones' => 'array',
         ];
     }
 

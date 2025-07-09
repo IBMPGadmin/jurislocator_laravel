@@ -662,7 +662,7 @@
                                         <li class="act-law"><strong>Law Subject: </strong><span>{{ $lawSubjects[$row->law_id ?? 1] ?? 'N/A' }}</span></li>
                                         <li class="act-jurisdiction"><strong>Jurisdiction: </strong><span>{{ $jurisdictions[$row->jurisdiction_id ?? 1] ?? 'Federal' }}</span></li>
                                         <li class="act-language"><strong>Language: </strong><span>{{ $languages[$row->language_id ?? 1] ?? 'English' }}</span></li>
-                                        <li class="act-description"><strong>Current to: </strong><span>{{ $row->created_at ? date('Y-m-d', strtotime($row->created_at)) : date('Y-m-d') }}</span></li>
+                                        <li class="act-description"><strong>Current to: </strong><span>{{ $row->created_at ? date('Y - m - d', strtotime($row->created_at)) : date('Y-m-d') }}</span></li>
                                         <li class="view-button"><a href="javascript:void(0)" onclick="event.stopPropagation(); redirectToDocument('{{ $row->table_name }}', '{{ $row->act_id }}', '{{ isset($client) && $client ? $client->id : "" }}', '{{ $row->language_id }}')"><strong>View Document</strong> <i class="fas fa-arrow-right"></i></a></li>
                                     </ul>
                                 </div>
