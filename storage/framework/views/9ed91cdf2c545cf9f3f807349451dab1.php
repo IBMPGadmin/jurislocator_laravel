@@ -1,14 +1,14 @@
-@extends('layouts.with-sidebar-layout')
 
-@section('meta')
+
+<?php $__env->startSection('meta'); ?>
     <!-- Current document context meta tags -->
-    <meta name="current-document-table" content="{{ $tableName }}">
-    <meta name="current-document-category-id" content="{{ $categoryId }}">
-    <meta name="current-client-id" content="{{ $client ? $client->id : '' }}">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-@endsection
+    <meta name="current-document-table" content="<?php echo e($tableName); ?>">
+    <meta name="current-document-category-id" content="<?php echo e($categoryId); ?>">
+    <meta name="current-client-id" content="<?php echo e($client ? $client->id : ''); ?>">
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
+<?php $__env->stopSection(); ?>
 
-@push('styles')
+<?php $__env->startPush('styles'); ?>
 <style>
     .clickable-heading {
         cursor: pointer;
@@ -1226,10 +1226,10 @@
         background: rgba(255, 255, 255, 0.95);
     }
 </style>
-@endpush
+<?php $__env->stopPush(); ?>
 
-@section('main-content')
-            @if(isset($client) && $client)
+<?php $__env->startSection('main-content'); ?>
+            <?php if(isset($client) && $client): ?>
                 <div class="gap_top col-12 mb-4 p-0">
                     <div class="bg_custom p-4 rounded shadow-sm">
                         <div class="d-flex align-items-center">
@@ -1241,13 +1241,15 @@
                                 <div class="d-flex flex-wrap">
                                     <div class="me-4 mb-2">
                                         <span class="d-flex align-items-center">
-                                            <strong data-en="Name:" data-fr="Nom :">Name:</strong>&nbsp;{{ $client->client_name ?? '-' }}
+                                            <strong data-en="Name:" data-fr="Nom :">Name:</strong>&nbsp;<?php echo e($client->client_name ?? '-'); ?>
+
                                         </span>
                                     </div>
                                     <div class="mb-2">
                                         <span class="d-flex align-items-center">
                                             <i class="fas fa-envelope me-2" style="color: var(--color-theme-3);"></i>
-                                            <strong data-en="Email:" data-fr="Courriel :">Email:</strong>&nbsp;{{ $client->client_email ?? '-' }}
+                                            <strong data-en="Email:" data-fr="Courriel :">Email:</strong>&nbsp;<?php echo e($client->client_email ?? '-'); ?>
+
                                         </span>
                                     </div>
                                 </div>
@@ -1255,10 +1257,10 @@
                         </div>
                     </div>
                 </div>
-            @endif
-            @if(empty($columns))
+            <?php endif; ?>
+            <?php if(empty($columns)): ?>
                 <div class="alert alert-warning mt-4" data-en="No data found in this table." data-fr="Aucune donnée trouvée dans cette table.">No data found in this table.</div>
-            @else
+            <?php else: ?>
             <!-- Keyword Search Card -->
             <div class="card mb-3 shadow-sm">
                 <div class="card-header bg-light border-bottom">
@@ -1266,16 +1268,16 @@
                 </div>
                 <div class="card-body">
                     <!-- Search Form -->
-                    <form action="{{ route('client.legalTables.view', $legalTable->id) }}" method="GET" class="mb-0">
-                        @if(isset($client) && $client)
-                            <input type="hidden" name="client_id" value="{{ $client->id }}">
-                        @endif
+                    <form action="<?php echo e(route('client.legalTables.view', $legalTable->id)); ?>" method="GET" class="mb-0">
+                        <?php if(isset($client) && $client): ?>
+                            <input type="hidden" name="client_id" value="<?php echo e($client->id); ?>">
+                        <?php endif; ?>
                         <div class="input-group">
                             <input type="text" name="search" class="form-control" 
                                    placeholder="Search..." 
                                    data-placeholder-en="Search..." 
                                    data-placeholder-fr="Rechercher..." 
-                                   value="{{ request('search') }}">
+                                   value="<?php echo e(request('search')); ?>">
                             <button class="btn search-btn" type="submit" data-en="Search" data-fr="Rechercher" style="background-color: var(--color-theme-3); border-color: var(--color-theme-3); color: white;">Search</button>
                         </div>
                     </form>
@@ -1288,7 +1290,7 @@
                 </div>
                 <div class="card-body" id="legal-content-area">
 
-                    @php
+                    <?php
                         $data = [];
                         $standaloneData = [];
                         
@@ -1542,233 +1544,252 @@
                             
                             return $text;
                         }
-                    @endphp
+                    ?>
 
                     <div class="legal-document-content">
-                        {{-- Render Standalone Sections First --}}
-                        @foreach($standaloneData as $titleGroup => $group)
+                        
+                        <?php $__currentLoopData = $standaloneData; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $titleGroup => $group): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <div style="margin-bottom: 1.5em;">
-                                <div style="font-size:1.15em; font-weight:bold; margin-bottom:0.5em;">{{ $titleGroup }}</div>
-                                @foreach($group['sections'] as $sectionNumber => $section)                                        @if(!empty($section['title']) && trim($section['title']) !== '' && !isset($section['is_intro']) && $section['title'] !== $titleGroup)
-                                        <div style="margin-top: 1em; color: #333; font-weight: bold;">{{ $section['title'] }}</div>
-                                    @endif
-                                    @if(!empty($section['text_content']))
+                                <div style="font-size:1.15em; font-weight:bold; margin-bottom:0.5em;"><?php echo e($titleGroup); ?></div>
+                                <?php $__currentLoopData = $group['sections']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $sectionNumber => $section): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>                                        <?php if(!empty($section['title']) && trim($section['title']) !== '' && !isset($section['is_intro']) && $section['title'] !== $titleGroup): ?>
+                                        <div style="margin-top: 1em; color: #333; font-weight: bold;"><?php echo e($section['title']); ?></div>
+                                    <?php endif; ?>
+                                    <?php if(!empty($section['text_content'])): ?>
                                         <div style="margin-left: 0.5em; margin-bottom: 1em;">
-                                            @if(!isset($section['is_intro']))
-                                                <strong>{{ $sectionNumber }}</strong>
-                                            @endif
-                                            {!! makeLinksClickableSimple($section['text_content'], $legalTable->id, isset($section['is_intro']) ? null : $sectionNumber) !!}
+                                            <?php if(!isset($section['is_intro'])): ?>
+                                                <strong><?php echo e($sectionNumber); ?></strong>
+                                            <?php endif; ?>
+                                            <?php echo makeLinksClickableSimple($section['text_content'], $legalTable->id, isset($section['is_intro']) ? null : $sectionNumber); ?>
+
                                         </div>
-                                    @endif
-                                    @foreach($section['subsections'] as $subsectionNumber => $subsection)
+                                    <?php endif; ?>
+                                    <?php $__currentLoopData = $section['subsections']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subsectionNumber => $subsection): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         <div style="margin-left: 2em;">
-                                            @if(!empty($subsection['text_content']))
+                                            <?php if(!empty($subsection['text_content'])): ?>
                                                 <div style="margin-bottom: 0.5em;">
-                                                    <strong>{{ $subsectionNumber }}</strong> {!! makeLinksClickableSimple($subsection['text_content'], $legalTable->id, $sectionNumber . '(' . $subsectionNumber . ')') !!}
+                                                    <strong><?php echo e($subsectionNumber); ?></strong> <?php echo makeLinksClickableSimple($subsection['text_content'], $legalTable->id, $sectionNumber . '(' . $subsectionNumber . ')'); ?>
+
                                                 </div>
-                                            @endif
-                                            @foreach($subsection['paragraphs'] as $paragraphNumber => $paragraph)
+                                            <?php endif; ?>
+                                            <?php $__currentLoopData = $subsection['paragraphs']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $paragraphNumber => $paragraph): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <div style="margin-left: 2em;">
                                                     <div style="margin-bottom: 0.5em;">
-                                                        <strong>{{ $paragraphNumber }}</strong> {!! makeLinksClickableSimple($paragraph['text_content'], $legalTable->id, $sectionNumber . '(' . $subsectionNumber . ')(' . $paragraphNumber . ')') !!}
+                                                        <strong><?php echo e($paragraphNumber); ?></strong> <?php echo makeLinksClickableSimple($paragraph['text_content'], $legalTable->id, $sectionNumber . '(' . $subsectionNumber . ')(' . $paragraphNumber . ')'); ?>
+
                                                     </div>
-                                                    @foreach($paragraph['sub_paragraphs'] as $subParagraph)
+                                                    <?php $__currentLoopData = $paragraph['sub_paragraphs']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subParagraph): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                         <div style="margin-left: 2em;">
                                                             <div style="margin-bottom: 0.5em;">
-                                                                <strong>{{ $subParagraph['sub_paragraph'] }}</strong> {!! makeLinksClickableSimple($subParagraph['text_content'], $legalTable->id, $sectionNumber . '(' . $subsectionNumber . ')(' . $paragraphNumber . ')(' . $subParagraph['sub_paragraph'] . ')') !!}
+                                                                <strong><?php echo e($subParagraph['sub_paragraph']); ?></strong> <?php echo makeLinksClickableSimple($subParagraph['text_content'], $legalTable->id, $sectionNumber . '(' . $subsectionNumber . ')(' . $paragraphNumber . ')(' . $subParagraph['sub_paragraph'] . ')'); ?>
+
                                                             </div>
                                                         </div>
-                                                    @endforeach
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                 </div>
-                                            @endforeach
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </div>
-                                    @endforeach
-                                    @foreach($section['paragraphs'] as $paragraphNumber => $paragraph)
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    <?php $__currentLoopData = $section['paragraphs']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $paragraphNumber => $paragraph): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         <div style="margin-left: 2em;">
                                             <div style="margin-bottom: 0.5em;">
-                                                <strong>{{ $paragraphNumber }}</strong> {!! makeLinksClickableSimple($paragraph['text_content'], $legalTable->id, $sectionNumber . '(' . $paragraphNumber . ')') !!}
+                                                <strong><?php echo e($paragraphNumber); ?></strong> <?php echo makeLinksClickableSimple($paragraph['text_content'], $legalTable->id, $sectionNumber . '(' . $paragraphNumber . ')'); ?>
+
                                             </div>
-                                            @foreach($paragraph['sub_paragraphs'] as $subParagraph)
+                                            <?php $__currentLoopData = $paragraph['sub_paragraphs']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subParagraph): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <div style="margin-left: 2em;">
                                                     <div style="margin-bottom: 0.5em;">
-                                                        <strong>{{ $subParagraph['sub_paragraph'] }}</strong> {!! makeLinksClickableSimple($subParagraph['text_content'], $legalTable->id, $sectionNumber . '(' . $paragraphNumber . ')(' . $subParagraph['sub_paragraph'] . ')') !!}
+                                                        <strong><?php echo e($subParagraph['sub_paragraph']); ?></strong> <?php echo makeLinksClickableSimple($subParagraph['text_content'], $legalTable->id, $sectionNumber . '(' . $paragraphNumber . ')(' . $subParagraph['sub_paragraph'] . ')'); ?>
+
                                                     </div>
                                                 </div>
-                                            @endforeach
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </div>
-                                    @endforeach
-                                    @if(!empty($section['footnote']))
-                                        <div class="footnote">{{ $section['footnote'] }}</div>
-                                    @endif
-                                @endforeach
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    <?php if(!empty($section['footnote'])): ?>
+                                        <div class="footnote"><?php echo e($section['footnote']); ?></div>
+                                    <?php endif; ?>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </div>
-                        @endforeach
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
-                        {{-- Render Parts Structure --}}
-                        @foreach($data as $partNumber => $part)
+                        
+                        <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $partNumber => $part): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <div style="margin-bottom: 2em;">
-                                <div style="font-size:1.15em; font-weight:bold; margin-bottom:0.5em;">Part {{ $partNumber }}: {{ $part['title'] }}</div>
-                                @if(!empty($part['sections']))
-                                    @foreach($part['sections'] as $sectionNumber => $section)
-                                        @if(!empty($section['title']) && trim($section['title']) !== '' && $section['title'] !== $part['title'])
-                                            <div style="margin-top: 1em; color: #333; font-weight: bold;">{{ $section['title'] }}</div>
-                                        @endif
-                                        @if(!empty($section['text_content']))
+                                <div style="font-size:1.15em; font-weight:bold; margin-bottom:0.5em;">Part <?php echo e($partNumber); ?>: <?php echo e($part['title']); ?></div>
+                                <?php if(!empty($part['sections'])): ?>
+                                    <?php $__currentLoopData = $part['sections']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $sectionNumber => $section): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <?php if(!empty($section['title']) && trim($section['title']) !== '' && $section['title'] !== $part['title']): ?>
+                                            <div style="margin-top: 1em; color: #333; font-weight: bold;"><?php echo e($section['title']); ?></div>
+                                        <?php endif; ?>
+                                        <?php if(!empty($section['text_content'])): ?>
                                             <div style="margin-left: 0.5em; margin-bottom: 1em;">
-                                                <strong>{{ $sectionNumber }}</strong> {!! makeLinksClickableSimple($section['text_content'], $legalTable->id, $sectionNumber) !!}
+                                                <strong><?php echo e($sectionNumber); ?></strong> <?php echo makeLinksClickableSimple($section['text_content'], $legalTable->id, $sectionNumber); ?>
+
                                             </div>
-                                        @endif
-                                        @foreach($section['subsections'] as $subsectionNumber => $subsection)
+                                        <?php endif; ?>
+                                        <?php $__currentLoopData = $section['subsections']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subsectionNumber => $subsection): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <div style="margin-left: 2em;">
-                                                @if(!empty($subsection['title']))
-                                                    <div style="font-style: italic;">{{ $subsection['title'] }}</div>
-                                                @endif
-                                                @if(!empty($subsection['text_content']))
+                                                <?php if(!empty($subsection['title'])): ?>
+                                                    <div style="font-style: italic;"><?php echo e($subsection['title']); ?></div>
+                                                <?php endif; ?>
+                                                <?php if(!empty($subsection['text_content'])): ?>
                                                     <div style="margin-bottom: 0.5em;">
-                                                        <strong>{{ $subsectionNumber }}</strong> {!! makeLinksClickableSimple($subsection['text_content'], $legalTable->id, $sectionNumber . '(' . $subsectionNumber . ')') !!}
+                                                        <strong><?php echo e($subsectionNumber); ?></strong> <?php echo makeLinksClickableSimple($subsection['text_content'], $legalTable->id, $sectionNumber . '(' . $subsectionNumber . ')'); ?>
+
                                                     </div>
-                                                @endif
-                                                @foreach($subsection['paragraphs'] as $paragraphNumber => $paragraph)
+                                                <?php endif; ?>
+                                                <?php $__currentLoopData = $subsection['paragraphs']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $paragraphNumber => $paragraph): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                     <div style="margin-left: 2em;">
                                                         <div style="margin-bottom: 0.5em;">
-                                                            <strong>{{ $paragraphNumber }}</strong> {!! makeLinksClickableSimple($paragraph['text_content'], $legalTable->id, $sectionNumber . '(' . $subsectionNumber . ')(' . $paragraphNumber . ')') !!}
+                                                            <strong><?php echo e($paragraphNumber); ?></strong> <?php echo makeLinksClickableSimple($paragraph['text_content'], $legalTable->id, $sectionNumber . '(' . $subsectionNumber . ')(' . $paragraphNumber . ')'); ?>
+
                                                         </div>
-                                                        @foreach($paragraph['sub_paragraphs'] as $subParagraph)
+                                                        <?php $__currentLoopData = $paragraph['sub_paragraphs']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subParagraph): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                             <div style="margin-left: 2em;">
                                                                 <div style="margin-bottom: 0.5em;">
-                                                                    <strong>{{ $subParagraph['sub_paragraph'] }}</strong> {!! makeLinksClickableSimple($subParagraph['text_content'], $legalTable->id, $sectionNumber . '(' . $subsectionNumber . ')(' . $paragraphNumber . ')(' . $subParagraph['sub_paragraph'] . ')') !!}
+                                                                    <strong><?php echo e($subParagraph['sub_paragraph']); ?></strong> <?php echo makeLinksClickableSimple($subParagraph['text_content'], $legalTable->id, $sectionNumber . '(' . $subsectionNumber . ')(' . $paragraphNumber . ')(' . $subParagraph['sub_paragraph'] . ')'); ?>
+
                                                                 </div>
                                                             </div>
-                                                        @endforeach
+                                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                     </div>
-                                                @endforeach
-                                                @if(!empty($subsection['footnote']))
-                                                    <div class="footnote"><em>{!! $subsection['footnote'] !!}</em></div>
-                                                @endif
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                <?php if(!empty($subsection['footnote'])): ?>
+                                                    <div class="footnote"><em><?php echo $subsection['footnote']; ?></em></div>
+                                                <?php endif; ?>
                                             </div>
-                                        @endforeach
-                                        @foreach($section['paragraphs'] as $paragraph)
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        <?php $__currentLoopData = $section['paragraphs']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $paragraph): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <div style="margin-left: 2em;">
                                                 <div style="margin-bottom: 0.5em;">
-                                                    <strong>{{ $paragraph['paragraph'] }}</strong> {!! makeLinksClickableSimple($paragraph['text_content'], $legalTable->id, $sectionNumber . '(' . $paragraph['paragraph'] . ')') !!}
+                                                    <strong><?php echo e($paragraph['paragraph']); ?></strong> <?php echo makeLinksClickableSimple($paragraph['text_content'], $legalTable->id, $sectionNumber . '(' . $paragraph['paragraph'] . ')'); ?>
+
                                                 </div>
-                                                @foreach($paragraph['sub_paragraphs'] as $subParagraph)
+                                                <?php $__currentLoopData = $paragraph['sub_paragraphs']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subParagraph): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                     <div style="margin-left: 2em;">
                                                         <div style="margin-bottom: 0.5em;">
-                                                            <strong>{{ $subParagraph['sub_paragraph'] }}</strong> {!! makeLinksClickableSimple($subParagraph['text_content'], $legalTable->id, $sectionNumber . '(' . $paragraph['paragraph'] . ')(' . $subParagraph['sub_paragraph'] . ')') !!}
+                                                            <strong><?php echo e($subParagraph['sub_paragraph']); ?></strong> <?php echo makeLinksClickableSimple($subParagraph['text_content'], $legalTable->id, $sectionNumber . '(' . $paragraph['paragraph'] . ')(' . $subParagraph['sub_paragraph'] . ')'); ?>
+
                                                         </div>
                                                     </div>
-                                                @endforeach
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                             </div>
-                                        @endforeach
-                                        @if(!empty($section['footnote']))
-                                            <div class="footnote">{{ $section['footnote'] }}</div>
-                                        @endif
-                                    @endforeach
-                                @endif
-                                @if(!empty($part['divisions']))
-                                    @foreach($part['divisions'] as $divisionNumber => $division)
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        <?php if(!empty($section['footnote'])): ?>
+                                            <div class="footnote"><?php echo e($section['footnote']); ?></div>
+                                        <?php endif; ?>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                <?php endif; ?>
+                                <?php if(!empty($part['divisions'])): ?>
+                                    <?php $__currentLoopData = $part['divisions']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $divisionNumber => $division): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         <div style="margin-left: 1.5em; margin-top: 1em;">
-                                            <div style="font-weight:bold; margin-bottom:0.5em;">Division {{ $divisionNumber }}: {{ $division['title'] }}</div>
-                                            @if(!empty($division['sub_divisions']))
-                                                @foreach($division['sub_divisions'] as $subDivisionNumber => $subDivision)
-                                                    @if($subDivision['title'] !== $division['title'])
-                                                        <div style="font-weight:bold; margin-bottom:0.5em; margin-left:1em;">Subdivision {{ $subDivisionNumber }}: {{ $subDivision['title'] }}</div>
-                                                    @endif
-                                                    @if(!empty($subDivision['sections']))
-                                                        @foreach($subDivision['sections'] as $sectionNumber => $section)
-                                                            @if(!empty($section['title']))
-                                                                <div style="margin-top: 1em; font-weight: bold;">{{ $section['title'] }}</div>
-                                                            @endif
-                                                            @if(!empty($section['text_content']))
+                                            <div style="font-weight:bold; margin-bottom:0.5em;">Division <?php echo e($divisionNumber); ?>: <?php echo e($division['title']); ?></div>
+                                            <?php if(!empty($division['sub_divisions'])): ?>
+                                                <?php $__currentLoopData = $division['sub_divisions']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subDivisionNumber => $subDivision): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                    <?php if($subDivision['title'] !== $division['title']): ?>
+                                                        <div style="font-weight:bold; margin-bottom:0.5em; margin-left:1em;">Subdivision <?php echo e($subDivisionNumber); ?>: <?php echo e($subDivision['title']); ?></div>
+                                                    <?php endif; ?>
+                                                    <?php if(!empty($subDivision['sections'])): ?>
+                                                        <?php $__currentLoopData = $subDivision['sections']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $sectionNumber => $section): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                            <?php if(!empty($section['title'])): ?>
+                                                                <div style="margin-top: 1em; font-weight: bold;"><?php echo e($section['title']); ?></div>
+                                                            <?php endif; ?>
+                                                            <?php if(!empty($section['text_content'])): ?>
                                                                 <div style="margin-left: 1em; margin-bottom: 0.5em;">
-                                                                    <strong>{{ $sectionNumber }}</strong> {!! makeLinksClickableSimple($section['text_content'], $legalTable->id, $sectionNumber) !!}
+                                                                    <strong><?php echo e($sectionNumber); ?></strong> <?php echo makeLinksClickableSimple($section['text_content'], $legalTable->id, $sectionNumber); ?>
+
                                                                 </div>
-                                                            @endif
-                                                            @foreach($section['subsections'] as $subsectionNumber => $subsection)
+                                                            <?php endif; ?>
+                                                            <?php $__currentLoopData = $section['subsections']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subsectionNumber => $subsection): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                                 <div style="margin-left: 2em;">
-                                                                    @if(!empty($subsection['title']))
-                                                                        <div style="font-style: italic;">{{ $subsection['title'] }}</div>
-                                                                    @endif
-                                                                    @if(!empty($subsection['text_content']))
+                                                                    <?php if(!empty($subsection['title'])): ?>
+                                                                        <div style="font-style: italic;"><?php echo e($subsection['title']); ?></div>
+                                                                    <?php endif; ?>
+                                                                    <?php if(!empty($subsection['text_content'])): ?>
                                                                         <div style="margin-bottom: 0.5em;">
-                                                                            <strong>{{ $subsectionNumber }}</strong> {!! makeLinksClickableSimple($subsection['text_content'], $legalTable->id, $sectionNumber . '(' . $subsectionNumber . ')') !!}
+                                                                            <strong><?php echo e($subsectionNumber); ?></strong> <?php echo makeLinksClickableSimple($subsection['text_content'], $legalTable->id, $sectionNumber . '(' . $subsectionNumber . ')'); ?>
+
                                                                         </div>
-                                                                    @endif
-                                                                    @foreach($subsection['paragraphs'] as $paragraph)
+                                                                    <?php endif; ?>
+                                                                    <?php $__currentLoopData = $subsection['paragraphs']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $paragraph): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                                         <div style="margin-left: 2em;">
                                                                             <div style="margin-bottom: 0.5em;">
-                                                                                <strong>{{ $paragraph['paragraph'] }}</strong> {!! makeLinksClickableSimple($paragraph['text_content'], $legalTable->id, $sectionNumber . '(' . $subsectionNumber . ')(' . $paragraph['paragraph'] . ')') !!}
+                                                                                <strong><?php echo e($paragraph['paragraph']); ?></strong> <?php echo makeLinksClickableSimple($paragraph['text_content'], $legalTable->id, $sectionNumber . '(' . $subsectionNumber . ')(' . $paragraph['paragraph'] . ')'); ?>
+
                                                                             </div>
-                                                                            @foreach($paragraph['sub_paragraphs'] as $subParagraph)
+                                                                            <?php $__currentLoopData = $paragraph['sub_paragraphs']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subParagraph): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                                                 <div style="margin-left: 2em;">
                                                                                     <div style="margin-bottom: 0.5em;">
-                                                                                        <strong>{{ $subParagraph['sub_paragraph'] }}</strong> {!! makeLinksClickableSimple($subParagraph['text_content'], $legalTable->id, $sectionNumber . '(' . $subsectionNumber . ')(' . $paragraph['paragraph'] . ')(' . $subParagraph['sub_paragraph'] . ')') !!}
+                                                                                        <strong><?php echo e($subParagraph['sub_paragraph']); ?></strong> <?php echo makeLinksClickableSimple($subParagraph['text_content'], $legalTable->id, $sectionNumber . '(' . $subsectionNumber . ')(' . $paragraph['paragraph'] . ')(' . $subParagraph['sub_paragraph'] . ')'); ?>
+
                                                                                     </div>
                                                                                 </div>
-                                                                            @endforeach
+                                                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                                         </div>
-                                                                    @endforeach
-                                                                    @if(!empty($subsection['footnote']))
-                                                                        <div class="footnote"><em>{!! $subsection['footnote'] !!}</em></div>
-                                                                    @endif
+                                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                                    <?php if(!empty($subsection['footnote'])): ?>
+                                                                        <div class="footnote"><em><?php echo $subsection['footnote']; ?></em></div>
+                                                                    <?php endif; ?>
                                                                 </div>
-                                                            @endforeach
-                                                            @foreach($section['paragraphs'] as $paragraph)
+                                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                            <?php $__currentLoopData = $section['paragraphs']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $paragraph): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                                 <div style="margin-left: 2em;">
                                                                     <div style="margin-bottom: 0.5em;">
-                                                                        <strong>{{ $paragraph['paragraph'] }}</strong> {!! makeLinksClickableSimple($paragraph['text_content'], $legalTable->id, $sectionNumber . '(' . $paragraph['paragraph'] . ')') !!}
+                                                                        <strong><?php echo e($paragraph['paragraph']); ?></strong> <?php echo makeLinksClickableSimple($paragraph['text_content'], $legalTable->id, $sectionNumber . '(' . $paragraph['paragraph'] . ')'); ?>
+
                                                                     </div>
-                                                                    @foreach($paragraph['sub_paragraphs'] as $subParagraph)
+                                                                    <?php $__currentLoopData = $paragraph['sub_paragraphs']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subParagraph): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                                         <div style="margin-left: 2em;">
                                                                             <div style="margin-bottom: 0.5em;">
-                                                                                <strong>{{ $subParagraph['sub_paragraph'] }}</strong> {!! makeLinksClickableSimple($subParagraph['text_content'], $legalTable->id, $sectionNumber . '(' . $paragraph['paragraph'] . ')(' . $subParagraph['sub_paragraph'] . ')') !!}
+                                                                                <strong><?php echo e($subParagraph['sub_paragraph']); ?></strong> <?php echo makeLinksClickableSimple($subParagraph['text_content'], $legalTable->id, $sectionNumber . '(' . $paragraph['paragraph'] . ')(' . $subParagraph['sub_paragraph'] . ')'); ?>
+
                                                                             </div>
                                                                         </div>
-                                                                    @endforeach
+                                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                                 </div>
-                                                            @endforeach
-                                                            @if(!empty($section['footnote']))
-                                                                <div class="footnote"><em>{!! $section['footnote'] !!}</em></div>
-                                                            @endif
-                                                        @endforeach
-                                                    @endif
-                                                @endforeach
-                                            @endif
+                                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                            <?php if(!empty($section['footnote'])): ?>
+                                                                <div class="footnote"><em><?php echo $section['footnote']; ?></em></div>
+                                                            <?php endif; ?>
+                                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                    <?php endif; ?>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                            <?php endif; ?>
                                         </div>
-                                    @endforeach
-                                @endif
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                <?php endif; ?>
                             </div>
-                        @endforeach
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </div>
                 </div>
             </div>
             
             <div class="pagination-controls d-flex justify-content-center align-items-center mt-3 gap-3">
-                <button id="prev-page-btn" class="btn pagination-btn" style="color: var(--color-theme-3); border-color: var(--color-theme-3); background-color: transparent; padding: 8px 15px; border: 2px solid var(--color-theme-3); border-radius: 4px; cursor: pointer; transition: all 0.3s ease;" onclick="changePage(currentPage - 1, currentCategoryId)" {{ request('page', 1) <= 1 ? 'disabled' : '' }}>
+                <button id="prev-page-btn" class="btn pagination-btn" style="color: var(--color-theme-3); border-color: var(--color-theme-3); background-color: transparent; padding: 8px 15px; border: 2px solid var(--color-theme-3); border-radius: 4px; cursor: pointer; transition: all 0.3s ease;" onclick="changePage(currentPage - 1, currentCategoryId)" <?php echo e(request('page', 1) <= 1 ? 'disabled' : ''); ?>>
                     Previous
                 </button>
                 
                 <select id="page-select" class="form-select" style="width: auto; border-color: var(--color-theme-3);" onchange="changePage(this.value, currentCategoryId)">
-                    @for($i = 1; $i <= $tableData->lastPage(); $i++)
-                        <option value="{{ $i }}" {{ request('page', 1) == $i ? 'selected' : '' }}>
-                            Page {{ $i }} of {{ $tableData->lastPage() }}
+                    <?php for($i = 1; $i <= $tableData->lastPage(); $i++): ?>
+                        <option value="<?php echo e($i); ?>" <?php echo e(request('page', 1) == $i ? 'selected' : ''); ?>>
+                            Page <?php echo e($i); ?> of <?php echo e($tableData->lastPage()); ?>
+
                         </option>
-                    @endfor
+                    <?php endfor; ?>
                 </select>
                 
-                <button id="next-page-btn" class="btn pagination-btn" style="color: var(--color-theme-3); border-color: var(--color-theme-3); background-color: transparent; padding: 8px 15px; border: 2px solid var(--color-theme-3); border-radius: 4px; cursor: pointer; transition: all 0.3s ease;" onclick="changePage(currentPage + 1, currentCategoryId)" {{ request('page', 1) >= $tableData->lastPage() ? 'disabled' : '' }}>
+                <button id="next-page-btn" class="btn pagination-btn" style="color: var(--color-theme-3); border-color: var(--color-theme-3); background-color: transparent; padding: 8px 15px; border: 2px solid var(--color-theme-3); border-radius: 4px; cursor: pointer; transition: all 0.3s ease;" onclick="changePage(currentPage + 1, currentCategoryId)" <?php echo e(request('page', 1) >= $tableData->lastPage() ? 'disabled' : ''); ?>>
                     Next
                 </button>
             </div>
-            @endif
+            <?php endif; ?>
                 
-@section('page-scripts')
+<?php $__env->startSection('page-scripts'); ?>
 <script>
-    var fullHierarchicalData = @json($tableData->items());
-    var currentPage = {{ request('page', 1) }};
-    var totalPages = {{ $tableData->lastPage() }};
-    var currentCategoryId = {{ $legalTable->id }};
+    var fullHierarchicalData = <?php echo json_encode($tableData->items(), 15, 512) ?>;
+    var currentPage = <?php echo e(request('page', 1)); ?>;
+    var totalPages = <?php echo e($tableData->lastPage()); ?>;
+    var currentCategoryId = <?php echo e($legalTable->id); ?>;
     
     // Function to change page with AJAX loading
     function changePage(page, category_id) {
@@ -1815,7 +1836,7 @@
         });
     });
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
 <!-- Content Viewer Modal -->
 <div class="modal fade" id="contentViewerModal" tabindex="-1" aria-labelledby="contentViewerModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -1858,11 +1879,11 @@
                     <button type="button" class="btn btn-outline-success btn-lg" id="saveToClientRecordsExpand">
                         <i class="fas fa-briefcase me-2"></i>
                         <span data-en="Save to Client Records" data-fr="Sauvegarder dans les dossiers clients">Save to Client Records</span>
-                        @if(isset($client) && $client)
-                        <br><small class="text-muted" data-en="(For client: {{ $client->client_name }})" data-fr="(Pour le client : {{ $client->client_name }})">(For client: {{ $client->client_name }})</small>
-                        @else
+                        <?php if(isset($client) && $client): ?>
+                        <br><small class="text-muted" data-en="(For client: <?php echo e($client->client_name); ?>)" data-fr="(Pour le client : <?php echo e($client->client_name); ?>)">(For client: <?php echo e($client->client_name); ?>)</small>
+                        <?php else: ?>
                         <br><small class="text-muted" data-en="(Select or create a client)" data-fr="(Sélectionner ou créer un client)">(Select or create a client)</small>
-                        @endif
+                        <?php endif; ?>
                     </button>
                 </div>
 
@@ -1882,7 +1903,7 @@
                         </div>
                         <div class="card-body bg-white bg-opacity-90">
                             <form id="newClientFormInModal">
-                                @csrf
+                                <?php echo csrf_field(); ?>
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="mb-3">
@@ -1977,7 +1998,7 @@
                                 </div>
                                 <div class="card-body bg-white bg-opacity-90">
                                     <form id="newClientForm">
-                                        @csrf
+                                        <?php echo csrf_field(); ?>
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="mb-3">
@@ -2226,11 +2247,11 @@
                     <button type="button" class="btn btn-outline-success btn-lg" id="saveNotesToClientRecordsExpand">
                         <i class="fas fa-briefcase me-2"></i>
                         <span data-en="Save to Client Records" data-fr="Sauvegarder dans les dossiers clients">Save to Client Records</span>
-                        @if(isset($client) && $client)
-                        <br><small class="text-muted" data-en="(For client: {{ $client->client_name }})" data-fr="(Pour le client : {{ $client->client_name }})">(For client: {{ $client->client_name }})</small>
-                        @else
+                        <?php if(isset($client) && $client): ?>
+                        <br><small class="text-muted" data-en="(For client: <?php echo e($client->client_name); ?>)" data-fr="(Pour le client : <?php echo e($client->client_name); ?>)">(For client: <?php echo e($client->client_name); ?>)</small>
+                        <?php else: ?>
                         <br><small class="text-muted" data-en="(Select or create a client)" data-fr="(Sélectionner ou créer un client)">(Select or create a client)</small>
-                        @endif
+                        <?php endif; ?>
                     </button>
                 </div>
 
@@ -2250,7 +2271,7 @@
                         </div>
                         <div class="card-body bg-white bg-opacity-90">
                             <form id="newClientFormInNotesModal">
-                                @csrf
+                                <?php echo csrf_field(); ?>
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="mb-3">
@@ -2640,12 +2661,12 @@
         <div id="debug-content" class="small font-monospace"></div>
     </div>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@push('page-scripts')
+<?php $__env->startPush('page-scripts'); ?>
 <!-- Custom scripts specific to this page -->
-<script src="{{ asset('user_assets/js/api-endpoint-tests.js') }}"></script>
-<script src="{{ asset('user_assets/js/reference-by-id.js') }}"></script>
+<script src="<?php echo e(asset('user_assets/js/api-endpoint-tests.js')); ?>"></script>
+<script src="<?php echo e(asset('user_assets/js/reference-by-id.js')); ?>"></script>
 
 <!-- Initialize TinyMCE and droppable area -->
 <script>
@@ -2741,7 +2762,7 @@ $(document).ready(function() {
         if (currentText.includes('persons referred to in subsection 99(2)')) {
             const fixedText = currentText.replace(
                 'persons referred to in subsection 99(2)',
-                'persons referred to in <span class="ref" data-section-id="99(2)" data-table-id="{{ $legalTable->id }}">subsection 99(2)</span>'
+                'persons referred to in <span class="ref" data-section-id="99(2)" data-table-id="<?php echo e($legalTable->id); ?>">subsection 99(2)</span>'
             );
             $(this).html(fixedText);
             return; // Skip the rest of the processing for this element
@@ -2751,7 +2772,7 @@ $(document).ready(function() {
         if (currentText.includes('applications for permanent resident visas made by persons referred to in subsection 99(2)')) {
             const fixedText = currentText.replace(
                 'persons referred to in subsection 99(2)',
-                'persons referred to in <span class="ref" data-section-id="99(2)" data-table-id="{{ $legalTable->id }}">subsection 99(2)</span>'
+                'persons referred to in <span class="ref" data-section-id="99(2)" data-table-id="<?php echo e($legalTable->id); ?>">subsection 99(2)</span>'
             );
             $(this).html(fixedText);
             return; // Skip the rest of the processing for this element
@@ -2761,7 +2782,7 @@ $(document).ready(function() {
         if (currentText.includes('subsection 99(2)') && !currentText.includes('<span class="ref"') && !currentText.includes('data-section-id="99(2)"')) {
             const fixedText = currentText.replace(
                 /(\s|^)(subsection\s+99\(2\))(\s|$|,|\.|;)/g, 
-                '$1<span class="ref" data-section-id="99(2)" data-table-id="{{ $legalTable->id }}">$2</span>$3'
+                '$1<span class="ref" data-section-id="99(2)" data-table-id="<?php echo e($legalTable->id); ?>">$2</span>$3'
             );
             $(this).html(fixedText);
             return; // Skip the rest of the processing for this element
@@ -2779,7 +2800,7 @@ $(document).ready(function() {
                 // Format the matched text to ensure proper structure with parentheses
                 const formattedMatch = preposition + ' ' + type + ' ' + section + '(' + subsection + ')';
                 
-                return preposition + ' <span class="ref" data-section-id="' + sectionId + '" data-table-id="{{ $legalTable->id }}">' + 
+                return preposition + ' <span class="ref" data-section-id="' + sectionId + '" data-table-id="<?php echo e($legalTable->id); ?>">' + 
                        type + ' ' + section + '(' + subsection + ')</span>';
             }
         );
@@ -2796,7 +2817,7 @@ $(document).ready(function() {
                 
                 console.log("Referred to match:", match, "->", sectionId);
                 
-                return phrase + ' <span class="ref" data-section-id="' + sectionId + '" data-table-id="{{ $legalTable->id }}">' + 
+                return phrase + ' <span class="ref" data-section-id="' + sectionId + '" data-table-id="<?php echo e($legalTable->id); ?>">' + 
                        type + ' ' + section + parenthesized + '</span>';
             }
         );
@@ -2807,7 +2828,7 @@ $(document).ready(function() {
             function(match, type, sectionId, actName) {
                 // This would need backend lookup in PHP but we'll use just the current table ID for JavaScript
                 return '<span class="ref cross-act-ref" data-section-id="' + sectionId + 
-                       '" data-table-id="{{ $legalTable->id }}" data-act-name="' + actName + 
+                       '" data-table-id="<?php echo e($legalTable->id); ?>" data-act-name="' + actName + 
                        '">' + type + ' ' + sectionId + '</span>' + ' (' + actName + ')';
             }
         );
@@ -2824,7 +2845,7 @@ $(document).ready(function() {
                 if (processedParts.includes(sectionId)) return match;
                 processedParts.push(sectionId);
                 
-                return '<span class="ref" data-section-id="' + sectionId + '" data-table-id="{{ $legalTable->id }}">' + 
+                return '<span class="ref" data-section-id="' + sectionId + '" data-table-id="<?php echo e($legalTable->id); ?>">' + 
                        match + '</span>';
             }
         );
@@ -2846,7 +2867,7 @@ $(document).ready(function() {
                 const specificContext = "section_" + sectionNum + "_exact";
                 processedParts.push(specificContext);
                 
-                return '<span class="ref" data-section-id="' + sectionNum + '" data-table-id="{{ $legalTable->id }}" data-original-match="' + fullMatchId + '">' + type + ' ' + sectionNum + '</span>';
+                return '<span class="ref" data-section-id="' + sectionNum + '" data-table-id="<?php echo e($legalTable->id); ?>" data-original-match="' + fullMatchId + '">' + type + ' ' + sectionNum + '</span>';
             }
         );
         
@@ -2861,7 +2882,7 @@ $(document).ready(function() {
                 processedParts.push(firstNum);
                 
                 let output = '<span class="ref" data-section-id="' + firstNum + 
-                        '" data-table-id="{{ $legalTable->id }}">' + type + ' ' + firstNum + '</span>';
+                        '" data-table-id="<?php echo e($legalTable->id); ?>">' + type + ' ' + firstNum + '</span>';
                 
                 // Get all comma-separated numbers
                 let commaMatches = match.match(/,\s*(\d+(?:\.\d+)?)/g) || [];
@@ -2873,14 +2894,14 @@ $(document).ready(function() {
                     processedParts.push(number);
                     
                     output += ', <span class="ref" data-section-id="' + number + 
-                            '" data-table-id="{{ $legalTable->id }}">' + number + '</span>';
+                            '" data-table-id="<?php echo e($legalTable->id); ?>">' + number + '</span>';
                 }
                 
                 // Add the "or" number if it exists
                 if (orNum && !processedParts.includes(orNum)) {
                     processedParts.push(orNum);
                     output += ' or <span class="ref" data-section-id="' + orNum + 
-                            '" data-table-id="{{ $legalTable->id }}">' + orNum + '</span>';
+                            '" data-table-id="<?php echo e($legalTable->id); ?>">' + orNum + '</span>';
                 }
                 
                 return output;
@@ -2899,7 +2920,7 @@ $(document).ready(function() {
                 if (processedParts.includes(sectionId)) return match;
                 processedParts.push(sectionId);
                 
-                return '<span class="ref" data-section-id="' + sectionId + '" data-table-id="{{ $legalTable->id }}">' + 
+                return '<span class="ref" data-section-id="' + sectionId + '" data-table-id="<?php echo e($legalTable->id); ?>">' + 
                        type + ' ' + sectionId + '</span>';
             }
         );
@@ -2916,7 +2937,7 @@ $(document).ready(function() {
                 if (processedParts.includes(sectionId)) return match;
                 processedParts.push(sectionId);
                 
-                return '<span class="ref" data-section-id="' + sectionId + '" data-table-id="{{ $legalTable->id }}">' + 
+                return '<span class="ref" data-section-id="' + sectionId + '" data-table-id="<?php echo e($legalTable->id); ?>">' + 
                        match + '</span>';
             }
         );
@@ -2933,7 +2954,7 @@ $(document).ready(function() {
                 if (processedParts.includes(sectionId)) return match;
                 processedParts.push(sectionId);
                 
-                return '<span class="ref" data-section-id="' + sectionId + '" data-table-id="{{ $legalTable->id }}">' + 
+                return '<span class="ref" data-section-id="' + sectionId + '" data-table-id="<?php echo e($legalTable->id); ?>">' + 
                        type + ' ' + sectionId + '</span>';
             }
         );
@@ -2945,10 +2966,10 @@ $(document).ready(function() {
                 // Try to get context from parent .legal-text div
                 const section = currentElement.closest('.legal-text').data('section-id') || '';
                 let sectionId = section ? section + '(' + firstRef + ')' : '(' + firstRef + ')';
-                let result = '<span class="ref" data-section-id="' + sectionId + '" data-table-id="{{ $legalTable->id }}">' + type + ' (' + firstRef + ')</span>';
+                let result = '<span class="ref" data-section-id="' + sectionId + '" data-table-id="<?php echo e($legalTable->id); ?>">' + type + ' (' + firstRef + ')</span>';
                 if (secondRef) {
                     let secondSectionId = section ? section + '(' + secondRef + ')' : '(' + secondRef + ')';
-                    result += ' or <span class="ref" data-section-id="' + secondSectionId + '" data-table-id="{{ $legalTable->id }}">(' + secondRef + ')</span>';
+                    result += ' or <span class="ref" data-section-id="' + secondSectionId + '" data-table-id="<?php echo e($legalTable->id); ?>">(' + secondRef + ')</span>';
                 }
                 return result;
             }
@@ -2973,7 +2994,7 @@ $(document).ready(function() {
                 sectionId += '(' + letter + ')';
                 
                 return '<span class="ref" data-section-id="' + sectionId + 
-                       '" data-table-id="{{ $legalTable->id }}">' + type + ' (' + letter + ')</span>';
+                       '" data-table-id="<?php echo e($legalTable->id); ?>">' + type + ' (' + letter + ')</span>';
             }
         );
         
@@ -2989,7 +3010,7 @@ $(document).ready(function() {
                 if (processedParts.includes(sectionId)) return match;
                 processedParts.push(sectionId);
                 
-                return '<span class="ref" data-section-id="' + sectionId + '" data-table-id="{{ $legalTable->id }}">' + 
+                return '<span class="ref" data-section-id="' + sectionId + '" data-table-id="<?php echo e($legalTable->id); ?>">' + 
                        type + ' ' + sectionId + '</span>';
             }
         );
@@ -3007,11 +3028,11 @@ $(document).ready(function() {
                     sectionId += '(' + baseSubsection + ')';
                 }
                 
-                let html = '<span class="ref" data-section-id="' + sectionId + '(' + firstLetter + ')" data-table-id="{{ $legalTable->id }}">' + 
+                let html = '<span class="ref" data-section-id="' + sectionId + '(' + firstLetter + ')" data-table-id="<?php echo e($legalTable->id); ?>">' + 
                         type + ' (' + firstLetter + ')</span>';
                 
                 if (secondLetter) {
-                    html += ' and <span class="ref" data-section-id="' + sectionId + '(' + secondLetter + ')" data-table-id="{{ $legalTable->id }}">' + 
+                    html += ' and <span class="ref" data-section-id="' + sectionId + '(' + secondLetter + ')" data-table-id="<?php echo e($legalTable->id); ?>">' + 
                             '(' + secondLetter + ')</span>';
                 }
                 
@@ -3027,10 +3048,10 @@ $(document).ready(function() {
                 
                 const section = currentElement.closest('.legal-text').data('section-id') || '';
                 let sectionId = section ? section + '(' + firstRef + ')' : '(' + firstRef + ')';
-                let result = '<span class="ref" data-section-id="' + sectionId + '" data-table-id="{{ $legalTable->id }}">' + type + ' (' + firstRef + ')</span>';
+                let result = '<span class="ref" data-section-id="' + sectionId + '" data-table-id="<?php echo e($legalTable->id); ?>">' + type + ' (' + firstRef + ')</span>';
                 if (secondRef) {
                     let secondSectionId = section ? section + '(' + secondRef + ')' : '(' + secondRef + ')';
-                    result += ' or <span class="ref" data-section-id="' + secondSectionId + '" data-table-id="{{ $legalTable->id }}">(' + secondRef + ')</span>';
+                    result += ' or <span class="ref" data-section-id="' + secondSectionId + '" data-table-id="<?php echo e($legalTable->id); ?>">(' + secondRef + ')</span>';
                 }
                 return result;
             }
@@ -3043,20 +3064,20 @@ $(document).ready(function() {
                 if (match.includes('</span>')) return match; // Already processed
                 
                 // Start with the first subsection
-                let html = '<span class="ref" data-section-id="' + section + '(' + firstNum + ')" data-table-id="{{ $legalTable->id }}">' + 
+                let html = '<span class="ref" data-section-id="' + section + '(' + firstNum + ')" data-table-id="<?php echo e($legalTable->id); ?>">' + 
                         type + ' ' + section + '(' + firstNum + ')</span>';
                 
                 // Handle comma-separated subsections
                 let commaMatches = match.match(/,\s*\((\d+(?:\.\d+)?)\)/g) || [];
                 for (let i = 0; i < commaMatches.length; i++) {
                     let num = commaMatches[i].replace(/,\s*\(|\)/g, '');
-                    html += ', <span class="ref" data-section-id="' + section + '(' + num + ')" data-table-id="{{ $legalTable->id }}">' + 
+                    html += ', <span class="ref" data-section-id="' + section + '(' + num + ')" data-table-id="<?php echo e($legalTable->id); ?>">' + 
                             '(' + num + ')</span>';
                 }
                 
                 // Handle the "or" subsection if it exists
                 if (orNum) {
-                    html += ' or <span class="ref" data-section-id="' + section + '(' + orNum + ')" data-table-id="{{ $legalTable->id }}">' + 
+                    html += ' or <span class="ref" data-section-id="' + section + '(' + orNum + ')" data-table-id="<?php echo e($legalTable->id); ?>">' + 
                             '(' + orNum + ')</span>';
                 }
                 
@@ -3070,10 +3091,10 @@ $(document).ready(function() {
             function(match, type, section, firstNum, secondNum) {
                 if (match.includes('</span>')) return match; // Already processed
                 
-                let html = '<span class="ref" data-section-id="' + section + '(' + firstNum + ')" data-table-id="{{ $legalTable->id }}">' + 
+                let html = '<span class="ref" data-section-id="' + section + '(' + firstNum + ')" data-table-id="<?php echo e($legalTable->id); ?>">' + 
                         type + ' ' + section + '(' + firstNum + ')</span>';
                 
-                html += ' and <span class="ref" data-section-id="' + section + '(' + secondNum + ')" data-table-id="{{ $legalTable->id }}">' + 
+                html += ' and <span class="ref" data-section-id="' + section + '(' + secondNum + ')" data-table-id="<?php echo e($legalTable->id); ?>">' + 
                         '(' + secondNum + ')</span>';
                 
                 return html;
@@ -3087,12 +3108,12 @@ $(document).ready(function() {
                 if (match.includes('</span>')) return match; // Already processed
                 
                 // Build the first reference
-                let html = '<span class="ref" data-section-id="' + section + '(' + subsection + ')(' + firstLetter + ')" data-table-id="{{ $legalTable->id }}">' + 
+                let html = '<span class="ref" data-section-id="' + section + '(' + subsection + ')(' + firstLetter + ')" data-table-id="<?php echo e($legalTable->id); ?>">' + 
                         type + ' ' + section + '(' + subsection + ')(' + firstLetter + ')</span>';
                 
                 // Add second reference if it exists
                 if (secondLetter) {
-                    html += ' or <span class="ref" data-section-id="' + section + '(' + subsection + ')(' + secondLetter + ')" data-table-id="{{ $legalTable->id }}">' + 
+                    html += ' or <span class="ref" data-section-id="' + section + '(' + subsection + ')(' + secondLetter + ')" data-table-id="<?php echo e($legalTable->id); ?>">' + 
                             '(' + secondLetter + ')</span>';
                 }
                 
@@ -3107,11 +3128,11 @@ $(document).ready(function() {
                 if (match.includes('</span>')) return match; // Already processed
                 if (!baseSection) return match;
                 
-                let html = '<span class="ref" data-section-id="' + baseSection + '(' + num + ')(' + firstLetter + ')" data-table-id="{{ $legalTable->id }}">' + 
+                let html = '<span class="ref" data-section-id="' + baseSection + '(' + num + ')(' + firstLetter + ')" data-table-id="<?php echo e($legalTable->id); ?>">' + 
                         type + ' (' + num + ')(' + firstLetter + ')</span>';
                 
                 if (secondLetter) {
-                    html += ' or <span class="ref" data-section-id="' + baseSection + '(' + num + ')(' + secondLetter + ')" data-table-id="{{ $legalTable->id }}">' + 
+                    html += ' or <span class="ref" data-section-id="' + baseSection + '(' + num + ')(' + secondLetter + ')" data-table-id="<?php echo e($legalTable->id); ?>">' + 
                             '(' + secondLetter + ')</span>';
                 }
                 
@@ -3126,11 +3147,11 @@ $(document).ready(function() {
                 if (match.includes('</span>')) return match; // Already processed
                 if (!baseSection) return match;
                 
-                let html = '<span class="ref" data-section-id="' + baseSection + '(' + startNum + ')" data-table-id="{{ $legalTable->id }}">' + 
+                let html = '<span class="ref" data-section-id="' + baseSection + '(' + startNum + ')" data-table-id="<?php echo e($legalTable->id); ?>">' + 
                        type + 's (' + startNum + ')</span>';
                 
                 // For simplicity, we'll just link the start and end rather than all intermediate values
-                html += ' to <span class="ref" data-section-id="' + baseSection + '(' + endNum + ')" data-table-id="{{ $legalTable->id }}">' + 
+                html += ' to <span class="ref" data-section-id="' + baseSection + '(' + endNum + ')" data-table-id="<?php echo e($legalTable->id); ?>">' + 
                        '(' + endNum + ')</span>';
                 
                 return html;
@@ -3146,26 +3167,26 @@ $(document).ready(function() {
                 let output = type + ' ';
                 
                 // First reference (e.g., 26(a))
-                output += '<span class="ref" data-section-id="' + firstSection + '(' + firstLetter + ')" data-table-id="{{ $legalTable->id }}">' + 
+                output += '<span class="ref" data-section-id="' + firstSection + '(' + firstLetter + ')" data-table-id="<?php echo e($legalTable->id); ?>">' + 
                         firstSection + '(' + firstLetter + ')</span>';
                 
                 // Handle comma-separated letters (e.g., (b), (d))
                 let commaMatches = match.match(/,\s*\(([a-z\d\.]+)\)/g) || [];
                 for (let i = 0; i < commaMatches.length; i++) {
                     let letter = commaMatches[i].replace(/,\s*\(|\)/g, '');
-                    output += ', <span class="ref" data-section-id="' + firstSection + '(' + letter + ')" data-table-id="{{ $legalTable->id }}">' + 
+                    output += ', <span class="ref" data-section-id="' + firstSection + '(' + letter + ')" data-table-id="<?php echo e($legalTable->id); ?>">' + 
                             '(' + letter + ')</span>';
                 }
                 
                 // Handle "or (e)"
                 if (orLetter) {
-                    output += ' or <span class="ref" data-section-id="' + firstSection + '(' + orLetter + ')" data-table-id="{{ $legalTable->id }}">' + 
+                    output += ' or <span class="ref" data-section-id="' + firstSection + '(' + orLetter + ')" data-table-id="<?php echo e($legalTable->id); ?>">' + 
                             '(' + orLetter + ')</span>';
                 }
                 
                 // Handle "or 32(d)"
                 if (finalSection && finalLetter) {
-                    output += ' or <span class="ref" data-section-id="' + finalSection + '(' + finalLetter + ')" data-table-id="{{ $legalTable->id }}">' + 
+                    output += ' or <span class="ref" data-section-id="' + finalSection + '(' + finalLetter + ')" data-table-id="<?php echo e($legalTable->id); ?>">' + 
                             finalSection + '(' + finalLetter + ')</span>';
                 }
                 
@@ -3184,19 +3205,19 @@ $(document).ready(function() {
                 // First reference (e.g., "subsection 20.1(1)")
                 if (type && section) {
                     let sectionId = section + (subsection ? '(' + subsection + ')' : '');
-                    output += '<span class="ref" data-section-id="' + sectionId + '" data-table-id="{{ $legalTable->id }}">' + 
+                    output += '<span class="ref" data-section-id="' + sectionId + '" data-table-id="<?php echo e($legalTable->id); ?>">' + 
                             type + ' ' + sectionId + '</span>';
                 }
                 
                 // Second reference after comma (e.g., "section 22.1")
                 if (commaRef) {
-                    output += ', <span class="ref" data-section-id="' + commaRef + '" data-table-id="{{ $legalTable->id }}">' + 
+                    output += ', <span class="ref" data-section-id="' + commaRef + '" data-table-id="<?php echo e($legalTable->id); ?>">' + 
                             commaRef + '</span>';
                 }
                 
                 // Third reference after "or" (e.g., "subsection 42.1(1)")
                 if (orRef) {
-                    output += ' or <span class="ref" data-section-id="' + orRef + '" data-table-id="{{ $legalTable->id }}">' + 
+                    output += ' or <span class="ref" data-section-id="' + orRef + '" data-table-id="<?php echo e($legalTable->id); ?>">' + 
                             orRef + '</span>';
                 }
                 
@@ -3208,14 +3229,14 @@ $(document).ready(function() {
                     else baseSection = section;
                     
                     let sectionId = baseSection + '(' + orSubsection + ')';
-                    output += ' or <span class="ref" data-section-id="' + sectionId + '" data-table-id="{{ $legalTable->id }}">' + 
+                    output += ' or <span class="ref" data-section-id="' + sectionId + '" data-table-id="<?php echo e($legalTable->id); ?>">' + 
                             '(' + orSubsection + ')</span>';
                 }
                 
                 // Final reference (e.g., "77(1)")
                 if (finalSection && finalSubsection) {
                     let sectionId = finalSection + '(' + finalSubsection + ')';
-                    output += ' or <span class="ref" data-section-id="' + sectionId + '" data-table-id="{{ $legalTable->id }}">' + 
+                    output += ' or <span class="ref" data-section-id="' + sectionId + '" data-table-id="<?php echo e($legalTable->id); ?>">' + 
                             sectionId + '</span>';
                 }
                 
@@ -3235,7 +3256,7 @@ $(document).ready(function() {
                 if (processedParts.includes(sectionId)) return match;
                 processedParts.push(sectionId);
                 
-                return '<span class="ref" data-section-id="' + sectionId + '" data-table-id="{{ $legalTable->id }}">' + 
+                return '<span class="ref" data-section-id="' + sectionId + '" data-table-id="<?php echo e($legalTable->id); ?>">' + 
                        type + ' ' + section + ' (' + subsection + ')</span>';
             }
         );
@@ -3243,7 +3264,7 @@ $(document).ready(function() {
         // Pattern 4: complex section references like 279.1(2) - with extra lookahead to prevent partial matches
         processedText = processedText.replace(
             /\b(\d+(?:\.\d+)?(?:\([^)]+\)){1,4})\b(?!\d)(?!\s*\([a-z](?:\.\d+)?\))(?![^<>]*<\/span>)/g,
-            '<span class="ref" data-section-id="$1" data-table-id="{{ $legalTable->id }}">$1</span>'
+            '<span class="ref" data-section-id="$1" data-table-id="<?php echo e($legalTable->id); ?>">$1</span>'
         );
         
         // Pattern 5: explicit section references
@@ -3254,7 +3275,7 @@ $(document).ready(function() {
                 
                 let sectionId = section + '(' + subsection + ')';
                 if (paragraph) sectionId += '(' + paragraph + ')';
-                return '<span class="ref" data-section-id="' + sectionId + '" data-table-id="{{ $legalTable->id }}">' + match + '</span>';
+                return '<span class="ref" data-section-id="' + sectionId + '" data-table-id="<?php echo e($legalTable->id); ?>">' + match + '</span>';
             }
         );
         
@@ -3267,7 +3288,7 @@ $(document).ready(function() {
                 const sectionId = section + '(' + subsection + ')';
                 console.log("Direct match for subsection pattern:", match);
                 
-                return '<span class="ref" data-section-id="' + sectionId + '" data-table-id="{{ $legalTable->id }}">' + 
+                return '<span class="ref" data-section-id="' + sectionId + '" data-table-id="<?php echo e($legalTable->id); ?>">' + 
                        match + '</span>';
             }
         );
@@ -3286,7 +3307,7 @@ $(document).ready(function() {
                 
                 console.log("Matched subsection reference:", match);
                 
-                return '<span class="ref" data-section-id="' + sectionId + '" data-table-id="{{ $legalTable->id }}">' + 
+                return '<span class="ref" data-section-id="' + sectionId + '" data-table-id="<?php echo e($legalTable->id); ?>">' + 
                        match + '</span>';
             }
         );
@@ -3301,7 +3322,7 @@ $(document).ready(function() {
         if (finalProcessed.indexOf('subsection 99(2)') !== -1) {
             finalProcessed = finalProcessed.replace(
                 /subsection 99\(2\)/g, 
-                '<span class="ref" data-section-id="99(2)" data-table-id="{{ $legalTable->id }}">subsection 99(2)</span>'
+                '<span class="ref" data-section-id="99(2)" data-table-id="<?php echo e($legalTable->id); ?>">subsection 99(2)</span>'
             );
         }
         
@@ -3309,7 +3330,7 @@ $(document).ready(function() {
         if (finalProcessed.indexOf('referred to in subsection 99(2)') !== -1) {
             finalProcessed = finalProcessed.replace(
                 /referred to in subsection 99\(2\)/g,
-                'referred to in <span class="ref" data-section-id="99(2)" data-table-id="{{ $legalTable->id }}">subsection 99(2)</span>'
+                'referred to in <span class="ref" data-section-id="99(2)" data-table-id="<?php echo e($legalTable->id); ?>">subsection 99(2)</span>'
             );
         }
         
@@ -3317,7 +3338,7 @@ $(document).ready(function() {
         if (finalProcessed.indexOf('persons referred to in subsection 99(2)') !== -1) {
             finalProcessed = finalProcessed.replace(
                 /persons referred to in subsection 99\(2\)/g,
-                'persons referred to in <span class="ref" data-section-id="99(2)" data-table-id="{{ $legalTable->id }}">subsection 99(2)</span>'
+                'persons referred to in <span class="ref" data-section-id="99(2)" data-table-id="<?php echo e($legalTable->id); ?>">subsection 99(2)</span>'
             );
         }
         
@@ -3336,7 +3357,7 @@ $(document).ready(function() {
             
             console.log("Final fallback match for:", match);
             
-            return '<span class="ref" data-section-id="' + sectionId + '" data-table-id="{{ $legalTable->id }}">' + 
+            return '<span class="ref" data-section-id="' + sectionId + '" data-table-id="<?php echo e($legalTable->id); ?>">' + 
                    match + '</span>';
         });
         
@@ -3349,7 +3370,7 @@ $(document).ready(function() {
             
             console.log("Preposition subsection fallback match for:", match);
             
-            return preposition + ' <span class="ref" data-section-id="' + sectionId + '" data-table-id="{{ $legalTable->id }}">' + 
+            return preposition + ' <span class="ref" data-section-id="' + sectionId + '" data-table-id="<?php echo e($legalTable->id); ?>">' + 
                    type + ' ' + section + '(' + subsection + ')</span>';
         });
         
@@ -3362,7 +3383,7 @@ $(document).ready(function() {
             
             console.log("Missing parentheses fallback match for:", match);
             
-            return '<span class="ref" data-section-id="' + sectionId + '" data-table-id="{{ $legalTable->id }}">' + 
+            return '<span class="ref" data-section-id="' + sectionId + '" data-table-id="<?php echo e($legalTable->id); ?>">' + 
                    match + '</span>';
         });
         
@@ -3376,7 +3397,7 @@ $(document).ready(function() {
                     
                     console.log("Direct specific match for:", match);
                     
-                    return preposition + '<span class="ref" data-section-id="99(2)" data-table-id="{{ $legalTable->id }}">' + 
+                    return preposition + '<span class="ref" data-section-id="99(2)" data-table-id="<?php echo e($legalTable->id); ?>">' + 
                            subsectionText + '</span>';
                 }
             );
@@ -3498,10 +3519,10 @@ $(function() {
 <!-- New pagination and reference handling scripts -->
 <script>
     // Global variables for pagination and content management
-    var fullHierarchicalData = @json($tableData->items());
-    var currentPage = {{ request('page', 1) }};
-    var totalPages = {{ $tableData->lastPage() }};
-    var currentCategoryId = {{ $legalTable->id }};
+    var fullHierarchicalData = <?php echo json_encode($tableData->items(), 15, 512) ?>;
+    var currentPage = <?php echo e(request('page', 1)); ?>;
+    var totalPages = <?php echo e($tableData->lastPage()); ?>;
+    var currentCategoryId = <?php echo e($legalTable->id); ?>;
     
     // Function to change page with AJAX loading
     function changePage(page, category_id) {
@@ -3791,7 +3812,7 @@ $(function() {
                 // Add a small reference button after each legal text
                 const refButton = document.createElement('button');
                 refButton.className = 'btn btn-sm btn-outline-primary ms-2';
-                refButton.setAttribute('data-ref-id', '{{ $legalTable->id }}:' + rowId);
+                refButton.setAttribute('data-ref-id', '<?php echo e($legalTable->id); ?>:' + rowId);
                 refButton.innerHTML = '<i class="fas fa-link"></i>';
                 refButton.title = 'Direct reference to this text';
                 textElem.appendChild(refButton);
@@ -4687,7 +4708,7 @@ $(function() {
                     const dummyRef = document.createElement('span');
                     dummyRef.className = 'ref';
                     dummyRef.setAttribute('data-section-id', '(a)');
-                    dummyRef.setAttribute('data-table-id', '{{ $legalTable->id }}');
+                    dummyRef.setAttribute('data-table-id', '<?php echo e($legalTable->id); ?>');
                     dummyRef.textContent = 'paragraph (a)';
                     
                     // Temporarily append it to the section
@@ -5247,7 +5268,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const saveToClientBtn = document.getElementById('saveToClientRecordsExpand');
     if (saveToClientBtn) {
         saveToClientBtn.addEventListener('click', function() {
-            const clientId = {{ isset($client) && $client ? $client->id : 'null' }};
+            const clientId = <?php echo e(isset($client) && $client ? $client->id : 'null'); ?>;
             if (!clientId) {
                 // No client selected, expand the modal to show client selection
                 expandModalForClientSelection();
@@ -5500,14 +5521,14 @@ document.addEventListener('DOMContentLoaded', function() {
         
         console.log('Loading clients for modal selection...');
         console.log('API URL: /api/clients');
-        console.log('CSRF Token:', '{{ csrf_token() }}');
+        console.log('CSRF Token:', '<?php echo e(csrf_token()); ?>');
         
         // Try API route first
         fetch('/api/clients', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                'X-CSRF-TOKEN': '<?php echo e(csrf_token()); ?>',
                 'Accept': 'application/json',
                 'X-Requested-With': 'XMLHttpRequest'
             },
@@ -5525,7 +5546,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'X-CSRF-TOKEN': '<?php echo e(csrf_token()); ?>',
                         'Accept': 'application/json',
                         'X-Requested-With': 'XMLHttpRequest'
                     },
@@ -5798,7 +5819,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     method: 'POST',
                     body: formData,
                     headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'X-CSRF-TOKEN': '<?php echo e(csrf_token()); ?>',
                         'Accept': 'application/json',
                         'X-Requested-With': 'XMLHttpRequest'
                     }
@@ -5883,7 +5904,7 @@ document.addEventListener('DOMContentLoaded', function() {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                'X-CSRF-TOKEN': '<?php echo e(csrf_token()); ?>',
                 'Accept': 'application/json'
             }
         })
@@ -5897,7 +5918,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'X-CSRF-TOKEN': '<?php echo e(csrf_token()); ?>',
                         'Accept': 'application/json'
                     }
                 });
@@ -5950,7 +5971,7 @@ document.addEventListener('DOMContentLoaded', function() {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                'X-CSRF-TOKEN': '<?php echo e(csrf_token()); ?>'
             }
         })
         .then(response => {
@@ -5961,7 +5982,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        'X-CSRF-TOKEN': '<?php echo e(csrf_token()); ?>'
                     }
                 });
             }
@@ -6053,7 +6074,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 method: 'POST',
                 body: formData,
                 headers: {
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    'X-CSRF-TOKEN': '<?php echo e(csrf_token()); ?>'
                 }
             })
             .then(response => response.json())
@@ -6105,7 +6126,7 @@ document.addEventListener('DOMContentLoaded', function() {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                'X-CSRF-TOKEN': '<?php echo e(csrf_token()); ?>'
             }
         })
         .then(response => response.json())
@@ -6177,7 +6198,7 @@ document.addEventListener('DOMContentLoaded', function() {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                'X-CSRF-TOKEN': '<?php echo e(csrf_token()); ?>',
                 'Accept': 'application/json',
                 'X-Requested-With': 'XMLHttpRequest'
             },
@@ -6191,7 +6212,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'X-CSRF-TOKEN': '<?php echo e(csrf_token()); ?>',
                         'Accept': 'application/json',
                         'X-Requested-With': 'XMLHttpRequest'
                     },
@@ -6411,7 +6432,7 @@ document.addEventListener('DOMContentLoaded', function() {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                'X-CSRF-TOKEN': '<?php echo e(csrf_token()); ?>'
             }
         })
         .then(response => response.json())
@@ -6546,7 +6567,7 @@ window.testClientAPI = function() {
     console.log('=== Testing Client API ===');
     console.log('Testing /api/clients endpoint...');
     console.log('Current URL:', window.location.href);
-    console.log('CSRF Token:', '{{ csrf_token() }}');
+    console.log('CSRF Token:', '<?php echo e(csrf_token()); ?>');
     
     // First test the debug route to see what routes are available
     fetch('/debug-api-routes', {
@@ -6570,7 +6591,7 @@ window.testClientAPI = function() {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                'X-CSRF-TOKEN': '<?php echo e(csrf_token()); ?>',
                 'Accept': 'application/json',
                 'X-Requested-With': 'XMLHttpRequest'
             },
@@ -6666,7 +6687,7 @@ window.testCreateClient = function() {
         method: 'POST',
         body: formData,
         headers: {
-            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+            'X-CSRF-TOKEN': '<?php echo e(csrf_token()); ?>',
             'Accept': 'application/json',
             'X-Requested-With': 'XMLHttpRequest'
         }
@@ -6841,7 +6862,7 @@ $(document).ready(function() {
         $(saveButton).prop('disabled', true);
 
         // Make API request
-        fetch('{{ route("save.notes") }}', { 
+        fetch('<?php echo e(route("save.notes")); ?>', { 
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -6888,7 +6909,7 @@ $(document).ready(function() {
         const loadingHtml = '<div class="text-center"><i class="fas fa-spinner fa-spin"></i> Loading notes...</div>';
         
         // Make API request
-        fetch('{{ route("get.saved.notes") }}?' + new URLSearchParams(requestData))
+        fetch('<?php echo e(route("get.saved.notes")); ?>?' + new URLSearchParams(requestData))
         .then(response => response.json())
         .then(data => {
             if (data.success && data.notes && data.notes.length > 0) {
@@ -7356,7 +7377,7 @@ $(document).ready(function() {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                'X-CSRF-TOKEN': '<?php echo e(csrf_token()); ?>'
             }
         })
         .then(response => {
@@ -7365,7 +7386,7 @@ $(document).ready(function() {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        'X-CSRF-TOKEN': '<?php echo e(csrf_token()); ?>'
                     }
                 });
             }
@@ -7477,7 +7498,7 @@ $(document).ready(function() {
         fetch('/api/clients', {
             method: 'POST',
             headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                'X-CSRF-TOKEN': '<?php echo e(csrf_token()); ?>'
             },
             body: formData
         })
@@ -7556,20 +7577,22 @@ $(document).ready(function() {
     });
 });
 </script>
-@endpush
+<?php $__env->stopPush(); ?>
 
-@push('head-scripts')
+<?php $__env->startPush('head-scripts'); ?>
 <!-- Font Awesome Icons for enhanced UI -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-@endpush
+<?php $__env->stopPush(); ?>
 
-@push('page-scripts')
+<?php $__env->startPush('page-scripts'); ?>
 <!-- Add the section matching fix script -->
-<script src="{{ asset('user_assets/js/section-matching-fix.js') }}"></script>
+<script src="<?php echo e(asset('user_assets/js/section-matching-fix.js')); ?>"></script>
 <!-- Add the section debug tool -->
-<script src="{{ asset('user_assets/js/section-debug-tool.js') }}"></script>
+<script src="<?php echo e(asset('user_assets/js/section-debug-tool.js')); ?>"></script>
 <!-- Add the exact section matcher direct fix -->
-<script src="{{ asset('user_assets/js/exact-section-matcher.js') }}"></script>
+<script src="<?php echo e(asset('user_assets/js/exact-section-matcher.js')); ?>"></script>
 <!-- Add the last resort DOM-level filter as final safeguard -->
-<script src="{{ asset('user_assets/js/last-resort-filter.js') }}"></script>
-@endpush
+<script src="<?php echo e(asset('user_assets/js/last-resort-filter.js')); ?>"></script>
+<?php $__env->stopPush(); ?>
+
+<?php echo $__env->make('layouts.with-sidebar-layout', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\Users\Dileesha\Desktop\jurislocator_laravel_new\resources\views/view-legal-table-data.blade.php ENDPATH**/ ?>

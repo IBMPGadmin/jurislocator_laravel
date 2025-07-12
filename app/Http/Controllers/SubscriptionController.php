@@ -14,12 +14,12 @@ use Illuminate\Support\Str;
 class SubscriptionController extends Controller
 {    public function __construct()
     {
-        // Set Stripe API key directly from .env for more reliability
-        $stripeSecret = env('STRIPE_SECRET');
-        if (!$stripeSecret) {
-            throw new \Exception('Stripe API key is not set in .env file');
-        }
-        Stripe::setApiKey($stripeSecret);
+        // // Set Stripe API key directly from .env for more reliability
+        // $stripeSecret = env('STRIPE_SECRET');
+        // if (!$stripeSecret) {
+        //     throw new \Exception('Stripe API key is not set in .env file');
+        // }
+        // Stripe::setApiKey($stripeSecret);
     }
 
     public function showPricing()

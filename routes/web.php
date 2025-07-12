@@ -116,18 +116,6 @@ Route::middleware([\App\Http\Middleware\Authenticate::class, 'verified', \App\Ht
     Route::post('/tools/exchange-rates', [App\Http\Controllers\User\ToolsController::class, 'getExchangeRates'])->name('tools.exchange-rates');
     Route::get('/tools/all-rates', [App\Http\Controllers\User\ToolsController::class, 'getAllRates'])->name('tools.all-rates');
     
-    // Timezone preference routes
-    Route::get('/user/timezones/pinned', [App\Http\Controllers\User\TimezoneController::class, 'getPinnedTimezones'])
-        ->name('user.timezones.pinned');
-    Route::post('/user/timezones/update', [App\Http\Controllers\User\TimezoneController::class, 'updatePinnedTimezones'])
-        ->name('user.timezones.update');
-    Route::post('/user/timezones/pin', [App\Http\Controllers\User\TimezoneController::class, 'pinTimezone'])
-        ->name('user.timezones.pin');
-    Route::delete('/user/timezones/unpin', [App\Http\Controllers\User\TimezoneController::class, 'unpinTimezone'])
-        ->name('user.timezones.unpin');
-    Route::get('/user/timezones/test', [App\Http\Controllers\User\TimezoneController::class, 'test'])
-        ->name('user.timezones.test');
-    
     // Client routes
     Route::post('/clients', [ClientController::class, 'store'])->name('clients.store');
     Route::post('/select-client', [ClientController::class, 'selectClient'])->name('clients.select');
@@ -355,6 +343,10 @@ Route::middleware([\App\Http\Middleware\Authenticate::class, 'verified', \App\Ht
     Route::delete('/user/popups/clear', [App\Http\Controllers\UserPopupController::class, 'clear'])
         ->name('user.popups.clear');
     
+    // Notes routes
+    Route::post('/save-notes', [App\Http\Controllers\NotesController::class, 'saveNotes'])->name('save.notes');
+    Route::get('/get-saved-notes', [App\Http\Controllers\NotesController::class, 'getSavedNotes'])->name('get.saved.notes');
+    
     // User template routes
     Route::get('/user/templates', [App\Http\Controllers\UserTemplateController::class, 'index'])
         ->name('user.templates.index');
@@ -364,6 +356,18 @@ Route::middleware([\App\Http\Middleware\Authenticate::class, 'verified', \App\Ht
         ->name('user.templates.update');
     Route::delete('/user/templates/{id}', [App\Http\Controllers\UserTemplateController::class, 'destroy'])
         ->name('user.templates.destroy');
+    
+    // Timezone preference routes
+    Route::get('/user/timezones/pinned', [App\Http\Controllers\User\TimezoneController::class, 'getPinnedTimezones'])
+        ->name('user.timezones.pinned');
+    Route::post('/user/timezones/update', [App\Http\Controllers\User\TimezoneController::class, 'updatePinnedTimezones'])
+        ->name('user.timezones.update');
+    Route::post('/user/timezones/pin', [App\Http\Controllers\User\TimezoneController::class, 'pinTimezone'])
+        ->name('user.timezones.pin');
+    Route::delete('/user/timezones/unpin', [App\Http\Controllers\User\TimezoneController::class, 'unpinTimezone'])
+        ->name('user.timezones.unpin');
+    Route::get('/user/timezones/test', [App\Http\Controllers\User\TimezoneController::class, 'test'])
+        ->name('user.timezones.test');
     
     // Payment Details routes
     Route::get('/payment/details', [App\Http\Controllers\PaymentDetailsController::class, 'index'])->name('payment.details');

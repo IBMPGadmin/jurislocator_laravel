@@ -113,7 +113,17 @@ class ViewLegalTableController extends Controller
     public function getSectionContent(Request $request, $tableId, $sectionRef)
     {
         try {
-            Log::info("Section content request for tableId=$tableId, sectionRef=$sectionRef");
+            // Log the request details including headers for exact matching
+            $exactMatch = $request->query('exact_match') === 'true' || 
+                         $request->header('X-Exact-Section-Match') === 'true';
+            $exactSectionId = $request->header('X-Section-ID');
+            
+            Log::info("Section content request for tableId=$tableId, sectionRef=$sectionRef", [
+                'exact_match' => $exactMatch ? 'true' : 'false',
+                'exact_section_id' => $exactSectionId,
+                'headers' => $request->headers->all(),
+                'query_params' => $request->query()
+            ]);
             
             // Get table info from legal_tables_master
             $tableInfo = DB::table('legal_tables_master')
@@ -653,33 +663,109 @@ class ViewLegalTableController extends Controller
      */
     private function buildSectionSearchQuery($tableName, $categoryId, $sectionId, Request $request)
     {
-        // SIMPLIFIED SEARCH LOGIC: Directly match on section_id like in the working PHP code
-        // This is more reliable for complex IDs like "14.1(1)"
+        // Check if exact matching is requested
+        $exactMatch = $request->query('exact_match') === 'true' || 
+                     $request->header('X-Exact-Section-Match') === 'true';
         
-        Log::info("Building search query for section_id: $sectionId in table: $tableName");
+        Log::info("Building search query for section_id: $sectionId in table: $tableName", [
+            'exact_match' => $exactMatch ? 'true' : 'false',
+            'section_id' => $sectionId
+        ]);
         
-        // Direct search on section_id (exact and pattern matches)
-        $query = DB::table($tableName)
-            ->where('category_id', $categoryId)
-            ->where(function($q) use ($sectionId) {
-                $q->where('section_id', $sectionId)
-                  ->orWhere('section_id', 'like', $sectionId.'.%')
-                  ->orWhere('section_id', 'like', $sectionId.'%');
-            })
-            ->orderByRaw(
-                "CASE 
-                    WHEN section_id = ? THEN 1
-                    WHEN section_id LIKE ? THEN 2
-                    ELSE 3
-                END", 
-                [$sectionId, $sectionId.'.%']
-            )
-            ->limit(10);
+        if ($exactMatch) {
+            // For exact matching, we need to be very precise
+            if (is_numeric($sectionId)) {
+                // For simple numeric sections like "17", ensure we don't match "170"
+                Log::info("Exact match for numeric section: $sectionId");
+                
+                // Use a more direct approach to match only exact numbers
+                $query = DB::table($tableName)
+                    ->where('category_id', $categoryId)
+                    ->where(function($q) use ($sectionId) {
+                        // For MySQL we can use binary comparison to ensure exact match
+                        $q->whereRaw("BINARY section = ?", [$sectionId])
+                          ->orWhereRaw("BINARY section_id = ?", [$sectionId]);
+                    });
+            } 
+            // For decimal section IDs like "10.3" - include section and all its subsections
+            else if (preg_match('/^\d+\.\d+$/', $sectionId)) {
+                Log::info("Exact match for decimal section: $sectionId (including subsections)");
+                
+                $query = DB::table($tableName)
+                    ->where('category_id', $categoryId)
+                    ->where(function($q) use ($sectionId) {
+                        // Match the exact section
+                        $q->whereRaw("BINARY section = ?", [$sectionId])
+                          // Or match section_id exactly
+                          ->orWhereRaw("BINARY section_id = ?", [$sectionId])
+                          // Or match subsections that start with this section ID followed by a parenthesis
+                          ->orWhere('section_id', 'like', $sectionId.'(%');
+                    });
+            }
+            // For section IDs with subsections like "17(2)"
+            else if (preg_match('/^(\d+)\((\d+)\)$/', $sectionId, $matches)) {
+                $mainSection = $matches[1];
+                $subSection = $matches[2];
+                
+                Log::info("Exact match for section with subsection: $mainSection($subSection)");
+                
+                $query = DB::table($tableName)
+                    ->where('category_id', $categoryId)
+                    ->where(function($q) use ($mainSection, $subSection, $sectionId) {
+                        $q->where(function($sq) use ($mainSection, $subSection) {
+                              $sq->whereRaw('CAST(section AS CHAR(255)) = ?', [$mainSection])
+                                 ->where(function($ssq) use ($subSection) {
+                                     $ssq->where('sub_section', $subSection)
+                                         ->orWhere('sub_section', "($subSection)");
+                                 });
+                          })
+                          ->orWhere('section_id', $sectionId);
+                    });
+            }
+            // For complex section IDs
+            else {
+                Log::info("Exact match for complex section ID: $sectionId");
+                $query = DB::table($tableName)
+                    ->where('category_id', $categoryId)
+                    ->where('section_id', $sectionId);
+            }
+        } 
+        // Default behavior - partial matching for backward compatibility
+        else {
+            $query = DB::table($tableName)
+                ->where('category_id', $categoryId)
+                ->where(function($q) use ($sectionId) {
+                    $q->where('section_id', $sectionId)
+                      ->orWhere('section_id', 'like', $sectionId.'.%')
+                      ->orWhere('section_id', 'like', $sectionId.'%');
+                })
+                ->orderByRaw(
+                    "CASE 
+                        WHEN section_id = ? THEN 1
+                        WHEN section_id LIKE ? THEN 2
+                        ELSE 3
+                    END", 
+                    [$sectionId, $sectionId.'.%']
+                );
+        }
+        
+        // Always add a limit to avoid too many results
+        $query->limit(10);
         
         // Log the SQL query for debugging
         $sql = $query->toSql();
         $bindings = $query->getBindings();
         Log::info("Built query: $sql with bindings: " . json_encode($bindings));
+        
+        // Execute query and log results
+        $results = $query->get();
+        Log::info("Query returned " . count($results) . " results");
+        
+        if (count($results) > 0 && $exactMatch) {
+            // For exact matching, log the section values of results for debugging
+            $sections = $results->pluck('section')->toArray();
+            Log::info("Returned section values: " . json_encode($sections));
+        }
         
         return $query;
     }
